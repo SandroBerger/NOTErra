@@ -16,6 +16,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".FormActivity"
+            android:label="@string/title_activity_form" >
+        </activity>
+        <activity
+            android:name=".NotesActivity"
+            android:label="@string/title_activity_notes" >
+        </activity>
+        <activity
+            android:name=".GpsActivity"
+            android:label="@string/title_activity_gps" >
+        </activity>
+        <activity
+            android:name=".FinishActivity"
+            android:label="@string/title_activity_finish" >
+        </activity>
     </application>
 
 </manifest>

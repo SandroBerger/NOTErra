@@ -1,5 +1,7 @@
 package com.example.android.noterra;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -10,9 +12,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.Button;
+
+import java.net.URI;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements View.OnClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +28,57 @@ public class MainActivity extends ActionBarActivity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+
+        addButton();
+
     }
 
+    public void addButton(){
+        Button formButton = (Button) findViewById(R.id.formbutton);
+        Button noteButton = (Button) findViewById(R.id.notebutton);
+        Button gpsButton = (Button) findViewById(R.id.gpsbutton);
+        Button finishButton = (Button) findViewById(R.id.finishbutton);
+
+        formButton.setOnClickListener(this);
+        noteButton.setOnClickListener(this);
+        gpsButton.setOnClickListener(this);
+        finishButton.setOnClickListener(this);
+
+    }
+
+    private void buttonFormClick(){
+        startActivity(new Intent(this, FormActivity.class));
+    }
+    private void buttonNoteClick(){
+        startActivity(new Intent(this, NotesActivity.class));
+    }
+    private void buttonGpsClick(){
+        startActivity(new Intent(this, GpsActivity.class));
+    }
+    private void buttonFinishClick(){
+        startActivity(new Intent(this, FinishActivity.class));
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.formbutton:
+                buttonFormClick();
+                break;
+
+            case R.id.notebutton:
+                buttonNoteClick();
+                break;
+
+            case R.id.gpsbutton:
+                buttonGpsClick();
+                break;
+
+            case R.id.finishbutton:
+                buttonFinishClick();
+                break;
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
