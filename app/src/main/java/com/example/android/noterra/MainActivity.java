@@ -29,9 +29,10 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                     .commit();
         }
 
+        //Aufruf der Funktion addButton
         addButton();
-
     }
+
 
     public void addButton(){
         Button formButton = (Button) findViewById(R.id.formbutton);
@@ -43,22 +44,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         noteButton.setOnClickListener(this);
         gpsButton.setOnClickListener(this);
         finishButton.setOnClickListener(this);
-
     }
 
-    private void buttonFormClick(){
-        startActivity(new Intent(this, FormActivity.class));
-    }
-    private void buttonNoteClick(){
-        startActivity(new Intent(this, NotesActivity.class));
-    }
-    private void buttonGpsClick(){
-        startActivity(new Intent(this, GpsActivity.class));
-    }
-    private void buttonFinishClick(){
-        startActivity(new Intent(this, FinishActivity.class));
-    }
-
+    //Führt je nach dem welche id mit dem click auf den Button mitgegeben wurde aus.
     @Override
     public void onClick(View v) {
         switch(v.getId()){
@@ -78,6 +66,20 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 buttonFinishClick();
                 break;
         }
+    }
+
+    //Ermöglicht die weiterleitung zwischen den einzelnen bereichen der Anwendung. Es wird ein view und die jeweilige Klasse mitgegeben auf die weitergeleitet werden soll.
+    private void buttonFormClick(){
+        startActivity(new Intent(this, FormActivity.class));
+    }
+    private void buttonNoteClick(){
+        startActivity(new Intent(this, NotesActivity.class));
+    }
+    private void buttonGpsClick(){
+        startActivity(new Intent(this, GpsActivity.class));
+    }
+    private void buttonFinishClick(){
+        startActivity(new Intent(this, FinishActivity.class));
     }
 
     @Override

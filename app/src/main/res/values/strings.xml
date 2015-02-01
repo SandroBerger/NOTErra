@@ -12,5 +12,6 @@
     <string name="notebutton">NoteButton</string>
     <string name="gpsbutton">GpsButton</string>
     <string name="finishbutton">FinishButton</string>
+    <string name="cameraButton">CameraButton</string>
 
 </resources>

@@ -1,5 +1,6 @@
 package com.example.android.noterra;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -10,9 +11,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 
-public class NotesActivity extends ActionBarActivity {
+public class NotesActivity extends ActionBarActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +26,29 @@ public class NotesActivity extends ActionBarActivity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+
+        addButton();
     }
 
+    public void addButton(){
+        ImageButton cameraButton = (ImageButton) findViewById(R.id.camerabutton);
+        cameraButton.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.camerabutton:
+                cameraButtonClick();
+                break;
+
+        }
+    }
+
+    private void cameraButtonClick(){
+        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+        startActivity(new Intent(intent));
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
