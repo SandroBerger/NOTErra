@@ -17,6 +17,7 @@ import android.os.Build;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -39,10 +40,17 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
 
         addButton();
     }
-//-------------Button Hinzufügen und weiterleiten auf neue Aktivity----
+//-------------Button Hinzufügen und funktion hinzufügen zugriff auf kamera, ufnahme von audio und notiz aufnahme----
     public void addButton(){
         ImageButton cameraButton = (ImageButton) findViewById(R.id.camerabutton);
+        ImageButton recordButton = (ImageButton) findViewById(R.id.recordbutton);
+        ImageButton playButton = (ImageButton) findViewById(R.id.playbutton);
+        ImageButton stopButton = (ImageButton) findViewById(R.id.stopbutton);
+
         cameraButton.setOnClickListener(this);
+        recordButton.setOnClickListener(this);
+        playButton.setOnClickListener(this);
+        stopButton.setOnClickListener(this);
     }
 
 
@@ -52,7 +60,15 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
             case R.id.camerabutton:
                 cameraButtonClick();
                 break;
-
+            case R.id.recordbutton:
+                recordButtonClick();
+                break;
+            case R.id.playbutton:
+                playButtonClick();
+                break;
+            case R.id.stopbutton:
+                stopButtonClick();
+                break;
         }
     }
 
@@ -61,7 +77,28 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         startActivity(new Intent(intent));
     }
     private void recordButtonClick(){
-        //Aufnahme button
+        Context context = getApplicationContext();
+        CharSequence text = "Funktioniert leider noch NICHT";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
+    private void playButtonClick(){
+        Context context = getApplicationContext();
+        CharSequence text = "Das auch noch NICHT!";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
+    private void stopButtonClick(){
+        Context context = getApplicationContext();
+        CharSequence text = "Langsam nervts..!";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
     }
 //---------------------------------------------------------------------
 
