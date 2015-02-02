@@ -1,6 +1,9 @@
 package com.example.android.noterra;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -13,9 +16,16 @@ import android.view.ViewGroup;
 import android.os.Build;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
 
 public class NotesActivity extends ActionBarActivity implements View.OnClickListener {
+
+    private static final int REQUEST_IMAGE_CAPTURE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +39,12 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
 
         addButton();
     }
-
+//-------------Button Hinzufügen und weiterleiten auf neue Aktivity----
     public void addButton(){
         ImageButton cameraButton = (ImageButton) findViewById(R.id.camerabutton);
         cameraButton.setOnClickListener(this);
     }
+
 
     @Override
     public void onClick(View v) {
@@ -49,6 +60,10 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
         startActivity(new Intent(intent));
     }
+    private void recordButtonClick(){
+        //Aufnahme button
+    }
+//---------------------------------------------------------------------
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

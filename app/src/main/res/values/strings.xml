@@ -12,6 +12,10 @@
     <string name="notebutton">NoteButton</string>
     <string name="gpsbutton">GpsButton</string>
     <string name="finishbutton">FinishButton</string>
-    <string name="cameraButton">CameraButton</string>
+    <string name="camerabutton">CameraButton</string>
+    <string name="recordbutton">RecordButton</string>
+    <string name="playbutton">PlayButton</string>
+    <string name="stopbutton">StopButton</string>
+    <string name="notetextfield">NoteTextField</string>
 
 </resources>

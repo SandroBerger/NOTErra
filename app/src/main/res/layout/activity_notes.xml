@@ -14,11 +14,51 @@
        android:background="@android:color/transparent"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:layout_marginLeft="39dp"
-       android:layout_marginStart="39dp"
-       android:layout_marginTop="40dp"
+       android:layout_marginTop="46dp"
        android:layout_alignParentTop="true"
-       android:layout_alignParentLeft="true"
-       android:layout_alignParentStart="true" />
+       android:layout_centerHorizontal="true" />
+
+    <ImageButton
+        android:id="@+id/recordbutton"
+        android:src="@drawable/record"
+        android:background="@android:color/transparent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_below="@+id/camerabutton"
+        android:layout_alignLeft="@+id/notetextfield"
+        android:layout_alignStart="@+id/notetextfield" />
+
+    <ImageButton
+        android:id="@+id/playbutton"
+        android:src="@drawable/play"
+        android:background="@android:color/transparent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/recordbutton"
+        android:layout_centerHorizontal="true" />
+
+    <ImageButton
+        android:id="@+id/stopbutton"
+        android:src="@drawable/stop"
+        android:background="@android:color/transparent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/playbutton"
+        android:layout_alignRight="@+id/notetextfield"
+        android:layout_alignEnd="@+id/notetextfield" />
+
+
+    <EditText
+        android:layout_width="330dp"
+        android:layout_height="200dp"
+        android:background="@drawable/apptheme_textfield_activated_holo_light"
+        android:id="@+id/notetextfield"
+        android:hint="Notiz hier eintragen..."
+        android:inputType="text"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"></EditText>
+
+
 
 </RelativeLayout>
