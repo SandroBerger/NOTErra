@@ -78,7 +78,7 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
     }
     private void recordButtonClick(){
         Context context = getApplicationContext();
-        CharSequence text = "Funktioniert leider noch NICHT";
+        CharSequence text = "Aufnahme wird gestartet!";
         int duration = Toast.LENGTH_SHORT;
 
         Toast toast = Toast.makeText(context, text, duration);
@@ -86,7 +86,7 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
     }
     private void playButtonClick(){
         Context context = getApplicationContext();
-        CharSequence text = "Das auch noch NICHT!";
+        CharSequence text = "Aufnahme wird abgespielt!";
         int duration = Toast.LENGTH_SHORT;
 
         Toast toast = Toast.makeText(context, text, duration);
@@ -94,7 +94,7 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
     }
     private void stopButtonClick(){
         Context context = getApplicationContext();
-        CharSequence text = "Langsam nervts..!";
+        CharSequence text = "Aufnahme wird gestoppt!";
         int duration = Toast.LENGTH_SHORT;
 
         Toast toast = Toast.makeText(context, text, duration);
