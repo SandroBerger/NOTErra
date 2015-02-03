@@ -58,7 +58,7 @@
         android:layout_alignParentEnd="true" />
 
         <ImageView
-            android:id="@+id/image1"
+            android:id="@+id/imageview"
             android:layout_width="250dp"
             android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
@@ -73,12 +73,12 @@
             android:layout_alignStart="@+id/camerabutton" />
 
         <ImageButton
-            android:id="@+id/deletbutton"
+            android:id="@+id/deletebutton"
             android:background="@drawable/delete"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="57dp"
-            android:layout_alignTop="@+id/image1"
+            android:layout_alignTop="@+id/imageview"
             android:layout_alignLeft="@+id/stopbutton"
             android:layout_alignStart="@+id/stopbutton" />
     </RelativeLayout>

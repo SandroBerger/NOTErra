@@ -47,6 +47,7 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         ImageButton playButton = (ImageButton) findViewById(R.id.playbutton);
         ImageButton stopButton = (ImageButton) findViewById(R.id.stopbutton);
         Button saveButton = (Button) findViewById(R.id.savebutton);
+        Button deleteButton = (Button) findViewById(R.id.deletbutton);
 
         cameraButton.setOnClickListener(this);
         recordButton.setOnClickListener(this);
@@ -73,6 +74,9 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
                 break;
             case R.id.savebutton:
                 saveButtonClick();
+                break;
+            case R.id.deletebutton:
+                imageDeleteButton();
                 break;
         }
     }
@@ -107,6 +111,14 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
     }
     private void saveButtonClick(){
         startActivity(new Intent(this, MainActivity.class));
+    }
+    private void imageDeleteButton(){
+        Context context = getApplicationContext();
+        CharSequence text = "Bild wird gelöscht!";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
     }
 //---------------------------------------------------------------------
 
