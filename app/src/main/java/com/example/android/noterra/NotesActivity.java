@@ -47,13 +47,14 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         ImageButton playButton = (ImageButton) findViewById(R.id.playbutton);
         ImageButton stopButton = (ImageButton) findViewById(R.id.stopbutton);
         Button saveButton = (Button) findViewById(R.id.savebutton);
-        Button deleteButton = (Button) findViewById(R.id.deletebutton);
+        ImageButton deleteButton = (ImageButton) findViewById(R.id.deletebutton);
 
         cameraButton.setOnClickListener(this);
         recordButton.setOnClickListener(this);
         playButton.setOnClickListener(this);
         stopButton.setOnClickListener(this);
         saveButton.setOnClickListener(this);
+        deleteButton.setOnClickListener(this);
     }
 
 
