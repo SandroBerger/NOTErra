@@ -46,11 +46,13 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         ImageButton recordButton = (ImageButton) findViewById(R.id.recordbutton);
         ImageButton playButton = (ImageButton) findViewById(R.id.playbutton);
         ImageButton stopButton = (ImageButton) findViewById(R.id.stopbutton);
+        Button saveButton = (Button) findViewById(R.id.savebutton);
 
         cameraButton.setOnClickListener(this);
         recordButton.setOnClickListener(this);
         playButton.setOnClickListener(this);
         stopButton.setOnClickListener(this);
+        saveButton.setOnClickListener(this);
     }
 
 
@@ -68,6 +70,9 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
                 break;
             case R.id.stopbutton:
                 stopButtonClick();
+                break;
+            case R.id.savebutton:
+                saveButtonClick();
                 break;
         }
     }
@@ -99,6 +104,9 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
 
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
+    }
+    private void saveButtonClick(){
+        startActivity(new Intent(this, MainActivity.class));
     }
 //---------------------------------------------------------------------
 

@@ -6,59 +6,82 @@
     tools:context="com.example.android.noterra.NotesActivity"
     tools:ignore="MergeRootFrame">
 
-
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.android.noterra.NotesActivity">
 
    <ImageButton
        android:id="@+id/camerabutton"
-       android:src="@drawable/camera"
-       android:background="@android:color/transparent"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_marginTop="46dp"
-       android:layout_alignParentTop="true"
-       android:layout_centerHorizontal="true" />
+       android:background="@drawable/camera"
+       android:layout_width="60dp"
+       android:layout_height="60dp"
+       android:layout_marginLeft="33dp"
+       android:layout_marginStart="33dp"
+       android:layout_alignTop="@+id/recordbutton"
+       android:layout_alignParentLeft="true"
+       android:layout_alignParentStart="true" />
 
     <ImageButton
         android:id="@+id/recordbutton"
-        android:src="@drawable/record"
-        android:background="@android:color/transparent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:layout_below="@+id/camerabutton"
-        android:layout_alignLeft="@+id/notetextfield"
-        android:layout_alignStart="@+id/notetextfield" />
+        android:background="@drawable/record"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="17dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="27dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/playbutton"
+        android:layout_toEndOf="@+id/playbutton" />
 
     <ImageButton
         android:id="@+id/playbutton"
-        android:src="@drawable/play"
-        android:background="@android:color/transparent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/recordbutton"
-        android:layout_centerHorizontal="true" />
+        android:background="@drawable/play"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="55dp"
+        android:layout_marginStart="55dp"
+        android:layout_alignTop="@+id/stopbutton"
+        android:layout_toRightOf="@+id/camerabutton"
+        android:layout_toEndOf="@+id/camerabutton" />
 
     <ImageButton
         android:id="@+id/stopbutton"
-        android:src="@drawable/stop"
-        android:background="@android:color/transparent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/playbutton"
-        android:layout_alignRight="@+id/notetextfield"
-        android:layout_alignEnd="@+id/notetextfield" />
+        android:background="@drawable/stop"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="13dp"
+        android:layout_alignTop="@+id/recordbutton"
+        android:layout_toRightOf="@+id/recordbutton"
+        android:layout_toEndOf="@+id/recordbutton" />
+    </RelativeLayout>
 
 
     <EditText
         android:layout_width="330dp"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
         android:background="@drawable/apptheme_textfield_activated_holo_light"
         android:id="@+id/notetextfield"
         android:hint="Notiz hier eintragen..."
-        android:inputType="text"
-        android:layout_alignParentBottom="true"
+        android:inputType="textMultiLine"
+
+        android:gravity="top|left"
+        android:maxLines="10"
+        android:layout_above="@+id/savebutton"
         android:layout_centerHorizontal="true"></EditText>
 
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Speichern"
+        android:id="@+id/savebutton"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/notetextfield"
+        android:layout_alignEnd="@+id/notetextfield"
+        android:layout_marginBottom="22dp" />
 
 
 </RelativeLayout>
