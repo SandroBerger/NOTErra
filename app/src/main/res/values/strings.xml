@@ -20,6 +20,7 @@
     <string name="playbutton">PlayButton</string>
     <string name="stopbutton">StopButton</string>
     <string name="savebutton">SaveButton</string>
+    <string name="deletbutton">DeletButton</string>
     <string name="notetextfield">NoteTextField</string>
 
 
