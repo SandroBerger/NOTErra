@@ -1,4 +1,4 @@
-package com.example.android.noterra;
+package at.itkolleg.android.noterra;
 
 import android.content.Context;
 import android.content.Intent;

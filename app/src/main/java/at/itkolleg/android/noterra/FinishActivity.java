@@ -1,4 +1,7 @@
-package com.example.android.noterra;
+package at.itkolleg.android.noterra;
+
+import android.support.v7.app.ActionBarActivity;
+
 
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -12,12 +15,12 @@ import android.view.ViewGroup;
 import android.os.Build;
 
 
-public class FormActivity extends ActionBarActivity {
+public class FinishActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_form);
+        setContentView(R.layout.activity_finish);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
@@ -29,7 +32,7 @@ public class FormActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_form, menu);
+        getMenuInflater().inflate(R.menu.menu_finish, menu);
         return true;
     }
 
@@ -59,7 +62,7 @@ public class FormActivity extends ActionBarActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_form, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_finish, container, false);
             return rootView;
         }
     }

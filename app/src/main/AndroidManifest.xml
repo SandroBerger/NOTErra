@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.android.noterra">
+          package="at.itkolleg.android.noterra">
 
     <!--Gewährleistet den zugriff auf die camera des systems-->
-    <uses-permission android:name="android.permission.CAMERA"></uses-permission>
+    <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
                      android:maxSdkVersion="18"/>
-    <!--berechtigung notwendig für den zugriff auf die google maps karte-->
-    <uses-permission android:name="ANDROID.PERMISSION.INTERNET"/>
 
     <application
             android:allowBackup="true"
