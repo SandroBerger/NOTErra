@@ -1,18 +1,14 @@
 package at.itkolleg.android.noterra;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
+import android.view.*;
 import android.widget.Button;
 
 
-public class MainActivity extends ActionBarActivity implements View.OnClickListener{
+public class MainActivity extends ActionBarActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,54 +24,26 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         addButton();
     }
 
-
+    //-------------Hinzufügen der Buttonclick funktion und weiterleitung auf die Begehungsseite----
     public void addButton(){
-        Button formButton = (Button) findViewById(R.id.formbutton);
-        Button noteButton = (Button) findViewById(R.id.notebutton);
-        Button gpsButton = (Button) findViewById(R.id.gpsbutton);
-        Button finishButton = (Button) findViewById(R.id.finishbutton);
+        Button inspectionButton = (Button) findViewById(R.id.inspectionbutton);
 
-        formButton.setOnClickListener(this);
-        noteButton.setOnClickListener(this);
-        gpsButton.setOnClickListener(this);
-        finishButton.setOnClickListener(this);
+        inspectionButton.setOnClickListener(this);
     }
 
-    //Führt je nach dem welche id mit dem click auf den Button mitgegeben wurde aus.
-    @Override
     public void onClick(View v) {
         switch(v.getId()){
-            case R.id.formbutton:
-                buttonFormClick();
-                break;
-
-            case R.id.notebutton:
-                buttonNoteClick();
-                break;
-
-            case R.id.gpsbutton:
-                buttonGpsClick();
-                break;
-
-            case R.id.finishbutton:
-                buttonFinishClick();
+            case R.id.inspectionbutton:
+                buttonInspectionClick();
                 break;
         }
     }
 
-    //Ermöglicht die weiterleitung zwischen den einzelnen bereichen der Anwendung. Es wird ein view und die jeweilige Klasse mitgegeben auf die weitergeleitet werden soll.
-    private void buttonFormClick(){
-        startActivity(new Intent(this, FormActivity.class));
+    private void buttonInspectionClick(){
+        startActivity(new Intent(this, InspectionActivity.class));
     }
-    private void buttonNoteClick(){
-        startActivity(new Intent(this, NotesActivity.class));
-    }
-    private void buttonGpsClick(){
-        startActivity(new Intent(this, GpsActivity.class));
-    }
-    private void buttonFinishClick(){
-        startActivity(new Intent(this, FinishActivity.class));
-    }
+    //-------------------------------------------------------------------------------------------------
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

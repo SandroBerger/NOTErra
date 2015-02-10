@@ -6,15 +6,20 @@
     <string name="title_activity_form">Formular</string>
     <string name="title_activity_notes">Notiz</string>
     <string name="title_activity_gps">GPS - Ortung</string>
-    <string name="title_activity_finish">Zusammenfassung</string>
+    <string name="title_activity_summary">Zusammenfassung</string>
+    <string name="title_activity_inspection">InspectionActivity</string>
 
-    <!--Strings des der Activity - MAIN-->
+    <!-- Strings des der Activity - Main -->
+    <string name="inspectionbutton">InspectionButton</string>
+    <string name="begehungstarten">Begehung Starten</string>
+
+    <!-- Strings des der Activity - Inspection -->
     <string name="formbutton">FormButton</string>
     <string name="notebutton">NoteButton</string>
     <string name="gpsbutton">GpsButton</string>
     <string name="finishbutton">FinishButton</string>
 
-    <!--Strings des der Activity - NOTIZ-->
+    <!-- Strings des der Activity - NOTIZ -->
     <string name="camerabutton">CameraButton</string>
     <string name="recordbutton">RecordButton</string>
     <string name="playbutton">PlayButton</string>
@@ -23,6 +28,4 @@
     <string name="deletebutton">DeletButton</string>
     <string name="imageview">ImageView</string>
     <string name="notetextfield">NoteTextField</string>
-
-
 </resources>

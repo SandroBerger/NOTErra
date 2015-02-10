@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 public class NotesActivity extends ActionBarActivity implements View.OnClickListener {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +25,7 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         }
 
         addButton();
+
     }
 //-------------Button Hinzufügen und funktion hinzufügen zugriff auf kamera, ufnahme von audio und notiz aufnahme----
     public void addButton(){
@@ -41,7 +43,6 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         saveButton.setOnClickListener(this);
         deleteButton.setOnClickListener(this);
     }
-
 
     @Override
     public void onClick(View v) {
@@ -69,7 +70,7 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
 
     private void cameraButtonClick(){
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-        startActivity(new Intent(intent));
+
     }
     private void recordButtonClick(){
         Context context = getApplicationContext();
@@ -107,6 +108,7 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         toast.show();
     }
 //---------------------------------------------------------------------
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

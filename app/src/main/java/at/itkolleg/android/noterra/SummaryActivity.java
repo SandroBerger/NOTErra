@@ -12,12 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-public class FinishActivity extends ActionBarActivity {
+public class SummaryActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_finish);
+        setContentView(R.layout.activity_summary);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
@@ -59,7 +59,7 @@ public class FinishActivity extends ActionBarActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_finish, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_summary, container, false);
             return rootView;
         }
     }
