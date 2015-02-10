@@ -92,10 +92,10 @@
         android:hint="Notiz hier eintragen..."
         android:inputType="textMultiLine"
 
-        android:gravity="top|left"
+        android:gravity="top|start"
         android:maxLines="10"
         android:layout_above="@+id/savebutton"
-        android:layout_centerHorizontal="true"></EditText>
+        android:layout_centerHorizontal="true"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"

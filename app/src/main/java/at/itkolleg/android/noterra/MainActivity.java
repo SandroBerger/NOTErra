@@ -7,6 +7,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.*;
 import android.widget.Button;
 
+import java.io.File;
+
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener {
 
@@ -19,6 +21,10 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+
+        //Erstellt das Verzeichnis am Internen Speicher - muss noch getestet werden ob das auf allen geräten mit dem verzeichnis funktioniert!!
+        File mediaDirectory = new File("/storage/emulated/0/NOTErra");
+        mediaDirectory.mkdir();
 
         //Aufruf der Funktion addButton
         addButton();
