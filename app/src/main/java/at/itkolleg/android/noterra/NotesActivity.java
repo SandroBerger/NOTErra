@@ -1,18 +1,29 @@
 package at.itkolleg.android.noterra;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.view.*;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import java.io.File;
 
 
 public class NotesActivity extends ActionBarActivity implements View.OnClickListener {
 
+    private static final int CAMERA_REQUEST = 1888;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +35,7 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
                     .commit();
         }
 
+        loadImage();
         addButton();
 
     }
@@ -69,9 +81,16 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
     }
 
     private void cameraButtonClick(){
-        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
 
+
+        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+
+        Uri uriSavedImage=Uri.fromFile(new File("/storage/emulated/0/NOTErra/Media/Images/begehung_001.jpg"));
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
+
+        startActivityForResult(intent, CAMERA_REQUEST);
     }
+
     private void recordButtonClick(){
         Context context = getApplicationContext();
         CharSequence text = "Aufnahme wird gestartet!";
@@ -100,15 +119,34 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         startActivity(new Intent(this, MainActivity.class));
     }
     private void imageDeleteButton(){
-        Context context = getApplicationContext();
-        CharSequence text = "Bild wird gelöscht!";
-        int duration = Toast.LENGTH_SHORT;
+        File fdelete = new File("/storage/emulated/0/NOTErra/Media/Images/begehung_001.jpg");
+        if (fdelete.exists()){
+            if(fdelete.delete()){
+                //Toast ausgabe - Das bild wurde gelöscht
+                Toast toast = Toast.makeText(getApplicationContext(), "Bild wurde gelöscht!", Toast.LENGTH_SHORT);
+                toast.show();
 
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
+                imageView.setImageDrawable(null);
+            }
+        }
+
     }
 //---------------------------------------------------------------------
 
+    public void loadImage(){
+        File imgFile = new File("/storage/emulated/0/NOTErra/Media/Images/begehung_001.jpg");
+        if (imgFile.exists()) {
+            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            imageView = (ImageView)this.findViewById(R.id.imageview);
+            imageView.setImageBitmap(myBitmap);
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        loadImage();
+        imageView.setBackground(null);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

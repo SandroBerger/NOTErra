@@ -7,7 +7,7 @@
     <string name="title_activity_notes">Notiz</string>
     <string name="title_activity_gps">GPS - Ortung</string>
     <string name="title_activity_summary">Zusammenfassung</string>
-    <string name="title_activity_inspection">InspectionActivity</string>
+    <string name="title_activity_inspection">Begehung</string>
 
     <!-- Strings des der Activity - Main -->
     <string name="inspectionbutton">InspectionButton</string>

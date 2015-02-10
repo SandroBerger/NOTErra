@@ -23,8 +23,14 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         }
 
         //Erstellt das Verzeichnis am Internen Speicher - muss noch getestet werden ob das auf allen geräten mit dem verzeichnis funktioniert!!
-        File mediaDirectory = new File("/storage/emulated/0/NOTErra");
+        File noterraDirectory = new File("/storage/emulated/0/NOTErra");
+        File mediaDirectory = new File("/storage/emulated/0/NOTErra/Media");
+        File imageDirectory = new File("/storage/emulated/0/NOTErra/Media/Images");
+        File audioDirectory = new File("/storage/emulated/0/NOTErra/Media/Audio");
+        noterraDirectory.mkdir();
         mediaDirectory.mkdir();
+        imageDirectory.mkdir();
+        audioDirectory.mkdir();
 
         //Aufruf der Funktion addButton
         addButton();
