@@ -39,23 +39,26 @@
                 android:background="@drawable/play"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginRight="29dp"
-                android:layout_marginEnd="29dp"
-                android:layout_alignTop="@+id/stopbutton"
-                android:layout_toLeftOf="@+id/recordbutton"
-                android:layout_toStartOf="@+id/recordbutton"/>
+                android:layout_alignTop="@+id/recordbutton" android:layout_centerHorizontal="true"
+                android:layout_marginTop="14dp"/>
 
         <ImageButton
                 android:id="@+id/stopbutton"
                 android:background="@drawable/stop"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginTop="13dp"
                 android:layout_marginRight="40dp"
                 android:layout_marginEnd="40dp"
-                android:layout_alignTop="@+id/recordbutton"
-                android:layout_alignParentRight="true"
+                android:layout_below="@+id/playbutton" android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"/>
+
+        <ImageButton
+                android:id="@+id/stoprecbutton"
+                android:background="@drawable/stoprec"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentTop="true" android:layout_alignLeft="@+id/stopbutton"
+                android:layout_alignStart="@+id/stopbutton" android:layout_marginTop="13dp"/>
 
         <ImageView
                 android:id="@+id/imageview"

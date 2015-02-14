@@ -24,6 +24,7 @@
     <string name="recordbutton">RecordButton</string>
     <string name="playbutton">PlayButton</string>
     <string name="stopbutton">StopButton</string>
+    <string name="stoprecbuttin">StopRecButton</string>
     <string name="savebutton">SaveButton</string>
     <string name="deletebutton">DeletButton</string>
     <string name="imageview">ImageView</string>
