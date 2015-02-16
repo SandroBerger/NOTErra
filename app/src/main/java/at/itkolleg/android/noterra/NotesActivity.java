@@ -151,7 +151,6 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
             stopButton.setEnabled(true);
 
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -176,7 +175,6 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
                         Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
