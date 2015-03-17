@@ -24,9 +24,13 @@
     <string name="recordbutton">RecordButton</string>
     <string name="playbutton">PlayButton</string>
     <string name="stopbutton">StopButton</string>
-    <string name="stoprecbuttin">StopRecButton</string>
+    <string name="deleteaudiobutton">DeleteAudioButton</string>
     <string name="savebutton">SaveButton</string>
     <string name="deletebutton">DeletButton</string>
+    <string name="deleteaudio">DeleteAudio</string>
     <string name="imageview">ImageView</string>
     <string name="notetextfield">NoteTextField</string>
+    <string name="speicherbuttontext">Speichern</string>
+    <string name="notizhinweis">Notiz hier eintragen...</string>
+    <string name="chronometer">Chronometer</string>
 </resources>

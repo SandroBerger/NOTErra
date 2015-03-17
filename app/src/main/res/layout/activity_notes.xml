@@ -16,10 +16,9 @@
                 android:background="@drawable/camera"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_marginLeft="19dp"
-                android:layout_marginStart="19dp"
-                android:layout_alignTop="@+id/recordbutton"
-                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="29dp"
+                android:layout_marginStart="29dp"
+                android:layout_alignTop="@+id/recordbutton" android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"/>
 
         <ImageButton
@@ -27,51 +26,48 @@
                 android:background="@drawable/record"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_marginTop="23dp"
-                android:layout_marginRight="23dp"
-                android:layout_marginEnd="23dp"
-                android:layout_alignParentTop="true"
-                android:layout_toLeftOf="@+id/stopbutton"
-                android:layout_toStartOf="@+id/stopbutton"/>
+                android:layout_marginRight="18dp" android:layout_marginEnd="18dp"
+                android:layout_alignTop="@+id/playbutton" android:layout_toLeftOf="@+id/deleteaudiobutton"
+                android:layout_toStartOf="@+id/deleteaudiobutton" android:layout_marginTop="14dp"/>
 
         <ImageButton
                 android:id="@+id/playbutton"
                 android:background="@drawable/play"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_alignTop="@+id/recordbutton" android:layout_centerHorizontal="true"
-                android:layout_marginTop="14dp"/>
+                android:layout_marginTop="20dp" android:layout_alignParentTop="true"
+                android:layout_alignLeft="@+id/stopbutton" android:layout_alignStart="@+id/stopbutton"/>
 
         <ImageButton
                 android:id="@+id/stopbutton"
                 android:background="@drawable/stop"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginEnd="40dp"
-                android:layout_below="@+id/playbutton" android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"/>
+                android:layout_marginRight="27dp"
+                android:layout_marginEnd="27dp"
+                android:layout_below="@+id/deleteaudiobutton" android:layout_toLeftOf="@+id/recordbutton"
+                android:layout_toStartOf="@+id/recordbutton"/>
 
         <ImageButton
-                android:id="@+id/stoprecbutton"
-                android:background="@drawable/stoprec"
+                android:id="@+id/deleteaudiobutton"
+                android:background="@drawable/delete"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_alignParentTop="true" android:layout_alignLeft="@+id/stopbutton"
-                android:layout_alignStart="@+id/stopbutton" android:layout_marginTop="13dp"/>
+                android:layout_marginRight="31dp" android:layout_marginEnd="31dp"
+                android:layout_below="@+id/playbutton" android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"/>
 
         <ImageView
                 android:id="@+id/imageview"
                 android:layout_width="250dp"
                 android:layout_height="150dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="38dp"
+                android:layout_marginTop="29dp"
                 android:paddingBottom="5dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:paddingTop="5dp"
-                android:layout_below="@+id/camerabutton"
-                android:layout_alignLeft="@+id/camerabutton"
+                android:layout_below="@+id/chronometer" android:layout_alignLeft="@+id/camerabutton"
                 android:layout_alignStart="@+id/camerabutton"/>
 
         <ImageButton
@@ -79,10 +75,16 @@
                 android:background="@drawable/delete"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginTop="57dp"
-                android:layout_alignTop="@+id/imageview"
-                android:layout_alignLeft="@+id/stopbutton"
-                android:layout_alignStart="@+id/stopbutton"/>
+                android:layout_alignBottom="@+id/imageview" android:layout_alignLeft="@+id/deleteaudiobutton"
+                android:layout_alignStart="@+id/deleteaudiobutton" android:layout_marginBottom="59dp"/>
+
+        <Chronometer
+                android:id="@+id/chronometer"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="80dp"
+                android:layout_height="18dp"
+                android:layout_below="@+id/stopbutton" android:layout_alignLeft="@+id/recordbutton"
+                android:layout_alignStart="@+id/recordbutton"/>
     </RelativeLayout>
 
 
@@ -91,7 +93,7 @@
             android:layout_height="150dp"
             android:background="@drawable/apptheme_textfield_activated_holo_light"
             android:id="@+id/notetextfield"
-            android:hint="Notiz hier eintragen..."
+            android:hint="@string/notizhinweis"
             android:inputType="textMultiLine"
 
             android:gravity="top|start"
@@ -103,7 +105,7 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Speichern"
+            android:text="@string/speicherbuttontext"
             android:id="@+id/savebutton"
             android:layout_alignParentBottom="true"
             android:layout_alignRight="@+id/notetextfield"
