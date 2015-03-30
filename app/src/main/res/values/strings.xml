@@ -33,4 +33,7 @@
     <string name="speicherbuttontext">Speichern</string>
     <string name="notizhinweis">Notiz hier eintragen...</string>
     <string name="chronometer">Chronometer</string>
+    <string name="title_activity_gps_handler">GpsHandler</string>
+    <string name="hello_world">Hello world!</string>
+
 </resources>
