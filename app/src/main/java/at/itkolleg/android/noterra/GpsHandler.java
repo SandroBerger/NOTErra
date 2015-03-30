@@ -15,9 +15,10 @@ public class GpsHandler extends FragmentActivity implements LocationListener {
 
     private Context context = null;
 
-    boolean isGpsEnabled;
-    boolean canGetLocation;
-    boolean isNetworkEnabled;
+    boolean isGpsEnabled = false;
+    boolean isNetworkEnabled = false;
+    boolean canGetLocation = false;
+
 
     Location location;
 
@@ -25,9 +26,12 @@ public class GpsHandler extends FragmentActivity implements LocationListener {
     double breitengrad;
 
     private static final float MIN_DISTANCE_CHANGE_FOR_UPDATES = 10;
-    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1;
+    private static final long MIN_TIME_BW_UPDATES = 1000 * 10;
 
     protected LocationManager locationManager;
+
+    public GpsHandler() {
+    }
 
     public GpsHandler(Context context) {
         this.context = context;
@@ -37,17 +41,30 @@ public class GpsHandler extends FragmentActivity implements LocationListener {
     public Location getLocation() {
         try {
             locationManager = (LocationManager) context.getSystemService(LOCATION_SERVICE);
-
             isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-
             isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
             if (!isGpsEnabled && !isNetworkEnabled) {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
 
+                alertDialog.setTitle("Fehlgeschlagen");
+                alertDialog.setMessage("Ihre Position konnte nicht festgestellt werden. /n Wollen Sie manuell Fortfahren?");
+                alertDialog.setPositiveButton("Ja", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                alertDialog.setNegativeButton("Nein", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        context.startActivity(new Intent(context, InspectionActivity.class));
+                    }
+                });
             } else {
                 this.canGetLocation = true;
                 if (isNetworkEnabled) {
-                    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, (android.location.LocationListener) this);
+                    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, (LocationListener) this);
 
                     if (locationManager != null) {
                         location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
@@ -60,7 +77,7 @@ public class GpsHandler extends FragmentActivity implements LocationListener {
 
                 if (isGpsEnabled) {
                     if (location == null) {
-                        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, (android.location.LocationListener) this);
+                        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, (LocationListener) this);
                         if (locationManager != null) {
                             location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                             if (location != null) {

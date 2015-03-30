@@ -18,12 +18,10 @@ public class GpsActivity extends FragmentActivity implements LocationListener {
 
     static LatLng AKTUELLER_STANDORT = null;
     private GoogleMap map;
-    private GpsHandler gps = new GpsHandler(GpsActivity.this);
+    private GpsHandler gps;
 
     private double laengengrad;
     private double breitengrad;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +32,7 @@ public class GpsActivity extends FragmentActivity implements LocationListener {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+            gps = new GpsHandler(GpsActivity.this);
             createMap();
     }
 
@@ -43,9 +42,9 @@ public class GpsActivity extends FragmentActivity implements LocationListener {
 
         getLaengeBreite();
 
-        if(AKTUELLER_STANDORT == null){
-            AKTUELLER_STANDORT = new LatLng(breitengrad, laengengrad);
-        }
+
+        AKTUELLER_STANDORT = new LatLng(breitengrad, laengengrad);
+
         if (map != null) {
             Marker aktuellerStandort = map.addMarker(new MarkerOptions().position(AKTUELLER_STANDORT)
                     .title("Aktueller Standort"));
