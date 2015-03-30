@@ -52,7 +52,6 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         }
 
         loadImage();
-        createRecorder();
         addButton();
 
     }
@@ -120,6 +119,7 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
 
         if(recButtonCount == 1){
             try {
+                createRecorder();
                 myRecorder.prepare();
                 myRecorder.start();
                 myChrono.start();
@@ -284,9 +284,9 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
 
     private void createRecorder(){
 
-        outputFile = "/storage/emulated/0/NOTErra/Media/Audio/begehungAudio001.3gpp";
+        outputFile = "/storage/emulated/0/NOTErra/Media/Audio/begehungAudio1.3gpp";
         if(!outputFile.isEmpty()){
-            int i = 1;
+            int i = 2;
             outputFile = "/storage/emulated/0/NOTErra/Media/Audio/begehungAudio" + i + ".3gpp";
         }
         myRecorder = new MediaRecorder();
