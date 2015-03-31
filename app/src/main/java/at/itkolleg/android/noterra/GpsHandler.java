@@ -25,7 +25,7 @@ public class GpsHandler extends FragmentActivity implements LocationListener {
     double laengengrad;
     double breitengrad;
 
-    private static final float MIN_DISTANCE_CHANGE_FOR_UPDATES = 10;
+    private static final float MIN_DISTANCE_CHANGE_FOR_UPDATES = 5;
     private static final long MIN_TIME_BW_UPDATES = 1000 * 10;
 
     protected LocationManager locationManager;

@@ -1,11 +1,10 @@
 package at.itkolleg.android.noterra;
 
-import android.location.Location;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.*;
-import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -14,7 +13,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 
-public class GpsActivity extends FragmentActivity implements LocationListener {
+public class GpsActivity extends FragmentActivity{
 
     static LatLng AKTUELLER_STANDORT = null;
     private GoogleMap map;
@@ -32,7 +31,7 @@ public class GpsActivity extends FragmentActivity implements LocationListener {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
-            gps = new GpsHandler(GpsActivity.this);
+            gps = new GpsHandler(this);
             createMap();
     }
 
@@ -42,7 +41,6 @@ public class GpsActivity extends FragmentActivity implements LocationListener {
 
         getLaengeBreite();
 
-
         AKTUELLER_STANDORT = new LatLng(breitengrad, laengengrad);
 
         if (map != null) {
@@ -51,7 +49,7 @@ public class GpsActivity extends FragmentActivity implements LocationListener {
         }
 
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(AKTUELLER_STANDORT, 15));
-        map.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
+        map.animateCamera(CameraUpdateFactory.zoomTo(17), 2000, null);
     }
 
     public void getLaengeBreite(){
@@ -61,6 +59,11 @@ public class GpsActivity extends FragmentActivity implements LocationListener {
         }else{
             gps.showSettingsAlert();
         }
+    }
+
+    protected void onRestart(){
+        super.onRestart();
+        startActivity(new Intent(this, InspectionActivity.class));
     }
 
     @Override
@@ -83,11 +86,6 @@ public class GpsActivity extends FragmentActivity implements LocationListener {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onLocationChanged(Location location) {
-
     }
 
     /**
