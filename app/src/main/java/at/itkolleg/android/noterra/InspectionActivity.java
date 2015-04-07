@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.view.*;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class InspectionActivity extends ActionBarActivity implements View.OnClickListener {
 
@@ -20,6 +21,13 @@ public class InspectionActivity extends ActionBarActivity implements View.OnClic
         }
 
         addButton();
+
+
+        TextView textView=(TextView)findViewById(R.id.h2beobachtung);
+
+        String extra= getIntent().getStringExtra("extra");
+        textView.setText(extra);
+
     }
 
     public void addButton(){
@@ -71,6 +79,11 @@ public class InspectionActivity extends ActionBarActivity implements View.OnClic
         startActivity(new Intent(this, SummaryActivity.class));
     }
     //-------------------------------------------------------------------------------------------------
+
+
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

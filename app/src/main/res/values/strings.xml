@@ -36,4 +36,24 @@
     <string name="title_activity_gps_handler">GpsHandler</string>
     <string name="hello_world">Hello world!</string>
 
+
+
+    <!-- String für Formular -->
+    <string name="h1Beobachtung">Beobachtung auswählen</string>
+    <string name="Beobachtung">-beliebig-</string>
+    <string name="speichern">speichern</string>
+    <string name="anzahlstam">Anzahl der Stämme:</string>
+    <string name="Baumart">Baumart(en)</string>
+    <string name="Mediabhd">Media (BHD)</string>
+    <string name="bachabschnitt">Länge Bachabschnitt (m)</string>
+    <string name="Beschreibung">Beschreibung</string>
+    <string name="Beschriftung">Beschreibung..</string>
+    <string name="Beschriftung1">Empfohlene Maßnahmen..</string>
+
+
+
+    <!-- String für Inspection-->
+    <string name="leer">Es wurde noch keine Beobachtung gewählt</string>
+
+
 </resources>

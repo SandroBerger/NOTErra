@@ -10,13 +10,11 @@
             android:id="@+id/formbutton"
             android:layout_width="200dp"
             android:layout_height="80dp"
-            android:layout_marginTop="43dp"
+            android:layout_marginTop="42dp"
             android:text="Formular"
             android:layout_gravity="center_horizontal|top"
-            android:layout_alignParentTop="true"
-            android:layout_alignLeft="@+id/notebutton"
-            android:layout_alignStart="@+id/notebutton"
-            android:onClick="FormOnClick"/>
+            android:onClick="FormOnClick" android:layout_alignParentTop="true"
+            android:layout_alignLeft="@+id/notebutton" android:layout_alignStart="@+id/notebutton"/>
 
     <Button
             android:id="@+id/notebutton"
@@ -24,9 +22,8 @@
             android:layout_height="80dp"
             android:text="Notiz"
             android:layout_gravity="center_horizontal|top"
-            android:layout_below="@+id/formbutton"
-            android:layout_centerHorizontal="true"
-            android:onClick="NoteOnClick"/>
+            android:onClick="NoteOnClick" android:layout_below="@+id/formbutton"
+            android:layout_centerHorizontal="true"/>
 
     <Button
             android:id="@+id/gpsbutton"
@@ -50,6 +47,19 @@
             android:layout_alignLeft="@+id/gpsbutton"
             android:layout_alignStart="@+id/gpsbutton"
             android:onClick="FinishOnClick"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/leer"
+            android:id="@+id/h2beobachtung"
+            android:textStyle="bold" android:textColor="#ff020001"
+            android:layout_below="@+id/textView3" android:layout_centerHorizontal="true"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Beobachtung:"
+            android:id="@+id/textView3" android:layout_alignParentTop="true" android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
 
 
 </RelativeLayout>
