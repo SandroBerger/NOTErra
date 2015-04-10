@@ -36,10 +36,11 @@
     <string name="title_activity_gps_handler">GpsHandler</string>
     <string name="hello_world">Hello world!</string>
 
-
+    <string name="title_activity_holzablagerungen">Holzablagerungen</string>
+    <string name="title_activity_holzablagerung">Holzablagerung</string>
+    <string name="title_activity_ablagerung">Ablagerung</string>
 
     <!-- String für Formular -->
-    <string name="h1Beobachtung">Beobachtung auswählen</string>
     <string name="Beobachtung">-beliebig-</string>
     <string name="speichern">speichern</string>
     <string name="anzahlstam">Anzahl der Stämme:</string>
@@ -48,12 +49,32 @@
     <string name="bachabschnitt">Länge Bachabschnitt (m)</string>
     <string name="Beschreibung">Beschreibung</string>
     <string name="Beschriftung">Beschreibung..</string>
-    <string name="Beschriftung1">Empfohlene Maßnahmen..</string>
+    <string name="maßnahme">Empfohlene Maßnahme</string>
+    <string name="Beliebig">Beliebig</string>
+    <string name="h1beobachtung">Bitte wählen Sie eine Beobachtung aus:</string>
+    <string name="holzmenge">Holzmenge (fm)</string>
+    <string name="kosten">Kosten (Euro geschätzt)</string>
 
-
-
-    <!-- String für Inspection-->
+    <!-- String für Inspection -->
     <string name="leer">Es wurde noch keine Beobachtung gewählt</string>
+
+    <color name="hellgrun">#89C35C</color>
+    <color name="tgrau">#CAC9C9</color> <!-- Text / Editor Grau -->
+    <color name="bgrau">#6E6E6E</color> <!-- Button Grau -->
+    <color name="black">#190707</color>
+
+    <!-- Strings Formular -> Beobachtung: Holzablagerung -->
+    <string name="ablagerung">Ablagerungsart</string>
+    <string name="Bau">Bauaushub</string>
+    <string name="felsblock">Felsblöcke</string>
+    <string name="mull">Müllabllagerung</string>
+    <string name="schotter">Schotter, Sand</string>
+
+    <!-- String Formular -> Beobachtung:Ablagerung sonst. abflusshemmender Gegenstände -->
+
+    <string name="großaus">Größe / Ausmaß (m2)</string>
+    <string name="lange_bachabschnitt">Länge Bachabschnitt (m)</string>
+
 
 
 </resources>

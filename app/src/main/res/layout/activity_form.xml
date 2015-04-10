@@ -4,154 +4,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="at.itkolleg.android.noterra.FormActivity"
-    tools:ignore="MergeRootFrame">
+    tools:ignore="MergeRootFrame"
+    android:background="@color/hellgrun">
 
-
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/h1Beobachtung"
-            android:id="@+id/textView2" android:textStyle="bold"
-            android:textColor="#ff000000" android:layout_gravity="center_horizontal|top"
-            android:layout_alignParentTop="true" android:layout_alignLeft="@+id/textView"
-            android:layout_alignStart="@+id/textView"/>
-    <TextView
-            android:layout_width="212dp"
-            android:layout_height="41dp"
-            android:text="@string/Beobachtung"
-            android:id="@+id/textView"
-            android:onClick="onClick"
-            android:clickable="true" android:textColor="#ff000000"
-            android:elegantTextHeight="false" android:editable="false"
-            android:layout_below="@+id/textView2"
-            android:layout_alignLeft="@+id/stringpicker"
-            android:layout_alignStart="@+id/stringpicker" android:layout_alignRight="@+id/mediabhd"
-            android:layout_alignEnd="@+id/mediabhd"/>
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/speichern"
-            android:id="@+id/button"
-            android:layout_marginBottom="159dp"
-            android:onClick="btnclick"
-            android:layout_alignParentBottom="true" android:layout_toRightOf="@+id/textView"
-            android:layout_toEndOf="@+id/textView" android:textSize="12dp"/>
-
-
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:id="@+id/anzahlstamm" android:textStyle="bold"
-              android:textColor="#ff000000"
-              android:layout_gravity="center_horizontal|top"
-              android:text="@string/anzahlstam"
-              android:layout_below="@+id/textView" android:layout_alignParentLeft="true"
-              android:layout_alignParentStart="true"/>
-    <EditText
-            android:layout_width="100px"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:ems="10"
-            android:id="@+id/zahlstamm"
-            android:layout_below="@+id/anzahlstamm" android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"/>
-
-
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/h1baumart"
-              android:textStyle="bold" android:textColor="#ff000000" android:layout_gravity="center_horizontal|top"
-              android:text="@string/Baumart"
-              android:layout_above="@+id/editbaumart" android:layout_alignParentLeft="true"
-              android:layout_alignParentStart="true"/>
-    <EditText
-            android:layout_width="200px"
-            android:layout_height="wrap_content"
-            android:id="@+id/editbaumart"
-            android:layout_above="@+id/h1beschreibung" android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"/>
-
-    <TextView android:layout_width="250px" android:layout_height="wrap_content" android:id="@+id/h1mediabhd"
-              android:textStyle="bold" android:textColor="#ff000000" android:layout_gravity="center_horizontal|top"
-              android:text="@string/Mediabhd"
-              android:layout_alignTop="@+id/anzahlstamm" android:layout_alignRight="@+id/h1bachabschnitt"
-              android:layout_alignEnd="@+id/h1bachabschnitt"/>
-
-    <EditText android:layout_width="100px" android:layout_height="wrap_content" android:inputType="number"
-              android:ems="10" android:id="@+id/mediabhd"
-              android:layout_alignTop="@+id/zahlstamm" android:layout_alignLeft="@+id/h1mediabhd"
-              android:layout_alignStart="@+id/h1mediabhd"/>
-
-    <TextView android:layout_width="300px" android:layout_height="wrap_content" android:id="@+id/h1bachabschnitt"
-              android:textStyle="bold" android:textColor="#ff000000" android:layout_gravity="center_horizontal|top"
-              android:text="@string/bachabschnitt"
-              android:layout_alignBaseline="@+id/h1baumart" android:layout_alignBottom="@+id/h1baumart"
-              android:layout_alignLeft="@+id/stringpicker" android:layout_alignStart="@+id/stringpicker"
-              android:layout_alignParentRight="true" android:layout_alignParentEnd="true"/>
-
-    <EditText android:layout_width="100px" android:layout_height="wrap_content" android:inputType="number"
-              android:ems="10" android:id="@+id/bachabschnitt"
-              android:layout_below="@+id/h1bachabschnitt" android:layout_alignLeft="@+id/mediabhd"
-              android:layout_alignStart="@+id/mediabhd"/>
-
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/h1beschreibung"
-              android:textStyle="bold" android:textColor="#ff000000" android:layout_gravity="center_horizontal|top"
-              android:text="@string/Beschreibung"
-              android:layout_above="@+id/beschreibung" android:layout_alignParentLeft="true"
-              android:layout_alignParentStart="true"/>
-
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/h1empfehl"
-              android:textStyle="bold" android:textColor="#ff000000" android:layout_gravity="center_horizontal|top"
-              android:text="Empfohlene Maßnhamen"
-              android:layout_above="@+id/empfehlungen" android:layout_toLeftOf="@+id/textView"
-              android:layout_toStartOf="@+id/textView"/>
-
-    <EditText android:layout_width="280dp" android:layout_height="150dp"
-              android:background="@drawable/apptheme_textfield_activated_holo_light" android:id="@+id/empfehlungen"
-              android:hint="@string/Beschriftung1" android:inputType="textMultiLine" android:gravity="top|start"
-              android:maxLines="10"
-              android:layout_alignParentBottom="true" android:layout_alignParentLeft="true"
-              android:layout_alignParentStart="true" android:layout_gravity="center_horizontal|bottom"
-         />
-
-
-    <EditText android:layout_width="280dp" android:layout_height="150dp"
-              android:background="@drawable/apptheme_textfield_activated_holo_light" android:id="@+id/beschreibung"
-              android:hint="@string/Beschriftung" android:inputType="textMultiLine" android:gravity="top|start"
-              android:maxLines="10"
-              android:layout_gravity="center"
-              android:layout_above="@+id/h1empfehl" android:layout_alignParentLeft="true"
-              android:layout_alignParentStart="true" android:layout_marginBottom="22dp"/>
-    <NumberPicker
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/stringpicker"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center"
+    <Spinner android:id="@+id/Spinner01"
+             android:layout_width="fill_parent"
+             android:layout_height="50dp"
+             android:layout_marginTop="163dp"
+            android:background="@drawable/spinner_style"
+             android:layout_alignParentTop="true" android:layout_alignParentLeft="true"
+             android:layout_alignParentStart="true"
+            android:prompt="@string/Beliebig"
             />
     <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="S\n p\n e\n i\n c\n h\n e\n r\n n\n"
-            android:id="@+id/speichbut"
-            android:layout_alignParentBottom="true"
-            android:layout_toRightOf="@+id/bachabschnitt"
-            android:layout_alignRight="@+id/button" android:layout_alignEnd="@+id/button"
-            android:onClick="onclick1"
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:textStyle="bold"
+            android:text="Speichern"
+            android:id="@+id/button" android:layout_centerVertical="true" android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/button_style"
+            android:onClick="onclick"
             />
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/h1kosten"
-              android:textStyle="bold" android:textColor="#ff000000" android:layout_gravity="center_horizontal|top"
-              android:text="Kosten (geschätzt)"
-              android:layout_below="@+id/bachabschnitt" android:layout_alignRight="@+id/kosten"
-              android:layout_alignEnd="@+id/kosten"/>
-    <EditText android:layout_width="100px" android:layout_height="wrap_content" android:inputType="number"
-              android:ems="10" android:id="@+id/kosten"
-              android:layout_alignTop="@+id/beschreibung" android:layout_toRightOf="@+id/beschreibung"
-              android:layout_toEndOf="@+id/beschreibung"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="€"
-            android:id="@+id/euro"
-            android:layout_alignBottom="@+id/kosten" android:layout_toRightOf="@+id/kosten"
-            android:layout_toEndOf="@+id/kosten"/>
+            android:text="@string/h1beobachtung"
+            android:id="@+id/textView"
+            android:layout_marginBottom="52dp"
+            android:textSize="18dp"
+            android:textStyle="bold" android:layout_alignBottom="@+id/Spinner01" android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
+
 
 
 </RelativeLayout>
