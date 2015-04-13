@@ -5,7 +5,7 @@
              android:layout_height="match_parent"
              tools:context="at.itkolleg.android.noterra.InspectionActivity"
              tools:ignore="MergeRootFrame"
-             android:background="@color/hellgrun">
+             android:background="#8BC34A">
 
     <Button
             android:id="@+id/formbutton"

@@ -106,10 +106,16 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
 
     private void cameraButtonClick() {
 
-
         Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 
-        Uri uriSavedImage = Uri.fromFile(new File("/storage/emulated/0/NOTErra/Media/Images/begehung_001.jpg"));
+        outputFile = "/storage/emulated/0/NOTErra/Media/Images/begehungImage_001.jpg";
+        if(!outputFile.isEmpty()){
+            int i = 2;
+            outputFile = "/storage/emulated/0/NOTErra/Media/Audio/begehungImage_00"+ i +".jpg";
+
+            i++;
+        }
+        Uri uriSavedImage = Uri.fromFile(new File(outputFile));
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
 
         startActivityForResult(intent, CAMERA_REQUEST);
@@ -268,7 +274,16 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
 //---------------------------------------------------------------------
 //---------------Ladet das bild in den Imageview wenn eines vorhanden ist in der Ordner struktur------------------
     public void loadImage() {
-        File imgFile = new File("/storage/emulated/0/NOTErra/Media/Images/begehung_001.jpg");
+        outputFile = "/storage/emulated/0/NOTErra/Media/Images/begehungImage_001.jpg";
+
+        if(outputFile.isEmpty()){
+            int i = 2;
+            outputFile = "/storage/emulated/0/NOTErra/Media/Audio/begehungAudio_00"+ i +".3gpp";
+
+            i++;
+        }
+
+        File imgFile = new File(outputFile);
 
         if (imgFile.exists()) {
             Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
@@ -284,10 +299,12 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
 
     private void createRecorder(){
 
-        outputFile = "/storage/emulated/0/NOTErra/Media/Audio/begehungAudio1.3gpp";
+        outputFile = "/storage/emulated/0/NOTErra/Media/Audio/begehungAudio_001.3gpp";
         if(!outputFile.isEmpty()){
             int i = 2;
-            outputFile = "/storage/emulated/0/NOTErra/Media/Audio/begehungAudio" + i + ".3gpp";
+            outputFile = "/storage/emulated/0/NOTErra/Media/Audio/begehungAudio_00"+ i + ".3gpp";
+
+            i++;
         }
         myRecorder = new MediaRecorder();
         myRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);

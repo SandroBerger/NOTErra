@@ -3,7 +3,6 @@ package at.itkolleg.android.noterra;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -41,8 +40,6 @@ public class Schaeden_Regulierungsbauten extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schaeden__regulierungsbauten);
 
-
-
         schaeden=(RadioGroup)findViewById(R.id.schaeden);
 
         geschiebsperre =(RadioButton)findViewById(R.id.geschiebesperre);
@@ -67,7 +64,7 @@ public class Schaeden_Regulierungsbauten extends ActionBarActivity {
 
 
 
-    public void onclick(View view)
+    public void onClick(View view)
     {
 
         int checkedRadiobut= schaeden.getCheckedRadioButtonId();
@@ -91,35 +88,19 @@ public class Schaeden_Regulierungsbauten extends ActionBarActivity {
                     toast.show();
                 }
                 break;
-
             case R.id.freiwahl:
                 if(freiwahl.isChecked()){
-
-
-
                     edit.requestFocus();
                     InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.showSoftInput(edit, InputMethodManager.SHOW_IMPLICIT);
-
-
-
-
                 }
                 break;
-
-
-
         }
-
-
     }
 
 
     public void onclick1(View view)
     {
-
-
-
         ArrayList<String> schadensartBauwerk=new ArrayList<String>();
 
         if(fehl.isChecked())
@@ -156,23 +137,30 @@ public class Schaeden_Regulierungsbauten extends ActionBarActivity {
         }
         if(frei.isChecked())
         {
-
-
-
-
             edit2.requestFocus();
             InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.showSoftInput(edit2, InputMethodManager.SHOW_IMPLICIT);
-
-
-
         }
 
     }
 
     public void save(View v) {
 
+        if(frei.isSelected() || freiwahl.isSelected()){
+            if(edit.equals(null) || edit2.equals(null)){
+                new AlertDialog.Builder(this)
+                        .setTitle("Achtung!")
+                        .setMessage("Das Ausgewählte Textfeld ist leer!")
+                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
+                            }
+                        })
+                        .show();
+            }
+        }
+        /*
         if (freiwahl.isChecked() || frei.isChecked())
         {
             if(edit.equals("") || edit2.equals(""))
@@ -186,9 +174,6 @@ public class Schaeden_Regulierungsbauten extends ActionBarActivity {
 
                             }
                         })
-
-
-
                         .show();
             }
             else
@@ -209,10 +194,9 @@ public class Schaeden_Regulierungsbauten extends ActionBarActivity {
                 startActivity(intent);
             }
 
-        }
-
-
+        }*/
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
