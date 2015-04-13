@@ -30,6 +30,9 @@ public class Holzablagerung extends ActionBarActivity {
         anzahl.add(">50");
         anzahl.add("Anzahl der Stämme:");
 
+
+        // dsfafs df
+
         final int listsize = anzahl.size() - 1;
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, anzahl) {
