@@ -74,20 +74,13 @@
             android:name=".GpsHandler"
             android:label="@string/title_activity_gps_handler" >
         </activity>
-
         <!--
             <meta-data
                 android:name="com.google.android.maps.v2.API_KEY"
-                android:value="AIzaSyBEBiMoIUX7sxnvRaEt8PHsMOUQJLNxWHs"/>
-        -->
+                android:value="AIzaSyBEBiMoIUX7sxnvRaEt8PHsMOUQJLNxWHs"/>-->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyDPIQPHoveJ82POg6reLYtBHy4Mg7-UmCY" />
-
-        <activity
-            android:name=".Holzablagerungen"
-            android:label="@string/title_activity_holzablagerungen" >
-        </activity>
         <activity
             android:name=".Holzablagerung"
             android:label="@string/title_activity_holzablagerung" >
