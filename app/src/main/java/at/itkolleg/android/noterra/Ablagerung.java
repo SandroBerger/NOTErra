@@ -1,6 +1,7 @@
 package at.itkolleg.android.noterra;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -22,6 +24,7 @@ public class Ablagerung extends ActionBarActivity {
     private RadioButton muellablagerung;
     private RadioButton schotter;
     private RadioButton eigenes;
+    private EditText edit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,15 +37,25 @@ public class Ablagerung extends ActionBarActivity {
         muellablagerung=(RadioButton)findViewById(R.id.mull);
         schotter=(RadioButton)findViewById(R.id.schotter);
         eigenes=(RadioButton)findViewById(R.id.freiwahl);
+        edit=(EditText)findViewById(R.id.editText);
+
+
+
+
 
 
 
     }
 
+    public void editclick(View view)
+    {
+        eigenes.setChecked(true);
+
+    }
 
     public void onclick(View v){
-        int checkedRadiobut= ablagerung.getCheckedRadioButtonId();
 
+        int checkedRadiobut= ablagerung.getCheckedRadioButtonId();
         switch(checkedRadiobut){
             case R.id.Bauaushub:
                 if(bauaushub.isChecked()){
@@ -71,44 +84,69 @@ public class Ablagerung extends ActionBarActivity {
             case R.id.freiwahl:
                 if(eigenes.isChecked()){
 
-                    EditText edit=(EditText)findViewById(R.id.editText);
 
-                    if(edit.getText().toString().equals(""))
-                    {
-                        new AlertDialog.Builder(this)
-                                .setTitle("!!Achtung!!")
-                                .setMessage("Es wurde kein Text eingegeben")
-                                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-
-                                    }
-                                })
-                                .setIcon(R.drawable.warning_ablagerungsart)
-
-
-                                .show();
-                    }
-                    else
-                    {
-                        Toast toast=Toast.makeText(getApplicationContext(),edit.getText(), Toast.LENGTH_SHORT);
-                        toast.show();
-                    }
+                    edit.requestFocus();
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.showSoftInput(edit, InputMethodManager.SHOW_IMPLICIT);
 
                 }
                 break;
 
-
-
         }
+
 
     }
 
+
+
+
+
+
+
+
     public void save(View v) {
-        String extra = getIntent().getStringExtra("Headline");
-        Intent intent = new Intent(Ablagerung.this, InspectionActivity.class);
-        intent.putExtra("Headline", extra);
-        startActivity(intent);
+
+        if(eigenes.isChecked())
+        {
+
+
+        if(edit.getText().toString().equals(""))
+        {
+            new AlertDialog.Builder(this)
+                    .setTitle("!!Achtung!!")
+                    .setMessage("Es wurde kein Text eingegeben")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                    .setIcon(R.drawable.warning_ablagerungsart)
+
+
+                    .show();
+        }
+        else {
+
+            String extra = getIntent().getStringExtra("Headline");
+            Intent intent = new Intent(Ablagerung.this, InspectionActivity.class);
+            intent.putExtra("Headline", extra);
+            startActivity(intent);
+        }
+        }
+        else
+        {
+            if(bauaushub.isChecked() || felsbloecke.isChecked() || muellablagerung.isChecked() || schotter.isChecked())
+            {
+                String extra = getIntent().getStringExtra("Headline");
+                Intent intent = new Intent(Ablagerung.this, InspectionActivity.class);
+                intent.putExtra("Headline", extra);
+                startActivity(intent);
+            }
+
+        }
+
+
     }
 
 

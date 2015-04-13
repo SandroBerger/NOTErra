@@ -1,6 +1,7 @@
 package at.itkolleg.android.noterra;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -22,6 +24,7 @@ public class Abflussbehinderndeeinbauten extends ActionBarActivity {
     private RadioButton staubrett;
     private RadioButton rohrdurchlass;
     private RadioButton freiwahl;
+    private EditText editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,8 @@ public class Abflussbehinderndeeinbauten extends ActionBarActivity {
         staubrett=(RadioButton)findViewById(R.id.staubrett);
         rohrdurchlass=(RadioButton)findViewById(R.id.rohrdurchlass);
         freiwahl=(RadioButton)findViewById(R.id.freiwahl);
+
+        editText=(EditText)findViewById(R.id.art_der_einbaut);
 
     }
 
@@ -73,26 +78,13 @@ public class Abflussbehinderndeeinbauten extends ActionBarActivity {
             case R.id.freiwahl:
                 if (freiwahl.isChecked()) {
 
-                    EditText edit = (EditText) findViewById(R.id.art_der_einbaut);
 
-                    if (edit.getText().toString().equals("")) {
-                        new AlertDialog.Builder(this)
-                                .setTitle("!!Achtung!!")
-                                .setMessage("Es wurde kein Text eingegeben")
-                                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-
-                                    }
-                                })
+                    editText.requestFocus();
+                        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
 
 
 
-                                .show();
-                    } else {
-                        Toast toast = Toast.makeText(getApplicationContext(), edit.getText(), Toast.LENGTH_SHORT);
-                        toast.show();
-                    }
 
                 }
                 break;
@@ -102,10 +94,41 @@ public class Abflussbehinderndeeinbauten extends ActionBarActivity {
     }
 
     public void save(View v){
-        String extra = getIntent().getStringExtra("Headline");
-        Intent intent = new Intent(Abflussbehinderndeeinbauten.this, InspectionActivity.class);
-        intent.putExtra("Headline", extra);
-        startActivity(intent);
+
+
+
+        if(freiwahl.isChecked())
+        {
+
+
+        if (editText.getText().toString().equals("")) {
+            new AlertDialog.Builder(this)
+                    .setTitle("!!Achtung!!")
+                    .setMessage("Es wurde kein Text eingegeben")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+
+
+
+                    .show();
+        } else {
+            String extra = getIntent().getStringExtra("Headline");
+            Intent intent = new Intent(Abflussbehinderndeeinbauten.this, InspectionActivity.class);
+            intent.putExtra("Headline", extra);
+            startActivity(intent);
+        }
+        }
+        else
+        {
+            String extra = getIntent().getStringExtra("Headline");
+            Intent intent = new Intent(Abflussbehinderndeeinbauten.this, InspectionActivity.class);
+            intent.putExtra("Headline", extra);
+            startActivity(intent);
+        }
     }
 
 

@@ -1,13 +1,15 @@
 package at.itkolleg.android.noterra;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -26,6 +28,7 @@ public class Abflussbehinderung extends ActionBarActivity {
     private RadioButton rutschung;
     private RadioButton sonstiges;
     private RadioButton freiwahl;
+    private EditText edit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +46,14 @@ public class Abflussbehinderung extends ActionBarActivity {
         rutschung=(RadioButton)findViewById(R.id.rutschung);
         sonstiges=(RadioButton)findViewById(R.id.sonst);
         freiwahl=(RadioButton)findViewById(R.id.freiwahl);
-
+        edit=(EditText)findViewById(R.id.art_der_abflussbehinderung);
 
 
 
     }
+
+
+
 
 
 
@@ -98,32 +104,18 @@ public class Abflussbehinderung extends ActionBarActivity {
             case R.id.freiwahl:
                 if(freiwahl.isChecked()){
 
-                    EditText edit=(EditText)findViewById(R.id.art_der_einbaut);
 
-                    if(edit.getText().toString().equals(""))
-                    {
-                        new AlertDialog.Builder(this)
-                                .setTitle("!!Achtung!!")
-                                .setMessage("Es wurde kein Text eingegeben")
-                                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
 
-                                    }
-                                })
 
-                                .setIcon(R.drawable.warning_artdesbauwerks)
+                    edit.requestFocus();
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.showSoftInput(edit, InputMethodManager.SHOW_IMPLICIT);
 
-                                .show();
-                    }
-                    else
-                    {
-                        Toast toast=Toast.makeText(getApplicationContext(),edit.getText(), Toast.LENGTH_SHORT);
-                        toast.show();
-                    }
 
                 }
                 break;
+
+
 
 
 
@@ -132,13 +124,46 @@ public class Abflussbehinderung extends ActionBarActivity {
 
     }
 
-    public void save(View v){
-        String extra = getIntent().getStringExtra("Headline");
-        Intent intent = new Intent(Abflussbehinderung.this, InspectionActivity.class);
-        intent.putExtra("Headline", extra);
-        startActivity(intent);
-    }
+    public void save(View v) {
 
+        if(freiwahl.isChecked())
+        {
+
+
+            if (edit.getText().toString().equals("")) {
+                new AlertDialog.Builder(this)
+                        .setTitle("!!Achtung!!")
+                        .setMessage("Es wurde kein Text eingegeben")
+                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+
+
+
+                        .show();
+            } else {
+                String extra = getIntent().getStringExtra("Headline");
+                Intent intent = new Intent(Abflussbehinderung.this, InspectionActivity.class);
+                intent.putExtra("Headline", extra);
+                startActivity(intent);
+            }
+        }
+        else
+        {
+            if(felssturz.isChecked() || hochwasser.isChecked() || lawinenablagerung.isChecked() || mure.isChecked() || rutschung.isChecked() || sonstiges.isChecked())
+            {
+                String extra = getIntent().getStringExtra("Headline");
+                Intent intent = new Intent(Abflussbehinderung.this, InspectionActivity.class);
+                intent.putExtra("Headline", extra);
+                startActivity(intent);
+            }
+
+        }
+
+    }
 
 
     @Override

@@ -4,61 +4,61 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
               tools:context="at.itkolleg.android.noterra.Holzablagerungen"
-              android:background="@color/hellgrun">
+              android:background="@color/hellgrun" android:focusableInTouchMode="true">
 
 
 
-    <ScrollView android:layout_width="fill_parent" android:layout_height="500dp">
+    <ScrollView android:layout_width="fill_parent" android:layout_height="wrap_content">
         <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
-                      android:orientation="vertical" >
+                      android:orientation="vertical" android:focusableInTouchMode="true" >
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/ablagerung"
+                    android:text="Ablagerung: "
                     android:id="@+id/textView2"
                     android:layout_gravity="center_vertical"
                     android:textStyle="bold"
                     android:textColor="@color/black" android:textSize="20dp"/>
 
-<RadioGroup android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/ablagerung">
+<RadioGroup android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/ablagerung">
             <RadioButton
-                    android:layout_width="match_parent"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="100dp"
+
                     android:text="@string/Bau"
                     android:id="@+id/Bauaushub"
                     android:topLeftRadius="8dip"
                     android:background="@drawable/testtop"
                     android:onClick="onclick"/>
             <RadioButton
-                    android:layout_width="match_parent"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="100dp"
+
                     android:text="@string/felsblock"
                     android:id="@+id/fesblock"
                     android:background="@color/tgrau"
                     android:onClick="onclick"/>
             <RadioButton
-                    android:layout_width="match_parent"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/tgrau"
-                    android:layout_marginLeft="100dp"
+
                     android:text="@string/mull"
                     android:id="@+id/mull"
                     android:onClick="onclick"/>
             <RadioButton
-                    android:layout_width="match_parent"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/tgrau"
-                    android:layout_marginLeft="100dp"
+
                     android:text="@string/schotter"
                     android:id="@+id/schotter"
                     android:onClick="onclick"/>
     <RadioButton
-                    android:layout_width="match_parent"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/testbot"
-                    android:layout_marginLeft="100dp"
+
                     android:text=""
                     android:id="@+id/freiwahl"
                     android:bottomLeftRadius="8dip"
@@ -67,12 +67,17 @@
 
 </RadioGroup>
             <EditText
-                    android:layout_width="102dp"
+                    android:layout_width="120dp"
                     android:layout_height="30dp"
                     android:id="@+id/editText"
+                    android:layout_marginLeft="30dp"
                     android:layout_marginTop="-30dp"
                     android:singleLine="true"
-                    android:background="@drawable/button_style" android:layout_gravity="center_horizontal"
+                    android:imeOptions="actionDone"
+                    android:background="@drawable/button_style"
+                    android:onClick="editclick"
+
+
                     />
 
             <EditText
@@ -86,6 +91,7 @@
 
                     android:gravity="top|start"
                     android:maxLines="10"
+                    android:imeOptions="actionDone"
                     />
 
             <EditText
@@ -96,6 +102,7 @@
                     android:hint="@string/großaus"
                     android:background="@drawable/textfield_style"
                     android:inputType="number"
+                    android:imeOptions="actionDone"
                     />
 
             <EditText
@@ -106,6 +113,7 @@
                     android:hint="@string/lange_bachabschnitt"
                     android:background="@drawable/textfield_style"
                     android:inputType="number"
+                    android:imeOptions="actionDone"
                     />
 
             <EditText
@@ -119,6 +127,7 @@
 
                     android:gravity="top|start"
                     android:maxLines="10"
+                    android:imeOptions="actionDone"
                     />
 
 
@@ -132,6 +141,7 @@
                     android:hint="@string/kosten"
                     android:background="@drawable/textfield_style"
                     android:inputType="number"
+                    android:imeOptions="actionDone"
                     />
 
 

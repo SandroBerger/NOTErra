@@ -66,7 +66,7 @@
     <string name="ablagerung">Ablagerungsart</string>
     <string name="Bau">Bauaushub</string>
     <string name="felsblock">Felsblöcke</string>
-    <string name="mull">Müllabllagerung</string>
+    <string name="mull">Müllablagerung</string>
     <string name="schotter">Schotter, Sand</string>
 
     <!-- String Formular -> Beobachtung:Ablagerung sonst. abflusshemmender Gegenstände -->
@@ -125,5 +125,7 @@
     <string name="mure">Mure</string>
     <string name="rutschung">Rutschung</string>
     <string name="title_activity_test">test</string>
+
+
 
 </resources>

@@ -4,13 +4,13 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
               tools:context="at.itkolleg.android.noterra.Holzablagerungen"
-              android:background="@color/hellgrun">
+              android:background="@color/hellgrun" android:focusableInTouchMode="true">
 
 
 
-    <ScrollView android:layout_width="fill_parent" android:layout_height="500dp">
+    <ScrollView android:layout_width="fill_parent" android:layout_height="wrap_content">
         <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
-                      android:orientation="vertical" >
+                      android:orientation="vertical" android:focusableInTouchMode="true" >
 
             <Spinner android:id="@+id/Spinner01"
                      android:layout_width="360dp"

@@ -3,13 +3,13 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
               tools:context="at.itkolleg.android.noterra.Holzablagerungen"
-              android:background="@color/hellgrun">
+              android:background="@color/hellgrun" android:focusableInTouchMode="true">
 
 
 
-<ScrollView android:layout_width="fill_parent" android:layout_height="500dp">
+<ScrollView android:layout_width="fill_parent" android:layout_height="wrap_content">
     <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
-                  android:orientation="vertical" >
+                  android:orientation="vertical" android:focusableInTouchMode="true">
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -18,14 +18,14 @@
                 android:layout_gravity="center_vertical"
                 android:textStyle="bold"
                 android:textColor="@color/black" android:textSize="20dp"/>
-        <RadioGroup android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/artdereinbauten">
+        <RadioGroup android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/artdereinbauten">
 
 
             <RadioButton
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/testtop"
-                    android:layout_marginLeft="100dp"
+
                     android:text="@string/bruckesteg"
                     android:id="@+id/bruckesteg"
                     android:onClick="onclick"/>
@@ -33,7 +33,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/tgrau"
-                    android:layout_marginLeft="100dp"
+
                     android:text="@string/huette"
                     android:id="@+id/huette"
                     android:onClick="onclick"/>
@@ -41,7 +41,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/tgrau"
-                    android:layout_marginLeft="100dp"
+
                     android:text="@string/staubrett"
                     android:id="@+id/staubrett"
                     android:onClick="onclick"/>
@@ -49,7 +49,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/tgrau"
-                    android:layout_marginLeft="100dp"
+
                     android:text="@string/rohrdurchlass"
                     android:id="@+id/rohrdurchlass"
                     android:onClick="onclick"/>
@@ -57,21 +57,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/testbot"
-                    android:layout_marginLeft="100dp"
+
                     android:text=""
                     android:id="@+id/freiwahl"
                     android:bottomLeftRadius="8dip"
                     android:onClick="onclick"/>
         </RadioGroup>
         <EditText
-                android:layout_width="180dp"
-                android:layout_marginLeft="40dp"
+                android:layout_width="120dp"
+                android:layout_marginLeft="30dp"
                 android:layout_height="30dp"
                 android:id="@+id/art_der_einbaut"
                 android:layout_marginTop="-30dp"
                 android:singleLine="true"
-                android:background="@drawable/button_style" android:layout_gravity="center_horizontal"
-                android:maxLength="20"/>
+                android:background="@drawable/button_style"
+                android:maxLength="20"
+                android:imeOptions="actionDone"
+                />
 
 
         <EditText
@@ -82,7 +84,7 @@
                 android:id="@+id/Beschreibung"
                 android:hint="@string/Beschreibung"
                 android:inputType="textMultiLine"
-
+                android:imeOptions="actionDone"
                 android:gravity="top|start"
                 android:maxLines="10"
                 />

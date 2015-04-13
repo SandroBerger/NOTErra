@@ -1,13 +1,15 @@
 package at.itkolleg.android.noterra;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 
 import java.util.ArrayList;
@@ -22,6 +24,8 @@ public class Wasserauseinleitung extends ActionBarActivity {
     private RadioButton bewaesserung;
     private RadioButton trinkwasser;
     private RadioButton freiwahl;
+
+    private EditText edit;
 
 
     @Override
@@ -57,6 +61,7 @@ public class Wasserauseinleitung extends ActionBarActivity {
         bewaesserung=(RadioButton)findViewById(R.id.bewaesserung);
         trinkwasser=(RadioButton)findViewById(R.id.trinkwasser);
         freiwahl=(RadioButton)findViewById(R.id.freiwahl);
+        edit=(EditText)findViewById(R.id.art_des_zweckes);
 
     }
 
@@ -94,26 +99,11 @@ public class Wasserauseinleitung extends ActionBarActivity {
             case R.id.freiwahl:
                 if (freiwahl.isChecked()) {
 
-                    EditText edit = (EditText) findViewById(R.id.art_der_einbaut);
-
-                    if (edit.getText().toString().equals("")) {
-                        new AlertDialog.Builder(this)
-                                .setTitle("!!Achtung!!")
-                                .setMessage("Es wurde kein Text eingegeben")
-                                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-
-                                    }
-                                })
+                    edit.requestFocus();
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.showSoftInput(edit, InputMethodManager.SHOW_IMPLICIT);
 
 
-
-                                .show();
-                    } else {
-                        Toast toast = Toast.makeText(getApplicationContext(), edit.getText(), Toast.LENGTH_SHORT);
-                        toast.show();
-                    }
 
                 }
                 break;
@@ -125,10 +115,33 @@ public class Wasserauseinleitung extends ActionBarActivity {
     }
 
     public void save(View v){
-        String extra = getIntent().getStringExtra("Headline");
-        Intent intent = new Intent(Wasserauseinleitung.this, InspectionActivity.class);
-        intent.putExtra("Headline", extra);
-        startActivity(intent);
+
+        if(freiwahl.isChecked())
+        {
+
+
+        if (edit.getText().toString().equals("")) {
+            new AlertDialog.Builder(this)
+                    .setTitle("!!Achtung!!")
+                    .setMessage("Es wurde kein Text eingegeben")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+
+
+
+                    .show();
+        } else {
+            String extra = getIntent().getStringExtra("Headline");
+            Intent intent = new Intent(Wasserauseinleitung.this, InspectionActivity.class);
+            intent.putExtra("Headline", extra);
+            startActivity(intent);
+        }
+        }
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

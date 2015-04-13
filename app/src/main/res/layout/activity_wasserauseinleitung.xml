@@ -3,13 +3,13 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
               tools:context="at.itkolleg.android.noterra.Holzablagerungen"
-              android:background="@color/hellgrun">
+              android:background="@color/hellgrun" android:focusableInTouchMode="true">
 
 
 
-    <ScrollView android:layout_width="fill_parent" android:layout_height="500dp">
+    <ScrollView android:layout_width="fill_parent" android:layout_height="wrap_content">
         <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
-                      android:orientation="vertical" >
+                      android:orientation="vertical" android:focusableInTouchMode="true">
 
             <Spinner android:id="@+id/wasserauseinleitung"
                      android:layout_width="360dp"
@@ -22,7 +22,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/zweck"
+                    android:text="Zweck:"
                     android:id="@+id/textView2"
                     android:layout_gravity="center_vertical"
                     android:textStyle="bold"
@@ -30,14 +30,14 @@
                     android:textColor="@color/black" android:textSize="20dp"/>
 
 
-            <RadioGroup android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/zweck">
+            <RadioGroup android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/zweck">
 
 
                 <RadioButton
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/testtop"
-                        android:layout_marginLeft="100dp"
+
                         android:text="@string/abwasser"
                         android:id="@+id/abwasser"
                         android:onClick="onclick"/>
@@ -45,7 +45,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/tgrau"
-                        android:layout_marginLeft="100dp"
+
                         android:text="@string/beschneiung"
                         android:id="@+id/beschneiung"
                         android:onClick="onclick"/>
@@ -53,7 +53,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/tgrau"
-                        android:layout_marginLeft="100dp"
+
                         android:text="@string/bewaesserung"
                         android:id="@+id/bewaesserung"
                         android:onClick="onclick"/>
@@ -61,7 +61,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/tgrau"
-                        android:layout_marginLeft="100dp"
+
                         android:text="@string/trinkwasser"
                         android:id="@+id/trinkwasser"
                         android:onClick="onclick"/>
@@ -69,20 +69,21 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/testbot"
-                        android:layout_marginLeft="100dp"
+
                         android:text=""
                         android:id="@+id/freiwahl"
                         android:bottomLeftRadius="8dip"
                         android:onClick="onclick"/>
             </RadioGroup>
             <EditText
-                    android:layout_width="180dp"
-                    android:layout_marginLeft="40dp"
+                    android:layout_width="120dp"
+                    android:layout_marginLeft="30dp"
                     android:layout_height="30dp"
-                    android:id="@+id/art_der_einbaut"
+                    android:id="@+id/art_des_zweckes"
                     android:layout_marginTop="-30dp"
                     android:singleLine="true"
-                    android:background="@drawable/button_style" android:layout_gravity="center_horizontal"
+                    android:imeOptions="actionDone"
+                    android:background="@drawable/button_style"
                     android:maxLength="20"/>
 
 
@@ -94,7 +95,7 @@
                     android:id="@+id/Beschreibung"
                     android:hint="@string/Beschreibung"
                     android:inputType="textMultiLine"
-
+                    android:imeOptions="actionDone"
                     android:gravity="top|start"
                     android:maxLines="10"
                     />

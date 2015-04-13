@@ -1,6 +1,7 @@
 package at.itkolleg.android.noterra;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 
 import java.util.ArrayList;
@@ -31,6 +33,9 @@ public class Schaeden_Regulierungsbauten extends ActionBarActivity {
     private CheckBox untersp;
     private CheckBox frei;
 
+    private EditText edit;
+    private EditText edit2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,8 +49,19 @@ public class Schaeden_Regulierungsbauten extends ActionBarActivity {
         laengsverbauung=(RadioButton)findViewById(R.id.laengsverbauung);
         querwerk=(RadioButton)findViewById(R.id.querwerk);
         freiwahl=(RadioButton)findViewById(R.id.freiwahl);
+        edit=(EditText)findViewById(R.id.artdesBauwerks_edittext);
+        edit2=(EditText)findViewById(R.id.freiwahl_bauwerk);
 
 
+        fehl=(CheckBox)findViewById(R.id.fehlabsturz);
+        ausg=(CheckBox)findViewById(R.id.ausgsperrenfluegel);
+        geschiebesperre=(CheckBox)findViewById(R.id.geschiebesperre2);
+        rissMauerwerk=(CheckBox)findViewById(R.id.rissemauerwerk);
+        schadMauerwerk=(CheckBox)findViewById(R.id.schadhaftesmauerwerk);
+        sonst=(CheckBox)findViewById(R.id.sonst);
+        starkerbewuchs=(CheckBox)findViewById(R.id.starkerbewuchs);
+        untersp=(CheckBox)findViewById(R.id.Untersp_fundanment);
+        frei=(CheckBox)findViewById(R.id.eigen);
     }
 
 
@@ -79,29 +95,14 @@ public class Schaeden_Regulierungsbauten extends ActionBarActivity {
             case R.id.freiwahl:
                 if(freiwahl.isChecked()){
 
-                    EditText edit=(EditText)findViewById(R.id.artdesBauwerks_edittext);
 
-                    if(edit.getText().toString().equals(""))
-                    {
-                        new AlertDialog.Builder(this)
-                                .setTitle("!!Achtung!!")
-                                .setMessage("Es wurde kein Text eingegeben")
-                                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
 
-                                    }
-                                })
+                    edit.requestFocus();
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.showSoftInput(edit, InputMethodManager.SHOW_IMPLICIT);
 
-                                .setIcon(R.drawable.warning_artdesbauwerks)
 
-                                .show();
-                    }
-                    else
-                    {
-                        Toast toast=Toast.makeText(getApplicationContext(),edit.getText(), Toast.LENGTH_SHORT);
-                        toast.show();
-                    }
+
 
                 }
                 break;
@@ -116,15 +117,7 @@ public class Schaeden_Regulierungsbauten extends ActionBarActivity {
 
     public void onclick1(View view)
     {
-        fehl=(CheckBox)findViewById(R.id.fehlabsturz);
-        ausg=(CheckBox)findViewById(R.id.ausgsperrenfluegel);
-        geschiebesperre=(CheckBox)findViewById(R.id.geschiebesperre2);
-        rissMauerwerk=(CheckBox)findViewById(R.id.rissemauerwerk);
-        schadMauerwerk=(CheckBox)findViewById(R.id.schadhaftesmauerwerk);
-        sonst=(CheckBox)findViewById(R.id.sonst);
-        starkerbewuchs=(CheckBox)findViewById(R.id.starkerbewuchs);
-        untersp=(CheckBox)findViewById(R.id.Untersp_fundanment);
-        frei=(CheckBox)findViewById(R.id.eigen);
+
 
 
         ArrayList<String> schadensartBauwerk=new ArrayList<String>();
@@ -163,9 +156,26 @@ public class Schaeden_Regulierungsbauten extends ActionBarActivity {
         }
         if(frei.isChecked())
         {
-            EditText freiw=(EditText)findViewById(R.id.freiwahl_bauwerk);
 
-            if(freiw.getText().toString().equals(""))
+
+
+
+            edit2.requestFocus();
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(edit2, InputMethodManager.SHOW_IMPLICIT);
+
+
+
+        }
+
+    }
+
+    public void save(View v) {
+
+
+        if (freiwahl.isChecked() || frei.isChecked())
+        {
+            if(edit.equals("") || edit2.equals(""))
             {
                 new AlertDialog.Builder(this)
                         .setTitle("!!Achtung!!")
@@ -183,20 +193,26 @@ public class Schaeden_Regulierungsbauten extends ActionBarActivity {
             }
             else
             {
-                schadensartBauwerk.add(freiw.getText().toString());
+                String extra = getIntent().getStringExtra("Headline");
+                Intent intent = new Intent(Schaeden_Regulierungsbauten.this, InspectionActivity.class);
+                intent.putExtra("Headline", extra);
+                startActivity(intent);
+            }
+        }
+        else
+        {
+            if(geschiebesperre.isChecked()|| laengsverbauung.isChecked() || querwerk.isChecked() || fehl.isChecked() || ausg.isChecked() || geschiebsperre.isChecked() || rissMauerwerk.isChecked() ||schadMauerwerk.isChecked() || sonst.isChecked() || starkerbewuchs.isChecked() || untersp.isChecked() )
+            {
+                String extra = getIntent().getStringExtra("Headline");
+                Intent intent = new Intent(Schaeden_Regulierungsbauten.this, InspectionActivity.class);
+                intent.putExtra("Headline", extra);
+                startActivity(intent);
             }
 
         }
 
-    }
 
-    public void save(View v){
-        String extra = getIntent().getStringExtra("Headline");
-        Intent intent = new Intent(Schaeden_Regulierungsbauten.this, InspectionActivity.class);
-        intent.putExtra("Headline", extra);
-        startActivity(intent);
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
