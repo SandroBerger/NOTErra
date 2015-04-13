@@ -116,6 +116,10 @@
             android:name=".Abflussbehinderung"
             android:label="@string/title_activity_abflussbehinderung" >
         </activity>
+        <activity
+            android:name=".test"
+            android:label="@string/title_activity_test" >
+        </activity>
     </application>
 
 </manifest>

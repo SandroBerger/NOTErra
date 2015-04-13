@@ -119,11 +119,11 @@
 
     <!-- Strings für Ereignis ohne unmittelbare Abflussbehinderung -->
     <string name="beobachtung">Art der Beobachtung</string>
-    
     <string name="felssturz">Felssturz</string>
     <string name="hochwasser">Hochwasser</string>
     <string name="lawinenablagerung">Lawinenablagerung</string>
     <string name="mure">Mure</string>
     <string name="rutschung">Rutschung</string>
-    
+    <string name="title_activity_test">test</string>
+
 </resources>
