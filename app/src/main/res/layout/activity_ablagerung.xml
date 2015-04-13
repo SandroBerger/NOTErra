@@ -71,6 +71,7 @@
                     android:layout_height="30dp"
                     android:id="@+id/editText"
                     android:layout_marginTop="-30dp"
+                    android:singleLine="true"
                     android:background="@drawable/button_style" android:layout_gravity="center_horizontal"
                     />
 

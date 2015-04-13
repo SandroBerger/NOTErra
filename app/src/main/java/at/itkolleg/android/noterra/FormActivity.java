@@ -73,21 +73,35 @@ public class FormActivity extends ActionBarActivity  {
 
                 break;
             case "Holzbewuchs im Hochwasserabflussbereich":
-
+                Intent intent2=new Intent(FormActivity.this,Holzbewuchs.class);
+                intent2.putExtra("Headline",beobachtung);
+                startActivity(intent2);
 
                 break;
             case "Schäden an Regulierungsbauten":
-
-
+                Intent intent3=new Intent(FormActivity.this,Schaeden_Regulierungsbauten.class);
+                intent3.putExtra("Headline",beobachtung);
+                startActivity(intent3);
                 break;
             case "Abflussbehindernde Einbauten":
+                Intent intent4=new Intent(FormActivity.this,Abflussbehinderdeeinbauten.class);
+                intent4.putExtra("Headline",beobachtung);
+                startActivity(intent4);
+
 
 
                 break;
             case "Wasseraus- und -einleitungen":
+                Intent intent5=new Intent(FormActivity.this,Wasserauseinleitung.class);
+                intent5.putExtra("Headline",beobachtung);
+                startActivity(intent5);
 
                 break;
             case "Ereignis ohne unmittelbare Abflussbehinderung":
+
+                Intent intent6=new Intent(FormActivity.this,Abflussbehinderung.class);
+                intent6.putExtra("Headline",beobachtung);
+                startActivity(intent6);
 
 
                 break;

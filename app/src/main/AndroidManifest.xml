@@ -96,6 +96,26 @@
             android:name=".Ablagerung"
             android:label="@string/title_activity_ablagerung" >
         </activity>
+        <activity
+            android:name=".Holzbewuchs"
+            android:label="@string/title_activity_holzbewuchs" >
+        </activity>
+        <activity
+            android:name=".Schaeden_Regulierungsbauten"
+            android:label="@string/title_activity_schaeden__regulierungsbauten" >
+        </activity>
+        <activity
+            android:name=".Abflussbehinderdeeinbauten"
+            android:label="@string/title_activity_ablufssbehinderndeeinbauten" >
+        </activity>
+        <activity
+            android:name=".Wasserauseinleitung"
+            android:label="@string/title_activity_wasserauseinleitung" >
+        </activity>
+        <activity
+            android:name=".Abflussbehinderung"
+            android:label="@string/title_activity_abflussbehinderung" >
+        </activity>
     </application>
 
 </manifest>

@@ -1,0 +1,102 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              tools:context="at.itkolleg.android.noterra.Holzablagerungen"
+              android:background="@color/hellgrun">
+
+
+
+<ScrollView android:layout_width="fill_parent" android:layout_height="500dp">
+    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+                  android:orientation="vertical" >
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/einbauten"
+                android:id="@+id/textView2"
+                android:layout_gravity="center_vertical"
+                android:textStyle="bold"
+                android:textColor="@color/black" android:textSize="20dp"/>
+        <RadioGroup android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/artdereinbauten">
+
+
+            <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/testtop"
+                    android:layout_marginLeft="100dp"
+                    android:text="@string/bruckesteg"
+                    android:id="@+id/bruckesteg"
+                    android:onClick="onclick"/>
+            <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/tgrau"
+                    android:layout_marginLeft="100dp"
+                    android:text="@string/huette"
+                    android:id="@+id/huette"
+                    android:onClick="onclick"/>
+            <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/tgrau"
+                    android:layout_marginLeft="100dp"
+                    android:text="@string/staubrett"
+                    android:id="@+id/staubrett"
+                    android:onClick="onclick"/>
+            <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/tgrau"
+                    android:layout_marginLeft="100dp"
+                    android:text="@string/rohrdurchlass"
+                    android:id="@+id/rohrdurchlass"
+                    android:onClick="onclick"/>
+            <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/testbot"
+                    android:layout_marginLeft="100dp"
+                    android:text=""
+                    android:id="@+id/freiwahl"
+                    android:bottomLeftRadius="8dip"
+                    android:onClick="onclick"/>
+        </RadioGroup>
+        <EditText
+                android:layout_width="180dp"
+                android:layout_marginLeft="40dp"
+                android:layout_height="30dp"
+                android:id="@+id/art_der_einbaut"
+                android:layout_marginTop="-30dp"
+                android:singleLine="true"
+                android:background="@drawable/button_style" android:layout_gravity="center_horizontal"
+                android:maxLength="20"/>
+
+
+        <EditText
+                android:layout_width="360dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/textfield_style"
+                android:id="@+id/Beschreibung"
+                android:hint="@string/Beschreibung"
+                android:inputType="textMultiLine"
+
+                android:gravity="top|start"
+                android:maxLines="10"
+                />
+
+        <Button
+                android:layout_width="360dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="Speichern"
+                android:id="@+id/speichern" android:layout_gravity="center_horizontal"
+                android:background="@drawable/button_style"
+                android:onClick="save"/>
+
+    </LinearLayout>
+</ScrollView>
+
+</LinearLayout>

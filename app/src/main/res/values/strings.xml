@@ -35,7 +35,6 @@
     <string name="chronometer">Chronometer</string>
     <string name="title_activity_gps_handler">GpsHandler</string>
     <string name="hello_world">Hello world!</string>
-
     <string name="title_activity_holzablagerungen">Holzablagerungen</string>
     <string name="title_activity_holzablagerung">Holzablagerung</string>
     <string name="title_activity_ablagerung">Ablagerung</string>
@@ -74,7 +73,57 @@
 
     <string name="großaus">Größe / Ausmaß (m2)</string>
     <string name="lange_bachabschnitt">Länge Bachabschnitt (m)</string>
+    <string name="title_activity_holzbewuchs">Holzbewuchs</string>
+    <string name="title_activity_schaeden__regulierungsbauten">Schaeden_Regulierungsbauten</string>
 
+    <!-- Strings Formular -> Beobachtung: Holzbewuchs -->
+    <string name="baumhoehe">Baumhöhe (m)</string>
 
+    <!-- Strings Formular -> Schäden an regulierungsbauten -->
+    <!-- Radio Buttons -->
+    <string name="geschiebesperre">Geschiebesperre</string>
+    <string name="laengsverbauung">Längsverbauung</string>
+    <string name="querwerk">Querwerk</string>
 
+    <!-- Überschriften & hint texte -->
+    <string name="bauwerk">Art des Bauwerks:</string>
+    <string name="schandsart">Schadensart des Bauwerkes:</string>
+    <string name="freiehoehedammkrone"> Freie Höhe bis Dammkrone (m)</string>
+
+    <!-- Checkboxes -->
+    <string name="fehlendeabsturz">Fehl. Absturzsich.</string>
+    <string name="Ausg">Ausg. Sperrenflügel</string>
+    <!-- Geschiebesperre oben schon deklariert -->
+    <string name="mauerwerk">Risse im Mauerwerk/Beton</string>
+    <string name="schadhaftes">Schadhaftes Mauerwerk/Beton</string>
+    <string name="sonst">Sonstiges</string>
+    <string name="starkerbewuchs">Starker Bewuchs</string>
+    <string name="untersp">Untersp. Fundanment</string>
+    <string name="title_activity_ablufssbehinderndeeinbauten">ablufssbehinderndeeinbauten</string>
+
+    <!-- Abflussbehindernde Einbauten -->
+    <string name="einbauten">Art der Einbauten</string>
+    <string name="bruckesteg">Brücke , Steg</string>
+    <string name="huette">Hütte</string>
+    <string name="staubrett">Staubrett</string>
+    <string name="rohrdurchlass">Verl. Rohrdurchlass</string>
+    <string name="title_activity_wasserauseinleitung">Wasserauseinleitung</string>
+
+    <!-- String für Wasseraus und -einleitung -->
+    <string name="zweck">Zweck</string>
+    <string name="abwasser">Abwasser</string>
+    <string name="beschneiung">Beschneiung</string>
+    <string name="bewaesserung">Bewässerung</string>
+    <string name="trinkwasser">Trinkwasser</string>
+    <string name="title_activity_abflussbehinderung">Abflussbehinderung</string>
+
+    <!-- Strings für Ereignis ohne unmittelbare Abflussbehinderung -->
+    <string name="beobachtung">Art der Beobachtung</string>
+    
+    <string name="felssturz">Felssturz</string>
+    <string name="hochwasser">Hochwasser</string>
+    <string name="lawinenablagerung">Lawinenablagerung</string>
+    <string name="mure">Mure</string>
+    <string name="rutschung">Rutschung</string>
+    
 </resources>

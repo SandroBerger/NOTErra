@@ -1,5 +1,7 @@
 package at.itkolleg.android.noterra;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -73,8 +75,19 @@ public class Ablagerung extends ActionBarActivity {
 
                     if(edit.getText().toString().equals(""))
                     {
-                        Toast toast=Toast.makeText(getApplicationContext(),"!!Achtung!! es wurde nichts eingegebn", Toast.LENGTH_SHORT);
-                        toast.show();
+                        new AlertDialog.Builder(this)
+                                .setTitle("!!Achtung!!")
+                                .setMessage("Es wurde kein Text eingegeben")
+                                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                })
+                                .setIcon(R.drawable.warning_ablagerungsart)
+
+
+                                .show();
                     }
                     else
                     {
