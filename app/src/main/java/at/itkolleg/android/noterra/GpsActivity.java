@@ -39,6 +39,9 @@ public class GpsActivity extends FragmentActivity{
         map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
                 .getMap();
 
+        map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        //map.addCircle(circleOptions);
+
         getLaengeBreite();
 
         AKTUELLER_STANDORT = new LatLng(breitengrad, laengengrad);
