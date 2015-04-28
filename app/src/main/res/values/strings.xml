@@ -29,7 +29,7 @@
     <string name="deletebutton">DeletButton</string>
     <string name="deleteaudio">DeleteAudio</string>
     <string name="imageview">ImageView</string>
-    <string name="notetextfield">NoteTextField</string>
+    <string name="notetextfield">Eingabe einer Textnotiz möglich...</string>
     <string name="speicherbuttontext">Speichern</string>
     <string name="notizhinweis">Notiz hier eintragen...</string>
     <string name="chronometer">Chronometer</string>

@@ -24,7 +24,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                     .commit();
         }
 
-        //Erstellt das Verzeichnis am Internen Speicher - muss noch getestet werden ob das auf allen geräten mit dem verzeichnis funktioniert!!
+        //Erstellt das Verzeichnis am Internen Speicher
         File noterraDirectory = new File("/storage/emulated/0/NOTErra");
         File mediaDirectory = new File("/storage/emulated/0/NOTErra/Media");
         File imageDirectory = new File("/storage/emulated/0/NOTErra/Media/Images");
@@ -37,13 +37,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         //Aufruf der Funktion addButton
         addButton();
 
-
-
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
-
-
-
-
     }
 
 
@@ -52,7 +46,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     //-------------Hinzufügen der Buttonclick funktion und weiterleitung auf die Begehungsseite----
     public void addButton(){
         Button inspectionButton = (Button) findViewById(R.id.inspectionbutton);
-
         inspectionButton.setOnClickListener(this);
     }
 

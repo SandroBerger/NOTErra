@@ -13,7 +13,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 
-public class GpsActivity extends FragmentActivity{
+public class GpsActivity extends FragmentActivity {
 
     static LatLng AKTUELLER_STANDORT = null;
     private GoogleMap map;
@@ -31,8 +31,8 @@ public class GpsActivity extends FragmentActivity{
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
-            gps = new GpsHandler(this);
-            createMap();
+        gps = new GpsHandler(this);
+        createMap();
     }
 
     public void createMap() {
@@ -55,16 +55,16 @@ public class GpsActivity extends FragmentActivity{
         map.animateCamera(CameraUpdateFactory.zoomTo(17), 2000, null);
     }
 
-    public void getLaengeBreite(){
-        if(gps.canGetLocation()){
+    public void getLaengeBreite() {
+        if (gps.canGetLocation()) {
             breitengrad = gps.getBreitengrad();
             laengengrad = gps.getLaengengrad();
-        }else{
+        } else {
             gps.showSettingsAlert();
         }
     }
 
-    protected void onRestart(){
+    protected void onRestart() {
         super.onRestart();
         startActivity(new Intent(this, InspectionActivity.class));
     }

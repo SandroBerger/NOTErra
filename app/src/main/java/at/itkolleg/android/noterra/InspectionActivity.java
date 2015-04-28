@@ -24,6 +24,7 @@ public class InspectionActivity extends ActionBarActivity implements View.OnClic
 
 
         TextView textView=(TextView)findViewById(R.id.h2beobachtung);
+        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
 
         String extra= getIntent().getStringExtra("Headline");
         textView.setText(extra);

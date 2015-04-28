@@ -21,6 +21,7 @@ import android.widget.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Calendar;
 
 
 public class NotesActivity extends ActionBarActivity implements View.OnClickListener {
@@ -51,6 +52,8 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
                     .commit();
         }
 
+
+        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
         loadImage();
         addButton();
 
@@ -105,16 +108,10 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
     }
 
     private void cameraButtonClick() {
-
         Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 
-        outputFile = "/storage/emulated/0/NOTErra/Media/Images/begehungImage_001.jpg";
-        if(!outputFile.isEmpty()){
-            int i = 2;
-            outputFile = "/storage/emulated/0/NOTErra/Media/Audio/begehungImage_00"+ i +".jpg";
+        outputFile = "/storage/emulated/0/NOTErra/Media/Images/begehungImage_"+ getCurrentTime() +".jpg";
 
-            i++;
-        }
         Uri uriSavedImage = Uri.fromFile(new File(outputFile));
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
 
@@ -255,7 +252,7 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // continue with delete
-                        File fdelete = new File("/storage/emulated/0/NOTErra/media/Images/begehung_001.jpg");
+                        File fdelete = new File("/storage/emulated/0/NOTErra/media/Images/begehung_"+ getCurrentTime() +".jpg");
                         if (fdelete.exists()) {
                             if (fdelete.delete()) {
                                 imageView.setImageDrawable(null);
@@ -274,14 +271,7 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
 //---------------------------------------------------------------------
 //---------------Ladet das bild in den Imageview wenn eines vorhanden ist in der Ordner struktur------------------
     public void loadImage() {
-        outputFile = "/storage/emulated/0/NOTErra/Media/Images/begehungImage_001.jpg";
-
-        if(outputFile.isEmpty()){
-            int i = 2;
-            outputFile = "/storage/emulated/0/NOTErra/Media/Audio/begehungAudio_00"+ i +".3gpp";
-
-            i++;
-        }
+        outputFile = "/storage/emulated/0/NOTErra/Media/Images/begehungImage_"+ getCurrentTime() +".jpg";
 
         File imgFile = new File(outputFile);
 
@@ -291,6 +281,21 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
             imageView.setImageBitmap(myBitmap);
         }
     }
+
+    private String getCurrentTime(){
+        final Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(System.currentTimeMillis());
+
+        int day = cal.get(Calendar.DATE);
+        int month = cal.get(Calendar.MONTH);
+        int year = cal.get(Calendar.YEAR);
+        int hour = cal.get(Calendar.HOUR);
+        int minute = cal.get(Calendar.MINUTE);
+
+        String time = day + "." + month + "." + year + "_" +hour + ":" + minute;
+
+        return time;
+    }
 //---------------------------------------------------------------------
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -299,13 +304,8 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
 
     private void createRecorder(){
 
-        outputFile = "/storage/emulated/0/NOTErra/Media/Audio/begehungAudio_001.3gpp";
-        if(!outputFile.isEmpty()){
-            int i = 2;
-            outputFile = "/storage/emulated/0/NOTErra/Media/Audio/begehungAudio_00"+ i + ".3gpp";
+        outputFile = "/storage/emulated/0/NOTErra/Media/Audio/begehungAudio_"+ getCurrentTime() + ".3gpp";
 
-            i++;
-        }
         myRecorder = new MediaRecorder();
         myRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         myRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
