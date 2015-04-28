@@ -1,11 +1,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="at.itkolleg.android.noterra.FormActivity"
-    tools:ignore="MergeRootFrame"
-    android:background="@color/hellgrun">
+                xmlns:tools="http://schemas.android.com/tools" xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="at.itkolleg.android.noterra.FormActivity"
+                tools:ignore="MergeRootFrame"
+                android:background="@color/hellgrun">
 
     <Spinner android:id="@+id/Spinner01"
              android:layout_width="fill_parent"
@@ -14,13 +14,16 @@
             android:background="@drawable/spinner_style"
              android:layout_alignParentTop="true" android:layout_alignParentLeft="true"
              android:layout_alignParentStart="true"
-            android:prompt="@string/Beliebig"
+            android:spinnerMode="dropdown"
+
+
             />
     <Button
             android:layout_width="fill_parent"
             android:layout_height="30dp"
             android:textStyle="bold"
             android:text="Öffnen"
+            android:textColor="@color/black"
             android:id="@+id/button" android:layout_centerVertical="true" android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:background="@drawable/button_style"

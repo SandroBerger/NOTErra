@@ -2,7 +2,7 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item><layer-list>
         <item><shape>
-            <solid android:color="@color/tgrau" />
+            <solid android:color="#F6E398" />
             <corners android:radius="10dip" />
             <stroke android:width="1dip" android:color="#000000"/>
 
@@ -15,9 +15,13 @@
 
         </shape></item>
         <item><bitmap android:gravity="right"
-                      android:src="@drawable/arrow1"
+                      android:tileModeX="repeat"
+                      android:src="@drawable/arrow2"
+
+
 
                 />
+
 
         </item>
     </layer-list></item>

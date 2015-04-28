@@ -21,6 +21,9 @@ public class Holzbewuchs extends ActionBarActivity {
         setContentView(R.layout.activity_holzbewuchs);
         Spinner mySpinner = (Spinner) findViewById(R.id.Spinner01);
 
+        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
+
+
         List<String> anzahl = new ArrayList<String>();
         anzahl.add("<10");
         anzahl.add(">100");
@@ -63,6 +66,8 @@ public class Holzbewuchs extends ActionBarActivity {
         dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner1.setAdapter(dataAdapter1);
         mySpinner1.setSelection(longsize);
+
+
 
 
     }

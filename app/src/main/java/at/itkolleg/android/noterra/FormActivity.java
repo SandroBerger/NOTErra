@@ -3,15 +3,16 @@ package at.itkolleg.android.noterra;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.*;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-public class FormActivity extends ActionBarActivity  {
+public class FormActivity extends ActionBarActivity {
 
 
-
+    ActionBar ar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,35 +21,34 @@ public class FormActivity extends ActionBarActivity  {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
-
         }
 
 
-        String ar[]={"Holzablagerungen im Hochwasserabflussbereich","Ablagerung sonst. abflusshemmender Gegenstände",
+        String ar[] = {"Holzablagerungen im Hochwasserabflussbereich",
+                "Ablagerung sonst. abflusshemmender Gegenstände",
                 "Holzbewuchs im Hochwasserabflussbereich",
                 "Schäden an Regulierungsbauten",
                 "Abflussbehindernde Einbauten",
                 "Wasseraus- und -einleitungen",
-                "Ereignis ohne unmittelbare Abflussbehinderung" };
+                "Ereignis ohne unmittelbare Abflussbehinderung"};
 
 
-
-
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, ar) {
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ar) {
 
         };
 
-        Spinner mySpinner=(Spinner)findViewById(R.id.Spinner01);
+        Spinner mySpinner = (Spinner) findViewById(R.id.Spinner01);
 
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner.setAdapter(dataAdapter);
 
-
-
-
-
+            getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
 
     }
+
+
+
+
 
     public void onclick(View v)
     {

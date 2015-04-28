@@ -12,7 +12,6 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Holzablagerung extends ActionBarActivity {
 
     @Override
@@ -66,6 +65,10 @@ public class Holzablagerung extends ActionBarActivity {
         dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner1.setAdapter(dataAdapter1);
         mySpinner1.setSelection(longsize);
+
+
+        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
+
 
 
     }

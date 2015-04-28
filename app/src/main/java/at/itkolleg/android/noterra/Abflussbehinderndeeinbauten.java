@@ -4,8 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,7 +31,6 @@ public class Abflussbehinderndeeinbauten extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ablufssbehinderndeeinbauten);
 
-
         einbaut=(RadioGroup)findViewById(R.id.artdereinbauten);
 
         bruecke =(RadioButton)findViewById(R.id.bruckesteg);
@@ -41,6 +40,9 @@ public class Abflussbehinderndeeinbauten extends ActionBarActivity {
         freiwahl=(RadioButton)findViewById(R.id.freiwahl);
 
         editText=(EditText)findViewById(R.id.art_der_einbaut);
+
+        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
+
 
     }
 
@@ -153,4 +155,7 @@ public class Abflussbehinderndeeinbauten extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
 }

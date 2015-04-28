@@ -36,7 +36,6 @@ public class Abflussbehinderung extends ActionBarActivity {
         setContentView(R.layout.activity_abflussbehinderung);
 
 
-
         beobachtung=(RadioGroup)findViewById(R.id.art_beobachtung);
 
         felssturz =(RadioButton)findViewById(R.id.felssturz);
@@ -48,6 +47,7 @@ public class Abflussbehinderung extends ActionBarActivity {
         freiwahl=(RadioButton)findViewById(R.id.freiwahl);
         edit=(EditText)findViewById(R.id.art_der_abflussbehinderung);
 
+        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
 
 
     }

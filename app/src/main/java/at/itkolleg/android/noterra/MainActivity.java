@@ -12,6 +12,8 @@ import java.io.File;
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener {
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +36,18 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
         //Aufruf der Funktion addButton
         addButton();
+
+
+
+        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
+
+
+
+
     }
+
+
+
 
     //-------------Hinzufügen der Buttonclick funktion und weiterleitung auf die Begehungsseite----
     public void addButton(){

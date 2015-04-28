@@ -63,6 +63,9 @@ public class Wasserauseinleitung extends ActionBarActivity {
         freiwahl=(RadioButton)findViewById(R.id.freiwahl);
         edit=(EditText)findViewById(R.id.art_des_zweckes);
 
+
+        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
+
     }
 
     public void onclick(View view) {

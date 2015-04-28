@@ -39,6 +39,7 @@ public class Ablagerung extends ActionBarActivity {
         eigenes=(RadioButton)findViewById(R.id.freiwahl);
         edit=(EditText)findViewById(R.id.editText);
 
+        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
 
 
 

@@ -3,6 +3,7 @@ package at.itkolleg.android.noterra;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -40,31 +41,35 @@ public class Schaeden_Regulierungsbauten extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schaeden__regulierungsbauten);
 
-        schaeden=(RadioGroup)findViewById(R.id.schaeden);
+        schaeden = (RadioGroup) findViewById(R.id.schaeden);
 
-        geschiebsperre =(RadioButton)findViewById(R.id.geschiebesperre);
-        laengsverbauung=(RadioButton)findViewById(R.id.laengsverbauung);
-        querwerk=(RadioButton)findViewById(R.id.querwerk);
-        freiwahl=(RadioButton)findViewById(R.id.freiwahl);
-        edit=(EditText)findViewById(R.id.artdesBauwerks_edittext);
-        edit2=(EditText)findViewById(R.id.freiwahl_bauwerk);
+        geschiebsperre = (RadioButton) findViewById(R.id.geschiebesperre);
+        laengsverbauung = (RadioButton) findViewById(R.id.laengsverbauung);
+        querwerk = (RadioButton) findViewById(R.id.querwerk);
+        freiwahl = (RadioButton) findViewById(R.id.freiwahl);
+        edit = (EditText) findViewById(R.id.artdesBauwerks_edittext);
+        edit2 = (EditText) findViewById(R.id.freiwahl_bauwerk);
 
 
-        fehl=(CheckBox)findViewById(R.id.fehlabsturz);
-        ausg=(CheckBox)findViewById(R.id.ausgsperrenfluegel);
-        geschiebesperre=(CheckBox)findViewById(R.id.geschiebesperre2);
-        rissMauerwerk=(CheckBox)findViewById(R.id.rissemauerwerk);
-        schadMauerwerk=(CheckBox)findViewById(R.id.schadhaftesmauerwerk);
-        sonst=(CheckBox)findViewById(R.id.sonst);
-        starkerbewuchs=(CheckBox)findViewById(R.id.starkerbewuchs);
-        untersp=(CheckBox)findViewById(R.id.Untersp_fundanment);
-        frei=(CheckBox)findViewById(R.id.eigen);
+        fehl = (CheckBox) findViewById(R.id.fehlabsturz);
+        ausg = (CheckBox) findViewById(R.id.ausgsperrenfluegel);
+        geschiebesperre = (CheckBox) findViewById(R.id.geschiebesperre2);
+        rissMauerwerk = (CheckBox) findViewById(R.id.rissemauerwerk);
+        schadMauerwerk = (CheckBox) findViewById(R.id.schadhaftesmauerwerk);
+        sonst = (CheckBox) findViewById(R.id.sonst);
+        starkerbewuchs = (CheckBox) findViewById(R.id.starkerbewuchs);
+        untersp = (CheckBox) findViewById(R.id.Untersp_fundanment);
+        frei = (CheckBox) findViewById(R.id.eigen);
+
+
+        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
+
+
     }
 
 
 
-
-    public void onClick(View view)
+    public void onclick(View view)
     {
 
         int checkedRadiobut= schaeden.getCheckedRadioButtonId();
@@ -145,9 +150,35 @@ public class Schaeden_Regulierungsbauten extends ActionBarActivity {
     }
 
     public void save(View v) {
+        if (frei.isSelected() || freiwahl.isSelected()) {
 
-        if(frei.isSelected() || freiwahl.isSelected()){
-            if(edit.equals(null) || edit2.equals(null)){
+            if (edit.equals("") || edit2.equals("")) {
+
+                if(!edit.equals("") || !edit2.equals(""))
+                {
+                    String extra = getIntent().getStringExtra("Headline");
+                    Intent intent = new Intent(Schaeden_Regulierungsbauten.this, InspectionActivity.class);
+                    intent.putExtra("Headline", extra);
+                    startActivity(intent);
+                }
+                else
+                {
+                    new AlertDialog.Builder(this)
+                            .setTitle("Achtung!")
+                            .setMessage("Das Ausgewählte Textfeld ist leer!")
+                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            })
+                            .show();
+                }
+
+            }
+            else
+            {
+
                 new AlertDialog.Builder(this)
                         .setTitle("Achtung!")
                         .setMessage("Das Ausgewählte Textfeld ist leer!")
@@ -159,43 +190,18 @@ public class Schaeden_Regulierungsbauten extends ActionBarActivity {
                         })
                         .show();
             }
-        }
-        /*
-        if (freiwahl.isChecked() || frei.isChecked())
-        {
-            if(edit.equals("") || edit2.equals(""))
-            {
-                new AlertDialog.Builder(this)
-                        .setTitle("!!Achtung!!")
-                        .setMessage("Es wurde kein Text eingegeben")
-                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        })
-                        .show();
-            }
-            else
-            {
-                String extra = getIntent().getStringExtra("Headline");
-                Intent intent = new Intent(Schaeden_Regulierungsbauten.this, InspectionActivity.class);
-                intent.putExtra("Headline", extra);
-                startActivity(intent);
-            }
-        }
-        else
-        {
-            if(geschiebesperre.isChecked()|| laengsverbauung.isChecked() || querwerk.isChecked() || fehl.isChecked() || ausg.isChecked() || geschiebsperre.isChecked() || rissMauerwerk.isChecked() ||schadMauerwerk.isChecked() || sonst.isChecked() || starkerbewuchs.isChecked() || untersp.isChecked() )
-            {
+        } else {
+            if (geschiebesperre.isChecked() || laengsverbauung.isChecked() || querwerk.isChecked() || fehl.isChecked() || ausg.isChecked() || geschiebsperre.isChecked() || rissMauerwerk.isChecked() || schadMauerwerk.isChecked() || sonst.isChecked() || starkerbewuchs.isChecked() || untersp.isChecked() ) {
                 String extra = getIntent().getStringExtra("Headline");
                 Intent intent = new Intent(Schaeden_Regulierungsbauten.this, InspectionActivity.class);
                 intent.putExtra("Headline", extra);
                 startActivity(intent);
             }
 
-        }*/
+        }
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

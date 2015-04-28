@@ -25,6 +25,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/testtop"
+                    android:textColor="@color/black"
+
+
 
                     android:text="@string/bruckesteg"
                     android:id="@+id/bruckesteg"
@@ -32,7 +35,7 @@
             <RadioButton
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/tgrau"
+                    android:background="#F6E398"
 
                     android:text="@string/huette"
                     android:id="@+id/huette"
@@ -40,7 +43,7 @@
             <RadioButton
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/tgrau"
+                    android:background="#F6E398"
 
                     android:text="@string/staubrett"
                     android:id="@+id/staubrett"
@@ -48,7 +51,7 @@
             <RadioButton
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/tgrau"
+                    android:background="#F6E398"
 
                     android:text="@string/rohrdurchlass"
                     android:id="@+id/rohrdurchlass"
