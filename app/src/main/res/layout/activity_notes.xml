@@ -8,15 +8,20 @@
               tools:ignore="MergeRootFrame">
 
     <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context="at.itkolleg.android.noterra.NotesActivity">
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+                      android:orientation="vertical">
+            <ImageView
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="100dp"
+                    android:id="@+id/imageview"
+                    android:layout_width="250dp"
+                    android:layout_height="150dp"/>
 
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                      android:orientation="vertical" android:focusableInTouchMode="true" android:id="@+id/noteLayout">
 
             <ImageButton
-                    android:layout_marginTop="80dp"
+                    android:layout_marginTop="-135dp"
                     android:id="@+id/camerabutton"
                     android:background="@drawable/camera"
                     android:layout_width="60dp"
@@ -24,15 +29,13 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginStart="29dp"/>
 
-
             <ImageButton
-                    android:id="@+id/deleteaudiobutton"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="35dp"
+                    android:id="@+id/deletebutton"
                     android:background="@drawable/delete"
                     android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="150dp"
-                    android:layout_marginLeft="180dp"
-                    android:layout_marginEnd="31dp"/>
+                    android:layout_height="30dp"/>
 
             <ImageButton
                     android:layout_marginLeft="90dp"
@@ -40,16 +43,18 @@
                     android:background="@drawable/record"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:layout_marginTop="0dp"
+                    android:layout_marginTop="90dp"
                     android:layout_gravity="left"/>
 
+
             <ImageButton
-                    android:layout_marginTop="-150dp"
-                    android:layout_marginLeft="310dp"
-                    android:id="@+id/deletebutton"
-                    android:background="@drawable/delete"
+                    android:layout_marginLeft="40dp"
+                    android:id="@+id/playbutton"
+                    android:background="@drawable/play"
                     android:layout_width="30dp"
-                    android:layout_height="30dp"/>
+                    android:layout_height="30dp"
+                    android:layout_marginTop="-90dp"
+                    />
 
             <ImageButton
                     android:id="@+id/stopbutton"
@@ -59,14 +64,17 @@
                     android:layout_marginTop="50dp"
                     android:layout_marginLeft="40dp"/>
 
+
             <ImageButton
-                    android:layout_marginLeft="40dp"
-                    android:id="@+id/playbutton"
-                    android:background="@drawable/play"
+                    android:id="@+id/deleteaudiobutton"
+                    android:background="@drawable/delete"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginTop="50dp"
-                    />
+                    android:layout_marginTop="-70dp"
+                    android:layout_marginLeft="180dp"
+                    android:layout_marginEnd="31dp"/>
+
+
 
             <Chronometer
                     android:id="@+id/chronometer"
@@ -74,29 +82,13 @@
                     android:layout_width="80dp"
                     android:layout_height="18dp"
                     android:textColor="#FFFF"
-                    android:layout_marginTop="-10dp"
+                    android:layout_marginTop="40dp"
                     android:layout_marginLeft="-40dp"/>
-
-            <ImageView
-                    android:layout_marginTop="-320dp"
-                    android:layout_marginLeft="100dp"
-                    android:id="@+id/imageview"
-                    android:layout_width="250dp"
-                    android:layout_height="150dp"/>
-
-            <Button
-                    android:layout_width="350dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="380dp"
-                    android:text="Speichern"
-                    android:id="@+id/savebutton" android:layout_gravity="center_horizontal"
-                    android:background="@drawable/button_style"
-                    android:onClick="save"/>
 
             <EditText
                     android:layout_width="330dp"
                     android:layout_height="150dp"
-                    android:layout_marginTop="-220dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginLeft="15dp"
                     android:background="@drawable/textfield_style"
                     android:id="@+id/notetextfield"
@@ -104,6 +96,17 @@
                     android:inputType="textMultiLine"
                     android:gravity="top|start"
                     android:maxLines="10"/>
+
+            <Button
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Speichern"
+                    android:id="@+id/savebutton" android:layout_gravity="center_horizontal"
+                    android:background="@drawable/button_style"
+                    android:onClick="save"/>
+
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
