@@ -12,6 +12,7 @@
         <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
                       android:orientation="vertical" android:focusableInTouchMode="true">
             <TextView
+                    android:layout_marginTop="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/bauwerk"
@@ -19,7 +20,8 @@
                     android:layout_gravity="center_vertical"
                     android:textStyle="bold"
                     android:textColor="@color/black" android:textSize="20dp"/>
-            <RadioGroup android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/schaeden">
+            <RadioGroup android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5dp" android:id="@+id/schaeden" android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp">
 
 
                 <RadioButton
@@ -33,7 +35,7 @@
                 <RadioButton
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/tgrau"
+                        android:background="#F6E398"
 
                         android:text="@string/laengsverbauung"
                         android:id="@+id/laengsverbauung"
@@ -41,7 +43,7 @@
                 <RadioButton
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/tgrau"
+                        android:background="#F6E398"
 
                         android:text="@string/querwerk"
                         android:id="@+id/querwerk"
@@ -59,20 +61,23 @@
             <EditText
                     android:layout_width="120dp"
                     android:layout_marginLeft="30dp"
-                    android:layout_height="30dp"
+                    android:layout_height="35dp"
                     android:id="@+id/artdesBauwerks_edittext"
-                    android:layout_marginTop="-30dp"
+                    android:layout_marginTop="-35dp"
                     android:singleLine="true"
-                    android:background="@drawable/button_style"
+                    android:background="@drawable/apptheme_textfield_default_holo_light"
                     android:maxLength="20"
-                    android:imeOptions="actionDone"
+
+                    android:hint="Sonstiges"
                     />
 
 
 
 
 
-           <TextView android:layout_width="wrap_content"
+           <TextView
+                   android:layout_marginTop="5dp"
+                   android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/schandsart"
             android:id="@+id/h2Schadensart"
@@ -80,9 +85,12 @@
             android:textStyle="bold"
             android:textColor="@color/black" android:textSize="20dp"/>
 
-            <CheckBox android:layout_width="match_parent"
+            <CheckBox  android:layout_marginTop="5dp"
+                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:background="@drawable/testtop"
+                      android:layout_marginLeft="5dp"
+                      android:layout_marginRight="5dp"
 
                       android:text="@string/fehlendeabsturz"
                       android:id="@+id/fehlabsturz"
@@ -91,7 +99,9 @@
 
             <CheckBox android:layout_width="match_parent"
                       android:layout_height="wrap_content"
-                      android:background="@color/tgrau"
+                      android:background="#F6E398"
+                      android:layout_marginLeft="5dp"
+                      android:layout_marginRight="5dp"
 
                       android:text="@string/Ausg"
                       android:id="@+id/ausgsperrenfluegel"
@@ -100,7 +110,9 @@
 
             <CheckBox android:layout_width="match_parent"
                       android:layout_height="wrap_content"
-                      android:background="@color/tgrau"
+                      android:background="#F6E398"
+                      android:layout_marginLeft="5dp"
+                      android:layout_marginRight="5dp"
 
                       android:text="@string/geschiebesperre"
                       android:id="@+id/geschiebesperre2"
@@ -109,7 +121,9 @@
 
             <CheckBox android:layout_width="match_parent"
                       android:layout_height="wrap_content"
-                      android:background="@color/tgrau"
+                      android:background="#F6E398"
+                      android:layout_marginLeft="5dp"
+                      android:layout_marginRight="5dp"
 
                       android:text="@string/mauerwerk"
                       android:id="@+id/rissemauerwerk"
@@ -118,7 +132,9 @@
 
             <CheckBox android:layout_width="match_parent"
                       android:layout_height="wrap_content"
-                      android:background="@color/tgrau"
+                      android:background="#F6E398"
+                      android:layout_marginLeft="5dp"
+                      android:layout_marginRight="5dp"
 
                       android:text="@string/schadhaftes"
                       android:id="@+id/schadhaftesmauerwerk"
@@ -127,7 +143,9 @@
 
             <CheckBox android:layout_width="match_parent"
                       android:layout_height="wrap_content"
-                      android:background="@color/tgrau"
+                      android:background="#F6E398"
+                      android:layout_marginLeft="5dp"
+                      android:layout_marginRight="5dp"
 
                       android:text="@string/sonst"
                       android:id="@+id/sonst"
@@ -136,7 +154,9 @@
 
             <CheckBox android:layout_width="match_parent"
                       android:layout_height="wrap_content"
-                      android:background="@color/tgrau"
+                      android:background="#F6E398"
+                      android:layout_marginLeft="5dp"
+                      android:layout_marginRight="5dp"
 
                       android:text="@string/starkerbewuchs"
                       android:id="@+id/starkerbewuchs"
@@ -145,7 +165,9 @@
 
             <CheckBox android:layout_width="match_parent"
                       android:layout_height="wrap_content"
-                      android:background="@color/tgrau"
+                      android:background="#F6E398"
+                      android:layout_marginLeft="5dp"
+                      android:layout_marginRight="5dp"
 
                       android:text="@string/untersp"
                       android:id="@+id/Untersp_fundanment"
@@ -155,6 +177,8 @@
             <CheckBox android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:background="@drawable/testbot"
+                      android:layout_marginLeft="5dp"
+                      android:layout_marginRight="5dp"
 
                       android:text=""
                       android:id="@+id/eigen"
@@ -165,30 +189,34 @@
             <EditText
                     android:layout_width="120dp"
                     android:layout_marginLeft="30dp"
-                    android:layout_height="30dp"
+                    android:layout_height="35dp"
                     android:id="@+id/freiwahl_bauwerk"
-                    android:layout_marginTop="-30dp"
+                    android:layout_marginTop="-35dp"
                     android:singleLine="true"
-                    android:imeOptions="actionDone"
-                    android:background="@drawable/button_style"
+
+                    android:background="@drawable/apptheme_textfield_default_holo_light"
+                    android:hint="Sonstiges"
+
                     />
 
             <EditText
-                    android:layout_width="360dp"
+                    android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
                     android:id="@+id/freiehoehedammkrone"
-                    android:imeOptions="actionDone"
+
                     android:hint="@string/freiehoehedammkrone"
                     android:background="@drawable/textfield_style"
                     android:inputType="number"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     />
 
             <EditText
-                    android:layout_width="360dp"
+                    android:layout_width="350dp"
                     android:layout_height="150dp"
                     android:layout_marginTop="50dp"
-                    android:imeOptions="actionDone"
+
                     android:background="@drawable/textfield_style"
                     android:id="@+id/Beschreibung"
                     android:hint="@string/Beschreibung"
@@ -196,11 +224,13 @@
 
                     android:gravity="top|start"
                     android:maxLines="10"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     />
 
 
             <Button
-                    android:layout_width="360dp"
+                    android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
                     android:text="Speichern"

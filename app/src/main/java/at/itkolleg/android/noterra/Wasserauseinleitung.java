@@ -38,7 +38,7 @@ public class Wasserauseinleitung extends ActionBarActivity {
         List<String> anzahl = new ArrayList<String>();
         anzahl.add("Wassereinleitung");
         anzahl.add("Wasserentnahme");
-        anzahl.add("Art Aus/Einleitung: ");
+        anzahl.add("Art: Aus/Einleitung: ");
 
         final int listsize = anzahl.size() - 1;
 

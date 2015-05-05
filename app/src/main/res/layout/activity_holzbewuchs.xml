@@ -13,7 +13,11 @@
                       android:orientation="vertical" android:focusableInTouchMode="true" >
 
             <Spinner android:id="@+id/Spinner01"
-                     android:layout_width="360dp"
+
+                     android:layout_marginLeft="5dp"
+                     android:layout_marginRight="5dp"
+
+                     android:layout_width="790dp"
                      android:layout_height="50dp"
                      android:layout_marginTop="10dp"
                      android:background="@drawable/spinner_style"
@@ -21,7 +25,11 @@
                     />
 
             <Spinner android:id="@+id/Spinner02"
-                     android:layout_width="360dp"
+
+                     android:layout_marginLeft="5dp"
+                     android:layout_marginRight="5dp"
+
+                     android:layout_width="790dp"
                      android:layout_height="50dp"
                      android:layout_marginTop="30dp"
                      android:background="@drawable/spinner_style"
@@ -30,7 +38,9 @@
                     />
 
             <EditText
-                    android:layout_width="360dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_width="790dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
                     android:id="@+id/baumhoehe"
@@ -39,7 +49,9 @@
                     android:inputType="number"
                     />
             <EditText
-                    android:layout_width="360dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_width="790dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
                     android:id="@+id/holzbewuchs_laenge_bachabschnitt"
@@ -49,7 +61,9 @@
                     />
 
             <EditText
-                    android:layout_width="360dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_width="790dp"
                     android:layout_height="150dp"
                     android:layout_marginTop="50dp"
                     android:background="@drawable/textfield_style"
@@ -62,7 +76,9 @@
                     />
 
             <EditText
-                    android:layout_width="360dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_width="790dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
                     android:id="@+id/laenge_bachabschnitt"
@@ -72,7 +88,7 @@
                     />
 
             <EditText
-                    android:layout_width="360dp"
+                    android:layout_width="790dp"
                     android:layout_height="150dp"
                     android:layout_marginTop="50dp"
                     android:background="@drawable/textfield_style"
@@ -88,7 +104,9 @@
 
 
             <EditText
-                    android:layout_width="360dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_width="790dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
                     android:id="@+id/Kosten"

@@ -12,6 +12,7 @@
         <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
                       android:orientation="vertical" android:focusableInTouchMode="true" >
             <TextView
+                    android:layout_marginTop="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Ablagerung: "
@@ -20,7 +21,8 @@
                     android:textStyle="bold"
                     android:textColor="@color/black" android:textSize="20dp"/>
 
-<RadioGroup android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/ablagerung">
+<RadioGroup android:layout_width="fill_parent"  android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp" android:layout_marginTop="5dp" android:layout_height="wrap_content" android:id="@+id/ablagerung">
             <RadioButton
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -36,12 +38,12 @@
 
                     android:text="@string/felsblock"
                     android:id="@+id/fesblock"
-                    android:background="@color/tgrau"
+                    android:background="#F6E398"
                     android:onClick="onclick"/>
             <RadioButton
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/tgrau"
+                    android:background="#F6E398"
 
                     android:text="@string/mull"
                     android:id="@+id/mull"
@@ -49,7 +51,7 @@
             <RadioButton
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/tgrau"
+                    android:background="#F6E398"
 
                     android:text="@string/schotter"
                     android:id="@+id/schotter"
@@ -68,20 +70,22 @@
 </RadioGroup>
             <EditText
                     android:layout_width="120dp"
-                    android:layout_height="30dp"
+                    android:layout_height="35dp"
                     android:id="@+id/editText"
                     android:layout_marginLeft="30dp"
-                    android:layout_marginTop="-30dp"
+                    android:layout_marginTop="-35dp"
                     android:singleLine="true"
-                    android:imeOptions="actionDone"
-                    android:background="@drawable/button_style"
-                    android:onClick="editclick"
 
+                    android:background="@drawable/apptheme_textfield_default_holo_light"
+                    android:onClick="editclick"
+                    android:hint="Sonstiges"
 
                     />
 
             <EditText
-                    android:layout_width="360dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_width="350dp"
                     android:layout_height="150dp"
                     android:layout_marginTop="50dp"
                     android:background="@drawable/textfield_style"
@@ -91,33 +95,39 @@
 
                     android:gravity="top|start"
                     android:maxLines="10"
-                    android:imeOptions="actionDone"
+
                     />
 
             <EditText
-                    android:layout_width="360dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
                     android:id="@+id/Großausmaß"
                     android:hint="@string/großaus"
                     android:background="@drawable/textfield_style"
                     android:inputType="number"
-                    android:imeOptions="actionDone"
+
                     />
 
             <EditText
-                    android:layout_width="360dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
                     android:id="@+id/laenge_bachabschnitt"
                     android:hint="@string/lange_bachabschnitt"
                     android:background="@drawable/textfield_style"
                     android:inputType="number"
-                    android:imeOptions="actionDone"
+
                     />
 
             <EditText
-                    android:layout_width="360dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_width="350dp"
                     android:layout_height="150dp"
                     android:layout_marginTop="50dp"
                     android:background="@drawable/textfield_style"
@@ -127,21 +137,23 @@
 
                     android:gravity="top|start"
                     android:maxLines="10"
-                    android:imeOptions="actionDone"
+
                     />
 
 
 
 
             <EditText
-                    android:layout_width="360dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
                     android:id="@+id/Kosten"
                     android:hint="@string/kosten"
                     android:background="@drawable/textfield_style"
                     android:inputType="number"
-                    android:imeOptions="actionDone"
+
                     />
 
 

@@ -3,6 +3,7 @@ package at.itkolleg.android.noterra;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.*;
 import android.widget.Button;
@@ -18,13 +19,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
-                    .commit();
-        }
 
-        //Erstellt das Verzeichnis am Internen Speicher
+
+        //Erstellt das Verzeichnis am Internen Speicher - muss noch getestet werden ob das auf allen geräten mit dem verzeichnis funktioniert!!
         File noterraDirectory = new File("/storage/emulated/0/NOTErra");
         File mediaDirectory = new File("/storage/emulated/0/NOTErra/Media");
         File imageDirectory = new File("/storage/emulated/0/NOTErra/Media/Images");
@@ -37,8 +34,15 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         //Aufruf der Funktion addButton
         addButton();
 
-        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
+        final ActionBar bar=getSupportActionBar();
+        bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+        bar.setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
+
+
+
     }
+
 
 
 
@@ -46,6 +50,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     //-------------Hinzufügen der Buttonclick funktion und weiterleitung auf die Begehungsseite----
     public void addButton(){
         Button inspectionButton = (Button) findViewById(R.id.inspectionbutton);
+
         inspectionButton.setOnClickListener(this);
     }
 
