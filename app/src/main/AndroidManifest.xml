@@ -33,7 +33,6 @@
         <activity
             android:name=".startup"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label= "@string/title_activity_startup"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -56,7 +56,7 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
 
     }
 
-//-------------Button Hinzufügen und funktion hinzufügen zugriff auf kamera, ufnahme von audio und notiz aufnahme----
+    //-------------Button Hinzufügen und funktion hinzufügen zugriff auf kamera, ufnahme von audio und notiz aufnahme----
     public void addButton() {
         cameraButton = (ImageButton) findViewById(R.id.camerabutton);
         recordButton = (ImageButton) findViewById(R.id.recordbutton);
@@ -107,7 +107,7 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
     private void cameraButtonClick() {
         Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 
-        outputFile = "/storage/emulated/0/NOTErra/Media/Images/begehungImage_"+ getCurrentTime() +".jpg";
+        outputFile = "/storage/emulated/0/NOTErra/Media/Images/begehungImage_" + getCurrentTime() + ".jpg";
         setImagePfad(outputFile);
 
         Uri uriSavedImage = Uri.fromFile(new File(outputFile));
@@ -118,7 +118,7 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
 
     private void recordButtonClick() {
 
-        if(recButtonCount == 1){
+        if (recButtonCount == 1) {
             try {
                 createRecorder();
                 myRecorder.prepare();
@@ -134,7 +134,7 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
                 e.printStackTrace();
             }
 
-            recButtonCount ++;
+            recButtonCount++;
 
             recordButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.stoprec));
 
@@ -145,13 +145,12 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
 
-        }else if (recButtonCount == 2){
+        } else if (recButtonCount == 2) {
             try {
                 myRecorder.stop();
                 myRecorder.release();
                 myChrono.stop();
                 myChrono.setBase(SystemClock.elapsedRealtime());
-                myRecorder = null;
 
                 recordButton.setEnabled(true);
                 playButton.setEnabled(true);
@@ -179,7 +178,7 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
 
     private void playButtonClick() {
 
-        try{
+        try {
             myPlayer = new MediaPlayer();
             myPlayer.setDataSource(getAudioPfad());
             myPlayer.prepare();
@@ -193,7 +192,7 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         }
 
         Context context = getApplicationContext();
-        CharSequence text = "Aufnahme wird abgespielt!";
+        CharSequence text = "Aufnahme gestartet";
         int duration = Toast.LENGTH_SHORT;
 
         Toast toast = Toast.makeText(context, text, duration);
@@ -217,7 +216,7 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         }
     }
 
-    private void deleteAudioButtonClick(){
+    private void deleteAudioButtonClick() {
         new AlertDialog.Builder(this)
                 .setTitle("Aufnahme löschen")
                 .setMessage("Wollen Sie die Aufnahme löschen?")
@@ -268,10 +267,11 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
-//---------------------------------------------------------------------
+
+    //---------------------------------------------------------------------
 //---------------Ladet das bild in den Imageview wenn eines vorhanden ist in der Ordner struktur------------------
     public void loadImage() {
-        outputFile = "/storage/emulated/0/NOTErra/Media/Images/begehungImage_"+ getCurrentTime() +".jpg";
+        outputFile = "/storage/emulated/0/NOTErra/Media/Images/begehungImage_" + getCurrentTime() + ".jpg";
 
         File imgFile = new File(outputFile);
 
@@ -282,7 +282,7 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         }
     }
 
-    private String getCurrentTime(){
+    private String getCurrentTime() {
         final Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(System.currentTimeMillis());
 
@@ -292,20 +292,27 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         int hour = cal.get(Calendar.HOUR);
         int minute = cal.get(Calendar.MINUTE);
 
-        String time = day + "." + month + "." + year + "_" +hour + ":" + minute;
+        String time = day + "." + month + "." + year + "_" + hour + ":" + minute;
 
         return time;
     }
-//---------------------------------------------------------------------
+
+    //---------------------------------------------------------------------
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         loadImage();
     }
 
-    private void createRecorder(){
+    private void createRecorder() {
+        int i = 00;
+        outputFile = "/storage/emulated/0/NOTErra/Media/Audio/begehungAudio_" + i + ".3gpp";
 
-        outputFile = "/storage/emulated/0/NOTErra/Media/Audio/begehungAudio_"+ getCurrentTime() + ".3gpp";
-        setAudioPfad("/storage/emulated/0/NOTErra/Media/Audio/begehungAudio_"+ getCurrentTime() + ".3gpp");
+        if (!outputFile.isEmpty()) {
+            i++;
+            outputFile = "/storage/emulated/0/NOTErra/Media/Audio/begehungAudio_" + i + ".3gpp";
+        }
+
+        setAudioPfad(outputFile);
 
         myRecorder = new MediaRecorder();
         myRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
@@ -314,18 +321,19 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         myRecorder.setOutputFile(outputFile);
     }
 
-    public void setAudioPfad(String AudioPfad){
+    public void setAudioPfad(String AudioPfad) {
         this.AudioPfad = AudioPfad;
     }
 
-    public String getAudioPfad(){
+    public String getAudioPfad() {
         return AudioPfad;
     }
-    public void setImagePfad(String ImagePfad){
+
+    public void setImagePfad(String ImagePfad) {
         this.ImagePfad = ImagePfad;
     }
 
-    public String getImagePfad(){
+    public String getImagePfad() {
         return ImagePfad;
     }
 
