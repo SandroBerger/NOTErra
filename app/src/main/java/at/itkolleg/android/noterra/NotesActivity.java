@@ -14,9 +14,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.provider.MediaStore;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
-import android.view.*;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.*;
 
 import java.io.File;
@@ -40,18 +41,14 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
     ImageButton deleteAudioButton;
     ImageButton deleteButton;
     Button saveButton;
+    String ImagePfad;
+    String AudioPfad;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes);
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
-                    .commit();
-        }
-
 
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
         loadImage();
@@ -111,6 +108,7 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 
         outputFile = "/storage/emulated/0/NOTErra/Media/Images/begehungImage_"+ getCurrentTime() +".jpg";
+        setImagePfad(outputFile);
 
         Uri uriSavedImage = Uri.fromFile(new File(outputFile));
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
@@ -183,7 +181,7 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
 
         try{
             myPlayer = new MediaPlayer();
-            myPlayer.setDataSource(outputFile);
+            myPlayer.setDataSource(getAudioPfad());
             myPlayer.prepare();
             myPlayer.start();
 
@@ -225,8 +223,9 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
                 .setMessage("Wollen Sie die Aufnahme löschen?")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
+                        String pfad = getAudioPfad();
                         // continue with delete
-                        File fdelete = new File("/storage/emulated/0/NOTErra/media/Audio/begehungAudio001.3gpp");
+                        File fdelete = new File(pfad);
                         if (fdelete.exists()) {
                             fdelete.delete();
                         }
@@ -251,8 +250,9 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
                 .setMessage("Wollen Sie das Bild löschen?")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
+                        String pfad = getImagePfad();
                         // continue with delete
-                        File fdelete = new File("/storage/emulated/0/NOTErra/media/Images/begehung_"+ getCurrentTime() +".jpg");
+                        File fdelete = new File(pfad);
                         if (fdelete.exists()) {
                             if (fdelete.delete()) {
                                 imageView.setImageDrawable(null);
@@ -305,12 +305,28 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
     private void createRecorder(){
 
         outputFile = "/storage/emulated/0/NOTErra/Media/Audio/begehungAudio_"+ getCurrentTime() + ".3gpp";
+        setAudioPfad("/storage/emulated/0/NOTErra/Media/Audio/begehungAudio_"+ getCurrentTime() + ".3gpp");
 
         myRecorder = new MediaRecorder();
         myRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         myRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
         myRecorder.setAudioEncoder(MediaRecorder.OutputFormat.AMR_NB);
         myRecorder.setOutputFile(outputFile);
+    }
+
+    public void setAudioPfad(String AudioPfad){
+        this.AudioPfad = AudioPfad;
+    }
+
+    public String getAudioPfad(){
+        return AudioPfad;
+    }
+    public void setImagePfad(String ImagePfad){
+        this.ImagePfad = ImagePfad;
+    }
+
+    public String getImagePfad(){
+        return ImagePfad;
     }
 
     @Override
@@ -335,19 +351,4 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_notes, container, false);
-            return rootView;
-        }
-    }
 }

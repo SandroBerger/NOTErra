@@ -99,7 +99,7 @@
     <string name="sonst">Sonstiges</string>
     <string name="starkerbewuchs">Starker Bewuchs</string>
     <string name="untersp">Untersp. Fundanment</string>
-    <string name="title_activity_ablufssbehinderndeeinbauten">ablufssbehinderndeeinbauten</string>
+    <string name="title_activity_ablufssbehinderndeeinbauten">Abflussbehindernde Einbauten</string>
 
     <!-- Abflussbehindernde Einbauten -->
     <string name="einbauten">Art der Einbauten</string>
