@@ -1,17 +1,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
-              android:id="@+id/container"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/hellgrun"
-              tools:context="at.itkolleg.android.noterra.NotesActivity"
-              tools:ignore="MergeRootFrame">
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              tools:context="at.itkolleg.android.noterra.Holzablagerungen"
+              android:background="@color/hellgrun" android:focusableInTouchMode="true">
 
-    <ScrollView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
-                      android:orientation="vertical">
+    <ScrollView android:layout_width="fill_parent" android:layout_height="wrap_content">
+<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="vertical"
+              android:focusableInTouchMode="true">
+            
             <ImageView
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="100dp"
@@ -106,7 +103,7 @@
                     android:background="@drawable/button_style"
                     android:onClick="save"/>
 
+</LinearLayout>
 
-        </LinearLayout>
     </ScrollView>
 </LinearLayout>

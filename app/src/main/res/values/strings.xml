@@ -57,7 +57,7 @@
     <!-- String für Inspection -->
     <string name="leer">Es wurde noch keine Beobachtung gewählt</string>
 
-    <color name="hellgrun">#38610B</color>
+    <color name="hellgrun">#0b622b</color>
     <color name="tgrau">#CAC9C9</color> <!-- Text / Editor Grau -->
     <color name="bgrau">#6E6E6E</color> <!-- Button Grau -->
     <color name="black">#190707</color>
@@ -126,5 +126,6 @@
     <string name="rutschung">Rutschung</string>
     <string name="title_activity_test">test</string>
     <string name="title_activity_startup">startup</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

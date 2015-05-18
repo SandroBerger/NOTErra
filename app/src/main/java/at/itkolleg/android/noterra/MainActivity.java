@@ -3,7 +3,6 @@ package at.itkolleg.android.noterra;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.*;
 import android.widget.Button;
@@ -20,6 +19,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+    android.support.v7.app.ActionBar ab=getSupportActionBar();
+         ab.setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
+
 
         //Erstellt das Verzeichnis am Internen Speicher - muss noch getestet werden ob das auf allen geräten mit dem verzeichnis funktioniert!!
         File noterraDirectory = new File("/storage/emulated/0/NOTErra");
@@ -34,18 +36,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         //Aufruf der Funktion addButton
         addButton();
 
-        final ActionBar bar=getSupportActionBar();
-        bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
-        bar.setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
-
 
 
     }
-
-
-
-
 
     //-------------Hinzufügen der Buttonclick funktion und weiterleitung auf die Begehungsseite----
     public void addButton(){
@@ -53,6 +46,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
         inspectionButton.setOnClickListener(this);
     }
+
+
 
     public void onClick(View v) {
         switch(v.getId()){
