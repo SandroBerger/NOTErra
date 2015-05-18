@@ -14,9 +14,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.provider.MediaStore;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
-import android.view.*;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.*;
 
 import java.io.File;
@@ -40,18 +41,14 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
     ImageButton deleteAudioButton;
     ImageButton deleteButton;
     Button saveButton;
+    String ImagePfad;
+    String AudioPfad;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes);
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
-                    .commit();
-        }
-
 
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
         loadImage();
@@ -59,7 +56,7 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
 
     }
 
-//-------------Button Hinzufügen und funktion hinzufügen zugriff auf kamera, ufnahme von audio und notiz aufnahme----
+    //-------------Button Hinzufügen und funktion hinzufügen zugriff auf kamera, ufnahme von audio und notiz aufnahme----
     public void addButton() {
         cameraButton = (ImageButton) findViewById(R.id.camerabutton);
         recordButton = (ImageButton) findViewById(R.id.recordbutton);
@@ -110,7 +107,8 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
     private void cameraButtonClick() {
         Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 
-        outputFile = "/storage/emulated/0/NOTErra/Media/Images/begehungImage_"+ getCurrentTime() +".jpg";
+        outputFile = "/storage/emulated/0/NOTErra/Media/Images/begehungImage_" + getCurrentTime() + ".jpg";
+        setImagePfad(outputFile);
 
         Uri uriSavedImage = Uri.fromFile(new File(outputFile));
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
@@ -120,7 +118,7 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
 
     private void recordButtonClick() {
 
-        if(recButtonCount == 1){
+        if (recButtonCount == 1) {
             try {
                 createRecorder();
                 myRecorder.prepare();
@@ -136,7 +134,7 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
                 e.printStackTrace();
             }
 
-            recButtonCount ++;
+            recButtonCount++;
 
             recordButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.stoprec));
 
@@ -147,13 +145,12 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
 
-        }else if (recButtonCount == 2){
+        } else if (recButtonCount == 2) {
             try {
                 myRecorder.stop();
                 myRecorder.release();
                 myChrono.stop();
                 myChrono.setBase(SystemClock.elapsedRealtime());
-                myRecorder = null;
 
                 recordButton.setEnabled(true);
                 playButton.setEnabled(true);
@@ -181,9 +178,9 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
 
     private void playButtonClick() {
 
-        try{
+        try {
             myPlayer = new MediaPlayer();
-            myPlayer.setDataSource(outputFile);
+            myPlayer.setDataSource(getAudioPfad());
             myPlayer.prepare();
             myPlayer.start();
 
@@ -195,7 +192,7 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         }
 
         Context context = getApplicationContext();
-        CharSequence text = "Aufnahme wird abgespielt!";
+        CharSequence text = "Aufnahme gestartet";
         int duration = Toast.LENGTH_SHORT;
 
         Toast toast = Toast.makeText(context, text, duration);
@@ -219,14 +216,15 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         }
     }
 
-    private void deleteAudioButtonClick(){
+    private void deleteAudioButtonClick() {
         new AlertDialog.Builder(this)
                 .setTitle("Aufnahme löschen")
                 .setMessage("Wollen Sie die Aufnahme löschen?")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
+                        String pfad = getAudioPfad();
                         // continue with delete
-                        File fdelete = new File("/storage/emulated/0/NOTErra/media/Audio/begehungAudio001.3gpp");
+                        File fdelete = new File(pfad);
                         if (fdelete.exists()) {
                             fdelete.delete();
                         }
@@ -251,8 +249,9 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
                 .setMessage("Wollen Sie das Bild löschen?")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
+                        String pfad = getImagePfad();
                         // continue with delete
-                        File fdelete = new File("/storage/emulated/0/NOTErra/media/Images/begehung_"+ getCurrentTime() +".jpg");
+                        File fdelete = new File(pfad);
                         if (fdelete.exists()) {
                             if (fdelete.delete()) {
                                 imageView.setImageDrawable(null);
@@ -268,10 +267,11 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
-//---------------------------------------------------------------------
+
+    //---------------------------------------------------------------------
 //---------------Ladet das bild in den Imageview wenn eines vorhanden ist in der Ordner struktur------------------
     public void loadImage() {
-        outputFile = "/storage/emulated/0/NOTErra/Media/Images/begehungImage_"+ getCurrentTime() +".jpg";
+        outputFile = "/storage/emulated/0/NOTErra/Media/Images/begehungImage_" + getCurrentTime() + ".jpg";
 
         File imgFile = new File(outputFile);
 
@@ -282,7 +282,7 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         }
     }
 
-    private String getCurrentTime(){
+    private String getCurrentTime() {
         final Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(System.currentTimeMillis());
 
@@ -292,25 +292,49 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         int hour = cal.get(Calendar.HOUR);
         int minute = cal.get(Calendar.MINUTE);
 
-        String time = day + "." + month + "." + year + "_" +hour + ":" + minute;
+        String time = day + "." + month + "." + year + "_" + hour + ":" + minute;
 
         return time;
     }
-//---------------------------------------------------------------------
+
+    //---------------------------------------------------------------------
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         loadImage();
     }
 
-    private void createRecorder(){
+    private void createRecorder() {
+        int i = 00;
+        outputFile = "/storage/emulated/0/NOTErra/Media/Audio/begehungAudio_" + i + ".3gpp";
 
-        outputFile = "/storage/emulated/0/NOTErra/Media/Audio/begehungAudio_"+ getCurrentTime() + ".3gpp";
+        if (!outputFile.isEmpty()) {
+            i++;
+            outputFile = "/storage/emulated/0/NOTErra/Media/Audio/begehungAudio_" + i + ".3gpp";
+        }
+
+        setAudioPfad(outputFile);
 
         myRecorder = new MediaRecorder();
         myRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         myRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
         myRecorder.setAudioEncoder(MediaRecorder.OutputFormat.AMR_NB);
         myRecorder.setOutputFile(outputFile);
+    }
+
+    public void setAudioPfad(String AudioPfad) {
+        this.AudioPfad = AudioPfad;
+    }
+
+    public String getAudioPfad() {
+        return AudioPfad;
+    }
+
+    public void setImagePfad(String ImagePfad) {
+        this.ImagePfad = ImagePfad;
+    }
+
+    public String getImagePfad() {
+        return ImagePfad;
     }
 
     @Override
@@ -335,19 +359,4 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_notes, container, false);
-            return rootView;
-        }
-    }
 }
