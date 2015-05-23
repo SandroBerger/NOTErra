@@ -241,11 +241,8 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
 
     private void saveButtonClick() {
         try {
-            FtpHandler ftp = new FtpHandler(getImagePfad());
-            ftp.workingDirektory("/Media/Images");
-            ftp.setFileInputStream();
-            ftp.saveFileOnServer();
-            ftp.closeConnection();
+            FTPHandler ftp = new FTPHandler(getImagePfad());
+
         }catch (IOException e){
             e.printStackTrace();
         }
