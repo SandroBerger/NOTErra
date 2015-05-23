@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/NOTErra.iml" filepath="$PROJECT_DIR$/NOTErra.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$USER_HOME$/Downloads/JakeWharton-ActionBarSherlock-4.4.0-0-g4a79d53/JakeWharton-ActionBarSherlock-5a15d92/actionbarsherlock-samples/fragments/fragments.iml" filepath="$USER_HOME$/Downloads/JakeWharton-ActionBarSherlock-4.4.0-0-g4a79d53/JakeWharton-ActionBarSherlock-5a15d92/actionbarsherlock-samples/fragments/fragments.iml" />
     </modules>
   </component>
 </project>
