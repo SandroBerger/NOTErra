@@ -24,6 +24,7 @@ public class FTPHandler {
     private String filepath;
     private File file;
     private FileInputStream inputFile;
+    private String remotePath = "/Media/Images/";
     private String audio = "3gpp";
     private String image = "jpg";
 
@@ -53,7 +54,7 @@ public class FTPHandler {
     }
 
     public void saveFileOnServer() throws IOException {
-        ftpClient.storeFile(filepath, inputFile);
+        ftpClient.storeFile(remotePath, inputFile);
     }
 
     public void closeConnection() throws IOException {
@@ -72,13 +73,11 @@ public class FTPHandler {
                     ftpLogin();
                     ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
 
-                    workingDirektory("Media/Images");
-
                     String extention = filepath.substring(filepath.lastIndexOf(".") + 1, filepath.length());
                     if(extention.equals("jpg")){
-                        workingDirektory("Media/Images");
+                        workingDirektory("/Media/Images/");
                     }else {
-                        workingDirektory("Media/Audio");
+                        workingDirektory("/Media/Audio/");
                     }
 
                     setFileInputStream();
