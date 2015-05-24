@@ -241,13 +241,18 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
 
     private void saveButtonClick() {
         try {
-            FTPHandler ftp1 = new FTPHandler(getImagePfad());
-            FTPHandler ftp2 = new FTPHandler(getAudioPfad());
+
+            if(getImagePfad() != null){
+                FTPHandler ftp1 = new FTPHandler(getImagePfad());
+            }
+            if(getAudioPfad()!= null){
+                FTPHandler ftp2 = new FTPHandler(getAudioPfad());
+            }
 
         }catch (IOException e){
             e.printStackTrace();
         }
-        //startActivity(new Intent(this, InspectionActivity.class));
+        startActivity(new Intent(this, InspectionActivity.class));
     }
 
     private void imageDeleteClick() {

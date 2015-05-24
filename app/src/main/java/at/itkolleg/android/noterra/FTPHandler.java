@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Calendar;
 
 /**
  * Created by SandroB on 23.05.2015.
@@ -25,11 +26,15 @@ public class FTPHandler {
     private File file;
     private FileInputStream inputFile;
     private String remotePath = "/Media/Images/";
-    private String audio = "3gpp";
     private String image = "jpg";
+    String extention;
+    private String timestamp;
 
     FTPHandler(String filepath) throws IOException {
         this.filepath = filepath;
+        file = new File(filepath);
+        extention = filepath.substring(filepath.lastIndexOf(".") + 1, filepath.length());
+
         FtpTask ftptask = new FtpTask();
         ftptask.execute();
     }
@@ -49,12 +54,17 @@ public class FTPHandler {
     }
 
     public void setFileInputStream() throws FileNotFoundException {
-        file = new File(filepath);
         inputFile = new FileInputStream(file);
     }
 
     public void saveFileOnServer() throws IOException {
-        ftpClient.storeFile(remotePath, inputFile);
+        timestamp = getCurrentTime();
+        if(extention.equals(image)){
+            ftpClient.storeFile(remotePath + getCurrentTime() +".jpg", inputFile);
+        }else {
+            ftpClient.storeFile(remotePath + getCurrentTime() +".3gpp", inputFile);
+        }
+
     }
 
     public void closeConnection() throws IOException {
@@ -62,21 +72,36 @@ public class FTPHandler {
         ftpClient.disconnect();
     }
 
-    public class FtpTask extends AsyncTask<Void, Void, Void>{
+    private String getCurrentTime() {
+        final Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(System.currentTimeMillis());
+
+        int day = cal.get(Calendar.DATE);
+        int month = cal.get(Calendar.MONTH);
+        int year = cal.get(Calendar.YEAR);
+        int hour = cal.get(Calendar.HOUR);
+        int minute = cal.get(Calendar.MINUTE);
+        int second = cal.get(Calendar.SECOND);
+
+        String time = day + "." + month + "." + year + "_" + hour + ":" + minute + ":" + second;
+
+        return time;
+    }
+
+    public class FtpTask extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... params) {
             try {
                 ftpConnection();
 
-                if(FTPReply.isPositiveCompletion(ftpClient.getReplyCode())){
+                if (FTPReply.isPositiveCompletion(ftpClient.getReplyCode())) {
                     ftpClient.enterLocalPassiveMode();
                     ftpLogin();
                     ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
 
-                    String extention = filepath.substring(filepath.lastIndexOf(".") + 1, filepath.length());
-                    if(extention.equals("jpg")){
+                    if (extention.equals(image)) {
                         workingDirektory("/Media/Images/");
-                    }else {
+                    } else {
                         workingDirektory("/Media/Audio/");
                     }
 
