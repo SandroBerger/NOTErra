@@ -4,17 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="at.itkolleg.android.noterra.MainActivity"
-    tools:ignore="MergeRootFrame">
+    tools:ignore="MergeRootFrame"
+    android:background="@color/Hintergrundfarbe">
 
     <Button
             android:id="@+id/inspectionbutton"
-            android:textColor="#FFFFFF"
+
             android:layout_width="200dp"
             android:layout_height="80dp"
             android:text="@string/begehungstarten"
             android:layout_gravity="center_horizontal|top"
-            android:background="@drawable/buttonshape"
+            android:background="@drawable/button_style"
             android:onClick="onClick" android:layout_centerVertical="true" android:layout_centerHorizontal="true"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/datum" android:layout_below="@+id/inspectionbutton"
+            android:layout_alignLeft="@+id/inspectionbutton" android:layout_alignStart="@+id/inspectionbutton"
+            android:layout_marginTop="44dp" android:textStyle="bold" android:textSize="14dp"
+            android:textColor="#ff000000"/>
 
 </RelativeLayout>
 

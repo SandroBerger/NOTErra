@@ -24,7 +24,15 @@ public class Ablagerung extends ActionBarActivity {
     private RadioButton muellablagerung;
     private RadioButton schotter;
     private RadioButton eigenes;
+
+
     private EditText edit;
+    private EditText besch;
+    private EditText groeße;
+    private EditText laengebach;
+    private EditText maßnahmen;
+    private EditText kosten;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +45,14 @@ public class Ablagerung extends ActionBarActivity {
         muellablagerung=(RadioButton)findViewById(R.id.mull);
         schotter=(RadioButton)findViewById(R.id.schotter);
         eigenes=(RadioButton)findViewById(R.id.freiwahl);
-        edit=(EditText)findViewById(R.id.editText);
+
+
+        edit=(EditText)findViewById(R.id.sonstiges);
+        besch=(EditText)findViewById(R.id.Beschreibung);
+        groeße=(EditText)findViewById(R.id.Großausmaß);
+        laengebach=(EditText)findViewById(R.id.laenge_bachabschnitt);
+        maßnahmen=(EditText)findViewById(R.id.maßnahmen);
+        kosten=(EditText)findViewById(R.id.Kosten);
 
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
 
@@ -107,12 +122,8 @@ public class Ablagerung extends ActionBarActivity {
 
     public void save(View v) {
 
-        if(eigenes.isChecked())
-        {
 
-
-        if(edit.getText().toString().equals(""))
-        {
+        if (eigenes.isChecked() && edit.getText().toString().equals("")) {
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
                     .setMessage("Es wurde kein Text eingegeben")
@@ -126,24 +137,91 @@ public class Ablagerung extends ActionBarActivity {
 
 
                     .show();
-        }
-        else {
+        } else if (!bauaushub.isChecked() && !felsbloecke.isChecked() && !muellablagerung.isChecked() && !schotter.isChecked() && !eigenes.isChecked()) {
+            new AlertDialog.Builder(this)
+                    .setTitle("!!Achtung!!")
+                    .setMessage("Es wurde kein Ablagerungsart ausgewählt")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+
+                    .show();
+
+        } else if (besch.getText().toString().equals("")){
+            new AlertDialog.Builder(this)
+                    .setTitle("!!Achtung!!")
+                    .setMessage("Es wurde keine Beschreibung angegeben")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+
+                    .show();
+        } else if (groeße.getText().toString().equals("")) {
+            new AlertDialog.Builder(this)
+                    .setTitle("!!Achtung!!")
+                    .setMessage("Es wurde keine Größe oder Ausmaß angegeben")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+
+                    .show();
+        } else if (laengebach.getText().toString().equals("")){
+            new AlertDialog.Builder(this)
+                    .setTitle("!!Achtung!!")
+                    .setMessage("Es wurde keine Länge zum Bachabschnitt angegeben")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+
+                    .show();
+
+
+
+        } else if(maßnahmen.getText().toString().equals("")){
+            new AlertDialog.Builder(this)
+                    .setTitle("!!Achtung!!")
+                    .setMessage("Es wurde keine Empfohlene Maßnahme angegeben")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+
+                    .show();
+        } else if(kosten.getText().toString().equals("")){
+            new AlertDialog.Builder(this)
+                    .setTitle("!!Achtung!!")
+                    .setMessage("Es wurden keine Kosten angegeben")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+
+                    .show();
+
+        } else
+        {
 
             String extra = getIntent().getStringExtra("Headline");
             Intent intent = new Intent(Ablagerung.this, InspectionActivity.class);
             intent.putExtra("Headline", extra);
             startActivity(intent);
-        }
-        }
-        else
-        {
-            if(bauaushub.isChecked() || felsbloecke.isChecked() || muellablagerung.isChecked() || schotter.isChecked())
-            {
-                String extra = getIntent().getStringExtra("Headline");
-                Intent intent = new Intent(Ablagerung.this, InspectionActivity.class);
-                intent.putExtra("Headline", extra);
-                startActivity(intent);
-            }
+
 
         }
 

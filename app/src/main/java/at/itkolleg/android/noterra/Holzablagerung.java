@@ -1,5 +1,7 @@
 package at.itkolleg.android.noterra;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -7,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -14,13 +17,37 @@ import java.util.List;
 
 public class Holzablagerung extends ActionBarActivity {
 
+    private Spinner mySpinner;
+    private Spinner mySpinner1;
+
+    private EditText bhd;
+    private EditText holzmenge;
+    private EditText lbachabschnitt;
+    private EditText maßnahmen;
+    private EditText kosten;
+
+    private EditText besch;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_holzablagerung);
 
+        bhd=(EditText)findViewById(R.id.Mediabhd);
+        holzmenge=(EditText)findViewById(R.id.Holzmenge);
+        lbachabschnitt=(EditText)findViewById(R.id.bachabschnitt);
+        besch=(EditText)findViewById(R.id.beschreibung);
 
-        Spinner mySpinner = (Spinner) findViewById(R.id.Spinner01);
+        maßnahmen=(EditText)findViewById(R.id.maßnahmen);
+        kosten=(EditText)findViewById(R.id.Kosten);
+
+
+
+
+         mySpinner = (Spinner) findViewById(R.id.Spinner01);
 
         List<String> anzahl = new ArrayList<>();
         anzahl.add("<5");
@@ -60,7 +87,7 @@ public class Holzablagerung extends ActionBarActivity {
             }
         };
 
-        Spinner mySpinner1 = (Spinner) findViewById(R.id.Spinner02);
+         mySpinner1 = (Spinner) findViewById(R.id.Spinner02);
 
         dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner1.setAdapter(dataAdapter1);
@@ -76,10 +103,93 @@ public class Holzablagerung extends ActionBarActivity {
 
 
     public void onclick(View v) {
-        String extra = getIntent().getStringExtra("Headline");
-        Intent intent = new Intent(Holzablagerung.this, InspectionActivity.class);
-        intent.putExtra("Headline", extra);
-        startActivity(intent);
+
+        if(mySpinner.getSelectedItem().toString().equals("Anzahl der Stämme:")){
+            new AlertDialog.Builder(this)
+                    .setTitle("!!Achtung!!")
+                    .setMessage("Bitte wählen Sie eine Anzahl der Stämme aus")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    }).show();
+        } else if (mySpinner1.getSelectedItem().toString().equals("Baumarten:")){
+            new AlertDialog.Builder(this)
+                    .setTitle("!!Achtung!!")
+                    .setMessage("Bitte wählen Sie eine Baumart aus")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    }).show();
+        } else if(bhd.getText().toString().equals(""))
+        {
+            new AlertDialog.Builder(this)
+                    .setTitle("!!Achtung!!")
+                    .setMessage("Es wurde kein Media eingegeben")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    }).show();
+        } else if (holzmenge.getText().toString().equals("")){
+            new AlertDialog.Builder(this)
+                    .setTitle("!!Achtung!!")
+                    .setMessage("Es wurde keine Holzmenge eingegeben")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    }).show();
+        } else if (lbachabschnitt.getText().toString().equals("")){
+            new AlertDialog.Builder(this)
+                    .setTitle("!!Achtung!!")
+                    .setMessage("Es wurde keine Länge des Bachabschnittes angegeben")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    }).show();
+        }else if (besch.getText().toString().equals("")){
+            new AlertDialog.Builder(this)
+                    .setTitle("!!Achtung!!")
+                    .setMessage("Bitte geben Sie eine Beschreibung an")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    }).show();
+        } else if(maßnahmen.getText().toString().equals("")){
+            new AlertDialog.Builder(this)
+                    .setTitle("!!Achtung!!")
+                    .setMessage("Es wurden keine Empfohlene Maßnahmen eingegeben")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    }).show();
+
+        }  else if(kosten.getText().toString().equals("")){
+            new AlertDialog.Builder(this)
+                    .setTitle("!!Achtung!!")
+                    .setMessage("Es wurden keine Kosten eingetragen")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    }).show();
+        } else
+        {
+            String extra = getIntent().getStringExtra("Headline");
+            Intent intent = new Intent(Holzablagerung.this, InspectionActivity.class);
+            intent.putExtra("Headline", extra);
+            startActivity(intent);
+        }
+
+
+
+
+
     }
 
 

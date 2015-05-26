@@ -3,7 +3,7 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
               tools:context="at.itkolleg.android.noterra.Holzablagerungen"
-              android:background="@color/hellgrun" android:focusableInTouchMode="true">
+              android:background="@color/Hintergrundfarbe" android:focusableInTouchMode="true">
 
 
 
@@ -12,10 +12,12 @@
                       android:orientation="vertical" android:focusableInTouchMode="true">
 
             <Spinner android:id="@+id/wasserauseinleitung"
-                     android:layout_width="350dp"
-                     android:layout_height="50dp"
+                     android:layout_width="match_parent"
                      android:layout_marginLeft="5dp"
                      android:layout_marginRight="5dp"
+
+                     android:layout_height="50dp"
+
                      android:layout_marginTop="10dp"
                      android:background="@drawable/spinner_style"
                      />
@@ -93,22 +95,25 @@
 
 
             <EditText
-                    android:layout_width="350dp"
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:layout_height="150dp"
                     android:layout_marginTop="50dp"
                     android:background="@drawable/textfield_style"
-                    android:id="@+id/Beschreibung"
+                    android:id="@+id/beschreibung"
                     android:hint="@string/Beschreibung"
                     android:inputType="textMultiLine"
 
                     android:gravity="top|start"
                     android:maxLines="10"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
+
                     />
 
             <Button
-                    android:layout_width="360dp"
+                    android:layout_width="match_parent"
+
+
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
                     android:text="Speichern"

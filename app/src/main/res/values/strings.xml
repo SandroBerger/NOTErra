@@ -57,7 +57,10 @@
     <!-- String für Inspection -->
     <string name="leer">Es wurde noch keine Beobachtung gewählt</string>
 
-    <color name="hellgrun">#0b622b</color>
+
+    <!-- Farben -->
+
+    <color name="Hintergrundfarbe">#0b622b</color>
     <color name="tgrau">#CAC9C9</color> <!-- Text / Editor Grau -->
     <color name="bgrau">#6E6E6E</color> <!-- Button Grau -->
     <color name="black">#190707</color>
@@ -74,7 +77,7 @@
     <string name="großaus">Größe / Ausmaß (m2)</string>
     <string name="lange_bachabschnitt">Länge Bachabschnitt (m)</string>
     <string name="title_activity_holzbewuchs">Holzbewuchs</string>
-    <string name="title_activity_schaeden__regulierungsbauten">Schaeden_Regulierungsbauten</string>
+    <string name="title_activity_schaeden__regulierungsbauten">Schäden Regulierungsbauten</string>
 
     <!-- Strings Formular -> Beobachtung: Holzbewuchs -->
     <string name="baumhoehe">Baumhöhe (m)</string>

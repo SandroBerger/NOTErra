@@ -41,6 +41,7 @@ public class FormActivity extends ActionBarActivity  {
         Spinner mySpinner=(Spinner)findViewById(R.id.Spinner01);
 
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         mySpinner.setAdapter(dataAdapter);
 
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));

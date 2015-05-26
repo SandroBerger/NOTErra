@@ -5,16 +5,20 @@
                 android:layout_height="match_parent"
                 tools:context="at.itkolleg.android.noterra.FormActivity"
                 tools:ignore="MergeRootFrame"
-                android:background="@color/hellgrun">
+                
+                android:background="@color/Hintergrundfarbe">
 
     <Spinner android:id="@+id/Spinner01"
              android:layout_width="fill_parent"
              android:layout_height="50dp"
              android:layout_marginTop="163dp"
+
+             android:layout_marginRight="5dp"
             android:background="@drawable/spinner_style"
              android:layout_alignParentTop="true" android:layout_alignParentLeft="true"
              android:layout_alignParentStart="true"
             android:spinnerMode="dropdown"
+
 
 
             />

@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.text.format.Time;
 import android.view.*;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.io.File;
 
@@ -23,6 +25,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
          ab.setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
 
 
+
+
         //Erstellt das Verzeichnis am Internen Speicher - muss noch getestet werden ob das auf allen geräten mit dem verzeichnis funktioniert!!
         File noterraDirectory = new File("/storage/emulated/0/NOTErra");
         File mediaDirectory = new File("/storage/emulated/0/NOTErra/Media");
@@ -36,7 +40,13 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         //Aufruf der Funktion addButton
         addButton();
 
+        TextView textView=(TextView)findViewById(R.id.datum);
 
+
+        Time t = new Time(Time.getCurrentTimezone());
+        t.setToNow();
+        String date = t.format("%d.%m.%Y");
+        textView.setText("Aktuelles Datum: "+date);
 
     }
 

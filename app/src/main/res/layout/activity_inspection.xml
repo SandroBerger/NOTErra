@@ -5,7 +5,7 @@
                 android:layout_height="match_parent"
                 tools:context="at.itkolleg.android.noterra.InspectionActivity"
                 tools:ignore="MergeRootFrame"
-                android:background="@color/hellgrun">
+                android:background="@color/Hintergrundfarbe">
 
     <Button
             android:id="@+id/formbutton"
@@ -15,7 +15,8 @@
             android:text="Formular"
             android:layout_gravity="center_horizontal|top"
             android:onClick="FormOnClick" android:layout_alignParentTop="true"
-            android:layout_alignLeft="@+id/notebutton" android:layout_alignStart="@+id/notebutton"/>
+            android:layout_alignLeft="@+id/notebutton" android:layout_alignStart="@+id/notebutton"
+            android:background="@drawable/button_style"/>
 
     <Button
             android:id="@+id/notebutton"
@@ -24,7 +25,9 @@
             android:text="Notiz"
             android:layout_gravity="center_horizontal|top"
             android:onClick="NoteOnClick" android:layout_below="@+id/formbutton"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/button_style"
+            android:layout_marginTop="10dp"/>
 
     <Button
             android:id="@+id/gpsbutton"
@@ -35,7 +38,9 @@
             android:layout_below="@+id/notebutton"
             android:layout_alignLeft="@+id/notebutton"
             android:layout_alignStart="@+id/notebutton"
-            android:onClick="GpsOnClick"/>
+            android:onClick="GpsOnClick"
+            android:background="@drawable/button_style"
+            android:layout_marginTop="10dp"/>
 
     <Button
             android:id="@+id/finishbutton"
@@ -47,7 +52,9 @@
             android:layout_alignParentBottom="true"
             android:layout_alignLeft="@+id/gpsbutton"
             android:layout_alignStart="@+id/gpsbutton"
-            android:onClick="FinishOnClick"/>
+            android:onClick="FinishOnClick"
+            android:background="@drawable/button_style"
+            android:layout_marginTop="10dp"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

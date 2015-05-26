@@ -18,6 +18,8 @@ import java.util.List;
 
 public class Wasserauseinleitung extends ActionBarActivity {
 
+    private Spinner mySpinner;
+
     private RadioGroup zweck;
     private RadioButton abwasser;
     private RadioButton beschneiung;
@@ -26,6 +28,7 @@ public class Wasserauseinleitung extends ActionBarActivity {
     private RadioButton freiwahl;
 
     private EditText edit;
+    private EditText besch;
 
 
     @Override
@@ -33,7 +36,7 @@ public class Wasserauseinleitung extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wasserauseinleitung);
 
-        Spinner mySpinner=(Spinner)findViewById(R.id.wasserauseinleitung);
+         mySpinner=(Spinner)findViewById(R.id.wasserauseinleitung);
 
         List<String> anzahl = new ArrayList<String>();
         anzahl.add("Wassereinleitung");
@@ -62,6 +65,8 @@ public class Wasserauseinleitung extends ActionBarActivity {
         trinkwasser=(RadioButton)findViewById(R.id.trinkwasser);
         freiwahl=(RadioButton)findViewById(R.id.freiwahl);
         edit=(EditText)findViewById(R.id.art_des_zweckes);
+
+        besch=(EditText)findViewById(R.id.beschreibung);
 
 
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
@@ -117,33 +122,64 @@ public class Wasserauseinleitung extends ActionBarActivity {
 
     }
 
-    public void save(View v){
-
-        if(freiwahl.isChecked())
-        {
+    public void save(View v) {
 
 
-        if (edit.getText().toString().equals("")) {
+        if (freiwahl.isChecked() && edit.getText().toString().equals("")) {
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
-                    .setMessage("Es wurde kein Text eingegeben")
+                    .setMessage("Es wurde kein Text innerhalb der Auswahl des Zweckes eingegeben")
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-
                         }
                     })
 
 
-
                     .show();
-        } else {
+        } else if (mySpinner.getSelectedItem().toString().equals("Art: Aus/Einleitung: ")) {
+            new AlertDialog.Builder(this)
+                    .setTitle("!!Achtung!!")
+                    .setMessage("Es wurde keine Aus oder Einleitung gewählt")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    }).show();
+
+        } else if (!abwasser.isChecked() && !beschneiung.isChecked() && !bewaesserung.isChecked() && !trinkwasser.isChecked() && !freiwahl.isChecked()) {
+            new AlertDialog.Builder(this)
+                    .setTitle("!!Achtung!!")
+                    .setMessage("Es wurde kein Zweck ausgewählt")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    }).show();
+
+        } else if (besch.getText().toString().equals("")) {
+            new AlertDialog.Builder(this)
+                    .setTitle("!!Achtung!!")
+                    .setMessage("Es wurde keine Beschreibung hinzugefügt")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    }).show();
+        } else
+        {
             String extra = getIntent().getStringExtra("Headline");
             Intent intent = new Intent(Wasserauseinleitung.this, InspectionActivity.class);
             intent.putExtra("Headline", extra);
             startActivity(intent);
         }
-        }
+
+
+
+
+
+
+
 
     }
     @Override
