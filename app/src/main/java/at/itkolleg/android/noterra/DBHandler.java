@@ -1,40 +1,29 @@
 package at.itkolleg.android.noterra;
 
-import android.app.Activity;
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Bundle;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 /**
  * Created by SandroB on 26.05.2015.
  */
-public class DBHandler extends Activity {
+public class DBHandler extends SQLiteOpenHelper {
+
+    private static final String DATABASE_NAME = "forstDB";
+    private static final int DATABASE_VERSION = 1;
+    private SQLiteDatabase forstDB;
+
+    public DBHandler(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        forstDB = this.getWritableDatabase();
+    }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        SQLiteDatabase forstDB = null;
+    public void onCreate(SQLiteDatabase forstDB) {
+        this.forstDB = forstDB;
 
         try {
-            forstDB = this.openOrCreateDatabase("forst_db", MODE_PRIVATE, null);
-
-            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Formular';");
-            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Gps';");
-            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Holzablagerung';");
-            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Holzbewuchs';");
-            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_OhneBehinderung';");
-            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_SchadenAnRegulierung';");
-            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Sprachaufnahme';");
-            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Sprachaufnahme';");
-            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Text';");
-            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_WasserAusEinleitung';");
-            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Foto';");
-            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Abflussbehinderung';");
-            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Ablagerung';");
-            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Notiz';");
-            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Beobachtung';");
-
             //Erstellen der Tabelle tbl_Formular in der Datenbank forst_db
             forstDB.execSQL("CREATE TABLE IF NOT EXISTS 'tbl_Formular' (" +
                     "'idFormular' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL CHECK('idFormular'>=0)," +
@@ -237,13 +226,42 @@ public class DBHandler extends Activity {
             forstDB.execSQL("CREATE INDEX 'tbl_Beobachtung.fk_tbl_Beobachtung_tbl_Gps1_idx' ON 'tbl_Beobachtung'('tbl_Gps_idGps');");
             forstDB.execSQL("CREATE INDEX 'tbl_Beobachtung.fk_tbl_Beobachtung_tbl_Formular1_idx' ON 'tbl_Beobachtung'('tbl_Formular_idFormular');'");
 
-
-            forstDB.close();
         } catch (Exception e) {
             Log.e("Error", "Error", e);
         } finally {
-            if (forstDB != null)
-                forstDB.close();
+            if (forstDB != null) {
+                //forstDB.close();
+            }
         }
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase forstDB, int oldVersion, int newVersion) {
+        this.forstDB = forstDB;
+
+        try {
+            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Formular';");
+            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Gps';");
+            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Holzablagerung';");
+            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Holzbewuchs';");
+            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_OhneBehinderung';");
+            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_SchadenAnRegulierung';");
+            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Sprachaufnahme';");
+            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Sprachaufnahme';");
+            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Text';");
+            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_WasserAusEinleitung';");
+            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Foto';");
+            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Abflussbehinderung';");
+            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Ablagerung';");
+            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Notiz';");
+            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Beobachtung';");
+        } catch (Exception e) {
+            Log.e("Error", "Error", e);
+        } finally {
+            if (forstDB != null) {
+                //forstDB.close();
+            }
+        }
+
     }
 }

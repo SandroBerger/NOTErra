@@ -10,6 +10,8 @@ import android.view.MenuItem;
 
 public class startup extends Activity {
 
+    private DBHandler dbHandler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,11 +29,9 @@ public class startup extends Activity {
 
         }.start();
 
+        dbHandler = new DBHandler(this);
 
     }
-
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
