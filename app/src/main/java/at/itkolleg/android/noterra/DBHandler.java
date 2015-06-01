@@ -24,6 +24,23 @@ public class DBHandler extends SQLiteOpenHelper {
         this.forstDB = forstDB;
 
         try {
+
+            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Formular';");
+            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Gps';");
+            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Holzablagerung';");
+            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Holzbewuchs';");
+            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_OhneBehinderung';");
+            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_SchadenAnRegulierung';");
+            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Sprachaufnahme';");
+            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Sprachaufnahme';");
+            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Text';");
+            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_WasserAusEinleitung';");
+            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Foto';");
+            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Abflussbehinderung';");
+            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Ablagerung';");
+            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Notiz';");
+            forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Beobachtung';");
+
             //Erstellen der Tabelle tbl_Formular in der Datenbank forst_db
             forstDB.execSQL("CREATE TABLE IF NOT EXISTS 'tbl_Formular' (" +
                     "'idFormular' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL CHECK('idFormular'>=0)," +
@@ -107,11 +124,11 @@ public class DBHandler extends SQLiteOpenHelper {
                     "'Sonstiges' INTEGER DEFAULT 0," +
                     "'Bewuchs' INTEGER DEFAULT 0," +
                     "'UnterspueltesFundament' INTEGER DEFAULT 0," +
-                    "  CONSTRAINT 'fk_tbl_SchadenAnRegulierung_tbl_Formular1'" +
-                    "    FOREIGN KEY('idSchadenAnRegulierung')" +
-                    "    REFERENCES 'tbl_Formular'('idFormular')" +
-                    "    ON DELETE CASCADE" +
-                    "    ON UPDATE CASCADE" +
+                    "CONSTRAINT 'fk_tbl_SchadenAnRegulierung_tbl_Formular1'" +
+                    "FOREIGN KEY('idSchadenAnRegulierung')" +
+                    "REFERENCES 'tbl_Formular'('idFormular')" +
+                    "ON DELETE CASCADE" +
+                    "ON UPDATE CASCADE" +
                     ");");
 
             forstDB.execSQL("CREATE TABLE IF NOT EXISTS 'tbl_Sprachaufnahme'(" +
@@ -123,11 +140,6 @@ public class DBHandler extends SQLiteOpenHelper {
             forstDB.execSQL("CREATE TABLE IF NOT EXISTS 'tbl_Text'(" +
                     "'idText' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL CHECK('idText'>=0)," +
                     "'Text' TEXT DEFAULT NULL" +
-                    ");");
-
-            forstDB.execSQL("CREATE TABLE IF NOT EXISTS 'tbl_Foto'(" +
-                    "'idFoto' INTEGER PRIMARY KEY NOT NULL CHECK('idFoto'>=0)," +
-                    "'Ref' TEXT" +
                     ");");
 
             forstDB.execSQL("CREATE TABLE IF NOT EXISTS 'tbl_WasserAusEinleitung'(" +
@@ -142,15 +154,20 @@ public class DBHandler extends SQLiteOpenHelper {
                     "ON UPDATE CASCADE" +
                     ");");
 
+            forstDB.execSQL("CREATE TABLE IF NOT EXISTS 'tbl_Foto'(" +
+                    "'idFoto' INTEGER PRIMARY KEY NOT NULL CHECK('idFoto'>=0)," +
+                    "'Ref' TEXT" +
+                    ");");
+
             forstDB.execSQL("CREATE TABLE IF NOT EXISTS 'tbl_Abflussbehinderung'(" +
                     "'idAbflussbehinderung' INTEGER PRIMARY KEY NOT NULL CHECK('idAbflussbehinderung'>=0)," +
                     "'Art' TEXT DEFAULT NULL," +
                     "'Beschreibung' TEXT DEFAULT NULL," +
-                    "  CONSTRAINT 'fk_tbl_Abflussbehinderung_tbl_Formular1'" +
-                    "    FOREIGN KEY('idAbflussbehinderung')" +
-                    "    REFERENCES 'tbl_Formular'('idFormular')" +
-                    "    ON DELETE CASCADE" +
-                    "    ON UPDATE CASCADE" +
+                    " CONSTRAINT 'fk_tbl_Abflussbehinderung_tbl_Formular1'" +
+                    "FOREIGN KEY('idAbflussbehinderung')" +
+                    "REFERENCES 'tbl_Formular'('idFormular')" +
+                    "ON DELETE CASCADE" +
+                    "ON UPDATE CASCADE" +
                     ");");
 
             forstDB.execSQL("CREATE TABLE IF NOT EXISTS 'tbl_Ablagerung'(" +
@@ -159,11 +176,11 @@ public class DBHandler extends SQLiteOpenHelper {
                     "'Beschreibung' TEXT DEFAULT NULL," +
                     "'Bachabschnitt' INTEGER CHECK('Bachabschnitt'>=0) DEFAULT NULL," +
                     "'Ausmass' INTEGER CHECK('Ausmass'>=0) DEFAULT NULL," +
-                    "  CONSTRAINT 'fk_tbl_Ablagerung_tbl_Formular1'" +
-                    "    FOREIGN KEY('idAblagerung')" +
-                    "    REFERENCES 'tbl_Formular'('idFormular')" +
-                    "    ON DELETE CASCADE" +
-                    "    ON UPDATE CASCADE" +
+                    "CONSTRAINT 'fk_tbl_Ablagerung_tbl_Formular1'" +
+                    "FOREIGN KEY('idAblagerung')" +
+                    "REFERENCES 'tbl_Formular'('idFormular')" +
+                    "ON DELETE CASCADE" +
+                    "ON UPDATE CASCADE" +
                     ");");
 
             forstDB.execSQL("CREATE TABLE IF NOT EXISTS 'tbl_Notiz'(" +
@@ -173,7 +190,7 @@ public class DBHandler extends SQLiteOpenHelper {
                     "'tbl_Text_idText' INTEGER CHECK('tbl_Text_idText'>=0)," +
                     "CONSTRAINT 'fk_tbl_Notiz_tbl_Sprachaufnahme'" +
                     "FOREIGN KEY('tbl_Sprachaufnahme_idSprachaufnahme')" +
-                    "REFERENCES 'tbl_Sprachaufnahme'('idSprachaufnahme')n" +
+                    "REFERENCES 'tbl_Sprachaufnahme'('idSprachaufnahme')" +
                     "ON DELETE CASCADE" +
                     "ON UPDATE CASCADE," +
                     "CONSTRAINT 'fk_tbl_Notiz_tbl_Foto1'" +
@@ -187,6 +204,7 @@ public class DBHandler extends SQLiteOpenHelper {
                     "ON DELETE CASCADE" +
                     "ON UPDATE CASCADE" +
                     ");");
+
 
             forstDB.execSQL("CREATE TABLE IF NOT EXISTS 'tbl_Beobachtung'(" +
                     "'idBeobachtung' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL CHECK('idBeobachtung'>=0)," +
