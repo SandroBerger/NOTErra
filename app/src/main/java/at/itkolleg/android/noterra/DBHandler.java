@@ -83,22 +83,18 @@ public class DBHandler extends SQLiteOpenHelper {
                     "CONSTRAINT 'fk_tbl_Holzablagerung_tbl_Formular1'" +
                     "FOREIGN KEY('idHolzablagerung')" +
                     "REFERENCES 'tbl_Formular'('idFormular')" +
-                    "ON DELTE CASCADE" +
-                    "ON UPDATE CASCADE" +
                     ");");
 
             forstDB.execSQL("CREATE TABLE IF NOT EXISTS 'tbl_Holzbewuchs'(" +
-                    "'idHolzbewuchs' INTEGER PRIMARY KEY NOT NULL CHECK(idHolzbewuchs>=0)," +
+                    "'idHolzbewuchs' INTEGER PRIMARY KEY NOT NULL CHECK('idHolzbewuchs'>=0)," +
                     "'Anzahl' INTEGER CHECK('Anzahl'>=0) DEFAULT NULL," +
                     "'Baumart' VARCHAR(45) DEFAULT NULL," +
                     "'Hoehe' INTEGER CHECK('Hoehe'>=0) DEFAULT NULL," +
                     "'Menge' INTEGER CHECK('Menge'>=0) DEFAULT NULL," +
                     "'Beschreibung' TEXT DEFAULT NULL," +
-                    "CONSTRAINT fk_tbl_Holzbewuchs_tbl_Formular1" +
+                    "CONSTRAINT 'fk_tbl_Holzbewuchs_tbl_Formular1'" +
                     "FOREIGN KEY('idHolzbewuchs')" +
-                    "REFERENCES tbl_Formular('idFormular')" +
-                    "ON DELETE CASCADE" +
-                    "ON UPDATE CASCADE" +
+                    "REFERENCES 'tbl_Formular'('idFormular')" +
                     ");");
 
             forstDB.execSQL("CREATE TABLE IF NOT EXISTS 'tbl_OhneBehinderung'(" +
@@ -108,8 +104,6 @@ public class DBHandler extends SQLiteOpenHelper {
                     "CONSTRAINT 'fk_tbl_OhneBehinderung_tbl_Formular1'" +
                     "FOREIGN KEY('idOhneBehinderung')" +
                     "REFERENCES 'tbl_Formular'('idFormular')" +
-                    "ON DELETE CASCADE" +
-                    "ON UPDATE CASCADE" +
                     ");");
 
             forstDB.execSQL("CREATE TABLE IF NOT EXISTS 'tbl_SchadenAnRegulierung'(" +
@@ -127,8 +121,6 @@ public class DBHandler extends SQLiteOpenHelper {
                     "CONSTRAINT 'fk_tbl_SchadenAnRegulierung_tbl_Formular1'" +
                     "FOREIGN KEY('idSchadenAnRegulierung')" +
                     "REFERENCES 'tbl_Formular'('idFormular')" +
-                    "ON DELETE CASCADE" +
-                    "ON UPDATE CASCADE" +
                     ");");
 
             forstDB.execSQL("CREATE TABLE IF NOT EXISTS 'tbl_Sprachaufnahme'(" +
@@ -150,8 +142,6 @@ public class DBHandler extends SQLiteOpenHelper {
                     "CONSTRAINT 'fk_tbl_WasserAusEinleitung_tbl_Formular1'" +
                     "FOREIGN KEY('idWasserAusEinleitung')" +
                     "REFERENCES 'tbl_Formular'('idFormular')" +
-                    "ON DELETE CASCADE" +
-                    "ON UPDATE CASCADE" +
                     ");");
 
             forstDB.execSQL("CREATE TABLE IF NOT EXISTS 'tbl_Foto'(" +
@@ -166,8 +156,6 @@ public class DBHandler extends SQLiteOpenHelper {
                     " CONSTRAINT 'fk_tbl_Abflussbehinderung_tbl_Formular1'" +
                     "FOREIGN KEY('idAbflussbehinderung')" +
                     "REFERENCES 'tbl_Formular'('idFormular')" +
-                    "ON DELETE CASCADE" +
-                    "ON UPDATE CASCADE" +
                     ");");
 
             forstDB.execSQL("CREATE TABLE IF NOT EXISTS 'tbl_Ablagerung'(" +
@@ -179,8 +167,6 @@ public class DBHandler extends SQLiteOpenHelper {
                     "CONSTRAINT 'fk_tbl_Ablagerung_tbl_Formular1'" +
                     "FOREIGN KEY('idAblagerung')" +
                     "REFERENCES 'tbl_Formular'('idFormular')" +
-                    "ON DELETE CASCADE" +
-                    "ON UPDATE CASCADE" +
                     ");");
 
             forstDB.execSQL("CREATE TABLE IF NOT EXISTS 'tbl_Notiz'(" +
@@ -191,18 +177,12 @@ public class DBHandler extends SQLiteOpenHelper {
                     "CONSTRAINT 'fk_tbl_Notiz_tbl_Sprachaufnahme'" +
                     "FOREIGN KEY('tbl_Sprachaufnahme_idSprachaufnahme')" +
                     "REFERENCES 'tbl_Sprachaufnahme'('idSprachaufnahme')" +
-                    "ON DELETE CASCADE" +
-                    "ON UPDATE CASCADE," +
                     "CONSTRAINT 'fk_tbl_Notiz_tbl_Foto1'" +
                     "FOREIGN KEY('tbl_Foto_idFoto')" +
                     "REFERENCES 'tbl_Foto'('idFoto')" +
-                    "ON DELETE CASCADE" +
-                    "ON UPDATE CASCADE," +
                     "CONSTRAINT 'fk_tbl_Notiz_tbl_Text1'" +
                     "FOREIGN KEY('tbl_Text_idText')" +
                     "REFERENCES 'tbl_Text'('idText')" +
-                    "ON DELETE CASCADE" +
-                    "ON UPDATE CASCADE" +
                     ");");
 
 
@@ -216,18 +196,12 @@ public class DBHandler extends SQLiteOpenHelper {
                     "'CONSTRAINT 'fk_tbl_Beobachtung_tbl_Notiz1'" +
                     "'FOREIGN KEY('tbl_Notiz_idNotiz')" +
                     "'REFERENCES 'tbl_Notiz'('idNotiz')" +
-                    "'ON DELETE CASCADE" +
-                    "'ON UPDATE CASCADE," +
                     "'CONSTRAINT 'fk_tbl_Beobachtung_tbl_Gps1'" +
                     "'FOREIGN KEY('tbl_Gps_idGps')" +
                     "'REFERENCES 'tbl_Gps'('idGps')" +
-                    "'ON DELETE CASCADE" +
-                    "'ON UPDATE CASCADE," +
                     "'CONSTRAINT 'fk_tbl_Beobachtung_tbl_Formular1'" +
                     "'FOREIGN KEY('tbl_Formular_idFormular')" +
                     "'REFERENCES 'tbl_Formular'('idFormular')" +
-                    "'ON DELETE CASCADE" +
-                    "'ON UPDATE CASCADE" +
                     ");");
 
             forstDB.execSQL("CREATE INDEX 'tbl_Holzablagerung.fk_tbl_Holzablagerung_tbl_Formular1_idx' ON 'tbl_Holzablagerung'('idHolzablagerung');");
