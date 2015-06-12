@@ -126,11 +126,8 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
                 myChrono.start();
 
             } catch (IllegalStateException e) {
-                // start:it is called before prepare()
-                // prepare: it is called after start() or before setOutputFormat()
                 e.printStackTrace();
             } catch (IOException e) {
-                // prepare() fails
                 e.printStackTrace();
             }
 
@@ -156,10 +153,8 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
                 playButton.setEnabled(true);
 
             } catch (IllegalStateException e) {
-                //  it is called before start()
                 e.printStackTrace();
             } catch (RuntimeException e) {
-                // no valid audio/video data has been received
                 e.printStackTrace();
             }
 
@@ -223,7 +218,6 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         String pfad = getAudioPfad();
-                        // continue with delete
                         File fdelete = new File(pfad);
                         if (fdelete.exists()) {
                             fdelete.delete();
@@ -283,7 +277,7 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
     //---------------------------------------------------------------------
 //---------------Ladet das bild in den Imageview wenn eines vorhanden ist in der Ordner struktur------------------
     public void loadImage() {
-        outputFile = "/storage/emulated/0/NOTErra/Media/Images/begehungImage_" + getCurrentTime() + ".jpg";
+        outputFile = getImagePfad();
 
         File imgFile = new File(outputFile);
 
@@ -316,13 +310,7 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
     }
 
     private void createRecorder() {
-        int i = 00;
-        outputFile = "/storage/emulated/0/NOTErra/Media/Audio/begehungAudio_" + i + ".3gpp";
-
-        if (!outputFile.isEmpty()) {
-            i++;
-            outputFile = "/storage/emulated/0/NOTErra/Media/Audio/begehungAudio_" + i + ".3gpp";
-        }
+        outputFile = "/storage/emulated/0/NOTErra/Media/Audio/begehungAudio_" + getCurrentTime() + ".3gpp";
 
         setAudioPfad(outputFile);
 
