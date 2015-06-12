@@ -41,8 +41,8 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
     ImageButton deleteAudioButton;
     ImageButton deleteButton;
     Button saveButton;
-    String ImagePfad;
-    String AudioPfad;
+    String imagePfad;
+    String audioPfad;
 
 
     @Override
@@ -126,11 +126,8 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
                 myChrono.start();
 
             } catch (IllegalStateException e) {
-                // start:it is called before prepare()
-                // prepare: it is called after start() or before setOutputFormat()
                 e.printStackTrace();
             } catch (IOException e) {
-                // prepare() fails
                 e.printStackTrace();
             }
 
@@ -156,10 +153,8 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
                 playButton.setEnabled(true);
 
             } catch (IllegalStateException e) {
-                //  it is called before start()
                 e.printStackTrace();
             } catch (RuntimeException e) {
-                // no valid audio/video data has been received
                 e.printStackTrace();
             }
 
@@ -225,7 +220,6 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         String pfad = getAudioPfad();
-                        // continue with delete
                         File fdelete = new File(pfad);
                         if (fdelete.exists()) {
                             fdelete.delete();
@@ -285,6 +279,17 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
     //---------------------------------------------------------------------
 //---------------Ladet das bild in den Imageview wenn eines vorhanden ist in der Ordner struktur------------------
     public void loadImage() {
+       /*File imageDir = new File("/storage/emulated/0/NOTErra/Media/Images/");
+        final ArrayList<String> imageFiles = new ArrayList<>();
+
+        imageDir.listFiles(new FileFilter() {
+            @Override
+            public boolean accept(File file) {
+                imageFiles.add(file.getAbsolutePath());
+                return false;
+            }
+        });*/
+
         outputFile = "/storage/emulated/0/NOTErra/Media/Images/begehungImage_" + getCurrentTime() + ".jpg";
 
         File imgFile = new File(outputFile);
@@ -318,13 +323,7 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
     }
 
     private void createRecorder() {
-        int i = 00;
-        outputFile = "/storage/emulated/0/NOTErra/Media/Audio/begehungAudio_" + i + ".3gpp";
-
-        if (!outputFile.isEmpty()) {
-            i++;
-            outputFile = "/storage/emulated/0/NOTErra/Media/Audio/begehungAudio_" + i + ".3gpp";
-        }
+        outputFile = "/storage/emulated/0/NOTErra/Media/Audio/begehungAudio_" + getCurrentTime() + ".3gpp";
 
         setAudioPfad(outputFile);
 
@@ -336,19 +335,19 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
     }
 
     public void setAudioPfad(String AudioPfad) {
-        this.AudioPfad = AudioPfad;
+        this.audioPfad = AudioPfad;
     }
 
     public String getAudioPfad() {
-        return AudioPfad;
+        return audioPfad;
     }
 
     public void setImagePfad(String ImagePfad) {
-        this.ImagePfad = ImagePfad;
+        this.imagePfad = ImagePfad;
     }
 
     public String getImagePfad() {
-        return ImagePfad;
+        return imagePfad;
     }
 
     @Override

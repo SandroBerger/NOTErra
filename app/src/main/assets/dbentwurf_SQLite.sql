@@ -203,6 +203,7 @@ CREATE TABLE IF NOT EXISTS "tbl_Notiz"(
     ON DELETE CASCADE
     ON UPDATE CASCADE
 );
+
 CREATE INDEX "tbl_Notiz.fk_tbl_Notiz_tbl_Sprachaufnahme_idx" ON "tbl_Notiz"("tbl_Sprachaufnahme_idSprachaufnahme");
 CREATE INDEX "tbl_Notiz.fk_tbl_Notiz_tbl_Foto1_idx" ON "tbl_Notiz"("tbl_Foto_idFoto");
 CREATE INDEX "tbl_Notiz.fk_tbl_Notiz_tbl_Text1_idx" ON "tbl_Notiz"("tbl_Text_idText");
