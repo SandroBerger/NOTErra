@@ -26,7 +26,7 @@ public class FTPHandler {
     private File file;
     private FileInputStream inputFile;
     private String remotePathImage = "/Media/Images/";
-    private String remotePathAudio = "Media/Audio/";
+    private String remotePathAudio = "/Media/Audio/";
     private String image = "jpg";
     String extention;
     private String timestamp;
