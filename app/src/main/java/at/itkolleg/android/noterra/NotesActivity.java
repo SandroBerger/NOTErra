@@ -41,8 +41,8 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
     ImageButton deleteAudioButton;
     ImageButton deleteButton;
     Button saveButton;
-    String ImagePfad;
-    String AudioPfad;
+    String imagePfad;
+    String audioPfad;
 
 
     @Override
@@ -277,7 +277,18 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
     //---------------------------------------------------------------------
 //---------------Ladet das bild in den Imageview wenn eines vorhanden ist in der Ordner struktur------------------
     public void loadImage() {
-        outputFile = getImagePfad();
+       /*File imageDir = new File("/storage/emulated/0/NOTErra/Media/Images/");
+        final ArrayList<String> imageFiles = new ArrayList<>();
+
+        imageDir.listFiles(new FileFilter() {
+            @Override
+            public boolean accept(File file) {
+                imageFiles.add(file.getAbsolutePath());
+                return false;
+            }
+        });*/
+
+        outputFile = "/storage/emulated/0/NOTErra/Media/Images/begehungImage_" + getCurrentTime() + ".jpg";
 
         File imgFile = new File(outputFile);
 
@@ -322,19 +333,19 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
     }
 
     public void setAudioPfad(String AudioPfad) {
-        this.AudioPfad = AudioPfad;
+        this.audioPfad = AudioPfad;
     }
 
     public String getAudioPfad() {
-        return AudioPfad;
+        return audioPfad;
     }
 
     public void setImagePfad(String ImagePfad) {
-        this.ImagePfad = ImagePfad;
+        this.imagePfad = ImagePfad;
     }
 
     public String getImagePfad() {
-        return ImagePfad;
+        return imagePfad;
     }
 
     @Override
