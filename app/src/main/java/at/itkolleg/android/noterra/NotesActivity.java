@@ -174,6 +174,8 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
             toast.show();
         }
 
+
+
     }
 
     private void playButtonClick() {

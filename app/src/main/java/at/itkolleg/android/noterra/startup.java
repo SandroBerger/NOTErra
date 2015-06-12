@@ -10,9 +10,12 @@ import android.view.MenuItem;
 
 public class startup extends Activity {
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_startup);
 
         new CountDownTimer(5000, 1000) {

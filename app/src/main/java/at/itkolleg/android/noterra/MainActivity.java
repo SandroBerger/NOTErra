@@ -14,7 +14,7 @@ import java.io.File;
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener {
 
-
+private File noterraDirectory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,17 +26,19 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
 
 
+        if(noterraDirectory==null) {
 
-        //Erstellt das Verzeichnis am Internen Speicher - muss noch getestet werden ob das auf allen geräten mit dem verzeichnis funktioniert!!
-        File noterraDirectory = new File("/storage/emulated/0/NOTErra");
-        File mediaDirectory = new File("/storage/emulated/0/NOTErra/Media");
-        File imageDirectory = new File("/storage/emulated/0/NOTErra/Media/Images");
-        File audioDirectory = new File("/storage/emulated/0/NOTErra/Media/Audio");
-        noterraDirectory.mkdir();
-        mediaDirectory.mkdir();
-        imageDirectory.mkdir();
-        audioDirectory.mkdir();
 
+            //Erstellt das Verzeichnis am Internen Speicher - muss noch getestet werden ob das auf allen geräten mit dem verzeichnis funktioniert!!
+            noterraDirectory = new File("/storage/emulated/0/NOTErra");
+            File mediaDirectory = new File("/storage/emulated/0/NOTErra/Media");
+            File imageDirectory = new File("/storage/emulated/0/NOTErra/Media/Images");
+            File audioDirectory = new File("/storage/emulated/0/NOTErra/Media/Audio");
+            noterraDirectory.mkdir();
+            mediaDirectory.mkdir();
+            imageDirectory.mkdir();
+            audioDirectory.mkdir();
+        }
         //Aufruf der Funktion addButton
         addButton();
 

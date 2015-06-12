@@ -10,6 +10,16 @@
                 android:background="@color/Hintergrundfarbe">
 
 
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/startup"
+            android:src="@drawable/forstanwendungandroid"
+            android:maxHeight="300dp"
+            android:maxWidth="300dp"
+            android:layout_alignParentTop="true"
+            android:layout_above="@+id/progressBar" android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"/>
 
 
 
@@ -19,8 +29,8 @@
             android:layout_height="wrap_content"
             android:text="NOTErra"
             android:id="@+id/textView4"
-            android:layout_centerHorizontal="true"
-            android:textSize="70dp" android:textStyle="bold" android:textColor="#00000F"/>
+            android:textSize="50dp" android:textStyle="bold" android:textColor="#00000F"
+            android:layout_above="@+id/progressBar" android:layout_centerHorizontal="true"/>
 
 
 
@@ -43,7 +53,7 @@
             android:text="Loading..."
             android:id="@+id/textView5"
             android:textSize="20dp" android:textStyle="bold" android:textColor="#00000F"
-            android:layout_below="@+id/textView4" android:layout_toRightOf="@+id/progressBar"
-            android:layout_toEndOf="@+id/progressBar"/>
+            android:layout_marginTop="33dp" android:layout_below="@+id/startup"
+            android:layout_toRightOf="@+id/progressBar" android:layout_toEndOf="@+id/progressBar"/>
 
 </RelativeLayout>
