@@ -1,5 +1,6 @@
 package at.itkolleg.android.noterra;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -222,13 +223,34 @@ public class DBHandler extends SQLiteOpenHelper {
             Log.e("Error", "Error", e);
         } finally {
             if (forstDB != null) {
-                //forstDB.close();
+                forstDB.close();
             }
         }
     }
 
+    public void addImageRef(String imagePath){
+        forstDB = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("Ref", imagePath);
+
+        forstDB.insert("tbl_Foto", null, values);
+        forstDB.close();
+    }
+
+    public void addAudioRef(String audioPath){
+        forstDB = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("Ref", audioPath);
+
+        forstDB.insert("tbl_Sprachaufnahme", null, values);
+        forstDB.close();
+    }
+
     @Override
     public void onUpgrade(SQLiteDatabase forstDB, int oldVersion, int newVersion) {
+        forstDB = this.getWritableDatabase();
         this.forstDB = forstDB;
 
         try {
@@ -251,7 +273,7 @@ public class DBHandler extends SQLiteOpenHelper {
             Log.e("Error", "Error", e);
         } finally {
             if (forstDB != null) {
-                //forstDB.close();
+                forstDB.close();
             }
         }
 

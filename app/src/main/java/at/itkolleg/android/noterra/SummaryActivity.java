@@ -14,12 +14,16 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class SummaryActivity extends ActionBarActivity implements View.OnClickListener {
 
     private String outputFile = null;
     private ImageView imageView;
+    private String imagePath;
+    private String audioPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +95,34 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
 
     }
 
+    public void loadData(){
+        File imageDirectory = new File("/storage/emulated/0/NOTErra/Media/Images/");
+        File audioDirectory = new File("/storage/emulated/0/NOTErra/Media/Audio/");
 
+        File[] imageFileList = imageDirectory.listFiles();
+        File[] audioFileList = audioDirectory.listFiles();
+
+        ArrayList<File> imageFiles = new ArrayList<>();
+        ArrayList<File> audioFiles = new ArrayList<>();
+
+        for (File file : imageFileList){
+            imageFiles.add(file);
+        }
+        for (File file : audioFileList){
+            audioFiles.add(file);
+        }
+
+        imagePath  = imageFiles.get(imageFiles.size()-1).getPath();
+        audioPath  = audioFiles.get(audioFiles.size()-1).getPath();
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public String getAudioPath() {
+        return audioPath;
+    }
 
     public void back(View v){
         Intent intent = new Intent(SummaryActivity.this, InspectionActivity.class);
@@ -99,8 +130,24 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
     }
 
     public void send(View v){
+
+        loadData();
+        try {
+            if(getImagePath() != null){
+                FTPHandler ftp1 = new FTPHandler(getImagePath());
+            }
+            if(getAudioPath() != null){
+                FTPHandler ftp2 = new FTPHandler(getAudioPath());
+            }
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+
         Intent intent = new Intent(SummaryActivity.this, MainActivity.class);
         startActivity(intent);
+
 
         Context context = getApplicationContext();
         CharSequence text = "Erfolgreich gespeichert";

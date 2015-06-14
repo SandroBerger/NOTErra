@@ -34,15 +34,15 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
     private MediaRecorder myRecorder;
     private MediaPlayer myPlayer;
     private String outputFile = null;
-    ImageButton cameraButton;
-    ImageButton recordButton;
-    ImageButton playButton;
-    ImageButton stopButton;
-    ImageButton deleteAudioButton;
-    ImageButton deleteButton;
-    Button saveButton;
-    String imagePfad;
-    String audioPfad;
+    private ImageButton cameraButton;
+    private ImageButton recordButton;
+    private ImageButton playButton;
+    private ImageButton stopButton;
+    private ImageButton deleteAudioButton;
+    private ImageButton deleteButton;
+    private Button saveButton;
+    private String imagePfad;
+    private String audioPfad;
 
 
     @Override
@@ -53,6 +53,7 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
         loadImage();
         addButton();
+
 
     }
 
@@ -236,7 +237,7 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
     }
 
     private void saveButtonClick() {
-        try {
+       /* try {
 
             if(getImagePfad() != null){
                 FTPHandler ftp1 = new FTPHandler(getImagePfad());
@@ -247,7 +248,7 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
 
         }catch (IOException e){
             e.printStackTrace();
-        }
+        }*/
         startActivity(new Intent(this, InspectionActivity.class));
     }
 

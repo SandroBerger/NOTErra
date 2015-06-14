@@ -45,22 +45,7 @@ public class GpsHandler extends FragmentActivity implements LocationListener {
             isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
             if (!isGpsEnabled && !isNetworkEnabled) {
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
-
-                alertDialog.setTitle("Fehlgeschlagen");
-                alertDialog.setMessage("Ihre Position konnte nicht festgestellt werden. /n Wollen Sie manuell Fortfahren?");
-                alertDialog.setPositiveButton("Ja", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-                alertDialog.setNegativeButton("Nein", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        context.startActivity(new Intent(context, InspectionActivity.class));
-                    }
-                });
+                this.canGetLocation = false;
             } else {
                 this.canGetLocation = true;
                 if (isNetworkEnabled) {
