@@ -248,6 +248,28 @@ public class DBHandler extends SQLiteOpenHelper {
         forstDB.close();
     }
 
+    public void addNoteText(String text){
+        forstDB = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("Text", text);
+
+        forstDB.insert("tbl_Text", null, values);
+        forstDB.close();
+    }
+
+    public void addCoordinates(String laengengrad, String breitengrad){
+        forstDB = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("Laenge", laengengrad);
+        values.put("Breite", breitengrad);
+
+        forstDB.insert("tbl_Gps", null, values);
+        forstDB.close();
+    }
+
+
     @Override
     public void onUpgrade(SQLiteDatabase forstDB, int oldVersion, int newVersion) {
         forstDB = this.getWritableDatabase();
