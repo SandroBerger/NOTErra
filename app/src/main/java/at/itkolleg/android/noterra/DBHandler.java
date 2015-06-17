@@ -6,11 +6,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.security.Timestamp;
+
 /**
  * Created by SandroB on 26.05.2015.
  */
 public class DBHandler extends SQLiteOpenHelper {
-
+    private int countBegehung = 1;
     private static final String DATABASE_NAME = "forstDB";
     private static final int DATABASE_VERSION = 1;
     private SQLiteDatabase forstDB;
@@ -55,7 +57,7 @@ public class DBHandler extends SQLiteOpenHelper {
                     "'Absturzsicherung' INTEGER DEFAULT 0," +
                     "'BaumFaellen' INTEGER DEFAULT 0," +
                     "'BauwerkSanieren' INTEGER DEFAULT 0," +
-                    "'BauwerkWarten' INTEGER DEFAULT 0," +
+                    "'Bauwe rkWarten' INTEGER DEFAULT 0," +
                     "'DurchlassFreilegen' INTEGER DEFAULT 0," +
                     "'GenemigungPruefen' INTEGER DEFAULT 0," +
                     "'HindernisseEntfernen' INTEGER DEFAULT 0," +
@@ -189,11 +191,11 @@ public class DBHandler extends SQLiteOpenHelper {
 
             forstDB.execSQL("CREATE TABLE IF NOT EXISTS 'tbl_Beobachtung'(" +
                     "'idBeobachtung' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL CHECK('idBeobachtung'>=0)," +
-                    "'tbl_Notiz_idNotiz' INTEGER NOT NULL CHECK('tbl_Notiz_idNotiz'>=0)," +
-                    "'tbl_Gps_idGps' INTEGER NOT NULL CHECK('tbl_Gps_idGps'>=0)," +
-                    "'tbl_Formular_idFormular' INTEGER NOT NULL CHECK('tbl_Formular_idFormular'>=0)," +
+                    "'tbl_Notiz_idNotiz' INTEGER CHECK('tbl_Notiz_idNotiz'>=0)," +
+                    "'tbl_Gps_idGps' INTEGER CHECK('tbl_Gps_idGps'>=0)," +
+                    "'tbl_Formular_idFormular' INTEGER CHECK('tbl_Formular_idFormular'>=0)," +
                     "'Zeit' TIMESTAMP DEFAULT NULL," +
-                    "'Gegehungsnummer' INTEGER NOT NULL," +
+                    "'Begehungsnummer' INTEGER NOT NULL," +
                     "'CONSTRAINT 'fk_tbl_Beobachtung_tbl_Notiz1'" +
                     "'FOREIGN KEY('tbl_Notiz_idNotiz')" +
                     "'REFERENCES 'tbl_Notiz'('idNotiz')" +
@@ -228,6 +230,20 @@ public class DBHandler extends SQLiteOpenHelper {
         }
     }
 
+    public void addBeobachtung(Timestamp time){
+        forstDB = this.getWritableDatabase();
+        String begehungsDatum = time.toString();
+
+        ContentValues values = new ContentValues();
+        values.put("Zeit", begehungsDatum);
+        values.put("Begehungsnummer", countBegehung);
+
+        forstDB.insert("tbl_Beobachtung", null, values);
+        forstDB.close();
+
+        countBegehung++;
+    }
+
     public void addImageRef(String imagePath){
         forstDB = this.getWritableDatabase();
 
@@ -240,9 +256,12 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public void addAudioRef(String audioPath){
         forstDB = this.getWritableDatabase();
+        forstDB = this.getReadableDatabase();
 
         ContentValues values = new ContentValues();
         values.put("Ref", audioPath);
+
+        //Cursor c = forstDB.rawQuery("SELECT id FROM tbl_Sprachaufnahme ORDER BY id DESC",null);
 
         forstDB.insert("tbl_Sprachaufnahme", null, values);
         forstDB.close();

@@ -48,7 +48,6 @@ public class FTPHandler {
         ftpClient.login(username, password);
     }
 
-
     public void workingDirektory(String workingpath) throws IOException {
         this.workingpath = workingpath;
         ftpClient.changeWorkingDirectory(workingpath);
