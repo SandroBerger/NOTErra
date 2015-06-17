@@ -53,8 +53,6 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
         loadImage();
         addButton();
-
-
     }
 
     //-------------Button Hinzufügen und funktion hinzufügen zugriff auf kamera, ufnahme von audio und notiz aufnahme----
@@ -169,9 +167,6 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
         }
-
-
-
     }
 
     private void playButtonClick() {
@@ -237,18 +232,6 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
     }
 
     private void saveButtonClick() {
-       /* try {
-
-            if(getImagePfad() != null){
-                FTPHandler ftp1 = new FTPHandler(getImagePfad());
-            }
-            if(getAudioPfad()!= null){
-                FTPHandler ftp2 = new FTPHandler(getAudioPfad());
-            }
-
-        }catch (IOException e){
-            e.printStackTrace();
-        }*/
         startActivity(new Intent(this, InspectionActivity.class));
     }
 
