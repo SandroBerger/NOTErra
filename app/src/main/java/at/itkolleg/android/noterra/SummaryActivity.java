@@ -111,9 +111,12 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         for (File file : audioFileList){
             audioFiles.add(file);
         }
-
-        imagePath  = imageFiles.get(imageFiles.size()-1).getPath();
-        audioPath  = audioFiles.get(audioFiles.size()-1).getPath();
+        if(!(imageFileList.length == 0)){
+            imagePath  = imageFiles.get(imageFiles.size()-1).getPath();
+        }
+        if(!(audioFileList.length == 0)){
+            audioPath  = audioFiles.get(audioFiles.size()-1).getPath();
+        }
     }
 
     public String getImagePath() {
