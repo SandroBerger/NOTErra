@@ -60,12 +60,17 @@ public class FTPHandler {
 
     public void saveFileOnServer() throws IOException {
         timestamp = getCurrentTime();
+        boolean checkFileUpload;
+
         if(extention.equals(image)){
-            ftpClient.storeFile(remotePathImage + getCurrentTime() +".jpg", inputFile);
+            checkFileUpload = ftpClient.storeFile(remotePathImage + getCurrentTime() +".jpg", inputFile);
         }else {
-            ftpClient.storeFile(remotePathAudio + getCurrentTime() +".3gpp", inputFile);
+            checkFileUpload = ftpClient.storeFile(remotePathAudio + getCurrentTime() +".3gpp", inputFile);
         }
 
+        if(checkFileUpload == true){
+            file.delete();
+        }
     }
 
     public void closeConnection() throws IOException {
@@ -105,7 +110,6 @@ public class FTPHandler {
                     } else {
                         workingDirektory(remotePathAudio);
                     }
-
                     setFileInputStream();
                     saveFileOnServer();
                     closeConnection();
