@@ -57,7 +57,7 @@ public class DBHandler extends SQLiteOpenHelper {
                     "'Absturzsicherung' INTEGER DEFAULT 0," +
                     "'BaumFaellen' INTEGER DEFAULT 0," +
                     "'BauwerkSanieren' INTEGER DEFAULT 0," +
-                    "'Bauwe rkWarten' INTEGER DEFAULT 0," +
+                    "'BauwerkWarten' INTEGER DEFAULT 0," +
                     "'DurchlassFreilegen' INTEGER DEFAULT 0," +
                     "'GenemigungPruefen' INTEGER DEFAULT 0," +
                     "'HindernisseEntfernen' INTEGER DEFAULT 0," +
@@ -229,6 +229,7 @@ public class DBHandler extends SQLiteOpenHelper {
             }
         }
     }
+
 
     public void addBeobachtung(Timestamp time){
         forstDB = this.getWritableDatabase();
