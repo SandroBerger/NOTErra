@@ -48,7 +48,7 @@ public class HTTPHandler extends Activity {
 
             String response = httpclient.execute(httpPost, responseHandler);
 
-            if (response.contains("success")) {
+            if (response.contains("success") || response.contains("200")) {
                 forstDB.deleteAllFromTables();
             }
 
