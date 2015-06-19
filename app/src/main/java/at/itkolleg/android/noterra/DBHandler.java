@@ -2,17 +2,20 @@ package at.itkolleg.android.noterra;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.security.Timestamp;
+import java.util.UUID;
 
 /**
  * Created by SandroB on 26.05.2015.
  */
 public class DBHandler extends SQLiteOpenHelper {
     private int countBegehung = 1;
+    private String uuid;
     private static final String DATABASE_NAME = "forstDB";
     private static final int DATABASE_VERSION = 1;
     private SQLiteDatabase forstDB;
@@ -27,7 +30,6 @@ public class DBHandler extends SQLiteOpenHelper {
         this.forstDB = forstDB;
 
         try {
-
             forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Formular';");
             forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Gps';");
             forstDB.execSQL("DROP TABLE IF EXISTS 'tbl_Holzablagerung';");
@@ -46,7 +48,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
             //Erstellen der Tabelle tbl_Formular in der Datenbank forst_db
             forstDB.execSQL("CREATE TABLE IF NOT EXISTS 'tbl_Formular' (" +
-                    "'idFormular' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL CHECK('idFormular'>=0)," +
+                    "'idFormular' VARCHAR(38) PRIMARY KEY NOT NULL," +
                     "'Gemeinde' VARCHAR(45) DEFAULT NULL," +
                     "'Zeit' TIMESTAMP DEFAULT NULL," +
                     "'Kosten' INTEGER CHECK('Kosten'>=0) DEFAULT NULL," +
@@ -70,14 +72,14 @@ public class DBHandler extends SQLiteOpenHelper {
                     ");");
 
             forstDB.execSQL("CREATE TABLE IF NOT EXISTS 'tbl_Gps'(" +
-                    "'idGps' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL CHECK('idGps'>=0)," +
+                    "'idGps' VARCHAR(38) PRIMARY KEY NOT NULL," +
                     "'Laenge' VARCHAR(20) DEFAULT NULL," +
                     "'Breite' VARCHAR(20) DEFAULT NULL," +
                     "'Toleranz' INTEGER CHECK('Toleranz'>=0) DEFAULT NULL" +
                     ");");
 
             forstDB.execSQL("CREATE TABLE IF NOT EXISTS 'tbl_Holzablagerung'(" +
-                    "'idHolzablagerung' INTEGER PRIMARY KEY NOT NULL CHECK('idHolzablagerung'>=0)," +
+                    "'idHolzablagerung' VARCHAR(38) PRIMARY KEY NOT NULL," +
                     "'AnzahlStaemme' INTEGER CHECK('AnzahlStaemme'>=0)," +
                     "'Baumart' VARCHAR(45) DEFAULT NULL," +
                     "'Media' INTEGER CHECK('Media'>=0) DEFAULT NULL," +
@@ -89,7 +91,7 @@ public class DBHandler extends SQLiteOpenHelper {
                     ");");
 
             forstDB.execSQL("CREATE TABLE IF NOT EXISTS 'tbl_Holzbewuchs'(" +
-                    "'idHolzbewuchs' INTEGER PRIMARY KEY NOT NULL CHECK('idHolzbewuchs'>=0)," +
+                    "'idHolzbewuchs' VARCHAR(38) PRIMARY KEY NOT NULL," +
                     "'Anzahl' INTEGER CHECK('Anzahl'>=0) DEFAULT NULL," +
                     "'Baumart' VARCHAR(45) DEFAULT NULL," +
                     "'Hoehe' INTEGER CHECK('Hoehe'>=0) DEFAULT NULL," +
@@ -101,7 +103,7 @@ public class DBHandler extends SQLiteOpenHelper {
                     ");");
 
             forstDB.execSQL("CREATE TABLE IF NOT EXISTS 'tbl_OhneBehinderung'(" +
-                    "'idOhneBehinderung' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL CHECK('idOhneBehinderung'>=0)," +
+                    "'idOhneBehinderung' VARCHAR(38) PRIMARY KEY NOT NULL," +
                     "'Art' TEXT DEFAULT NULL," +
                     "'Beschreibung' TEXT DEFAULT NULL," +
                     "CONSTRAINT 'fk_tbl_OhneBehinderung_tbl_Formular1'" +
@@ -110,11 +112,11 @@ public class DBHandler extends SQLiteOpenHelper {
                     ");");
 
             forstDB.execSQL("CREATE TABLE IF NOT EXISTS 'tbl_SchadenAnRegulierung'(" +
-                    "'idSchadenAnRegulierung' INTEGER PRIMARY KEY NOT NULL CHECK('idSchadenAnRegulierung'>=0)," +
+                    "'idSchadenAnRegulierung' VARCHAR(38) PRIMARY KEY NOT NULL," +
                     "'Art' VARCHAR(255) DEFAULT NULL," +
                     "'Hoehe' INTEGER CHECK('Hoehe'>=0) DEFAULT NULL," +
                     "'FehlendeAbsturzsicherung' INTEGER DEFAULT 0," +
-                    "'Ausgang Sperrenfluegel' INTEGER DEFAULT 0," +
+                    "'AusgangSperrenfluegel' INTEGER DEFAULT 0," +
                     "'Geschiebesperre' INTEGER DEFAULT 0," +
                     "'Risse' INTEGER DEFAULT 0," +
                     "'SchadhaftesMauerwerk' INTEGER DEFAULT 0," +
@@ -127,18 +129,18 @@ public class DBHandler extends SQLiteOpenHelper {
                     ");");
 
             forstDB.execSQL("CREATE TABLE IF NOT EXISTS 'tbl_Sprachaufnahme'(" +
-                    "'idSprachaufnahme' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL CHECK('idSprachaufnahme'>=0)," +
+                    "'idSprachaufnahme' VARCHAR(38) PRIMARY KEY NOT NULL," +
                     "'Laenge' FLOAT DEFAULT NULL," +
                     "'Ref' TEXT DEFAULT NULL" +
                     ");");
 
             forstDB.execSQL("CREATE TABLE IF NOT EXISTS 'tbl_Text'(" +
-                    "'idText' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL CHECK('idText'>=0)," +
+                    "'idText' VARCHAR(38) PRIMARY KEY NOT NULL," +
                     "'Text' TEXT DEFAULT NULL" +
                     ");");
 
             forstDB.execSQL("CREATE TABLE IF NOT EXISTS 'tbl_WasserAusEinleitung'(" +
-                    "'idWasserAusEinleitung' INTEGER PRIMARY KEY NOT NULL CHECK('idWasserAusEinleitung'>=0)," +
+                    "'idWasserAusEinleitung' VARCHAR(38) PRIMARY KEY NOT NULL," +
                     "'Art' VARCHAR(45) DEFAULT NULL," +
                     "'Zweck' VARCHAR(45) DEFAULT NULL," +
                     "'Beschreibung' TEXT DEFAULT NULL," +
@@ -148,12 +150,12 @@ public class DBHandler extends SQLiteOpenHelper {
                     ");");
 
             forstDB.execSQL("CREATE TABLE IF NOT EXISTS 'tbl_Foto'(" +
-                    "'idFoto' INTEGER PRIMARY KEY NOT NULL CHECK('idFoto'>=0)," +
+                    "'idFoto' VARCHAR(38) PRIMARY KEY NOT NULL," +
                     "'Ref' TEXT" +
                     ");");
 
             forstDB.execSQL("CREATE TABLE IF NOT EXISTS 'tbl_Abflussbehinderung'(" +
-                    "'idAbflussbehinderung' INTEGER PRIMARY KEY NOT NULL CHECK('idAbflussbehinderung'>=0)," +
+                    "'idAbflussbehinderung' VARCHAR(38) PRIMARY KEY NOT NULL," +
                     "'Art' TEXT DEFAULT NULL," +
                     "'Beschreibung' TEXT DEFAULT NULL," +
                     " CONSTRAINT 'fk_tbl_Abflussbehinderung_tbl_Formular1'" +
@@ -162,7 +164,7 @@ public class DBHandler extends SQLiteOpenHelper {
                     ");");
 
             forstDB.execSQL("CREATE TABLE IF NOT EXISTS 'tbl_Ablagerung'(" +
-                    "'idAblagerung' INTEGER PRIMARY KEY NOT NULL CHECK('idAblagerung'>=0)," +
+                    "'idAblagerung' VARCHAR(38) PRIMARY KEY NOT NULL," +
                     "'Art' VARCHAR(45) DEFAULT NULL," +
                     "'Beschreibung' TEXT DEFAULT NULL," +
                     "'Bachabschnitt' INTEGER CHECK('Bachabschnitt'>=0) DEFAULT NULL," +
@@ -173,10 +175,10 @@ public class DBHandler extends SQLiteOpenHelper {
                     ");");
 
             forstDB.execSQL("CREATE TABLE IF NOT EXISTS 'tbl_Notiz'(" +
-                    "'idNotiz' INTEGER PRIMARY KEY NOT NULL CHECK('idNotiz'>=0)," +
-                    "'tbl_Sprachaufnahme_idSprachaufnahme' INTEGER CHECK('tbl_Sprachaufnahme_idSprachaufnahme'>=0)," +
-                    "'tbl_Foto_idFoto' INTEGER CHECK('tbl_Foto_idFoto'>=0)," +
-                    "'tbl_Text_idText' INTEGER CHECK('tbl_Text_idText'>=0)," +
+                    "'idNotiz' VARCHAR(38) PRIMARY KEY NOT NULL," +
+                    "'tbl_Sprachaufnahme_idSprachaufnahme' VARCHAR(38) CHECK('tbl_Sprachaufnahme_idSprachaufnahme'>=0)," +
+                    "'tbl_Foto_idFoto' VARCHAR(38) CHECK('tbl_Foto_idFoto'>=0)," +
+                    "'tbl_Text_idText' VARCHAR(38) CHECK('tbl_Text_idText'>=0)," +
                     "CONSTRAINT 'fk_tbl_Notiz_tbl_Sprachaufnahme'" +
                     "FOREIGN KEY('tbl_Sprachaufnahme_idSprachaufnahme')" +
                     "REFERENCES 'tbl_Sprachaufnahme'('idSprachaufnahme')" +
@@ -190,10 +192,10 @@ public class DBHandler extends SQLiteOpenHelper {
 
 
             forstDB.execSQL("CREATE TABLE IF NOT EXISTS 'tbl_Beobachtung'(" +
-                    "'idBeobachtung' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL CHECK('idBeobachtung'>=0)," +
-                    "'tbl_Notiz_idNotiz' INTEGER CHECK('tbl_Notiz_idNotiz'>=0)," +
-                    "'tbl_Gps_idGps' INTEGER CHECK('tbl_Gps_idGps'>=0)," +
-                    "'tbl_Formular_idFormular' INTEGER CHECK('tbl_Formular_idFormular'>=0)," +
+                    "'idBeobachtung' VARCHAR(38) PRIMARY KEY NOT NULL," +
+                    "'tbl_Notiz_idNotiz' VARCHAR(38) CHECK('tbl_Notiz_idNotiz'>=0)," +
+                    "'tbl_Gps_idGps' VARCHAR(38) CHECK('tbl_Gps_idGps'>=0)," +
+                    "'tbl_Formular_idFormular' VARCHAR(38) CHECK('tbl_Formular_idFormular'>=0)," +
                     "'Zeit' TIMESTAMP DEFAULT NULL," +
                     "'Begehungsnummer' INTEGER NOT NULL," +
                     "'CONSTRAINT 'fk_tbl_Beobachtung_tbl_Notiz1'" +
@@ -230,12 +232,18 @@ public class DBHandler extends SQLiteOpenHelper {
         }
     }
 
+    public String getRandomUUID(){
+        uuid = UUID.randomUUID().toString().replaceAll("-", "");
+        return uuid;
+    }
 
     public void addBeobachtung(Timestamp time){
         forstDB = this.getWritableDatabase();
         String begehungsDatum = time.toString();
+        String begehungsID = getRandomUUID();
 
         ContentValues values = new ContentValues();
+        values.put("idBeobachtung", begehungsID);
         values.put("Zeit", begehungsDatum);
         values.put("Begehungsnummer", countBegehung);
 
@@ -245,50 +253,259 @@ public class DBHandler extends SQLiteOpenHelper {
         countBegehung++;
     }
 
-    public void addImageRef(String imagePath){
+    public void addFormular(String gemeinde, String zeit, Integer kosten, String massnahmen, String prioritaet,
+                            int foerderfaehig, String abwicklung, int absturzsicherung, int baumFaellen, int bauwerkSanieren,
+                            int bauwerkWarten, int durchlassFreilegen, int genemigungPruefen, int hindernissEntfernen, int hindernissSprengen,
+                            int holzAblaegen, int keineMassnahme, int sperreOdGerinneRaumen, int uferSichern, int zustandBeobachten){
+
         forstDB = this.getWritableDatabase();
+        String formularID = getRandomUUID();
 
         ContentValues values = new ContentValues();
+        values.put("idFormular", formularID);
+        values.put("Gemeinde", gemeinde);
+        values.put("Zeit", zeit);
+        values.put("Kosten", kosten);
+        values.put("Massnahme", massnahmen);
+        values.put("Prioritaet", prioritaet);
+        values.put("Foerderfaehig", foerderfaehig);
+        values.put("Abwicklung", abwicklung);
+        values.put("Absturzsicherung", absturzsicherung);
+        values.put("BaumFaellen", baumFaellen);
+        values.put("BauwerkSanieren", bauwerkSanieren);
+        values.put("BauwerkWarten", bauwerkWarten);
+        values.put("DurchlassFreilegen", durchlassFreilegen);
+        values.put("GenemigungPruefen", genemigungPruefen);
+        values.put("HindernisseEntfernen", hindernissEntfernen);
+        values.put("HindernissSprengen", hindernissSprengen);
+        values.put("HolzAblaengen", holzAblaegen);
+        values.put("KeineMassnahme", keineMassnahme);
+        values.put("SperreOdGerinneRaumen", sperreOdGerinneRaumen);
+        values.put("UferSichern", uferSichern);
+        values.put("ZustandBeobachten", zustandBeobachten);
+
+        ContentValues setFormularID = new ContentValues();
+        setFormularID.put("tbl_Formular_idFormular", formularID);
+
+        forstDB.insert("tbl_Formular", null, values);
+        forstDB.insert("tbl_Beobachtung", null, setFormularID);
+        forstDB.close();
+    }
+
+    public void addHolzablagerung(int anzahlStaemme, String baumart, int media, int holzmaenge, int bachabschnitt){
+        forstDB = this.getWritableDatabase();
+        forstDB = this.getReadableDatabase();
+
+        Cursor cursor = forstDB.rawQuery("SELECT idFormular FROM tbl_Formular", null);
+        String holzablagerungID = cursor.toString();
+
+        ContentValues values = new ContentValues();
+        values.put("idHolzablagerung", holzablagerungID);
+        values.put("Baumart", baumart);
+        values.put("Media", media);
+        values.put("Holzmenge", holzmaenge);
+        values.put("Bachabschnitt", bachabschnitt);
+
+        forstDB.insert("tbl_Holzablagerung", null, values);
+        forstDB.close();
+    }
+
+    public void addHolzbewuchs(int anzahl, String baumart, int hoehe, int menge, String beschreibung){
+        forstDB = this.getWritableDatabase();
+        forstDB = this.getReadableDatabase();
+
+        Cursor cursor = forstDB.rawQuery("SELECT idFormular FROM tbl_Formular", null);
+        String holzbewuchsID = cursor.toString();
+
+        ContentValues values = new ContentValues();
+        values.put("idHolzbewuchs", holzbewuchsID);
+        values.put("Anzahl", anzahl);
+        values.put("Baumart", baumart);
+        values.put("Hoehe", hoehe);
+        values.put("Menge", menge);
+        values.put("Beschreibung", beschreibung);
+
+        forstDB.insert("tbl_Holzbewuchs", null, values);
+        forstDB.close();
+    }
+
+    public void addOhneBehinderung(String art, String beschreibung){
+        forstDB = this.getWritableDatabase();
+        forstDB = this.getReadableDatabase();
+
+        Cursor cursor = forstDB.rawQuery("SELECT idFormular FROM tbl_Formular", null);
+        String ohneBehinderungID = cursor.toString();
+
+        ContentValues values = new ContentValues();
+        values.put("idOhneBehinderung", ohneBehinderungID);
+        values.put("Art", art);
+        values.put("Beschreibung", beschreibung);
+
+        forstDB.insert("tbl_OhneBehinderung", null, values);
+        forstDB.close();
+    }
+
+    public void addSchadenAnRegulierung(String art, int hoehe, int fehlendeAbsturzsicherung,
+                                        int ausgangSperrenfluegel, int geschiebesperre, int risse,
+                                        int schadhaftesMauerwerk, int sonstiges, int bewuchs, int unterspueltesfundament){
+        forstDB = this.getWritableDatabase();
+        forstDB = this.getReadableDatabase();
+
+        Cursor cursor = forstDB.rawQuery("SELECT idFormular FROM tbl_Formular", null);
+        String schadenAnRegulierungID = cursor.toString();
+
+        ContentValues values = new ContentValues();
+        values.put("idSchadenAnRegulierung", schadenAnRegulierungID);
+        values.put("Art", art);
+        values.put("Hoehe", hoehe);
+        values.put("FehlendeAbsturzsicherung", fehlendeAbsturzsicherung);
+        values.put("AusgangSperrenfluegel", ausgangSperrenfluegel);
+        values.put("Geschiebesperre", geschiebesperre);
+        values.put("Risse", risse);
+        values.put("SchadhaftesMauerwerk", schadhaftesMauerwerk);
+        values.put("Sonstiges", sonstiges);
+        values.put("Bewuchs", bewuchs);
+        values.put("UnterspueltesFundament", unterspueltesfundament);
+
+
+        forstDB.insert("tbl_OhneBehinderung", null, values);
+        forstDB.close();
+    }
+
+    public void addWasserAuseinleitung(String art, String zweck, String beschreibung){
+        forstDB = this.getWritableDatabase();
+        forstDB = this.getReadableDatabase();
+
+        Cursor cursor = forstDB.rawQuery("SELECT idFormular FROM tbl_Formular", null);
+        String wasserAusEinleitungID = cursor.toString();
+
+        ContentValues values = new ContentValues();
+        values.put("idWasserAusEinleitung", wasserAusEinleitungID);
+        values.put("Art", art);
+        values.put("Zweck", zweck);
+        values.put("Beschreibung", beschreibung);
+
+        forstDB.insert("tbl_WasserAusEinleitung", null, values);
+        forstDB.close();
+    }
+
+    public void addAbflussbehinderung(String art, String beschreibung){
+        forstDB = this.getWritableDatabase();
+        forstDB = this.getReadableDatabase();
+
+        Cursor cursor = forstDB.rawQuery("SELECT idFormular FROM tbl_Formular", null);
+        String abflussbehinderungID = cursor.toString();
+
+        ContentValues values = new ContentValues();
+        values.put("idAbflussbehinderung", abflussbehinderungID);
+        values.put("Art", art);
+        values.put("Beschreibung", beschreibung);
+
+        forstDB.insert("tbl_Abflussbehinderung", null, values);
+        forstDB.close();
+    }
+
+    public void addAblagerung(String art, String beschreibung, int bachabschnitt, int ausmass){
+        forstDB = this.getWritableDatabase();
+        forstDB = this.getReadableDatabase();
+
+        Cursor cursor = forstDB.rawQuery("SELECT idFormular FROM tbl_Formular", null);
+        String ablagerungID = cursor.toString();
+
+        ContentValues values = new ContentValues();
+        values.put("idAblagerung", ablagerungID);
+        values.put("Art", art);
+        values.put("Beschreibung", beschreibung);
+        values.put("Bachabschnitt", bachabschnitt);
+        values.put("Ausmass", ausmass);
+
+        forstDB.insert("tbl_Ablagerung", null, values);
+        forstDB.close();
+    }
+
+    //Methoden zum setzen der Notiz Attribute (Audio, Bilder, Text)
+    public void addNotiz(){
+        forstDB = this.getWritableDatabase();
+        String notizID = getRandomUUID();
+
+        ContentValues values = new ContentValues();
+        values.put("idNotiz", notizID);
+
+        ContentValues setNotizID = new ContentValues();
+        setNotizID.put("tbl_Notiz_idNotiz", notizID);
+
+        forstDB.insert("tbl_Notiz", null, values);
+        forstDB.insert("tbl_Beobachtung", null, setNotizID);
+        forstDB.close();
+    }
+
+    public void addImageRef(String imagePath){
+        forstDB = this.getWritableDatabase();
+        String imageID = getRandomUUID();
+
+        ContentValues values = new ContentValues();
+        values.put("idFoto", imageID);
         values.put("Ref", imagePath);
 
+        ContentValues setImageID = new ContentValues();
+        setImageID.put("tbl_Foto_idFoto", imageID);
+
         forstDB.insert("tbl_Foto", null, values);
+        forstDB.insert("tbl_Notiz", null, setImageID);
         forstDB.close();
     }
 
     public void addAudioRef(String audioPath){
         forstDB = this.getWritableDatabase();
-        forstDB = this.getReadableDatabase();
+        String audioID = getRandomUUID();
 
         ContentValues values = new ContentValues();
+        values.put("idSprachaufnahme", audioID);
         values.put("Ref", audioPath);
 
-        //Cursor c = forstDB.rawQuery("SELECT id FROM tbl_Sprachaufnahme ORDER BY id DESC",null);
+        ContentValues setAudioID = new ContentValues();
+        setAudioID.put("tbl_Sprachaufnahme_idSprachaufnahme", audioID);
 
         forstDB.insert("tbl_Sprachaufnahme", null, values);
+        forstDB.insert("tbl_Notiz", null, setAudioID);
         forstDB.close();
     }
 
     public void addNoteText(String text){
         forstDB = this.getWritableDatabase();
+        String textID = getRandomUUID();
 
         ContentValues values = new ContentValues();
+        values.put("idText", textID);
         values.put("Text", text);
 
+        ContentValues setTextID = new ContentValues();
+        setTextID.put("tbl_Text_idText", textID);
+
         forstDB.insert("tbl_Text", null, values);
+        forstDB.insert("tbl_Notiz", null, setTextID);
         forstDB.close();
     }
+    //ENDE Setzen der Attribute Notiz
 
+    //Hinzufügen der Koordinaten
     public void addCoordinates(String laengengrad, String breitengrad){
         forstDB = this.getWritableDatabase();
+        String gpsID = getRandomUUID();
 
         ContentValues values = new ContentValues();
+        values.put("idGps", gpsID);
         values.put("Laenge", laengengrad);
         values.put("Breite", breitengrad);
 
+        ContentValues setGpsID = new ContentValues();
+        setGpsID.put("tbl_Gps_idGps", gpsID);
+
         forstDB.insert("tbl_Gps", null, values);
+        forstDB.insert("tbl_Beobachtung", null, setGpsID);
         forstDB.close();
     }
-
+    //Ende Hinzufügen der Koordinaten
 
     @Override
     public void onUpgrade(SQLiteDatabase forstDB, int oldVersion, int newVersion) {
