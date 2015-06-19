@@ -37,11 +37,13 @@ public class HTTPHandler extends Activity {
     public void sendSQLiteToServer(String tabelname) {
         Cursor c = forstDB.getAllFromTable(tabelname);
         c.moveToFirst();
+
         List<NameValuePair> nameValuePairs = new ArrayList<>(2);
+        nameValuePairs.add(new BasicNameValuePair("TabellenName", tabelname));
 
         try {
             for (int i = 0; i <= c.getCount(); i++) {
-                nameValuePairs.add(new BasicNameValuePair(c.getColumnName(i), c.getString(i)));
+                nameValuePairs.add(new BasicNameValuePair(c.getColumnName(i)+i, c.getString(i)));
             }
 
             String response = httpclient.execute(httpPost, responseHandler);
