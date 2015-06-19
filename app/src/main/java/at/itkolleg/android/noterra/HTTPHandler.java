@@ -1,6 +1,6 @@
 package at.itkolleg.android.noterra;
 
-import android.app.Activity;
+import android.content.Context;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import org.apache.http.NameValuePair;
@@ -18,14 +18,14 @@ import java.util.List;
 /**
  * Created by SandroB on 19.06.2015.
  */
-public class HTTPHandler extends Activity {
+public class HTTPHandler {
     private ResponseHandler<String> responseHandler;
     private HttpClient httpclient;
     private HttpPost httpPost;
     private DBHandler forstDB;
 
-    public HTTPHandler() throws IOException {
-        forstDB = new DBHandler(this);
+    public HTTPHandler(Context context) throws IOException {
+        forstDB = new DBHandler(context);
         httpclient = new DefaultHttpClient();
         responseHandler = new BasicResponseHandler();
         httpPost = new HttpPost("http://schwarzenauer.hol.es/NOTErra/handler.php");
@@ -42,8 +42,8 @@ public class HTTPHandler extends Activity {
         nameValuePairs.add(new BasicNameValuePair("TabellenName", tabelname));
 
         try {
-            for (int i = 0; i <= c.getCount(); i++) {
-                nameValuePairs.add(new BasicNameValuePair(c.getColumnName(i)+i, c.getString(i)));
+            for (int i = 0; i <= c.getCount()-1; i++) {
+                nameValuePairs.add(new BasicNameValuePair(c.getColumnName(i), c.getString(i)));
             }
 
             String response = httpclient.execute(httpPost, responseHandler);

@@ -493,7 +493,7 @@ public class DBHandler extends SQLiteOpenHelper {
         setGpsID.put("tbl_Gps_idGps", gpsID);
 
         forstDB.insert("tbl_Gps", null, values);
-        forstDB.update("tbl_Notiz", setGpsID, "idNotiz = '" + beobachtungsID + "'", null);
+        forstDB.update("tbl_Beobachtung", setGpsID, "idBeobachtung = '" + beobachtungsID + "'", null);
     }
     //Ende Hinzufügen der Koordinaten
 

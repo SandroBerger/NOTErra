@@ -24,6 +24,7 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
     private ImageView imageView;
     private String imagePath;
     private String audioPath;
+    private DBHandler forstDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +32,7 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         setContentView(R.layout.activity_summary);
 
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
-
+        forstDB = new DBHandler(this);
     }
 
 
@@ -132,7 +133,8 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         startActivity(intent);
     }
 
-    public void send(View v){
+    public void send(View v) throws IOException {
+        HTTPHandler httpHandler = new HTTPHandler(this);
         loadData();
 
         try {
@@ -146,6 +148,7 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         }catch (IOException e){
             e.printStackTrace();
         }
+
 
 
         Intent intent = new Intent(SummaryActivity.this, MainActivity.class);
