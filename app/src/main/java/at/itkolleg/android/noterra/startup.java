@@ -10,8 +10,6 @@ import android.view.MenuItem;
 
 public class startup extends Activity {
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,9 +30,6 @@ public class startup extends Activity {
 
 
     }
-
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

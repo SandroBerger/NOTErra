@@ -14,7 +14,10 @@ import java.io.File;
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener {
 
-private File noterraDirectory;
+    private File noterraDirectory;
+    private DBHandler forstDB;
+    private Time t = new Time(Time.getCurrentTimezone());
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,11 +27,7 @@ private File noterraDirectory;
     android.support.v7.app.ActionBar ab=getSupportActionBar();
          ab.setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
 
-
-
         if(noterraDirectory==null) {
-
-
             //Erstellt das Verzeichnis am Internen Speicher - muss noch getestet werden ob das auf allen geräten mit dem verzeichnis funktioniert!!
             noterraDirectory = new File("/storage/emulated/0/NOTErra");
             File mediaDirectory = new File("/storage/emulated/0/NOTErra/Media");
@@ -39,17 +38,16 @@ private File noterraDirectory;
             imageDirectory.mkdir();
             audioDirectory.mkdir();
         }
+
+        forstDB = new DBHandler(this);
         //Aufruf der Funktion addButton
         addButton();
 
         TextView textView=(TextView)findViewById(R.id.datum);
 
-
-        Time t = new Time(Time.getCurrentTimezone());
         t.setToNow();
         String date = t.format("%d.%m.%Y");
-        textView.setText("Aktuelles Datum: "+date);
-
+        textView.setText("Aktuelles Datum: " + date);
     }
 
     //-------------Hinzufügen der Buttonclick funktion und weiterleitung auf die Begehungsseite----
@@ -70,6 +68,8 @@ private File noterraDirectory;
     }
 
     private void buttonInspectionClick(){
+        String date = t.format("%d.%m.%Y");
+        forstDB.addBeobachtung(date);
         startActivity(new Intent(this, InspectionActivity.class));
     }
     //-------------------------------------------------------------------------------------------------

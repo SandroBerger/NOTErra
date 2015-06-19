@@ -133,8 +133,8 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
     }
 
     public void send(View v){
-
         loadData();
+
         try {
             if(getImagePath() != null){
                 FTPHandler ftp1 = new FTPHandler(getImagePath());

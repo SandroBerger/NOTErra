@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class InspectionActivity extends ActionBarActivity implements View.OnClickListener {
+    private DBHandler forstDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +22,7 @@ public class InspectionActivity extends ActionBarActivity implements View.OnClic
         }
 
         addButton();
-
+        forstDB = new DBHandler(this);
 
         TextView textView=(TextView)findViewById(R.id.h2beobachtung);
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
@@ -71,6 +72,7 @@ public class InspectionActivity extends ActionBarActivity implements View.OnClic
         startActivity(new Intent(this, FormActivity.class));
     }
     private void buttonNoteClick(){
+        forstDB.addNotiz();
         startActivity(new Intent(this, NotesActivity.class));
     }
     private void buttonGpsClick(){

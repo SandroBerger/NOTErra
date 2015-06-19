@@ -43,6 +43,8 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
     private Button saveButton;
     private String imagePfad;
     private String audioPfad;
+    private EditText textNotiz;
+    private DBHandler forstDB;
 
 
     @Override
@@ -51,6 +53,7 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         setContentView(R.layout.activity_notes);
 
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
+        forstDB = new DBHandler(this);
         loadImage();
         addButton();
     }
@@ -65,6 +68,7 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         deleteButton = (ImageButton) findViewById(R.id.deletebutton);
         saveButton = (Button) findViewById(R.id.savebutton);
         myChrono = (Chronometer) findViewById(R.id.chronometer);
+        textNotiz = (EditText) findViewById(R.id.notetextfield);
 
 
         cameraButton.setOnClickListener(this);
@@ -232,6 +236,10 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
     }
 
     private void saveButtonClick() {
+        forstDB.addImageRef(imagePfad);
+        forstDB.addAudioRef(audioPfad);
+        forstDB.addNoteText(textNotiz.getText().toString());
+        System.out.println(forstDB.getAllFromTable("tbl_Notiz").getString(2));
         startActivity(new Intent(this, InspectionActivity.class));
     }
 

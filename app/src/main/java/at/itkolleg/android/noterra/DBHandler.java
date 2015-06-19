@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import java.security.Timestamp;
 import java.util.UUID;
 
 /**
@@ -196,17 +195,17 @@ public class DBHandler extends SQLiteOpenHelper {
                     "'tbl_Notiz_idNotiz' VARCHAR(38) CHECK('tbl_Notiz_idNotiz'>=0)," +
                     "'tbl_Gps_idGps' VARCHAR(38) CHECK('tbl_Gps_idGps'>=0)," +
                     "'tbl_Formular_idFormular' VARCHAR(38) CHECK('tbl_Formular_idFormular'>=0)," +
-                    "'Zeit' TIMESTAMP DEFAULT NULL," +
+                    "'Zeit' VARCHAR(30) DEFAULT NULL," +
                     "'Begehungsnummer' INTEGER NOT NULL," +
-                    "'CONSTRAINT 'fk_tbl_Beobachtung_tbl_Notiz1'" +
-                    "'FOREIGN KEY('tbl_Notiz_idNotiz')" +
-                    "'REFERENCES 'tbl_Notiz'('idNotiz')" +
-                    "'CONSTRAINT 'fk_tbl_Beobachtung_tbl_Gps1'" +
-                    "'FOREIGN KEY('tbl_Gps_idGps')" +
-                    "'REFERENCES 'tbl_Gps'('idGps')" +
-                    "'CONSTRAINT 'fk_tbl_Beobachtung_tbl_Formular1'" +
-                    "'FOREIGN KEY('tbl_Formular_idFormular')" +
-                    "'REFERENCES 'tbl_Formular'('idFormular')" +
+                    "CONSTRAINT 'fk_tbl_Beobachtung_tbl_Notiz1'" +
+                    "FOREIGN KEY('tbl_Notiz_idNotiz')" +
+                    "REFERENCES 'tbl_Notiz'('idNotiz')" +
+                    "CONSTRAINT 'fk_tbl_Beobachtung_tbl_Gps1'" +
+                    "FOREIGN KEY('tbl_Gps_idGps')" +
+                    "REFERENCES 'tbl_Gps'('idGps')" +
+                    "CONSTRAINT 'fk_tbl_Beobachtung_tbl_Formular1'" +
+                    "FOREIGN KEY('tbl_Formular_idFormular')" +
+                    "REFERENCES 'tbl_Formular'('idFormular')" +
                     ");");
 
             forstDB.execSQL("CREATE INDEX 'tbl_Holzablagerung.fk_tbl_Holzablagerung_tbl_Formular1_idx' ON 'tbl_Holzablagerung'('idHolzablagerung');");
@@ -227,7 +226,7 @@ public class DBHandler extends SQLiteOpenHelper {
             Log.e("Error", "Error", e);
         } finally {
             if (forstDB != null) {
-                forstDB.close();
+                //forstDB.close();
             }
         }
     }
@@ -237,7 +236,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return uuid;
     }
 
-    public void addBeobachtung(Timestamp time){
+    public void addBeobachtung(String time){
         forstDB = this.getWritableDatabase();
         String begehungsDatum = time.toString();
         String begehungsID = getRandomUUID();
@@ -248,7 +247,6 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put("Begehungsnummer", countBegehung);
 
         forstDB.insert("tbl_Beobachtung", null, values);
-        forstDB.close();
 
         countBegehung++;
     }
@@ -260,6 +258,8 @@ public class DBHandler extends SQLiteOpenHelper {
 
         forstDB = this.getWritableDatabase();
         String formularID = getRandomUUID();
+
+        String beobachtungsID = getIDfromTable("tbl_Beobachtung", "idBeobachtung");
 
         ContentValues values = new ContentValues();
         values.put("idFormular", formularID);
@@ -288,16 +288,14 @@ public class DBHandler extends SQLiteOpenHelper {
         setFormularID.put("tbl_Formular_idFormular", formularID);
 
         forstDB.insert("tbl_Formular", null, values);
-        forstDB.insert("tbl_Beobachtung", null, setFormularID);
-        forstDB.close();
+        forstDB.update("tbl_Beobachtung", setFormularID, "idBeobachtung = '" + beobachtungsID + "'", null);
     }
 
     public void addHolzablagerung(int anzahlStaemme, String baumart, int media, int holzmaenge, int bachabschnitt){
         forstDB = this.getWritableDatabase();
         forstDB = this.getReadableDatabase();
 
-        Cursor cursor = forstDB.rawQuery("SELECT idFormular FROM tbl_Formular", null);
-        String holzablagerungID = cursor.toString();
+        String holzablagerungID = getIDfromTable("tbl_Formular", "idFormular");
 
         ContentValues values = new ContentValues();
         values.put("idHolzablagerung", holzablagerungID);
@@ -307,15 +305,13 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put("Bachabschnitt", bachabschnitt);
 
         forstDB.insert("tbl_Holzablagerung", null, values);
-        forstDB.close();
-    }
+}
 
     public void addHolzbewuchs(int anzahl, String baumart, int hoehe, int menge, String beschreibung){
         forstDB = this.getWritableDatabase();
         forstDB = this.getReadableDatabase();
 
-        Cursor cursor = forstDB.rawQuery("SELECT idFormular FROM tbl_Formular", null);
-        String holzbewuchsID = cursor.toString();
+        String holzbewuchsID = getIDfromTable("tbl_Formular", "idFormular");
 
         ContentValues values = new ContentValues();
         values.put("idHolzbewuchs", holzbewuchsID);
@@ -326,15 +322,13 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put("Beschreibung", beschreibung);
 
         forstDB.insert("tbl_Holzbewuchs", null, values);
-        forstDB.close();
     }
 
     public void addOhneBehinderung(String art, String beschreibung){
         forstDB = this.getWritableDatabase();
         forstDB = this.getReadableDatabase();
 
-        Cursor cursor = forstDB.rawQuery("SELECT idFormular FROM tbl_Formular", null);
-        String ohneBehinderungID = cursor.toString();
+        String ohneBehinderungID = getIDfromTable("tbl_Formular", "idFormular");
 
         ContentValues values = new ContentValues();
         values.put("idOhneBehinderung", ohneBehinderungID);
@@ -342,7 +336,6 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put("Beschreibung", beschreibung);
 
         forstDB.insert("tbl_OhneBehinderung", null, values);
-        forstDB.close();
     }
 
     public void addSchadenAnRegulierung(String art, int hoehe, int fehlendeAbsturzsicherung,
@@ -351,8 +344,7 @@ public class DBHandler extends SQLiteOpenHelper {
         forstDB = this.getWritableDatabase();
         forstDB = this.getReadableDatabase();
 
-        Cursor cursor = forstDB.rawQuery("SELECT idFormular FROM tbl_Formular", null);
-        String schadenAnRegulierungID = cursor.toString();
+        String schadenAnRegulierungID = getIDfromTable("tbl_Formular", "idFormular");
 
         ContentValues values = new ContentValues();
         values.put("idSchadenAnRegulierung", schadenAnRegulierungID);
@@ -369,15 +361,13 @@ public class DBHandler extends SQLiteOpenHelper {
 
 
         forstDB.insert("tbl_OhneBehinderung", null, values);
-        forstDB.close();
     }
 
     public void addWasserAuseinleitung(String art, String zweck, String beschreibung){
         forstDB = this.getWritableDatabase();
         forstDB = this.getReadableDatabase();
 
-        Cursor cursor = forstDB.rawQuery("SELECT idFormular FROM tbl_Formular", null);
-        String wasserAusEinleitungID = cursor.toString();
+        String wasserAusEinleitungID = getIDfromTable("tbl_Formular", "idFormular");
 
         ContentValues values = new ContentValues();
         values.put("idWasserAusEinleitung", wasserAusEinleitungID);
@@ -386,15 +376,13 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put("Beschreibung", beschreibung);
 
         forstDB.insert("tbl_WasserAusEinleitung", null, values);
-        forstDB.close();
     }
 
     public void addAbflussbehinderung(String art, String beschreibung){
         forstDB = this.getWritableDatabase();
         forstDB = this.getReadableDatabase();
 
-        Cursor cursor = forstDB.rawQuery("SELECT idFormular FROM tbl_Formular", null);
-        String abflussbehinderungID = cursor.toString();
+        String abflussbehinderungID = getIDfromTable("tbl_Formular", "idFormular");
 
         ContentValues values = new ContentValues();
         values.put("idAbflussbehinderung", abflussbehinderungID);
@@ -402,15 +390,13 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put("Beschreibung", beschreibung);
 
         forstDB.insert("tbl_Abflussbehinderung", null, values);
-        forstDB.close();
     }
 
     public void addAblagerung(String art, String beschreibung, int bachabschnitt, int ausmass){
         forstDB = this.getWritableDatabase();
         forstDB = this.getReadableDatabase();
 
-        Cursor cursor = forstDB.rawQuery("SELECT idFormular FROM tbl_Formular", null);
-        String ablagerungID = cursor.toString();
+        String ablagerungID = getIDfromTable("tbl_Formular", "idFormular");
 
         ContentValues values = new ContentValues();
         values.put("idAblagerung", ablagerungID);
@@ -420,13 +406,14 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put("Ausmass", ausmass);
 
         forstDB.insert("tbl_Ablagerung", null, values);
-        forstDB.close();
     }
 
     //Methoden zum setzen der Notiz Attribute (Audio, Bilder, Text)
     public void addNotiz(){
         forstDB = this.getWritableDatabase();
         String notizID = getRandomUUID();
+
+        String beobachtungsID = getIDfromTable("tbl_Beobachtung", "idBeobachtung");
 
         ContentValues values = new ContentValues();
         values.put("idNotiz", notizID);
@@ -435,13 +422,14 @@ public class DBHandler extends SQLiteOpenHelper {
         setNotizID.put("tbl_Notiz_idNotiz", notizID);
 
         forstDB.insert("tbl_Notiz", null, values);
-        forstDB.insert("tbl_Beobachtung", null, setNotizID);
-        forstDB.close();
+        forstDB.update("tbl_Beobachtung", setNotizID, "idBeobachtung = '" + beobachtungsID + "'", null);
     }
 
     public void addImageRef(String imagePath){
         forstDB = this.getWritableDatabase();
         String imageID = getRandomUUID();
+
+        String notizID = getIDfromTable("tbl_Notiz", "idNotiz");
 
         ContentValues values = new ContentValues();
         values.put("idFoto", imageID);
@@ -451,13 +439,14 @@ public class DBHandler extends SQLiteOpenHelper {
         setImageID.put("tbl_Foto_idFoto", imageID);
 
         forstDB.insert("tbl_Foto", null, values);
-        forstDB.insert("tbl_Notiz", null, setImageID);
-        forstDB.close();
+        forstDB.update("tbl_Notiz", setImageID, "idNotiz = '" + notizID + "'", null);
     }
 
     public void addAudioRef(String audioPath){
         forstDB = this.getWritableDatabase();
         String audioID = getRandomUUID();
+
+        String notizID = getIDfromTable("tbl_Notiz", "idNotiz");
 
         ContentValues values = new ContentValues();
         values.put("idSprachaufnahme", audioID);
@@ -467,13 +456,14 @@ public class DBHandler extends SQLiteOpenHelper {
         setAudioID.put("tbl_Sprachaufnahme_idSprachaufnahme", audioID);
 
         forstDB.insert("tbl_Sprachaufnahme", null, values);
-        forstDB.insert("tbl_Notiz", null, setAudioID);
-        forstDB.close();
+        forstDB.update("tbl_Notiz", setAudioID, "idNotiz = '" + notizID + "'", null);
     }
 
     public void addNoteText(String text){
         forstDB = this.getWritableDatabase();
         String textID = getRandomUUID();
+
+        String notizID = getIDfromTable("tbl_Notiz", "idNotiz");
 
         ContentValues values = new ContentValues();
         values.put("idText", textID);
@@ -483,8 +473,7 @@ public class DBHandler extends SQLiteOpenHelper {
         setTextID.put("tbl_Text_idText", textID);
 
         forstDB.insert("tbl_Text", null, values);
-        forstDB.insert("tbl_Notiz", null, setTextID);
-        forstDB.close();
+        forstDB.update("tbl_Notiz", setTextID, "idNotiz = '" + notizID + "'", null);
     }
     //ENDE Setzen der Attribute Notiz
 
@@ -492,6 +481,8 @@ public class DBHandler extends SQLiteOpenHelper {
     public void addCoordinates(String laengengrad, String breitengrad){
         forstDB = this.getWritableDatabase();
         String gpsID = getRandomUUID();
+
+        String beobachtungsID = getIDfromTable("tbl_Beobachtung", "idBeobachtung");
 
         ContentValues values = new ContentValues();
         values.put("idGps", gpsID);
@@ -502,10 +493,28 @@ public class DBHandler extends SQLiteOpenHelper {
         setGpsID.put("tbl_Gps_idGps", gpsID);
 
         forstDB.insert("tbl_Gps", null, values);
-        forstDB.insert("tbl_Beobachtung", null, setGpsID);
-        forstDB.close();
+        forstDB.update("tbl_Notiz", setGpsID, "idNotiz = '" + beobachtungsID + "'", null);
     }
     //Ende Hinzufügen der Koordinaten
+
+    public void closeDB(){
+        forstDB.close();
+    }
+
+    public String getIDfromTable(String tablename, String idName){
+        Cursor cursor = forstDB.query(tablename, new String[] {String.valueOf(idName)}, null, null, null, null, null);
+        cursor.moveToFirst();
+        String id = cursor.getString(0);
+
+        return id;
+    }
+
+    public Cursor getAllFromTable(String tablename){
+        Cursor cursor = forstDB.rawQuery("SELECT * FROM " + tablename + "", null);
+        cursor.moveToFirst();
+
+        return cursor;
+    }
 
     @Override
     public void onUpgrade(SQLiteDatabase forstDB, int oldVersion, int newVersion) {
@@ -532,7 +541,7 @@ public class DBHandler extends SQLiteOpenHelper {
             Log.e("Error", "Error", e);
         } finally {
             if (forstDB != null) {
-                forstDB.close();
+                //forstDB.close();
             }
         }
 
