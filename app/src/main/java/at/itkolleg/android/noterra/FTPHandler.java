@@ -31,7 +31,7 @@ public class FTPHandler {
     String extention;
     private String timestamp;
 
-    FTPHandler(String filepath) throws IOException {
+    public FTPHandler(String filepath) throws IOException {
         this.filepath = filepath;
         file = new File(filepath);
         extention = filepath.substring(filepath.lastIndexOf(".") + 1, filepath.length());

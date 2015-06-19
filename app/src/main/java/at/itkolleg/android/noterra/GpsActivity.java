@@ -18,6 +18,7 @@ public class GpsActivity extends FragmentActivity {
     static LatLng AKTUELLER_STANDORT = null;
     private GoogleMap map;
     private GpsHandler gps;
+    private DBHandler forstDB;
 
     private double laengengrad;
     private double breitengrad;
@@ -32,6 +33,7 @@ public class GpsActivity extends FragmentActivity {
                     .commit();
         }
         gps = new GpsHandler(this);
+        forstDB = new DBHandler(this);
         createMap();
     }
 
@@ -40,9 +42,9 @@ public class GpsActivity extends FragmentActivity {
                 .getMap();
 
         map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-        //map.addCircle(circleOptions);
 
         getLaengeBreite();
+        forstDB.addCoordinates(""+laengengrad, ""+breitengrad);
 
         AKTUELLER_STANDORT = new LatLng(breitengrad, laengengrad);
 
@@ -59,6 +61,8 @@ public class GpsActivity extends FragmentActivity {
         if (gps.canGetLocation()) {
             breitengrad = gps.getBreitengrad();
             laengengrad = gps.getLaengengrad();
+
+
         } else {
             gps.showSettingsAlert();
         }

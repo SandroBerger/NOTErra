@@ -516,6 +516,24 @@ public class DBHandler extends SQLiteOpenHelper {
         return cursor;
     }
 
+    public void deleteAllFromTables(){
+        forstDB = getWritableDatabase();
+
+        forstDB.rawQuery("DELETE FROM tbl_Formular", null);
+        forstDB.rawQuery("DELETE FROM tbl_Holzablagerung", null);
+        forstDB.rawQuery("DELETE FROM tbl_OhneBehinderung", null);
+        forstDB.rawQuery("DELETE FROM tbl_SchadenAnRegulierung", null);
+        forstDB.rawQuery("DELETE FROM tbl_WasserAusEinleitung", null);
+        forstDB.rawQuery("DELETE FROM tbl_Abflussbehinderung", null);
+        forstDB.rawQuery("DELETE FROM tbl_Ablagerung", null);
+        forstDB.rawQuery("DELETE FROM tbl_Notiz", null);
+        forstDB.rawQuery("DELETE FROM tbl_Foto", null);
+        forstDB.rawQuery("DELETE FROM tbl_Sprachaufnahme", null);
+        forstDB.rawQuery("DELETE FROM tbl_Text", null);
+        forstDB.rawQuery("DELETE FROM tbl_Gps", null);
+        forstDB.rawQuery("DELETE FROM tbl_Beobachtung", null);
+    }
+
     @Override
     public void onUpgrade(SQLiteDatabase forstDB, int oldVersion, int newVersion) {
         forstDB = this.getWritableDatabase();

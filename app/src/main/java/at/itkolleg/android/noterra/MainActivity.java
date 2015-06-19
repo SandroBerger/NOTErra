@@ -53,7 +53,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     //-------------Hinzufügen der Buttonclick funktion und weiterleitung auf die Begehungsseite----
     public void addButton(){
         Button inspectionButton = (Button) findViewById(R.id.inspectionbutton);
-
         inspectionButton.setOnClickListener(this);
     }
 
