@@ -34,7 +34,7 @@ public class HTTPHandler {
         httpTask.execute();
     }
 
-    public void sendSQLiteToServer(String tabelname) {
+    public void sendTableToServer(String tabelname) {
         Cursor c = forstDB.getAllFromTable(tabelname);
         c.moveToFirst();
 
@@ -61,20 +61,20 @@ public class HTTPHandler {
         @Override
         protected Void doInBackground(Void... params) {
 
-            sendSQLiteToServer("tbl_Beobachtung");
-            sendSQLiteToServer("tbl_Formular");
-            sendSQLiteToServer("tbl_Holzablagerung");
-            sendSQLiteToServer("tbl_Holzbewuchs");
-            sendSQLiteToServer("tbl_OhneBehinderung");
-            sendSQLiteToServer("tbl_SchadenAnRegulierung");
-            sendSQLiteToServer("tbl_WasserAusEinleitung");
-            sendSQLiteToServer("tbl_Abflussbehinderung");
-            sendSQLiteToServer("tbl_Ablagerung");
-            sendSQLiteToServer("tbl_Notiz");
-            sendSQLiteToServer("tbl_Foto");
-            sendSQLiteToServer("tbl_Sprachaufnahme");
-            sendSQLiteToServer("tbl_Text");
-            sendSQLiteToServer("tbl_Gps");
+            sendTableToServer("tbl_Beobachtung");
+            sendTableToServer("tbl_Formular");
+            sendTableToServer("tbl_Holzablagerung");
+            sendTableToServer("tbl_Holzbewuchs");
+            sendTableToServer("tbl_OhneBehinderung");
+            sendTableToServer("tbl_SchadenAnRegulierung");
+            sendTableToServer("tbl_WasserAusEinleitung");
+            sendTableToServer("tbl_Abflussbehinderung");
+            sendTableToServer("tbl_Ablagerung");
+            sendTableToServer("tbl_Notiz");
+            sendTableToServer("tbl_Foto");
+            sendTableToServer("tbl_Sprachaufnahme");
+            sendTableToServer("tbl_Text");
+            sendTableToServer("tbl_Gps");
 
             return null;
         }
