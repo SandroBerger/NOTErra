@@ -177,7 +177,7 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
 
         try {
             myPlayer = new MediaPlayer();
-            myPlayer.setDataSource(getAudioPfad());
+            myPlayer.setDataSource(outputFile);
             myPlayer.prepare();
             myPlayer.start();
 
