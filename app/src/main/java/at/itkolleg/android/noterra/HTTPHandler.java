@@ -49,6 +49,8 @@ public class HTTPHandler {
 
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
+            httpclient.execute(httpPost);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
