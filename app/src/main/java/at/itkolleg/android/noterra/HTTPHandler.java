@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -46,11 +47,7 @@ public class HTTPHandler {
                 nameValuePairs.add(new BasicNameValuePair(c.getColumnName(i), c.getString(i)));
             }
 
-            String response = httpclient.execute(httpPost, responseHandler);
-
-            if (response.contains("success") || response.contains("200")) {
-                forstDB.deleteAllFromTables();
-            }
+            httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
         } catch (IOException e) {
             e.printStackTrace();

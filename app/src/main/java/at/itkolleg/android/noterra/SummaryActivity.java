@@ -134,9 +134,7 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
     }
 
     public void send(View v) throws IOException {
-        HTTPHandler httpHandler = new HTTPHandler(this);
         loadData();
-
         try {
             if(getImagePath() != null){
                 FTPHandler ftp1 = new FTPHandler(getImagePath());
@@ -148,7 +146,7 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         }catch (IOException e){
             e.printStackTrace();
         }
-
+        HTTPHandler httpHandler = new HTTPHandler(this);
 
 
         Intent intent = new Intent(SummaryActivity.this, MainActivity.class);
