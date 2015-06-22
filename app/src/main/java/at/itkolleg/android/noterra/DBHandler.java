@@ -517,6 +517,28 @@ public class DBHandler extends SQLiteOpenHelper {
         return cursor;
     }
 
+    public String getRefFromImageTable(){
+        String tablename = "tbl_Foto";
+        String spaltenName = "Ref";
+
+        Cursor cursor = forstDB.query(tablename, new String[] {String.valueOf(spaltenName)}, null, null, null, null, null);
+        cursor.moveToLast();
+        String imageRef = imageRef = cursor.getString(0);
+
+        return imageRef;
+    }
+
+    public String getRefFromAudioTable(){
+        String tablename = "tbl_Sprachaufnahme";
+        String spaltenName = "Ref";
+
+        Cursor cursor = forstDB.query(tablename, new String[] {String.valueOf(spaltenName)}, null, null, null, null, null);
+        cursor.moveToFirst();
+        String audioRef = cursor.getString(0);
+
+        return audioRef;
+    }
+
     public void deleteAllFromTables(){
         forstDB = getWritableDatabase();
 

@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Calendar;
 
 public class SummaryActivity extends ActionBarActivity implements View.OnClickListener {
@@ -24,6 +23,7 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
     private ImageView imageView;
     private String imagePath;
     private String audioPath;
+    private DBHandler forstdb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +31,7 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         setContentView(R.layout.activity_summary);
 
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
-
+        forstdb = new DBHandler(this);
     }
 
 
@@ -96,24 +96,8 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
     }
 
     public void loadData(){
-        File imageDirectory = new File("/storage/emulated/0/NOTErra/Media/Images/");
-        File audioDirectory = new File("/storage/emulated/0/NOTErra/Media/Audio/");
-
-        File[] imageFileList = imageDirectory.listFiles();
-        File[] audioFileList = audioDirectory.listFiles();
-
-        ArrayList<File> imageFiles = new ArrayList<>();
-        ArrayList<File> audioFiles = new ArrayList<>();
-
-        for (File file : imageFileList){
-            imageFiles.add(file);
-        }
-        for (File file : audioFileList){
-            audioFiles.add(file);
-        }
-
-        imagePath  = imageFiles.get(imageFiles.size()-1).getPath();
-        audioPath  = audioFiles.get(audioFiles.size()-1).getPath();
+        imagePath  = forstdb.getRefFromImageTable();
+        audioPath  = forstdb.getRefFromAudioTable();
     }
 
     public String getImagePath() {
