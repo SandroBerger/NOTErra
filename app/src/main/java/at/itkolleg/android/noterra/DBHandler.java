@@ -504,7 +504,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public String getIDfromTable(String tablename, String idName){
         Cursor cursor = forstDB.query(tablename, new String[] {String.valueOf(idName)}, null, null, null, null, null);
-        cursor.moveToFirst();
+        cursor.moveToLast();
         String id = cursor.getString(0);
 
         return id;
