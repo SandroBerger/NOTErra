@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools" xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/container"
                 android:layout_width="match_parent"
@@ -8,10 +8,282 @@
                 
                 android:background="@color/Hintergrundfarbe">
 
+
+
+    <ScrollView android:layout_width="fill_parent" android:layout_height="wrap_content">
+    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+                  android:orientation="vertical" android:focusableInTouchMode="true" >
+
+
+
+        <EditText
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:id="@+id/Kosten"
+                android:hint="@string/kostenschatzung"
+                android:background="@drawable/textfield_style"
+                android:inputType="number"
+
+                />
+
+
+
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+
+                android:layout_height="150dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/textfield_style"
+                android:id="@+id/maßnahmen"
+                android:hint="@string/maßnahme"
+                android:inputType="textMultiLine"
+
+                android:gravity="top|start"
+                android:maxLines="10"
+
+                />
+
+
+        <Spinner android:id="@+id/Spinner02"
+
+                 android:layout_width="match_parent"
+                 android:layout_marginLeft="5dp"
+                 android:layout_marginRight="5dp"
+
+                 android:layout_height="50dp"
+                 android:layout_marginTop="30dp"
+                 android:background="@drawable/spinner_style"
+                 android:prompt="@string/prioritat"
+                />
+
+        <Spinner android:id="@+id/Spinner03"
+
+                 android:layout_width="match_parent"
+                 android:layout_marginLeft="5dp"
+                 android:layout_marginRight="5dp"
+
+                 android:layout_height="50dp"
+                 android:layout_marginTop="30dp"
+                 android:background="@drawable/spinner_style"
+
+                 android:prompt="@string/forderfahig"
+                />
+
+        <Spinner android:id="@+id/Spinner04"
+
+                 android:layout_width="match_parent"
+                 android:layout_marginLeft="5dp"
+                 android:layout_marginRight="5dp"
+
+                 android:layout_height="50dp"
+                 android:layout_marginTop="30dp"
+                 android:background="@drawable/spinner_style"
+
+                 android:prompt="@string/abwicklung"
+                />
+
+
+
+
+
+
+        <TextView
+            android:layout_marginTop="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/defMaßn"
+            android:id="@+id/textView2"
+            android:layout_gravity="center_vertical"
+            android:textStyle="bold"
+            android:textColor="@color/black" android:textSize="20dp"/>
+
+        <CheckBox  android:layout_marginTop="5dp"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:background="@drawable/testtop"
+                   android:layout_marginLeft="5dp"
+                   android:layout_marginRight="5dp"
+
+                   android:text="@string/absturzsicherung"
+                   android:id="@+id/abstuzsucherung"
+                   android:bottomLeftRadius="8dip"
+                   android:onClick="onclick1"/>
+
+        <CheckBox android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:background="#F6E398"
+                  android:layout_marginLeft="5dp"
+                  android:layout_marginRight="5dp"
+
+                  android:text="@string/baumestraucher"
+                  android:id="@+id/baumestraucher"
+                  android:bottomLeftRadius="8dip"
+                  android:onClick="onclick1"/>
+
+        <CheckBox android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:background="#F6E398"
+                  android:layout_marginLeft="5dp"
+                  android:layout_marginRight="5dp"
+
+                  android:text="@string/baumwerksan"
+                  android:id="@+id/baumwerksan"
+                  android:bottomLeftRadius="8dip"
+                  android:onClick="onclick1"/>
+
+        <CheckBox android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:background="#F6E398"
+                  android:layout_marginLeft="5dp"
+                  android:layout_marginRight="5dp"
+
+                  android:text="@string/baumwerkwar"
+                  android:id="@+id/baumwerkwar"
+                  android:bottomLeftRadius="8dip"
+                  android:onClick="onclick"/>
+
+        <CheckBox android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:background="#F6E398"
+                  android:layout_marginLeft="5dp"
+                  android:layout_marginRight="5dp"
+
+                  android:text="@string/durchlass"
+                  android:id="@+id/durchlass"
+                  android:bottomLeftRadius="8dip"
+                  android:onClick="onclick1"/>
+
+        <CheckBox android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:background="#F6E398"
+                  android:layout_marginLeft="5dp"
+                  android:layout_marginRight="5dp"
+
+                  android:text="@string/genehmigung"
+                  android:id="@+id/genehmigung"
+                  android:bottomLeftRadius="8dip"
+                  android:onClick="onclick1"/>
+
+        <CheckBox android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:background="#F6E398"
+                  android:layout_marginLeft="5dp"
+                  android:layout_marginRight="5dp"
+
+                  android:text="@string/hindernisseentf"
+                  android:id="@+id/hindernisseentf"
+                  android:bottomLeftRadius="8dip"
+                  android:onClick="onclick"/>
+
+
+
+        <CheckBox android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:background="#F6E398"
+                  android:layout_marginLeft="5dp"
+                  android:layout_marginRight="5dp"
+
+                  android:text="@string/hindernissp"
+                  android:id="@+id/hindernissp"
+                  android:bottomLeftRadius="8dip"
+                  android:onClick="onclick"/>
+
+
+        <CheckBox android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:background="#F6E398"
+                  android:layout_marginLeft="5dp"
+                  android:layout_marginRight="5dp"
+
+                  android:text="@string/holzablang"
+                  android:id="@+id/holzablang"
+                  android:bottomLeftRadius="8dip"
+                  android:onClick="onclick"/>
+
+
+        <CheckBox android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:background="#F6E398"
+                  android:layout_marginLeft="5dp"
+                  android:layout_marginRight="5dp"
+
+                  android:text="@string/keineMaßn"
+                  android:id="@+id/keineMaßn"
+                  android:bottomLeftRadius="8dip"
+                  android:onClick="onclick"/>
+
+
+        <CheckBox android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:background="#F6E398"
+                  android:layout_marginLeft="5dp"
+                  android:layout_marginRight="5dp"
+
+                  android:text="@string/sperreodgerinne"
+                  android:id="@+id/sperreodgerinne"
+                  android:bottomLeftRadius="8dip"
+                  android:onClick="onclick"/>
+
+
+        <CheckBox android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:background="#F6E398"
+                  android:layout_marginLeft="5dp"
+                  android:layout_marginRight="5dp"
+
+                  android:text="@string/ufersich"
+                  android:id="@+id/ufersich"
+                  android:bottomLeftRadius="8dip"
+                  android:onClick="onclick"/>
+
+        <CheckBox android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:background="#F6E398"
+                  android:layout_marginLeft="5dp"
+                  android:layout_marginRight="5dp"
+
+                  android:text="@string/zustandbeob"
+                  android:id="@+id/zustandbeob"
+                  android:bottomLeftRadius="8dip"
+                  android:onClick="onclick"/>
+
+        <CheckBox android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:background="@drawable/testbot"
+                  android:layout_marginLeft="5dp"
+                  android:layout_marginRight="5dp"
+
+                  android:text="@string/untersp"
+                  android:id="@+id/Untersp_fundanment"
+                  android:bottomLeftRadius="8dip"
+                  android:onClick="onclick1"/>
+
+
+
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/h1beobachtung"
+                android:id="@+id/textView"
+                android:layout_marginTop="50dp"
+                android:textSize="18dp"
+                android:textStyle="bold" android:layout_alignBottom="@+id/Spinner01" android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"/>
+
+
+
+
     <Spinner android:id="@+id/Spinner01"
              android:layout_width="fill_parent"
              android:layout_height="50dp"
-             android:layout_marginTop="163dp"
+             android:layout_marginTop="5dp"
 
              android:layout_marginRight="5dp"
             android:background="@drawable/spinner_style"
@@ -27,23 +299,18 @@
             android:layout_height="30dp"
             android:textStyle="bold"
             android:text="Öffnen"
+            android:layout_marginTop="5dp"
             android:textColor="@color/black"
             android:id="@+id/button" android:layout_centerVertical="true" android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:background="@drawable/button_style"
             android:onClick="onclick"
             />
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/h1beobachtung"
-            android:id="@+id/textView"
-            android:layout_marginBottom="52dp"
-            android:textSize="18dp"
-            android:textStyle="bold" android:layout_alignBottom="@+id/Spinner01" android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"/>
 
 
 
-</RelativeLayout>
+
+    </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -270,6 +270,7 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put("Prioritaet", prioritaet);
         values.put("Foerderfaehig", foerderfaehig);
         values.put("Abwicklung", abwicklung);
+        // Int mitgeben 0 oder 1 ob gesetzt oder nicht gesetzt!
         values.put("Absturzsicherung", absturzsicherung);
         values.put("BaumFaellen", baumFaellen);
         values.put("BauwerkSanieren", bauwerkSanieren);
@@ -477,7 +478,7 @@ public class DBHandler extends SQLiteOpenHelper {
     }
     //ENDE Setzen der Attribute Notiz
 
-    //Hinzufügen der Koordinaten
+    //Hinzufï¿½gen der Koordinaten
     public void addCoordinates(String laengengrad, String breitengrad){
         forstDB = this.getWritableDatabase();
         String gpsID = getRandomUUID();
@@ -495,7 +496,7 @@ public class DBHandler extends SQLiteOpenHelper {
         forstDB.insert("tbl_Gps", null, values);
         forstDB.update("tbl_Beobachtung", setGpsID, "idBeobachtung = '" + beobachtungsID + "'", null);
     }
-    //Ende Hinzufügen der Koordinaten
+    //Ende Hinzufï¿½gen der Koordinaten
 
     public void closeDB(){
         forstDB.close();

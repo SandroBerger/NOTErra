@@ -8,6 +8,9 @@ import android.view.*;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FormActivity extends ActionBarActivity  {
 
 
@@ -24,7 +27,77 @@ public class FormActivity extends ActionBarActivity  {
         }
 
 
-        String ar[]={"Holzablagerungen im Hochwasserabflussbereich","Ablagerung sonst. abflusshemmender Gegenstände",
+        Spinner mySpinner = (Spinner) findViewById(R.id.Spinner02);
+
+        List<String> anzahl = new ArrayList<String>();
+        anzahl.add("Niedrig(in 6-7 Jahren");
+        anzahl.add("Mittel(in 3-5 Jahren)");
+        anzahl.add("Hoch (in 1-2 Jahren");
+        anzahl.add("Priorität");
+
+        final int listsize = anzahl.size() - 1;
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, anzahl) {
+            @Override
+            public int getCount() {
+                return (listsize); // Truncate the list
+            }
+        };
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mySpinner.setAdapter(dataAdapter);
+
+        mySpinner.setSelection(listsize);
+
+
+        List<String> list = new ArrayList<String>();
+        list.add("Ja");
+        list.add("Nein");
+
+        list.add("Förderfähig");
+
+        final int longsize1 = list.size() - 1;
+
+
+        ArrayAdapter<String> dataAdapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list) {
+            @Override
+            public int getCount() {
+                return (longsize1); // Truncate the list
+            }
+        };
+
+        Spinner mySpinner1 = (Spinner) findViewById(R.id.Spinner03);
+
+        dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mySpinner1.setAdapter(dataAdapter1);
+        mySpinner1.setSelection(longsize1);
+
+
+
+
+        List<String> list1 = new ArrayList<String>();
+        list1.add("Gemeinde");
+        list1.add("Gebietsbauleitung");
+        list1.add("Abwicklung");
+
+        final int longsize2 = list1.size() - 1;
+
+
+        ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list1) {
+            @Override
+            public int getCount() {
+                return (longsize2); // Truncate the list
+            }
+        };
+
+        Spinner mySpinner2 = (Spinner) findViewById(R.id.Spinner04);
+
+        dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mySpinner2.setAdapter(dataAdapter2);
+        mySpinner2.setSelection(longsize2);
+
+
+        String ar[]={"Holzablagerungen im Hochwasserabflussbereich",
+                "Ablagerung sonst. abflusshemmender Gegenstände",
                 "Holzbewuchs im Hochwasserabflussbereich",
                 "Schäden an Regulierungsbauten",
                 "Abflussbehindernde Einbauten",
@@ -32,17 +105,13 @@ public class FormActivity extends ActionBarActivity  {
                 "Ereignis ohne unmittelbare Abflussbehinderung" };
 
 
+        Spinner mySpinner3=(Spinner)findViewById(R.id.Spinner01);
+
+        ArrayAdapter<String> dataAdapter3 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, ar) {};
+        dataAdapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mySpinner3.setAdapter(dataAdapter3);
 
 
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, ar) {
-
-        };
-
-        Spinner mySpinner=(Spinner)findViewById(R.id.Spinner01);
-
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        mySpinner.setAdapter(dataAdapter);
 
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
 

@@ -25,6 +25,11 @@ public class Abflussbehinderndeeinbauten extends ActionBarActivity {
     private RadioButton rohrdurchlass;
     private RadioButton freiwahl;
     private EditText editText;
+    private EditText beschreibung;
+
+    //Datenbankteil
+    private DBHandler forstDB;
+    private String auswahl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +46,11 @@ public class Abflussbehinderndeeinbauten extends ActionBarActivity {
 
         editText=(EditText)findViewById(R.id.art_der_einbaut);
 
+        beschreibung=(EditText)findViewById(R.id.Beschreibung);
+
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
+
+        forstDB = new DBHandler(this);
 
 
     }
@@ -55,24 +64,28 @@ public class Abflussbehinderndeeinbauten extends ActionBarActivity {
                 if (bruecke.isChecked()) {
                     Toast toast = Toast.makeText(getApplicationContext(), bruecke.getText(), Toast.LENGTH_SHORT);
                     toast.show();
+                    auswahl=bruecke.getText().toString();
                 }
                 break;
             case R.id.huette:
                 if (huette.isChecked()) {
                     Toast toast = Toast.makeText(getApplicationContext(), huette.getText(), Toast.LENGTH_SHORT);
                     toast.show();
+                    auswahl=huette.getText().toString();
                 }
                 break;
             case R.id.staubrett:
                 if (staubrett.isChecked()) {
                     Toast toast = Toast.makeText(getApplicationContext(), staubrett.getText(), Toast.LENGTH_SHORT);
                     toast.show();
+                    auswahl=staubrett.getText().toString();
                 }
                 break;
             case R.id.rohrdurchlass:
                 if (rohrdurchlass.isChecked()) {
                     Toast toast = Toast.makeText(getApplicationContext(), rohrdurchlass.getText(), Toast.LENGTH_SHORT);
                     toast.show();
+                    auswahl=rohrdurchlass.getText().toString();
                 }
                 break;
 
@@ -84,26 +97,18 @@ public class Abflussbehinderndeeinbauten extends ActionBarActivity {
                     editText.requestFocus();
                         InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                         imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
-
-
-
-
+                    auswahl=editText.getText().toString();
                 }
                 break;
-
-
         }
+
     }
 
     public void save(View v){
 
 
 
-        if(freiwahl.isChecked())
-        {
-
-
-        if (editText.getText().toString().equals("")) {
+        if (freiwahl.isChecked() && freiwahl.getText().toString().equals("")) {
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
                     .setMessage("Es wurde kein Text eingegeben")
@@ -117,19 +122,44 @@ public class Abflussbehinderndeeinbauten extends ActionBarActivity {
 
 
                     .show();
-        } else {
-            String extra = getIntent().getStringExtra("Headline");
-            Intent intent = new Intent(Abflussbehinderndeeinbauten.this, InspectionActivity.class);
-            intent.putExtra("Headline", extra);
-            startActivity(intent);
-        }
-        }
-        else
+        } else if (!bruecke.isChecked() && !huette.isChecked() && !staubrett.isChecked() && !freiwahl.isChecked() ) {
+            new AlertDialog.Builder(this)
+                    .setTitle("!!Achtung!!")
+                    .setMessage("Es wurde kein Art der Einbauten ausgewählt")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+
+                    .show();
+
+        } else if (beschreibung.getText().toString().equals("")) {
+            new AlertDialog.Builder(this)
+                    .setTitle("!!Achtung!!")
+                    .setMessage("Es wurde keine Beschreibung angegeben")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+
+                    .show();
+        } else
         {
-            String extra = getIntent().getStringExtra("Headline");
-            Intent intent = new Intent(Abflussbehinderndeeinbauten.this, InspectionActivity.class);
-            intent.putExtra("Headline", extra);
+
+            forstDB.addAbflussbehinderung(auswahl,beschreibung.getText().toString());
+
+            String extra= getIntent().getStringExtra("Headline");
+            Intent intent=new Intent(Abflussbehinderndeeinbauten.this, InspectionActivity.class);
+            intent.putExtra("Headline",extra);
             startActivity(intent);
+
+
+
+
         }
     }
 

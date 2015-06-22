@@ -24,7 +24,6 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
     private ImageView imageView;
     private String imagePath;
     private String audioPath;
-    private DBHandler forstDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +31,7 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         setContentView(R.layout.activity_summary);
 
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
-        forstDB = new DBHandler(this);
+
     }
 
 
@@ -112,12 +111,9 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         for (File file : audioFileList){
             audioFiles.add(file);
         }
-        if(!(imageFileList.length == 0)){
-            imagePath  = imageFiles.get(imageFiles.size()-1).getPath();
-        }
-        if(!(audioFileList.length == 0)){
-            audioPath  = audioFiles.get(audioFiles.size()-1).getPath();
-        }
+
+        imagePath  = imageFiles.get(imageFiles.size()-1).getPath();
+        audioPath  = audioFiles.get(audioFiles.size()-1).getPath();
     }
 
     public String getImagePath() {
@@ -133,7 +129,8 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         startActivity(intent);
     }
 
-    public void send(View v) throws IOException {
+    public void send(View v){
+
         loadData();
         try {
             if(getImagePath() != null){
@@ -146,7 +143,6 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         }catch (IOException e){
             e.printStackTrace();
         }
-        HTTPHandler httpHandler = new HTTPHandler(this);
 
 
         Intent intent = new Intent(SummaryActivity.this, MainActivity.class);

@@ -69,6 +69,7 @@ public class InspectionActivity extends ActionBarActivity implements View.OnClic
 
     //Ermöglicht die weiterleitung zwischen den einzelnen bereichen der Anwendung. Es wird ein view und die jeweilige Klasse mitgegeben auf die weitergeleitet werden soll.
     private void buttonFormClick(){
+
         startActivity(new Intent(this, FormActivity.class));
     }
     private void buttonNoteClick(){

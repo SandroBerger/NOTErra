@@ -65,6 +65,30 @@
     <color name="bgrau">#6E6E6E</color> <!-- Button Grau -->
     <color name="black">#190707</color>
 
+
+
+    <!-- Strings für Haupt-Formular-->
+    <string name="kostenschatzung">Kostenschätzung</string>
+    <string name="empfMaßn">Empfohlene Maßnhamen</string>
+    <string name="prioritat">Priorität</string>
+    <string name="forderfahig">Förderfähig</string>
+    <string name="abwicklung">Abwicklung</string>
+    <string name="defMaßn">Def. Maßnhamen</string>
+
+    <string name="absturzsicherung">Absturzsicherung</string>
+    <string name="baumestraucher">Bäume/Sträuche fällen</string>
+    <string name="baumwerksan">Bauwerk sanieren</string>
+    <string name="baumwerkwar">Bauwerk warten</string>
+    <string name="durchlass">Durchlass freilegen</string>
+    <string name="genehmigung">Genehmigung prüfen</string>
+    <string name="hindernisseentf">Hindernisse entfernen/räumen</string>
+    <string name="hindernissp">Hinderniss sperngen</string>
+    <string name="holzablang">Holz ablängen</string>
+    <string name="keineMaßn">Keine Maßnahmen</string>
+    <string name="sperreodgerinne">Sperre oder Gerinne räumen</string>
+    <string name="ufersich">Ufer sichern</string>
+    <string name="zustandbeob">Zustand beobachten</string>
+
     <!-- Strings Formular -> Beobachtung: Holzablagerung -->
     <string name="ablagerung">Ablagerungsart</string>
     <string name="Bau">Bauaushub</string>

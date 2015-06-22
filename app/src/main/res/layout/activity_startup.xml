@@ -23,6 +23,15 @@
 
 
 
+    <ProgressBar
+
+            android:layout_width="50dp"
+            android:layout_height="100dp"
+            android:indeterminate="true"
+            android:layout_alignParentBottom="true" android:layout_centerHorizontal="true"
+            android:id="@+id/progressBar"/>
+
+
     <TextView
 
             android:layout_width="wrap_content"
@@ -31,19 +40,6 @@
             android:id="@+id/textView4"
             android:textSize="50dp" android:textStyle="bold" android:textColor="#00000F"
             android:layout_above="@+id/progressBar" android:layout_centerHorizontal="true"/>
-
-
-
-
-
-        <ProgressBar
-
-                android:layout_width="50dp"
-                android:layout_height="100dp"
-                android:indeterminate="true"
-                android:layout_alignParentBottom="true" android:layout_centerHorizontal="true"
-                android:id="@+id/progressBar"/>
-
 
 
     <TextView
