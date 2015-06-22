@@ -129,8 +129,8 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         startActivity(intent);
     }
 
-    public void send(View v){
-
+    public void send(View v) throws IOException {
+        HTTPHandler httpHandler = new HTTPHandler(this);
         loadData();
         try {
             if(getImagePath() != null){

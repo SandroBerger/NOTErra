@@ -29,6 +29,7 @@ public class HTTPHandler {
         forstDB = new DBHandler(context);
         httpclient = new DefaultHttpClient();
         responseHandler = new BasicResponseHandler();
+        //httpPost = new HttpPost("http://berger.hol.es/NOTErra/handler.php");
         httpPost = new HttpPost("http://schwarzenauer.hol.es/NOTErra/handler.php");
 
         HTTPTask httpTask = new HTTPTask();
