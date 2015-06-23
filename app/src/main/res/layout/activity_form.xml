@@ -33,7 +33,7 @@
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:id="@+id/Kosten"
+                android:id="@+id/kosten"
                 android:hint="@string/kostenschatzung"
                 android:background="@drawable/textfield_style"
                 android:inputType="number"
