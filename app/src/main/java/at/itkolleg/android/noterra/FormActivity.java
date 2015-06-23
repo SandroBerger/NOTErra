@@ -58,6 +58,11 @@ public class FormActivity extends ActionBarActivity  {
 
 
 
+    private Spinner mySpinner;
+    private Spinner mySpinner1;
+    private Spinner mySpinner2;
+    private Spinner mySpinner3;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,15 +92,15 @@ public class FormActivity extends ActionBarActivity  {
 
 
 
-        Spinner mySpinner = (Spinner) findViewById(R.id.Spinner02);
+         mySpinner = (Spinner) findViewById(R.id.Spinner02);
 
 
         date=getIntent().getStringExtra("Zeit");
 
         List<String> anzahl = new ArrayList<String>();
-        anzahl.add("Niedrig(in 6-7 Jahren");
+        anzahl.add("Niedrig(in 6-7 Jahren)");
         anzahl.add("Mittel(in 3-5 Jahren)");
-        anzahl.add("Hoch (in 1-2 Jahren");
+        anzahl.add("Hoch (in 1-2 Jahren)");
         anzahl.add("Priorität");
 
         final int listsize = anzahl.size() - 1;
@@ -128,7 +133,7 @@ public class FormActivity extends ActionBarActivity  {
             }
         };
 
-        Spinner mySpinner1 = (Spinner) findViewById(R.id.Spinner03);
+         mySpinner1 = (Spinner) findViewById(R.id.Spinner03);
 
         dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner1.setAdapter(dataAdapter1);
@@ -152,7 +157,7 @@ public class FormActivity extends ActionBarActivity  {
             }
         };
 
-        Spinner mySpinner2 = (Spinner) findViewById(R.id.Spinner04);
+         mySpinner2 = (Spinner) findViewById(R.id.Spinner04);
 
         dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner2.setAdapter(dataAdapter2);
@@ -168,7 +173,7 @@ public class FormActivity extends ActionBarActivity  {
                 "Ereignis ohne unmittelbare Abflussbehinderung" };
 
 
-        Spinner mySpinner3=(Spinner)findViewById(R.id.Spinner01);
+        mySpinner3=(Spinner)findViewById(R.id.Spinner01);
 
         ArrayAdapter<String> dataAdapter3 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, ar) {};
         dataAdapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -191,19 +196,6 @@ public class FormActivity extends ActionBarActivity  {
         maßnahmen=(EditText)findViewById(R.id.maßnahmen);
 
 
-        prioritat=mySpinner.getSelectedItem().toString();
-
-
-        if(mySpinner1.equals("JA"))
-        {
-            foederfahig=1;
-        }
-        else
-        {
-            foederfahig=0;
-        }
-
-        abwicklung=mySpinner2.getSelectedItem().toString();
 
 
 
@@ -280,6 +272,22 @@ public class FormActivity extends ActionBarActivity  {
 
         gemeindestr=gemeinde.getText().toString();
         maßnhamenstr=maßnahmen.getText().toString();
+
+        prioritat=mySpinner.getSelectedItem().toString();
+
+        if(mySpinner1.getSelectedItem(). equals("Ja"))
+        {
+            foederfahig=1;
+        }
+        else
+        {
+            foederfahig=0;
+        }
+
+        abwicklung=mySpinner2.getSelectedItem().toString();
+
+
+
 
         Spinner mySpinner=(Spinner)findViewById(R.id.Spinner01);
         String beobachtung=mySpinner.getSelectedItem().toString();
