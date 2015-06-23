@@ -17,6 +17,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     private File noterraDirectory;
     private DBHandler forstDB;
     private Time t = new Time(Time.getCurrentTimezone());
+    private String date;
 
 
     @Override
@@ -46,7 +47,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         TextView textView=(TextView)findViewById(R.id.datum);
 
         t.setToNow();
-        String date = t.format("%d.%m.%Y");
+         date = t.format("%d.%m.%Y");
         textView.setText("Aktuelles Datum: " + date);
     }
 
@@ -59,11 +60,10 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
 
     public void onClick(View v) {
-        switch(v.getId()){
-            case R.id.inspectionbutton:
-                buttonInspectionClick();
-                break;
-        }
+
+        Intent intent=new Intent(MainActivity.this,InspectionActivity.class);
+        intent.putExtra("Zeit",date);
+        startActivity(intent);
     }
 
     private void buttonInspectionClick(){

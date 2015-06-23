@@ -6,12 +6,56 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.view.*;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FormActivity extends ActionBarActivity  {
+
+    private EditText gemeinde;
+    private EditText kosten;
+    private EditText maßnahmen;
+
+    private CheckBox absturzsicherung;
+    private CheckBox baumestr;
+    private CheckBox bauwerksan;
+    private CheckBox bauwerkwart;
+    private CheckBox durchlassfrei;
+    private CheckBox genehmigung;
+    private CheckBox hindernisseentf;
+    private CheckBox hindernissespreng;
+    private CheckBox holzablang;
+    private CheckBox keinemaßnahm;
+    private CheckBox sperreodgerinne;
+    private CheckBox ufersichern;
+    private CheckBox zustandbeob;
+
+    private int absturzsicherungint;
+    private int baumestrint;
+    private int bauwerksanint;
+    private int bauwerkwartint;
+    private int durchlassfreiint;
+    private int genehmigungint;
+    private int hindernisseentfint;
+    private int hindernissesprengint;
+    private int holzablangint;
+    private int keinemaßnahmint;
+    private int sperreodgerinneint;
+    private int ufersichernint;
+    private int zustandbeobint;
+    private DBHandler forstDB;
+
+    private String gemeindestr;
+    private String date;
+    private int kostenint;
+    private String maßnhamenstr;
+    private String prioritat;
+    private int foederfahig;
+    private String abwicklung;
+
 
 
 
@@ -25,9 +69,28 @@ public class FormActivity extends ActionBarActivity  {
                     .commit();
 
         }
+        forstDB = new DBHandler(this);
+
+        absturzsicherung = (CheckBox) findViewById(R.id.abstuzsicherung);
+        baumestr = (CheckBox) findViewById(R.id.baumestraucher);
+        bauwerksan = (CheckBox) findViewById(R.id.bauwerksan);
+        bauwerkwart = (CheckBox) findViewById(R.id.bauwerkwar);
+        durchlassfrei = (CheckBox) findViewById(R.id.durchlass);
+        genehmigung = (CheckBox) findViewById(R.id.genehmigung);
+        hindernisseentf = (CheckBox) findViewById(R.id.hindernisseentf);
+        hindernissespreng = (CheckBox) findViewById(R.id.hindernissp);
+        holzablang = (CheckBox) findViewById(R.id.holzablang);
+        keinemaßnahm = (CheckBox) findViewById(R.id.keineMaßn);
+        sperreodgerinne = (CheckBox) findViewById(R.id.sperreodgerinne);
+        ufersichern = (CheckBox) findViewById(R.id.ufersich);
+        zustandbeob = (CheckBox) findViewById(R.id.zustandbeob);
+
 
 
         Spinner mySpinner = (Spinner) findViewById(R.id.Spinner02);
+
+
+        date=getIntent().getStringExtra("Zeit");
 
         List<String> anzahl = new ArrayList<String>();
         anzahl.add("Niedrig(in 6-7 Jahren");
@@ -116,17 +179,107 @@ public class FormActivity extends ActionBarActivity  {
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
 
 
+        gemeinde=(EditText)findViewById(R.id.gemeinde);
+        gemeindestr=gemeinde.getText().toString();
+
+        kosten=(EditText)findViewById(R.id.Kosten);
+
+
+
+
+        maßnahmen=(EditText)findViewById(R.id.maßnahmen);
+        maßnhamenstr=maßnahmen.getText().toString();
+
+
+        prioritat=mySpinner.getSelectedItem().toString();
+
+
+        if(mySpinner1.equals("JA"))
+        {
+            foederfahig=1;
+        }
+        else
+        {
+            foederfahig=0;
+        }
+
+        abwicklung=mySpinner2.getSelectedItem().toString();
+
+
+
+
 
 
     }
 
+    public void test(View v){
+        ArrayList<String> schadensartBauwerk=new ArrayList<String>();
+
+        if(absturzsicherung.isChecked())
+        {
+            absturzsicherungint=1;
+        }
+        if(baumestr.isChecked())
+        {
+            baumestrint=1;
+        }
+        if(bauwerkwart.isChecked())
+        {
+             bauwerksanint=1;
+        }
+        if(bauwerkwart.isChecked())
+        {
+           bauwerkwartint=1;
+        }
+        if(durchlassfrei.isChecked())
+        {
+         durchlassfreiint=1;
+        }
+        if(genehmigung.isChecked())
+        {
+            genehmigungint=1;
+        }
+        if(hindernisseentf.isChecked())
+        {
+            hindernisseentfint=1;
+        }
+        if(hindernissespreng.isChecked())
+        {
+            hindernissesprengint=1;
+        }
+        if(holzablang.isChecked())
+        {
+            holzablangint=1;
+        }
+        if(keinemaßnahm.isChecked())
+        {
+            keinemaßnahmint=1;
+        }
+        if(sperreodgerinne.isChecked())
+        {
+            sperreodgerinneint=1;
+        }
+        if(ufersichern.isChecked())
+        {
+            ufersichernint=1;
+        }
+        if(zustandbeob.isChecked())
+        {
+            zustandbeobint=1;
+        }
+
+
+    }
+
+
     public void onclick(View v)
     {
 
+        kostenint=Integer.parseInt(kosten.getText().toString());
         Spinner mySpinner=(Spinner)findViewById(R.id.Spinner01);
         String beobachtung=mySpinner.getSelectedItem().toString();
 
-
+       forstDB.addFormular(gemeindestr,date,kostenint,maßnhamenstr,prioritat,foederfahig,abwicklung,absturzsicherungint, baumestrint,bauwerksanint, bauwerkwartint, durchlassfreiint, genehmigungint, hindernisseentfint, hindernissesprengint, holzablangint, keinemaßnahmint, sperreodgerinneint, ufersichernint, zustandbeobint);
 
 
         switch (beobachtung) {

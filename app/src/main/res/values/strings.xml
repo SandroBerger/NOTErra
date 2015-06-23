@@ -68,6 +68,7 @@
 
 
     <!-- Strings für Haupt-Formular-->
+    <string name="gemeinde">Gemeinde</string>
     <string name="kostenschatzung">Kostenschätzung</string>
     <string name="empfMaßn">Empfohlene Maßnhamen</string>
     <string name="prioritat">Priorität</string>
@@ -77,8 +78,8 @@
 
     <string name="absturzsicherung">Absturzsicherung</string>
     <string name="baumestraucher">Bäume/Sträuche fällen</string>
-    <string name="baumwerksan">Bauwerk sanieren</string>
-    <string name="baumwerkwar">Bauwerk warten</string>
+    <string name="bauwerksan">Bauwerk sanieren</string>
+    <string name="bauwerkwar">Bauwerk warten</string>
     <string name="durchlass">Durchlass freilegen</string>
     <string name="genehmigung">Genehmigung prüfen</string>
     <string name="hindernisseentf">Hindernisse entfernen/räumen</string>

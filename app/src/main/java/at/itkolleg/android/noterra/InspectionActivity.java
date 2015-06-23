@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 public class InspectionActivity extends ActionBarActivity implements View.OnClickListener {
     private DBHandler forstDB;
+    private String date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,8 @@ public class InspectionActivity extends ActionBarActivity implements View.OnClic
 
         TextView textView=(TextView)findViewById(R.id.h2beobachtung);
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
+
+        date=getIntent().getStringExtra("Zeit");
 
         String extra= getIntent().getStringExtra("Headline");
         textView.setText(extra);
@@ -70,7 +73,10 @@ public class InspectionActivity extends ActionBarActivity implements View.OnClic
     //Ermöglicht die weiterleitung zwischen den einzelnen bereichen der Anwendung. Es wird ein view und die jeweilige Klasse mitgegeben auf die weitergeleitet werden soll.
     private void buttonFormClick(){
 
-        startActivity(new Intent(this, FormActivity.class));
+        Intent intent=new Intent(InspectionActivity.this,FormActivity.class);
+        intent.putExtra("Zeit", date);
+        startActivity(intent);
+
     }
     private void buttonNoteClick(){
         forstDB.addNotiz();

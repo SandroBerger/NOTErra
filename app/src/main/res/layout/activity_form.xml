@@ -15,18 +15,28 @@
                   android:orientation="vertical" android:focusableInTouchMode="true" >
 
 
-
         <EditText
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
+                android:id="@+id/gemeinde"
+                android:hint="@string/gemeinde"
+                android:background="@drawable/textfield_style"
+
+                />
+
+        <EditText
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:id="@+id/Kosten"
                 android:hint="@string/kostenschatzung"
                 android:background="@drawable/textfield_style"
                 android:inputType="number"
-
                 />
 
 
@@ -45,7 +55,6 @@
 
                 android:gravity="top|start"
                 android:maxLines="10"
-
                 />
 
 
@@ -110,9 +119,9 @@
                    android:layout_marginRight="5dp"
 
                    android:text="@string/absturzsicherung"
-                   android:id="@+id/abstuzsucherung"
+                   android:id="@+id/abstuzsicherung"
                    android:bottomLeftRadius="8dip"
-                   android:onClick="onclick1"/>
+                   android:onClick="test"/>
 
         <CheckBox android:layout_width="match_parent"
                   android:layout_height="wrap_content"
@@ -123,7 +132,7 @@
                   android:text="@string/baumestraucher"
                   android:id="@+id/baumestraucher"
                   android:bottomLeftRadius="8dip"
-                  android:onClick="onclick1"/>
+                  android:onClick="test"/>
 
         <CheckBox android:layout_width="match_parent"
                   android:layout_height="wrap_content"
@@ -131,10 +140,10 @@
                   android:layout_marginLeft="5dp"
                   android:layout_marginRight="5dp"
 
-                  android:text="@string/baumwerksan"
-                  android:id="@+id/baumwerksan"
+                  android:text="@string/bauwerksan"
+                  android:id="@+id/bauwerksan"
                   android:bottomLeftRadius="8dip"
-                  android:onClick="onclick1"/>
+                  android:onClick="test"/>
 
         <CheckBox android:layout_width="match_parent"
                   android:layout_height="wrap_content"
@@ -142,10 +151,10 @@
                   android:layout_marginLeft="5dp"
                   android:layout_marginRight="5dp"
 
-                  android:text="@string/baumwerkwar"
-                  android:id="@+id/baumwerkwar"
+                  android:text="@string/bauwerkwar"
+                  android:id="@+id/bauwerkwar"
                   android:bottomLeftRadius="8dip"
-                  android:onClick="onclick"/>
+                  android:onClick="test"/>
 
         <CheckBox android:layout_width="match_parent"
                   android:layout_height="wrap_content"
@@ -156,7 +165,7 @@
                   android:text="@string/durchlass"
                   android:id="@+id/durchlass"
                   android:bottomLeftRadius="8dip"
-                  android:onClick="onclick1"/>
+                  android:onClick="test"/>
 
         <CheckBox android:layout_width="match_parent"
                   android:layout_height="wrap_content"
@@ -167,7 +176,7 @@
                   android:text="@string/genehmigung"
                   android:id="@+id/genehmigung"
                   android:bottomLeftRadius="8dip"
-                  android:onClick="onclick1"/>
+                  android:onClick="test"/>
 
         <CheckBox android:layout_width="match_parent"
                   android:layout_height="wrap_content"
@@ -178,7 +187,7 @@
                   android:text="@string/hindernisseentf"
                   android:id="@+id/hindernisseentf"
                   android:bottomLeftRadius="8dip"
-                  android:onClick="onclick"/>
+                  android:onClick="test"/>
 
 
 
@@ -191,7 +200,7 @@
                   android:text="@string/hindernissp"
                   android:id="@+id/hindernissp"
                   android:bottomLeftRadius="8dip"
-                  android:onClick="onclick"/>
+                  android:onClick="test"/>
 
 
         <CheckBox android:layout_width="match_parent"
@@ -203,7 +212,7 @@
                   android:text="@string/holzablang"
                   android:id="@+id/holzablang"
                   android:bottomLeftRadius="8dip"
-                  android:onClick="onclick"/>
+                  android:onClick="test"/>
 
 
         <CheckBox android:layout_width="match_parent"
@@ -215,7 +224,7 @@
                   android:text="@string/keineMaßn"
                   android:id="@+id/keineMaßn"
                   android:bottomLeftRadius="8dip"
-                  android:onClick="onclick"/>
+                  android:onClick="test"/>
 
 
         <CheckBox android:layout_width="match_parent"
@@ -227,7 +236,7 @@
                   android:text="@string/sperreodgerinne"
                   android:id="@+id/sperreodgerinne"
                   android:bottomLeftRadius="8dip"
-                  android:onClick="onclick"/>
+                  android:onClick="test"/>
 
 
         <CheckBox android:layout_width="match_parent"
@@ -239,7 +248,7 @@
                   android:text="@string/ufersich"
                   android:id="@+id/ufersich"
                   android:bottomLeftRadius="8dip"
-                  android:onClick="onclick"/>
+                  android:onClick="test"/>
 
         <CheckBox android:layout_width="match_parent"
                   android:layout_height="wrap_content"
@@ -250,7 +259,7 @@
                   android:text="@string/zustandbeob"
                   android:id="@+id/zustandbeob"
                   android:bottomLeftRadius="8dip"
-                  android:onClick="onclick"/>
+                  android:onClick="test"/>
 
         <CheckBox android:layout_width="match_parent"
                   android:layout_height="wrap_content"
@@ -261,7 +270,7 @@
                   android:text="@string/untersp"
                   android:id="@+id/Untersp_fundanment"
                   android:bottomLeftRadius="8dip"
-                  android:onClick="onclick1"/>
+                  android:onClick="test"/>
 
 
 
@@ -304,11 +313,7 @@
             android:id="@+id/button" android:layout_centerVertical="true" android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:background="@drawable/button_style"
-            android:onClick="onclick"
-            />
-
-
-
+            android:onClick="onclick"/>
 
     </LinearLayout>
     </ScrollView>

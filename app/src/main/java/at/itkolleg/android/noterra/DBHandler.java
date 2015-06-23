@@ -67,7 +67,7 @@ public class DBHandler extends SQLiteOpenHelper {
                     "'KeineMassnahme' INTEGER DEFAULT 0," +
                     "'SperreOdGerinneRaumen' INTEGER DEFAULT 0," +
                     "'UferSichern' INTEGER DEFAULT 0," +
-                    "'AZustandBeobachten' INTEGER DEFAULT 0" +
+                    "'ZustandBeobachten' INTEGER DEFAULT 0" +
                     ");");
 
             forstDB.execSQL("CREATE TABLE IF NOT EXISTS 'tbl_Gps'(" +
