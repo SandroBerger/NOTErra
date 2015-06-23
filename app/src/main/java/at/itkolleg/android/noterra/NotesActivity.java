@@ -239,7 +239,6 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         forstDB.addImageRef(imagePfad);
         forstDB.addAudioRef(audioPfad);
         forstDB.addNoteText(textNotiz.getText().toString());
-        System.out.println(forstDB.getAllFromTable("tbl_Notiz").getString(2));
         startActivity(new Intent(this, InspectionActivity.class));
     }
 
