@@ -76,7 +76,7 @@
                 android:layout_width="120dp"
                 android:layout_marginLeft="30dp"
                 android:layout_height="35dp"
-                android:id="@+id/art_der_einbaut"
+                android:id="@+id/art_sonstiges"
                 android:layout_marginTop="-35dp"
                 android:singleLine="true"
                 android:background="@drawable/apptheme_textfield_default_holo_light"

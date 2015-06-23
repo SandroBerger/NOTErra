@@ -44,7 +44,7 @@ public class Abflussbehinderndeeinbauten extends ActionBarActivity {
         rohrdurchlass=(RadioButton)findViewById(R.id.rohrdurchlass);
         freiwahl=(RadioButton)findViewById(R.id.freiwahl);
 
-        editText=(EditText)findViewById(R.id.art_der_einbaut);
+        editText=(EditText)findViewById(R.id.art_sonstiges);
 
         beschreibung=(EditText)findViewById(R.id.Beschreibung);
 
@@ -106,9 +106,12 @@ public class Abflussbehinderndeeinbauten extends ActionBarActivity {
 
     public void save(View v){
 
+        if(freiwahl.isChecked()){
+            auswahl=editText.getText().toString();
+        }
 
 
-        if (freiwahl.isChecked() && freiwahl.getText().toString().equals("")) {
+        if (editText.getText().toString().equals("")) {
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
                     .setMessage("Es wurde kein Text eingegeben")
@@ -149,6 +152,7 @@ public class Abflussbehinderndeeinbauten extends ActionBarActivity {
                     .show();
         } else
         {
+
 
             forstDB.addAbflussbehinderung(auswahl,beschreibung.getText().toString());
 
