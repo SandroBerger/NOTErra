@@ -51,28 +51,18 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         textView.setText("Aktuelles Datum: " + date);
     }
 
-    //-------------Hinzufügen der Buttonclick funktion und weiterleitung auf die Begehungsseite----
     public void addButton(){
         Button inspectionButton = (Button) findViewById(R.id.inspectionbutton);
         inspectionButton.setOnClickListener(this);
     }
 
-
-
     public void onClick(View v) {
-
+        String date = t.format("%d.%m.%Y");
+        forstDB.addBeobachtung(date);
         Intent intent=new Intent(MainActivity.this,InspectionActivity.class);
         intent.putExtra("Zeit",date);
         startActivity(intent);
     }
-
-    private void buttonInspectionClick(){
-        String date = t.format("%d.%m.%Y");
-        forstDB.addBeobachtung(date);
-        startActivity(new Intent(this, InspectionActivity.class));
-    }
-    //-------------------------------------------------------------------------------------------------
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

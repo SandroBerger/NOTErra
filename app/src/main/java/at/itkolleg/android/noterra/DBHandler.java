@@ -523,7 +523,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
         Cursor cursor = forstDB.query(tablename, new String[] {String.valueOf(spaltenName)}, null, null, null, null, null);
         cursor.moveToLast();
-        String imageRef = imageRef = cursor.getString(0);
+        String imageRef = cursor.getString(0);
 
         return imageRef;
     }
