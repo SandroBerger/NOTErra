@@ -180,15 +180,15 @@ public class FormActivity extends ActionBarActivity  {
 
 
         gemeinde=(EditText)findViewById(R.id.gemeinde);
-        gemeindestr=gemeinde.getText().toString();
 
-        kosten=(EditText)findViewById(R.id.Kosten);
+
+
+        kosten=(EditText)findViewById(R.id.kosten);
 
 
 
 
         maßnahmen=(EditText)findViewById(R.id.maßnahmen);
-        maßnhamenstr=maßnahmen.getText().toString();
 
 
         prioritat=mySpinner.getSelectedItem().toString();
@@ -274,12 +274,18 @@ public class FormActivity extends ActionBarActivity  {
 
     public void onclick(View v)
     {
+        if(!kosten.getText().toString().equals("")) {
+            kostenint = Integer.parseInt(kosten.getText().toString());
+        }
 
-        kostenint=Integer.parseInt(kosten.getText().toString());
+        gemeindestr=gemeinde.getText().toString();
+        maßnhamenstr=maßnahmen.getText().toString();
+
         Spinner mySpinner=(Spinner)findViewById(R.id.Spinner01);
         String beobachtung=mySpinner.getSelectedItem().toString();
 
        forstDB.addFormular(gemeindestr,date,kostenint,maßnhamenstr,prioritat,foederfahig,abwicklung,absturzsicherungint, baumestrint,bauwerksanint, bauwerkwartint, durchlassfreiint, genehmigungint, hindernisseentfint, hindernissesprengint, holzablangint, keinemaßnahmint, sperreodgerinneint, ufersichernint, zustandbeobint);
+
 
 
         switch (beobachtung) {
