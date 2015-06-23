@@ -3,6 +3,7 @@ package at.itkolleg.android.noterra;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.AsyncTask;
+import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
@@ -49,7 +50,11 @@ public class HTTPHandler {
 
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
-            httpclient.execute(httpPost);
+            HttpResponse response = httpclient.execute(httpPost);
+            int a = response.getStatusLine().getStatusCode();
+            if(a == 200) {
+                forstDB.deleteAllFromTable(tabelname);
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
