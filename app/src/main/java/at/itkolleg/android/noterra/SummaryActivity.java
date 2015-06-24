@@ -95,9 +95,9 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
 
     }
 
-    public void loadData(){
-        imagePath  = forstdb.getRefFromImageTable();
-        audioPath  = forstdb.getRefFromAudioTable();
+    public void loadData() {
+        imagePath = forstdb.getRefFromImageTable();
+        audioPath = forstdb.getRefFromAudioTable();
     }
 
     public String getImagePath() {
@@ -108,7 +108,7 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         return audioPath;
     }
 
-    public void back(View v){
+    public void back(View v) {
         Intent intent = new Intent(SummaryActivity.this, InspectionActivity.class);
         startActivity(intent);
     }
@@ -117,14 +117,14 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         HTTPHandler httpHandler = new HTTPHandler(this);
         loadData();
         try {
-            if(getImagePath() != null){
+            if (getImagePath() != null) {
                 FTPHandler ftp1 = new FTPHandler(getImagePath());
             }
-            if(getAudioPath() != null){
+            if (getAudioPath() != null) {
                 FTPHandler ftp2 = new FTPHandler(getAudioPath());
             }
 
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
