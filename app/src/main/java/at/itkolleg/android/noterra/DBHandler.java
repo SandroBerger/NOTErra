@@ -270,7 +270,6 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put("Prioritaet", prioritaet);
         values.put("Foerderfaehig", foerderfaehig);
         values.put("Abwicklung", abwicklung);
-        // Int mitgeben 0 oder 1 ob gesetzt oder nicht gesetzt!
         values.put("Absturzsicherung", absturzsicherung);
         values.put("BaumFaellen", baumFaellen);
         values.put("BauwerkSanieren", bauwerkSanieren);
@@ -512,7 +511,7 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     public Cursor getAllFromTable(String tablename){
-        Cursor cursor = forstDB.rawQuery("SELECT * FROM " + tablename + "", null);
+        Cursor cursor = forstDB.rawQuery("SELECT * FROM " + tablename+";", null);
         cursor.moveToFirst();
 
         return cursor;
@@ -539,6 +538,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
         Cursor cursor = forstDB.query(tablename, new String[] {String.valueOf(spaltenName)}, null, null, null, null, null);
         cursor.moveToFirst();
+
         if(!(cursor.getCount() == 0)) {
             audioRef = cursor.getString(0);
         }
@@ -546,23 +546,22 @@ public class DBHandler extends SQLiteOpenHelper {
         return audioRef;
     }
 
-    public void deleteAllFromTable(String tablename){
+    public void deleteAllFromTable(){
         forstDB = getWritableDatabase();
 
-        forstDB.rawQuery("DELETE FROM " + tablename, null);
-        //forstDB.rawQuery("DELETE FROM tbl_Formular", null);
-        //forstDB.rawQuery("DELETE FROM tbl_Holzablagerung", null);
-        //forstDB.rawQuery("DELETE FROM tbl_OhneBehinderung", null);
-        //forstDB.rawQuery("DELETE FROM tbl_SchadenAnRegulierung", null);
-        //forstDB.rawQuery("DELETE FROM tbl_WasserAusEinleitung", null);
-        //forstDB.rawQuery("DELETE FROM tbl_Abflussbehinderung", null);
-        //forstDB.rawQuery("DELETE FROM tbl_Ablagerung", null);
-        //forstDB.rawQuery("DELETE FROM tbl_Notiz", null);
-        //forstDB.rawQuery("DELETE FROM tbl_Foto", null);
-        //forstDB.rawQuery("DELETE FROM tbl_Sprachaufnahme", null);
-        //forstDB.rawQuery("DELETE FROM tbl_Text", null);
-        //forstDB.rawQuery("DELETE FROM tbl_Gps", null);
-        //forstDB.rawQuery("DELETE FROM tbl_Beobachtung", null);
+        forstDB.delete("tbl_Formular", null, null);
+        forstDB.delete("tbl_Holzablagerung", null, null);
+        forstDB.delete("tbl_OhneBehinderung", null, null);
+        forstDB.delete("tbl_SchadenAnRegulierung", null, null);
+        forstDB.delete("tbl_WasserAusEinleitung", null, null);
+        forstDB.delete("tbl_Abflussbehinderung", null, null);
+        forstDB.delete("tbl_Ablagerung", null, null);
+        forstDB.delete("tbl_Notiz", null, null);
+        forstDB.delete("tbl_Foto", null, null);
+        forstDB.delete("tbl_Sprachaufnahme", null, null);
+        forstDB.delete("tbl_Text", null, null);
+        forstDB.delete("tbl_Gps", null, null);
+        forstDB.delete("tbl_Beobachtung", null, null);
     }
 
     @Override
