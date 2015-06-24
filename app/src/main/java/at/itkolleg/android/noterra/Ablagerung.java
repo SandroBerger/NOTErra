@@ -13,7 +13,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 
 public class Ablagerung extends ActionBarActivity {
@@ -31,7 +30,12 @@ public class Ablagerung extends ActionBarActivity {
     private EditText groeße;
     private EditText laengebach;
     private EditText maßnahmen;
-    private EditText kosten;
+
+    private DBHandler forstDB;
+    private String auswahl;
+    private int bachabschnitt;
+    private int ausmas;
+
 
 
     @Override
@@ -48,15 +52,16 @@ public class Ablagerung extends ActionBarActivity {
 
 
         edit=(EditText)findViewById(R.id.sonstiges);
+
         besch=(EditText)findViewById(R.id.Beschreibung);
         groeße=(EditText)findViewById(R.id.Großausmaß);
         laengebach=(EditText)findViewById(R.id.laenge_bachabschnitt);
-        maßnahmen=(EditText)findViewById(R.id.maßnahmen);
-        kosten=(EditText)findViewById(R.id.Kosten);
+
 
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
 
 
+        forstDB = new DBHandler(this);
 
 
 
@@ -75,26 +80,22 @@ public class Ablagerung extends ActionBarActivity {
         switch(checkedRadiobut){
             case R.id.Bauaushub:
                 if(bauaushub.isChecked()){
-                    Toast toast=Toast.makeText(getApplicationContext(),bauaushub.getText(), Toast.LENGTH_SHORT);
-                    toast.show();
+                    auswahl=bauaushub.getText().toString();
                 }
                 break;
             case R.id.fesblock:
                 if(felsbloecke.isChecked()){
-                    Toast toast=Toast.makeText(getApplicationContext(),felsbloecke.getText(), Toast.LENGTH_SHORT);
-                    toast.show();
+                    auswahl=felsbloecke.getText().toString();
                 }
                 break;
             case R.id.mull:
                 if(muellablagerung.isChecked()){
-                    Toast toast=Toast.makeText(getApplicationContext(),muellablagerung.getText(), Toast.LENGTH_SHORT);
-                    toast.show();
+                    auswahl=muellablagerung.getText().toString();
                 }
                 break;
             case R.id.schotter:
                 if(schotter.isChecked()){
-                    Toast toast=Toast.makeText(getApplicationContext(),schotter.getText(), Toast.LENGTH_SHORT);
-                    toast.show();
+                    auswahl=schotter.getText().toString();
                 }
                 break;
             case R.id.freiwahl:
@@ -104,6 +105,7 @@ public class Ablagerung extends ActionBarActivity {
                     edit.requestFocus();
                     InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.showSoftInput(edit, InputMethodManager.SHOW_IMPLICIT);
+                    auswahl=edit.getText().toString();
 
                 }
                 break;
@@ -189,33 +191,22 @@ public class Ablagerung extends ActionBarActivity {
 
 
 
-        } else if(maßnahmen.getText().toString().equals("")){
-            new AlertDialog.Builder(this)
-                    .setTitle("!!Achtung!!")
-                    .setMessage("Es wurde keine Empfohlene Maßnahme angegeben")
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    })
-
-                    .show();
-        } else if(kosten.getText().toString().equals("")){
-            new AlertDialog.Builder(this)
-                    .setTitle("!!Achtung!!")
-                    .setMessage("Es wurden keine Kosten angegeben")
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    })
-
-                    .show();
-
-        } else
+        }  else
         {
+
+            auswahl=edit.getText().toString();
+
+            String beschreibung=besch.getText().toString();
+
+            if(!laengebach.getText().equals(""))
+            {
+                bachabschnitt= Integer.parseInt(laengebach.getText().toString());
+                ausmas=Integer.parseInt(groeße.getText().toString());
+            }
+
+
+
+            forstDB.addAblagerung(auswahl,beschreibung, bachabschnitt,ausmas);
 
             String extra = getIntent().getStringExtra("Headline");
             Intent intent = new Intent(Ablagerung.this, InspectionActivity.class);

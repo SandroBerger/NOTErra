@@ -13,7 +13,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 
 
@@ -29,6 +28,10 @@ public class Abflussbehinderung extends ActionBarActivity {
     private RadioButton sonstiges;
     private RadioButton freiwahl;
     private EditText edit;
+    private EditText besch;
+
+    private DBHandler forstDB;
+    private String auswahl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +49,12 @@ public class Abflussbehinderung extends ActionBarActivity {
         sonstiges=(RadioButton)findViewById(R.id.sonst);
         freiwahl=(RadioButton)findViewById(R.id.freiwahl);
         edit=(EditText)findViewById(R.id.art_der_abflussbehinderung);
+        besch=(EditText)findViewById(R.id.Beschreibung);
+
 
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
 
+        forstDB = new DBHandler(this);
 
     }
 
@@ -66,51 +72,42 @@ public class Abflussbehinderung extends ActionBarActivity {
         switch(checkedRadiobut){
             case R.id.felssturz:
                 if(felssturz.isChecked()){
-                    Toast toast=Toast.makeText(getApplicationContext(),felssturz.getText(), Toast.LENGTH_SHORT);
-                    toast.show();
+                    auswahl=felssturz.getText().toString();
                 }
                 break;
             case R.id.hochwasser:
                 if(hochwasser.isChecked()){
-                    Toast toast=Toast.makeText(getApplicationContext(),hochwasser.getText(), Toast.LENGTH_SHORT);
-                    toast.show();
+                    auswahl=hochwasser.getText().toString();
                 }
                 break;
             case R.id.lawinenablagerung:
                 if(lawinenablagerung.isChecked()){
-                    Toast toast=Toast.makeText(getApplicationContext(),lawinenablagerung.getText(), Toast.LENGTH_SHORT);
-                    toast.show();
+                    auswahl=lawinenablagerung.getText().toString();
                 }
                 break;
             case R.id.mure:
                 if(mure.isChecked()){
-                    Toast toast=Toast.makeText(getApplicationContext(),mure.getText(), Toast.LENGTH_SHORT);
-                    toast.show();
+                    auswahl=mure.getText().toString();
                 }
                 break;
             case R.id.rutschung:
                 if(rutschung.isChecked()){
-                    Toast toast=Toast.makeText(getApplicationContext(),rutschung.getText(), Toast.LENGTH_SHORT);
-                    toast.show();
+                    auswahl=rutschung.getText().toString();
                 }
                 break;
             case R.id.sonst:
                 if(sonstiges.isChecked()){
-                    Toast toast=Toast.makeText(getApplicationContext(),sonstiges.getText(), Toast.LENGTH_SHORT);
-                    toast.show();
+                    auswahl=sonstiges.getText().toString();
                 }
                 break;
 
             case R.id.freiwahl:
                 if(freiwahl.isChecked()){
 
-
-
-
                     edit.requestFocus();
                     InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.showSoftInput(edit, InputMethodManager.SHOW_IMPLICIT);
-
+                    auswahl=edit.getText().toString();
 
                 }
                 break;
@@ -126,9 +123,12 @@ public class Abflussbehinderung extends ActionBarActivity {
 
     public void save(View v) {
 
+
+
+
         if(freiwahl.isChecked())
         {
-
+            auswahl=edit.getText().toString();
 
             if (edit.getText().toString().equals("")) {
                 new AlertDialog.Builder(this)
@@ -145,6 +145,7 @@ public class Abflussbehinderung extends ActionBarActivity {
 
                         .show();
             } else {
+                forstDB.addOhneBehinderung(auswahl, besch.getText().toString());
                 String extra = getIntent().getStringExtra("Headline");
                 Intent intent = new Intent(Abflussbehinderung.this, InspectionActivity.class);
                 intent.putExtra("Headline", extra);
@@ -155,6 +156,10 @@ public class Abflussbehinderung extends ActionBarActivity {
         {
             if(felssturz.isChecked() || hochwasser.isChecked() || lawinenablagerung.isChecked() || mure.isChecked() || rutschung.isChecked() || sonstiges.isChecked())
             {
+
+
+                forstDB.addOhneBehinderung(auswahl, besch.getText().toString());
+
                 String extra = getIntent().getStringExtra("Headline");
                 Intent intent = new Intent(Abflussbehinderung.this, InspectionActivity.class);
                 intent.putExtra("Headline", extra);
