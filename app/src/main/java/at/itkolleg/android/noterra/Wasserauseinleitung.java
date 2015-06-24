@@ -92,17 +92,17 @@ public class Wasserauseinleitung extends ActionBarActivity {
                 break;
             case R.id.beschneiung:
                 if (beschneiung.isChecked()) {
-                    auswahl=abwasser.getText().toString();
+                    auswahl=beschneiung.getText().toString();
                 }
                 break;
             case R.id.bewaesserung:
                 if (bewaesserung.isChecked()) {
-                    auswahl=abwasser.getText().toString();
+                    auswahl=bewaesserung.getText().toString();
                 }
                 break;
             case R.id.trinkwasser:
                 if (trinkwasser.isChecked()) {
-                    auswahl=abwasser.getText().toString();
+                    auswahl=trinkwasser.getText().toString();
                 }
                 break;
 

@@ -194,7 +194,7 @@ public class Ablagerung extends ActionBarActivity {
         }  else
         {
 
-            auswahl=edit.getText().toString();
+
 
             String beschreibung=besch.getText().toString();
 

@@ -111,7 +111,7 @@ public class Abflussbehinderndeeinbauten extends ActionBarActivity {
         }
 
 
-        if (editText.getText().toString().equals("")) {
+        if (editText.getText().toString().equals("") && freiwahl.isChecked()) {
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
                     .setMessage("Es wurde kein Text eingegeben")
