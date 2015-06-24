@@ -46,7 +46,9 @@ public class HTTPHandler {
 
         try {
             for (int i = 0; i <= c.getColumnCount()-1; i++) {
-                nameValuePairs.add(new BasicNameValuePair(c.getColumnName(i), c.getString(i)));
+                if (!(c.getCount() == 0 || c.getString(i) == null || c.getString(i).equals(null))){
+                    nameValuePairs.add(new BasicNameValuePair(c.getColumnName(i), c.getString(i)));
+                }
             }
 
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));

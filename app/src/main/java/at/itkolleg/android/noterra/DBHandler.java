@@ -549,19 +549,19 @@ public class DBHandler extends SQLiteOpenHelper {
     public void deleteAllFromTable(){
         forstDB = getWritableDatabase();
 
-        forstDB.rawQuery("DELETE FROM tbl_Formular", null);
-        forstDB.rawQuery("DELETE FROM tbl_Holzablagerung", null);
-        forstDB.rawQuery("DELETE FROM tbl_OhneBehinderung", null);
-        forstDB.rawQuery("DELETE FROM tbl_SchadenAnRegulierung", null);
-        forstDB.rawQuery("DELETE FROM tbl_WasserAusEinleitung", null);
-        forstDB.rawQuery("DELETE FROM tbl_Abflussbehinderung", null);
-        forstDB.rawQuery("DELETE FROM tbl_Ablagerung", null);
-        forstDB.rawQuery("DELETE FROM tbl_Notiz", null);
-        forstDB.rawQuery("DELETE FROM tbl_Foto", null);
-        forstDB.rawQuery("DELETE FROM tbl_Sprachaufnahme", null);
-        forstDB.rawQuery("DELETE FROM tbl_Text", null);
-        forstDB.rawQuery("DELETE FROM tbl_Gps", null);
-        forstDB.rawQuery("DELETE FROM tbl_Beobachtung", null);
+        forstDB.delete("tbl_Formular", null, null);
+        forstDB.delete("tbl_Holzablagerung", null, null);
+        forstDB.delete("tbl_OhneBehinderung", null, null);
+        forstDB.delete("tbl_SchadenAnRegulierung", null, null);
+        forstDB.delete("tbl_WasserAusEinleitung", null, null);
+        forstDB.delete("tbl_Abflussbehinderung", null, null);
+        forstDB.delete("tbl_Ablagerung", null, null);
+        forstDB.delete("tbl_Notiz", null, null);
+        forstDB.delete("tbl_Foto", null, null);
+        forstDB.delete("tbl_Sprachaufnahme", null, null);
+        forstDB.delete("tbl_Text", null, null);
+        forstDB.delete("tbl_Gps", null, null);
+        forstDB.delete("tbl_Beobachtung", null, null);
     }
 
     @Override
