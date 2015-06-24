@@ -300,6 +300,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put("idHolzablagerung", holzablagerungID);
+        values.put("AnzahlStaemme", anzahlStaemme);
         values.put("Baumart", baumart);
         values.put("Media", media);
         values.put("Holzmenge", holzmaenge);
