@@ -36,49 +36,55 @@ public class HTTPHandler {
         httpTask.execute();
     }
 
-    public void sendTableToServer(String tabelname) {
+    public int sendTableToServer(String tabelname) {
         Cursor c = forstDB.getAllFromTable(tabelname);
-        c.moveToFirst();
+        int responseCode = 0;
+        c.moveToLast();
 
         List<NameValuePair> nameValuePairs = new ArrayList<>(2);
         nameValuePairs.add(new BasicNameValuePair("TabellenName", tabelname));
 
         try {
-            for (int i = 0; i <= c.getCount()-1; i++) {
+            for (int i = 0; i <= c.getColumnCount()-1; i++) {
                 nameValuePairs.add(new BasicNameValuePair(c.getColumnName(i), c.getString(i)));
             }
 
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
             HttpResponse response = httpclient.execute(httpPost);
-            int a = response.getStatusLine().getStatusCode();
-            if(a == 200) {
-                forstDB.deleteAllFromTable(tabelname);
-            }
+            responseCode = response.getStatusLine().getStatusCode();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return responseCode;
     }
 
     public class HTTPTask extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... params) {
+            int responseCode;
 
-            sendTableToServer("tbl_Beobachtung");
-            sendTableToServer("tbl_Formular");
-            sendTableToServer("tbl_Holzablagerung");
-            sendTableToServer("tbl_Holzbewuchs");
-            sendTableToServer("tbl_OhneBehinderung");
-            sendTableToServer("tbl_SchadenAnRegulierung");
-            sendTableToServer("tbl_WasserAusEinleitung");
-            sendTableToServer("tbl_Abflussbehinderung");
-            sendTableToServer("tbl_Ablagerung");
-            sendTableToServer("tbl_Notiz");
-            sendTableToServer("tbl_Foto");
-            sendTableToServer("tbl_Sprachaufnahme");
-            sendTableToServer("tbl_Text");
-            sendTableToServer("tbl_Gps");
+            responseCode = sendTableToServer("tbl_Beobachtung");
+            responseCode += sendTableToServer("tbl_Formular");
+            responseCode += sendTableToServer("tbl_Holzablagerung");
+            responseCode += sendTableToServer("tbl_Holzbewuchs");
+            responseCode += sendTableToServer("tbl_OhneBehinderung");
+            responseCode += sendTableToServer("tbl_SchadenAnRegulierung");
+            responseCode += sendTableToServer("tbl_WasserAusEinleitung");
+            responseCode += sendTableToServer("tbl_Abflussbehinderung");
+            responseCode += sendTableToServer("tbl_Ablagerung");
+            responseCode += sendTableToServer("tbl_Notiz");
+            responseCode += sendTableToServer("tbl_Foto");
+            responseCode += sendTableToServer("tbl_Sprachaufnahme");
+            responseCode += sendTableToServer("tbl_Text");
+            responseCode += sendTableToServer("tbl_Gps");
+
+            if(responseCode == 2800){
+                forstDB.deleteAllFromTable();
+                forstDB.closeDB();
+            }
 
             return null;
         }
