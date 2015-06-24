@@ -520,10 +520,13 @@ public class DBHandler extends SQLiteOpenHelper {
     public String getRefFromImageTable(){
         String tablename = "tbl_Foto";
         String spaltenName = "Ref";
+        String imageRef = null;
 
         Cursor cursor = forstDB.query(tablename, new String[] {String.valueOf(spaltenName)}, null, null, null, null, null);
         cursor.moveToLast();
-        String imageRef = cursor.getString(0);
+        if(!(cursor.getCount() == 0)){
+            imageRef = cursor.getString(0);
+        }
 
         return imageRef;
     }
@@ -531,10 +534,13 @@ public class DBHandler extends SQLiteOpenHelper {
     public String getRefFromAudioTable(){
         String tablename = "tbl_Sprachaufnahme";
         String spaltenName = "Ref";
+        String audioRef = null;
 
         Cursor cursor = forstDB.query(tablename, new String[] {String.valueOf(spaltenName)}, null, null, null, null, null);
         cursor.moveToFirst();
-        String audioRef = cursor.getString(0);
+        if(!(cursor.getCount() == 0)) {
+            audioRef = cursor.getString(0);
+        }
 
         return audioRef;
     }
