@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -15,20 +16,36 @@ import java.util.List;
 
 public class Holzbewuchs extends ActionBarActivity {
 
+    private Spinner mySpinner;
+    private Spinner mySpinner1;
+
+    private EditText baumhohe;
+    private EditText holzmenge;
+    private EditText beschreibung;
+
+    private DBHandler forstDB;
+    private String anzahl;
+    private int anzahl1;
+    private int baumhoehe;
+    private int holzmengen;
+    private String beschreibungen;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_holzbewuchs);
-        Spinner mySpinner = (Spinner) findViewById(R.id.Spinner01);
+         mySpinner = (Spinner) findViewById(R.id.Spinner01);
 
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
 
 
+        forstDB = new DBHandler(this);
+
         List<String> anzahl = new ArrayList<String>();
         anzahl.add("<10");
-        anzahl.add(">100");
         anzahl.add("11-50");
         anzahl.add("50-100");
+        anzahl.add(">100");
         anzahl.add("Anzahl der Stämme/Sträucher:");
 
         final int listsize = anzahl.size() - 1;
@@ -61,18 +78,60 @@ public class Holzbewuchs extends ActionBarActivity {
             }
         };
 
-        Spinner mySpinner1 = (Spinner) findViewById(R.id.Spinner02);
+        mySpinner1 = (Spinner) findViewById(R.id.Spinner02);
 
         dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner1.setAdapter(dataAdapter1);
         mySpinner1.setSelection(longsize);
 
 
+        baumhohe=(EditText)findViewById(R.id.baumhoehe);
+        holzmenge=(EditText)findViewById(R.id.holzbewuchs_laenge_bachabschnitt);
+        beschreibung=(EditText)findViewById(R.id.beschreibung);
 
 
     }
 
     public void save(View v){
+
+        String baumarten=mySpinner1.getSelectedItem().toString();
+        anzahl=mySpinner.getSelectedItem().toString();
+
+
+        switch (anzahl) {
+            case "<10":
+                anzahl1=10;
+
+                break;
+            case "11-50":
+                anzahl1=35;
+
+
+                break;
+            case "50-100":
+                anzahl1=75;
+
+
+                break;
+            case ">100":
+                anzahl1=100;
+
+
+                break;
+
+            default:
+                break;
+
+        }
+
+
+        baumhoehe=Integer.parseInt(baumhohe.getText().toString());
+        holzmengen=Integer.parseInt(holzmenge.getText().toString());
+        beschreibungen=beschreibung.getText().toString();
+
+    forstDB.addHolzbewuchs(anzahl1,baumarten,baumhoehe,holzmengen,beschreibungen);
+
+
         String extra = getIntent().getStringExtra("Headline");
         Intent intent = new Intent(Holzbewuchs.this, InspectionActivity.class);
         intent.putExtra("Headline", extra);
