@@ -126,7 +126,7 @@
                       android:text="@string/mauerwerk"
                       android:id="@+id/rissemauerwerk"
                       android:bottomLeftRadius="8dip"
-                      android:onClick="onclick"/>
+                      android:onClick="onclick1"/>
 
             <CheckBox android:layout_width="match_parent"
                       android:layout_height="wrap_content"
@@ -159,17 +159,6 @@
                       android:text="@string/starkerbewuchs"
                       android:id="@+id/starkerbewuchs"
                       android:bottomLeftRadius="8dip"
-                      android:onClick="onclick"/>
-
-            <CheckBox android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:background="#F6E398"
-                      android:layout_marginLeft="5dp"
-                      android:layout_marginRight="5dp"
-
-                      android:text="@string/untersp"
-                      android:id="@+id/Untersp_fundanment"
-                      android:bottomLeftRadius="8dip"
                       android:onClick="onclick1"/>
 
             <CheckBox android:layout_width="match_parent"
@@ -178,24 +167,13 @@
                       android:layout_marginLeft="5dp"
                       android:layout_marginRight="5dp"
 
-                      android:text=""
-                      android:id="@+id/eigen"
+                      android:text="@string/untersp"
+                      android:id="@+id/Untersp_fundanment"
                       android:bottomLeftRadius="8dip"
                       android:onClick="onclick1"/>
 
 
-            <EditText
-                    android:layout_width="120dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_height="35dp"
-                    android:id="@+id/freiwahl_bauwerk"
-                    android:layout_marginTop="-35dp"
-                    android:singleLine="true"
 
-                    android:background="@drawable/apptheme_textfield_default_holo_light"
-                    android:hint="Sonstiges"
-
-                    />
 
             <EditText
                     android:layout_width="match_parent"
@@ -211,25 +189,6 @@
                     android:inputType="number"
 
                     />
-
-            <EditText
-                    android:layout_width="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-
-                    android:layout_height="150dp"
-                    android:layout_marginTop="50dp"
-
-                    android:background="@drawable/textfield_style"
-                    android:id="@+id/Beschreibung"
-                    android:hint="@string/Beschreibung"
-                    android:inputType="textMultiLine"
-
-                    android:gravity="top|start"
-                    android:maxLines="10"
-
-                    />
-
 
             <Button
                     android:layout_width="match_parent"

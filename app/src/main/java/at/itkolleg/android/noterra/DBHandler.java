@@ -350,7 +350,7 @@ public class DBHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put("idSchadenAnRegulierung", schadenAnRegulierungID);
         values.put("Art", art);
-        values.put("Hoehe", hoehe);
+        values.put("Hoehe", hoehe); //Dammkrone
         values.put("FehlendeAbsturzsicherung", fehlendeAbsturzsicherung);
         values.put("AusgangSperrenfluegel", ausgangSperrenfluegel);
         values.put("Geschiebesperre", geschiebesperre);
@@ -361,7 +361,7 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put("UnterspueltesFundament", unterspueltesfundament);
 
 
-        forstDB.insert("tbl_OhneBehinderung", null, values);
+        forstDB.insert("tbl_SchadenAnRegulierung", null, values);
     }
 
     public void addWasserAuseinleitung(String art, String zweck, String beschreibung){

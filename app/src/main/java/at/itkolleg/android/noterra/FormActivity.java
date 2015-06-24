@@ -205,7 +205,7 @@ public class FormActivity extends ActionBarActivity  {
     }
 
     public void test(View v){
-        ArrayList<String> schadensartBauwerk=new ArrayList<String>();
+
 
         if(absturzsicherung.isChecked())
         {

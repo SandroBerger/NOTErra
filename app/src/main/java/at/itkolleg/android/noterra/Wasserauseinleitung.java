@@ -30,6 +30,12 @@ public class Wasserauseinleitung extends ActionBarActivity {
     private EditText edit;
     private EditText besch;
 
+    private DBHandler forstDB;
+    private String auswahl;
+    private String beschreibung;
+    private String art;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +77,7 @@ public class Wasserauseinleitung extends ActionBarActivity {
 
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
 
+        forstDB = new DBHandler(this);
     }
 
     public void onclick(View view) {
@@ -80,26 +87,22 @@ public class Wasserauseinleitung extends ActionBarActivity {
         switch (checkedRadiobut) {
             case R.id.abwasser:
                 if (abwasser.isChecked()) {
-                    Toast toast = Toast.makeText(getApplicationContext(), abwasser.getText(), Toast.LENGTH_SHORT);
-                    toast.show();
+                   auswahl=abwasser.getText().toString();
                 }
                 break;
             case R.id.beschneiung:
                 if (beschneiung.isChecked()) {
-                    Toast toast = Toast.makeText(getApplicationContext(), beschneiung.getText(), Toast.LENGTH_SHORT);
-                    toast.show();
+                    auswahl=abwasser.getText().toString();
                 }
                 break;
             case R.id.bewaesserung:
                 if (bewaesserung.isChecked()) {
-                    Toast toast = Toast.makeText(getApplicationContext(), bewaesserung.getText(), Toast.LENGTH_SHORT);
-                    toast.show();
+                    auswahl=abwasser.getText().toString();
                 }
                 break;
             case R.id.trinkwasser:
                 if (trinkwasser.isChecked()) {
-                    Toast toast = Toast.makeText(getApplicationContext(), trinkwasser.getText(), Toast.LENGTH_SHORT);
-                    toast.show();
+                    auswahl=abwasser.getText().toString();
                 }
                 break;
 
@@ -110,7 +113,7 @@ public class Wasserauseinleitung extends ActionBarActivity {
                     edit.requestFocus();
                     InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.showSoftInput(edit, InputMethodManager.SHOW_IMPLICIT);
-
+                    auswahl=edit.getText().toString();
 
 
                 }
@@ -168,6 +171,12 @@ public class Wasserauseinleitung extends ActionBarActivity {
                     }).show();
         } else
         {
+
+           art=mySpinner.getSelectedItem().toString();
+
+            beschreibung=besch.getText().toString();
+            forstDB.addWasserAuseinleitung(art,auswahl,beschreibung);
+
             String extra = getIntent().getStringExtra("Headline");
             Intent intent = new Intent(Wasserauseinleitung.this, InspectionActivity.class);
             intent.putExtra("Headline", extra);
