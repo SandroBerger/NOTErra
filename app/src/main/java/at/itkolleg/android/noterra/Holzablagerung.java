@@ -28,8 +28,12 @@ public class Holzablagerung extends ActionBarActivity {
 
     private EditText besch;
 
-
-
+    private DBHandler forstDB;
+    private int media;
+    private int bachabschnitt;
+    private int holzmengen;
+    private int anzahl1;
+    private String anzahl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +43,10 @@ public class Holzablagerung extends ActionBarActivity {
         bhd=(EditText)findViewById(R.id.Mediabhd);
         holzmenge=(EditText)findViewById(R.id.Holzmenge);
         lbachabschnitt=(EditText)findViewById(R.id.bachabschnitt);
-        besch=(EditText)findViewById(R.id.beschreibung);
-
-        maßnahmen=(EditText)findViewById(R.id.maßnahmen);
-        kosten=(EditText)findViewById(R.id.Kosten);
 
 
+
+        forstDB = new DBHandler(this);
 
 
          mySpinner = (Spinner) findViewById(R.id.Spinner01);
@@ -150,40 +152,56 @@ public class Holzablagerung extends ActionBarActivity {
                         public void onClick(DialogInterface dialog, int which) {
                         }
                     }).show();
-        }else if (besch.getText().toString().equals("")){
-            new AlertDialog.Builder(this)
-                    .setTitle("!!Achtung!!")
-                    .setMessage("Bitte geben Sie eine Beschreibung an")
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    }).show();
-        } else if(maßnahmen.getText().toString().equals("")){
-            new AlertDialog.Builder(this)
-                    .setTitle("!!Achtung!!")
-                    .setMessage("Es wurden keine Empfohlene Maßnahmen eingegeben")
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    }).show();
 
-        }  else if(kosten.getText().toString().equals("")){
-            new AlertDialog.Builder(this)
-                    .setTitle("!!Achtung!!")
-                    .setMessage("Es wurden keine Kosten eingetragen")
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    }).show();
         } else
         {
+
+
+            String baumarten=mySpinner1.getSelectedItem().toString();
+             anzahl=mySpinner.getSelectedItem().toString();
+
+
+            switch (anzahl) {
+                case "<5":
+                    anzahl1=5;
+
+                    break;
+                case "5-20":
+                    anzahl1=20;
+
+
+                    break;
+                case "21-50":
+                    anzahl1=35;
+
+                    break;
+                case ">50":
+                    anzahl1=50;
+
+                    break;
+
+
+                default:
+                    break;
+
+            }
+
+            if(!bhd.getText().equals(""))
+            {
+                media= Integer.parseInt(bhd.getText().toString());
+                bachabschnitt=Integer.parseInt(lbachabschnitt.getText().toString());
+            }
+                holzmengen=Integer.parseInt(holzmenge.getText().toString());
+
+
+            forstDB.addHolzablagerung(anzahl1,baumarten,media,holzmengen,bachabschnitt);
+
+
             String extra = getIntent().getStringExtra("Headline");
             Intent intent = new Intent(Holzablagerung.this, InspectionActivity.class);
             intent.putExtra("Headline", extra);
             startActivity(intent);
+
         }
 
 
