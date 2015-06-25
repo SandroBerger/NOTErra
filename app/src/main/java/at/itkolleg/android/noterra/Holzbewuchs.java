@@ -1,5 +1,7 @@
 package at.itkolleg.android.noterra;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -124,18 +126,43 @@ public class Holzbewuchs extends ActionBarActivity {
 
         }
 
+if(!baumhohe.getText().toString().equals("")){
+    baumhoehe=Integer.parseInt(baumhohe.getText().toString());
+    holzmengen=Integer.parseInt(holzmenge.getText().toString());
+    beschreibungen=beschreibung.getText().toString();
+}
 
-        baumhoehe=Integer.parseInt(baumhohe.getText().toString());
-        holzmengen=Integer.parseInt(holzmenge.getText().toString());
-        beschreibungen=beschreibung.getText().toString();
 
     forstDB.addHolzbewuchs(anzahl1,baumarten,baumhoehe,holzmengen,beschreibungen);
 
 
-        String extra = getIntent().getStringExtra("Headline");
-        Intent intent = new Intent(Holzbewuchs.this, InspectionActivity.class);
-        intent.putExtra("Headline", extra);
-        startActivity(intent);
+        if(mySpinner.getSelectedItem().toString().equals("Anzahl der Stämme/Sträucher:")){
+            new AlertDialog.Builder(this)
+                    .setTitle("!!Achtung!!")
+                    .setMessage("Bitte wählen Sie eine Anzahl der Stämme bzw. Sträucher aus")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    }).show();
+        } else if (mySpinner1.getSelectedItem().toString().equals("Baumarten:")) {
+            new AlertDialog.Builder(this)
+                    .setTitle("!!Achtung!!")
+                    .setMessage("Bitte wählen Sie eine Baumart aus")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    }).show();
+        }else
+            {
+                String extra = getIntent().getStringExtra("Headline");
+                Intent intent = new Intent(Holzbewuchs.this, InspectionActivity.class);
+                intent.putExtra("Headline", extra);
+                startActivity(intent);
+            }
+
+
     }
 
     @Override

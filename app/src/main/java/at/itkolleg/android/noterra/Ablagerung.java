@@ -64,7 +64,12 @@ public class Ablagerung extends ActionBarActivity {
         forstDB = new DBHandler(this);
 
 
-
+        edit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                eigenes.setChecked(true);
+            }
+        });
 
     }
 

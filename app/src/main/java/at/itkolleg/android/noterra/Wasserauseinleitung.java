@@ -78,6 +78,13 @@ public class Wasserauseinleitung extends ActionBarActivity {
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
 
         forstDB = new DBHandler(this);
+
+        edit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                freiwahl.setChecked(true);
+            }
+        });
     }
 
     public void onclick(View view) {
@@ -143,7 +150,7 @@ public class Wasserauseinleitung extends ActionBarActivity {
         } else if (mySpinner.getSelectedItem().toString().equals("Art: Aus/Einleitung: ")) {
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
-                    .setMessage("Es wurde keine Aus oder Einleitung gewählt")
+                    .setMessage("Es wurde keine Aus- oder -Einleitung gewählt")
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

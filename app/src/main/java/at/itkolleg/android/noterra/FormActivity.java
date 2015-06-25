@@ -1,5 +1,7 @@
 package at.itkolleg.android.noterra;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -264,87 +266,110 @@ public class FormActivity extends ActionBarActivity  {
     }
 
 
-    public void onclick(View v)
-    {
-        if(!kosten.getText().toString().equals("")) {
+    public void onclick(View v) {
+        if (!kosten.getText().toString().equals("")) {
             kostenint = Integer.parseInt(kosten.getText().toString());
         }
 
-        gemeindestr=gemeinde.getText().toString();
-        maßnhamenstr=maßnahmen.getText().toString();
+        gemeindestr = gemeinde.getText().toString();
+        maßnhamenstr = maßnahmen.getText().toString();
 
-        prioritat=mySpinner.getSelectedItem().toString();
+        prioritat = mySpinner.getSelectedItem().toString();
 
-        if(mySpinner1.getSelectedItem(). equals("Ja"))
-        {
-            foederfahig=1;
-        }
-        else
-        {
-            foederfahig=0;
+        if (mySpinner1.getSelectedItem().equals("Ja")) {
+            foederfahig = 1;
+        } else {
+            foederfahig = 0;
         }
 
-        abwicklung=mySpinner2.getSelectedItem().toString();
+        abwicklung = mySpinner2.getSelectedItem().toString();
 
 
 
 
-        Spinner mySpinner=(Spinner)findViewById(R.id.Spinner01);
-        String beobachtung=mySpinner.getSelectedItem().toString();
-
-       forstDB.addFormular(gemeindestr,date,kostenint,maßnhamenstr,prioritat,foederfahig,abwicklung,absturzsicherungint, baumestrint,bauwerksanint, bauwerkwartint, durchlassfreiint, genehmigungint, hindernisseentfint, hindernissesprengint, holzablangint, keinemaßnahmint, sperreodgerinneint, ufersichernint, zustandbeobint);
+        forstDB.addFormular(gemeindestr, date, kostenint, maßnhamenstr, prioritat, foederfahig, abwicklung, absturzsicherungint, baumestrint, bauwerksanint, bauwerkwartint, durchlassfreiint, genehmigungint, hindernisseentfint, hindernissesprengint, holzablangint, keinemaßnahmint, sperreodgerinneint, ufersichernint, zustandbeobint);
 
 
+        if (mySpinner.getSelectedItem().toString().equals("Priorität")) {
+            new AlertDialog.Builder(this)
+                    .setTitle("!!Achtung!!")
+                    .setMessage("Bitte wählen Sie eine Priorität aus")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    }).show();
+        } else if (mySpinner1.getSelectedItem().toString().equals("Förderfähig")) {
+            new AlertDialog.Builder(this)
+                    .setTitle("!!Achtung!!")
+                    .setMessage("Bitte wählen Sie die Förderfähigkeit aus")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    }).show();
+        } else if (mySpinner2.getSelectedItem().toString().equals("Abwicklung")) {
+            new AlertDialog.Builder(this)
+                    .setTitle("!!Achtung!!")
+                    .setMessage("Bitte wählen Sie eine Abwicklung aus")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    }).show();
+        } else {
+            Spinner mySpinner = (Spinner) findViewById(R.id.Spinner01);
+            String beobachtung = mySpinner.getSelectedItem().toString();
 
-        switch (beobachtung) {
-            case "Holzablagerungen im Hochwasserabflussbereich":
-                Intent intent=new Intent(FormActivity.this,Holzablagerung.class);
-                intent.putExtra("Headline",beobachtung);
-                startActivity(intent);
-                break;
-            case "Ablagerung sonst. abflusshemmender Gegenstände":
-                Intent intent1=new Intent(FormActivity.this,Ablagerung.class);
-                intent1.putExtra("Headline",beobachtung);
-                startActivity(intent1);
-
-
-                break;
-            case "Holzbewuchs im Hochwasserabflussbereich":
-                Intent intent2=new Intent(FormActivity.this,Holzbewuchs.class);
-                intent2.putExtra("Headline",beobachtung);
-                startActivity(intent2);
-
-                break;
-            case "Schäden an Regulierungsbauten":
-                Intent intent3=new Intent(FormActivity.this,Schaeden_Regulierungsbauten.class);
-                intent3.putExtra("Headline",beobachtung);
-                startActivity(intent3);
-                break;
-            case "Abflussbehindernde Einbauten":
-                Intent intent4=new Intent(FormActivity.this,Abflussbehinderndeeinbauten.class);
-                intent4.putExtra("Headline",beobachtung);
-                startActivity(intent4);
-
-
-
-                break;
-            case "Wasseraus- und -einleitungen":
-                Intent intent5=new Intent(FormActivity.this,Wasserauseinleitung.class);
-                intent5.putExtra("Headline",beobachtung);
-                startActivity(intent5);
-
-                break;
-            case "Ereignis ohne unmittelbare Abflussbehinderung":
-
-                Intent intent6=new Intent(FormActivity.this,Abflussbehinderung.class);
-                intent6.putExtra("Headline",beobachtung);
-                startActivity(intent6);
+            switch (beobachtung) {
+                case "Holzablagerungen im Hochwasserabflussbereich":
+                    Intent intent = new Intent(FormActivity.this, Holzablagerung.class);
+                    intent.putExtra("Headline", beobachtung);
+                    startActivity(intent);
+                    break;
+                case "Ablagerung sonst. abflusshemmender Gegenstände":
+                    Intent intent1 = new Intent(FormActivity.this, Ablagerung.class);
+                    intent1.putExtra("Headline", beobachtung);
+                    startActivity(intent1);
 
 
-                break;
-            default:
-                break;
+                    break;
+                case "Holzbewuchs im Hochwasserabflussbereich":
+                    Intent intent2 = new Intent(FormActivity.this, Holzbewuchs.class);
+                    intent2.putExtra("Headline", beobachtung);
+                    startActivity(intent2);
 
+                    break;
+                case "Schäden an Regulierungsbauten":
+                    Intent intent3 = new Intent(FormActivity.this, Schaeden_Regulierungsbauten.class);
+                    intent3.putExtra("Headline", beobachtung);
+                    startActivity(intent3);
+                    break;
+                case "Abflussbehindernde Einbauten":
+                    Intent intent4 = new Intent(FormActivity.this, Abflussbehinderndeeinbauten.class);
+                    intent4.putExtra("Headline", beobachtung);
+                    startActivity(intent4);
+
+
+                    break;
+                case "Wasseraus- und -einleitungen":
+                    Intent intent5 = new Intent(FormActivity.this, Wasserauseinleitung.class);
+                    intent5.putExtra("Headline", beobachtung);
+                    startActivity(intent5);
+
+                    break;
+                case "Ereignis ohne unmittelbare Abflussbehinderung":
+
+                    Intent intent6 = new Intent(FormActivity.this, Abflussbehinderung.class);
+                    intent6.putExtra("Headline", beobachtung);
+                    startActivity(intent6);
+
+
+                    break;
+                default:
+                    break;
+
+            }
         }
 
     }

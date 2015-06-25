@@ -1,6 +1,8 @@
 package at.itkolleg.android.noterra;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -13,8 +15,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-
-public class Schaeden_Regulierungsbauten extends ActionBarActivity {
+public class Schaeden_Regulierungsbauten extends ActionBarActivity   {
 
     private RadioGroup  schaeden;
     private RadioButton geschiebsperre;
@@ -78,7 +79,16 @@ public class Schaeden_Regulierungsbauten extends ActionBarActivity {
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
 
         forstDB = new DBHandler(this);
+
+     edit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+         @Override
+         public void onFocusChange(View v, boolean hasFocus) {
+             freiwahl.setChecked(true);
+         }
+     });
+
     }
+
 
 
 
@@ -169,17 +179,54 @@ public class Schaeden_Regulierungsbauten extends ActionBarActivity {
 
 
 
-        if(hoehe.getText().toString().equals("")) {
+        if(!hoehe.getText().toString().equals("")) {
             hoehen = Integer.parseInt(hoehe.getText().toString());
         }
 
 
         forstDB.addSchadenAnRegulierung(auswahl,hoehen,fehlendeAbsturzsicherung,ausgangSperrenfluegel,geschiebesperre1,risse,schadhaftesMauerwerk,sonstiges,bewuchs, unterspulfundament);
 
-        String extra = getIntent().getStringExtra("Headline");
-        Intent intent = new Intent(Schaeden_Regulierungsbauten.this, InspectionActivity.class);
-        intent.putExtra("Headline", extra);
-        startActivity(intent);
+
+
+        if (freiwahl.isChecked() && edit.getText().toString().equals("")) {
+            new AlertDialog.Builder(this)
+                    .setTitle("!!Achtung!!")
+                    .setMessage("Es wurde kein Text eingegeben")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                    .setIcon(R.drawable.warning_ablagerungsart)
+
+
+                    .show();
+        } else if (!geschiebesperre.isChecked() && !laengsverbauung.isChecked() && !querwerk.isChecked() && !freiwahl.isChecked() ) {
+            new AlertDialog.Builder(this)
+                    .setTitle("!!Achtung!!")
+                    .setMessage("Es wurde kein Bauwerksart ausgewählt")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+
+                    .show();
+
+        } else
+        {
+
+            String extra = getIntent().getStringExtra("Headline");
+            Intent intent = new Intent(Schaeden_Regulierungsbauten.this, InspectionActivity.class);
+            intent.putExtra("Headline", extra);
+            startActivity(intent);
+
+        }
+
+
+
 
 
     }
