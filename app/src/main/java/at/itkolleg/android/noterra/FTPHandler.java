@@ -58,7 +58,6 @@ public class FTPHandler {
     }
 
     public void saveFileOnServer() throws IOException {
-        timestamp = getCurrentTime();
         boolean checkFileUpload;
 
         if(extention.equals(image)){
