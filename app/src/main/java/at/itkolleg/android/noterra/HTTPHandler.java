@@ -36,7 +36,7 @@ public class HTTPHandler {
         httpTask.execute();
     }
 
-    public int sendTableToServer(String tabelname) {
+    public void sendTableToServer(String tabelname) {
         Cursor cursor = forstDB.getAllFromTable(tabelname);
         int responseCode = 0;
 
@@ -46,7 +46,7 @@ public class HTTPHandler {
             List<NameValuePair> nameValuePairs = new ArrayList<>(2);
             nameValuePairs.add(new BasicNameValuePair("TabellenName", tabelname));
 
-             try {
+            try {
                 for (int i = 0; i <= cursor.getColumnCount() - 1; i++) {
                     if (!(cursor.getCount() == 0 || cursor.getString(i) == null || cursor.getString(i).equals(null))) {
                         nameValuePairs.add(new BasicNameValuePair(cursor.getColumnName(i), cursor.getString(i)));
@@ -58,18 +58,18 @@ public class HTTPHandler {
                 HttpResponse response = httpclient.execute(httpPost);
                 responseCode = response.getStatusLine().getStatusCode();
 
-                 if (responseCode == 200){
-                     String column = nameValuePairs.get(1).toString().substring(0, nameValuePairs.get(1).toString().length()-33);
-                     String uuid = nameValuePairs.get(1).toString().substring(nameValuePairs.get(1).toString().length() - 32, nameValuePairs.get(1).toString().length());
+                if (responseCode == 200) {
+                    String column = nameValuePairs.get(1).toString().substring(0, nameValuePairs.get(1).toString().length() - 33);
+                    String uuid = nameValuePairs.get(1).toString().substring(nameValuePairs.get(1).toString().length() - 32,
+                            nameValuePairs.get(1).toString().length());
 
-                     forstDB.deleteWhereIDIs(tabelname, column, new String[] {uuid});
-                 }
+                    forstDB.deleteWhereIDIs(tabelname, column, new String[]{uuid});
+                }
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        return responseCode;
     }
 
 
