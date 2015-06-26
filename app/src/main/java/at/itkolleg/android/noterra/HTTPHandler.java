@@ -37,31 +37,34 @@ public class HTTPHandler {
     }
 
     public int sendTableToServer(String tabelname) {
-        Cursor c = forstDB.getAllFromTable(tabelname);
+        Cursor cursor = forstDB.getAllFromTable(tabelname);
         int responseCode = 0;
-        c.moveToLast();
 
-        List<NameValuePair> nameValuePairs = new ArrayList<>(2);
-        nameValuePairs.add(new BasicNameValuePair("TabellenName", tabelname));
+        cursor.moveToPosition(-1);
 
-        try {
-            for (int i = 0; i <= c.getColumnCount()-1; i++) {
-                if (!(c.getCount() == 0 || c.getString(i) == null || c.getString(i).equals(null))){
-                    nameValuePairs.add(new BasicNameValuePair(c.getColumnName(i), c.getString(i)));
+        while (cursor.moveToNext()) {
+            List<NameValuePair> nameValuePairs = new ArrayList<>(2);
+            nameValuePairs.add(new BasicNameValuePair("TabellenName", tabelname));
+
+             try {
+                for (int i = 0; i <= cursor.getColumnCount() - 1; i++) {
+                    if (!(cursor.getCount() == 0 || cursor.getString(i) == null || cursor.getString(i).equals(null))) {
+                        nameValuePairs.add(new BasicNameValuePair(cursor.getColumnName(i), cursor.getString(i)));
+                    }
                 }
+
+                httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+                HttpResponse response = httpclient.execute(httpPost);
+                responseCode = response.getStatusLine().getStatusCode();
+
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-
-            httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-
-            HttpResponse response = httpclient.execute(httpPost);
-            responseCode = response.getStatusLine().getStatusCode();
-
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-
         return responseCode;
     }
+
 
     public class HTTPTask extends AsyncTask<Void, Void, Void> {
         @Override
