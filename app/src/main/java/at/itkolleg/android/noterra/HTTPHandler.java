@@ -58,6 +58,13 @@ public class HTTPHandler {
                 HttpResponse response = httpclient.execute(httpPost);
                 responseCode = response.getStatusLine().getStatusCode();
 
+                 if (responseCode == 200){
+                     String column = nameValuePairs.get(1).toString().substring(0, nameValuePairs.get(1).toString().length()-33);
+                     String uuid = nameValuePairs.get(1).toString().substring(nameValuePairs.get(1).toString().length() - 32, nameValuePairs.get(1).toString().length());
+
+                     forstDB.deleteWhereIDIs(tabelname, column, new String[] {uuid});
+                 }
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -69,27 +76,20 @@ public class HTTPHandler {
     public class HTTPTask extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... params) {
-            int responseCode;
-
-            responseCode = sendTableToServer("tbl_Beobachtung");
-            responseCode += sendTableToServer("tbl_Formular");
-            responseCode += sendTableToServer("tbl_Holzablagerung");
-            responseCode += sendTableToServer("tbl_Holzbewuchs");
-            responseCode += sendTableToServer("tbl_OhneBehinderung");
-            responseCode += sendTableToServer("tbl_SchadenAnRegulierung");
-            responseCode += sendTableToServer("tbl_WasserAusEinleitung");
-            responseCode += sendTableToServer("tbl_Abflussbehinderung");
-            responseCode += sendTableToServer("tbl_Ablagerung");
-            responseCode += sendTableToServer("tbl_Notiz");
-            responseCode += sendTableToServer("tbl_Foto");
-            responseCode += sendTableToServer("tbl_Sprachaufnahme");
-            responseCode += sendTableToServer("tbl_Text");
-            responseCode += sendTableToServer("tbl_Gps");
-
-            if(responseCode == 2800){
-                forstDB.deleteAllFromTable();
-                forstDB.closeDB();
-            }
+            sendTableToServer("tbl_Beobachtung");
+            sendTableToServer("tbl_Formular");
+            sendTableToServer("tbl_Holzablagerung");
+            sendTableToServer("tbl_Holzbewuchs");
+            sendTableToServer("tbl_OhneBehinderung");
+            sendTableToServer("tbl_SchadenAnRegulierung");
+            sendTableToServer("tbl_WasserAusEinleitung");
+            sendTableToServer("tbl_Abflussbehinderung");
+            sendTableToServer("tbl_Ablagerung");
+            sendTableToServer("tbl_Notiz");
+            sendTableToServer("tbl_Foto");
+            sendTableToServer("tbl_Sprachaufnahme");
+            sendTableToServer("tbl_Text");
+            sendTableToServer("tbl_Gps");
 
             return null;
         }

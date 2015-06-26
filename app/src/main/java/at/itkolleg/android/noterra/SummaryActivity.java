@@ -15,14 +15,15 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class SummaryActivity extends ActionBarActivity implements View.OnClickListener {
 
     private String outputFile = null;
     private ImageView imageView;
-    private String imagePath;
-    private String audioPath;
+    private ArrayList<String> imagePath = new ArrayList<>();
+    private ArrayList<String> audioPath = new ArrayList<>();
     private DBHandler forstdb;
 
     @Override
@@ -100,11 +101,11 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         audioPath = forstdb.getRefFromAudioTable();
     }
 
-    public String getImagePath() {
+    public ArrayList<String> getImagePath() {
         return imagePath;
     }
 
-    public String getAudioPath() {
+    public ArrayList<String> getAudioPath() {
         return audioPath;
     }
 
@@ -118,10 +119,14 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         loadData();
         try {
             if (getImagePath() != null) {
-                FTPHandler ftp1 = new FTPHandler(getImagePath());
+                for(String filepath : getImagePath()){
+                    FTPHandler ftp1 = new FTPHandler(filepath);
+                }
             }
             if (getAudioPath() != null) {
-                FTPHandler ftp2 = new FTPHandler(getAudioPath());
+                for(String filepath : getAudioPath()){
+                    FTPHandler ftp1 = new FTPHandler(filepath);
+                }
             }
 
         } catch (IOException e) {
