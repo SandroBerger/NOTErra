@@ -131,11 +131,11 @@
 
     <!-- Abflussbehindernde Einbauten -->
     <string name="einbauten">Art der Einbauten</string>
-    <string name="bruckesteg">Brücke , Steg</string>
+    <string name="bruckesteg">Brücke, Steg</string>
     <string name="huette">Hütte</string>
     <string name="staubrett">Staubrett</string>
-    <string name="rohrdurchlass">Verl. Rohrdurchlass</string>
-    <string name="title_activity_wasserauseinleitung">Wasserauseinleitung</string>
+    <string name="rohrdurchlass">Verlegter Rohrdurchlass</string>
+    <string name="title_activity_wasserauseinleitung">Wasseraus- und -einleitung</string>
 
     <!-- String für Wasseraus und -einleitung -->
     <string name="zweck">Zweck</string>

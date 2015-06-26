@@ -205,7 +205,7 @@ public class Schaeden_Regulierungsbauten extends ActionBarActivity   {
         } else if (!geschiebesperre.isChecked() && !laengsverbauung.isChecked() && !querwerk.isChecked() && !freiwahl.isChecked() ) {
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
-                    .setMessage("Es wurde kein Bauwerksart ausgewählt")
+                    .setMessage("Es wurde keine Bauwerksart ausgewählt")
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
