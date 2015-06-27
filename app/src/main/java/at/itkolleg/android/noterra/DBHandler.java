@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 /**
@@ -510,6 +511,10 @@ public class DBHandler extends SQLiteOpenHelper {
         return id;
     }
 
+    public void deleteWhereIDIs(String tabelname, String column, String[] uuid){
+        forstDB.delete(tabelname, column + " = ?", uuid);
+    }
+
     public Cursor getAllFromTable(String tablename){
         Cursor cursor = forstDB.rawQuery("SELECT * FROM " + tablename+";", null);
         cursor.moveToFirst();
@@ -517,30 +522,38 @@ public class DBHandler extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public String getRefFromImageTable(){
+    public ArrayList<String> getRefFromImageTable(){
         String tablename = "tbl_Foto";
         String spaltenName = "Ref";
-        String imageRef = null;
+        ArrayList<String> imageRef = new ArrayList<>();
 
         Cursor cursor = forstDB.query(tablename, new String[] {String.valueOf(spaltenName)}, null, null, null, null, null);
-        cursor.moveToLast();
+        cursor.moveToFirst();
         if(!(cursor.getCount() == 0)){
-            imageRef = cursor.getString(0);
+            cursor.moveToPosition(-1);
+
+            while(cursor.moveToNext()){
+                imageRef.add(cursor.getString(0));
+            }
         }
 
         return imageRef;
     }
 
-    public String getRefFromAudioTable(){
+    public ArrayList<String> getRefFromAudioTable(){
         String tablename = "tbl_Sprachaufnahme";
         String spaltenName = "Ref";
-        String audioRef = null;
+        ArrayList<String> audioRef = new ArrayList<>();
 
         Cursor cursor = forstDB.query(tablename, new String[] {String.valueOf(spaltenName)}, null, null, null, null, null);
         cursor.moveToFirst();
 
         if(!(cursor.getCount() == 0)) {
-            audioRef = cursor.getString(0);
+            cursor.moveToPosition(-1);
+
+            while(cursor.moveToNext()){
+                audioRef.add(cursor.getString(0));
+            }
         }
 
         return audioRef;

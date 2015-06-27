@@ -58,13 +58,12 @@ public class FTPHandler {
     }
 
     public void saveFileOnServer() throws IOException {
-        timestamp = getCurrentTime();
         boolean checkFileUpload;
 
         if(extention.equals(image)){
-            checkFileUpload = ftpClient.storeFile(remotePathImage + getCurrentTime() +".jpg", inputFile);
+            checkFileUpload = ftpClient.storeFile(remotePathImage + file.getName(), inputFile);
         }else {
-            checkFileUpload = ftpClient.storeFile(remotePathAudio + getCurrentTime() +".3gpp", inputFile);
+            checkFileUpload = ftpClient.storeFile(remotePathAudio + file.getName(), inputFile);
         }
 
         if(checkFileUpload == true){
