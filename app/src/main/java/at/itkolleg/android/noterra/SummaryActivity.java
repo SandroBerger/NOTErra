@@ -1,11 +1,9 @@
 package at.itkolleg.android.noterra;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -16,7 +14,6 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class SummaryActivity extends ActionBarActivity implements View.OnClickListener {
 
@@ -33,16 +30,11 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
 
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
         forstdb = new DBHandler(this);
-    }
-
-
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         loadImage();
     }
 
     public void loadImage() {
-        outputFile = "/storage/emulated/0/NOTErra/Media/Images/begehungImage_" + getCurrentTime() + ".jpg";
+        outputFile = forstdb.getRefFromImageTable().get(forstdb.getRefFromImageTable().size()-1);
 
         File imgFile = new File(outputFile);
 
@@ -51,21 +43,6 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
             imageView = (ImageView) this.findViewById(R.id.imageview);
             imageView.setImageBitmap(myBitmap);
         }
-    }
-
-    private String getCurrentTime() {
-        final Calendar cal = Calendar.getInstance();
-        cal.setTimeInMillis(System.currentTimeMillis());
-
-        int day = cal.get(Calendar.DATE);
-        int month = cal.get(Calendar.MONTH);
-        int year = cal.get(Calendar.YEAR);
-        int hour = cal.get(Calendar.HOUR);
-        int minute = cal.get(Calendar.MINUTE);
-
-        String time = day + "." + month + "." + year + "_" + hour + ":" + minute;
-
-        return time;
     }
 
 
