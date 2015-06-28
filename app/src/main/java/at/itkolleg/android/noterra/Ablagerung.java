@@ -209,6 +209,10 @@ public class Ablagerung extends ActionBarActivity {
                 ausmas=Integer.parseInt(groeße.getText().toString());
             }
 
+            if(eigenes.isChecked()){
+                auswahl=edit.getText().toString();
+            }
+
 
 
             forstDB.addAblagerung(auswahl,beschreibung, bachabschnitt,ausmas);

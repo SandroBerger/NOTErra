@@ -13,7 +13,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 
 public class Abflussbehinderndeeinbauten extends ActionBarActivity {
@@ -68,29 +67,25 @@ public class Abflussbehinderndeeinbauten extends ActionBarActivity {
         switch (checkedRadiobut) {
             case R.id.bruckesteg:
                 if (bruecke.isChecked()) {
-                    Toast toast = Toast.makeText(getApplicationContext(), bruecke.getText(), Toast.LENGTH_SHORT);
-                    toast.show();
+
                     auswahl=bruecke.getText().toString();
                 }
                 break;
             case R.id.huette:
                 if (huette.isChecked()) {
-                    Toast toast = Toast.makeText(getApplicationContext(), huette.getText(), Toast.LENGTH_SHORT);
-                    toast.show();
+
                     auswahl=huette.getText().toString();
                 }
                 break;
             case R.id.staubrett:
                 if (staubrett.isChecked()) {
-                    Toast toast = Toast.makeText(getApplicationContext(), staubrett.getText(), Toast.LENGTH_SHORT);
-                    toast.show();
+
                     auswahl=staubrett.getText().toString();
                 }
                 break;
             case R.id.rohrdurchlass:
                 if (rohrdurchlass.isChecked()) {
-                    Toast toast = Toast.makeText(getApplicationContext(), rohrdurchlass.getText(), Toast.LENGTH_SHORT);
-                    toast.show();
+
                     auswahl=rohrdurchlass.getText().toString();
                 }
                 break;
@@ -131,7 +126,7 @@ public class Abflussbehinderndeeinbauten extends ActionBarActivity {
 
 
                     .show();
-        } else if (!bruecke.isChecked() && !huette.isChecked() && !staubrett.isChecked() && !freiwahl.isChecked() ) {
+        } else if (!bruecke.isChecked() && !huette.isChecked() && !staubrett.isChecked() && !rohrdurchlass.isChecked() && !freiwahl.isChecked() ) {
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
                     .setMessage("Es wurde kein Art der Einbauten ausgewählt")
