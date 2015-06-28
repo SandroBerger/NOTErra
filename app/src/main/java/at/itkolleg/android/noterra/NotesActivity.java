@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.*;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Calendar;
 
@@ -54,7 +55,6 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
 
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
         forstDB = new DBHandler(this);
-        loadImage();
         addButton();
     }
 
@@ -176,8 +176,9 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
     private void playButtonClick() {
 
         try {
+            FileInputStream audioFile = new FileInputStream(getAudioPfad());
             myPlayer = new MediaPlayer();
-            myPlayer.setDataSource(getAudioPfad());
+            myPlayer.setDataSource(audioFile.getFD());
             myPlayer.prepare();
             myPlayer.start();
 
@@ -281,7 +282,7 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
             }
         });*/
 
-        outputFile = "/storage/emulated/0/NOTErra/Media/Images/begehungImage_" + getCurrentTime() + ".jpg";
+        outputFile = getImagePfad();
 
         File imgFile = new File(outputFile);
 
