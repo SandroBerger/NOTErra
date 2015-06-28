@@ -181,6 +181,12 @@ public class Wasserauseinleitung extends ActionBarActivity {
 
            art=mySpinner.getSelectedItem().toString();
 
+            if(freiwahl.isChecked())
+            {
+                auswahl=edit.getText().toString();
+            }
+
+
             beschreibung=besch.getText().toString();
             forstDB.addWasserAuseinleitung(art,auswahl,beschreibung);
 

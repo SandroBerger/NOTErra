@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +16,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+
+
 
 public class Schaeden_Regulierungsbauten extends ActionBarActivity   {
 
@@ -50,9 +54,19 @@ public class Schaeden_Regulierungsbauten extends ActionBarActivity   {
     private String beschreibungen;
     private String bauwerkart;
 
+    private ViewPager mPager;
+    private PagerAdapter mPagerAdapter;
+    private static final int NUM_PAGES = 3;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
+
         setContentView(R.layout.activity_schaeden__regulierungsbauten);
 
         schaeden = (RadioGroup) findViewById(R.id.schaeden);
@@ -86,6 +100,10 @@ public class Schaeden_Regulierungsbauten extends ActionBarActivity   {
              freiwahl.setChecked(true);
          }
      });
+
+
+
+
 
     }
 
@@ -183,6 +201,9 @@ public class Schaeden_Regulierungsbauten extends ActionBarActivity   {
             hoehen = Integer.parseInt(hoehe.getText().toString());
         }
 
+        if(freiwahl.isChecked()){
+            auswahl=edit.getText().toString();
+        }
 
         forstDB.addSchadenAnRegulierung(auswahl,hoehen,fehlendeAbsturzsicherung,ausgangSperrenfluegel,geschiebesperre1,risse,schadhaftesMauerwerk,sonstiges,bewuchs, unterspulfundament);
 
@@ -202,7 +223,7 @@ public class Schaeden_Regulierungsbauten extends ActionBarActivity   {
 
 
                     .show();
-        } else if (!geschiebesperre.isChecked() && !laengsverbauung.isChecked() && !querwerk.isChecked() && !freiwahl.isChecked() ) {
+        } else if (!geschiebsperre.isChecked() && !laengsverbauung.isChecked() && !querwerk.isChecked() && !freiwahl.isChecked() ) {
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
                     .setMessage("Es wurde kein Bauwerksart ausgewählt")
