@@ -18,26 +18,27 @@
         <EditText
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:layout_width="350dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:id="@+id/gemeinde"
                 android:hint="@string/gemeinde"
                 android:background="@drawable/textfield_style"
-
-                />
+                android:singleLine="true"
+                android:imeOptions="actionNext"
+                android:focusableInTouchMode="true"/>
 
         <EditText
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:layout_width="350dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:id="@+id/kosten"
                 android:hint="@string/kostenschatzung"
                 android:background="@drawable/textfield_style"
                 android:inputType="number"
-                />
+                android:focusableInTouchMode="true"/>
 
 
 
@@ -55,7 +56,7 @@
 
                 android:gravity="top|start"
                 android:maxLines="10"
-                />
+                android:focusableInTouchMode="true"/>
 
 
         <Spinner android:id="@+id/Spinner02"
@@ -252,23 +253,12 @@
 
         <CheckBox android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:background="#F6E398"
+                  android:background="@drawable/testbot"
                   android:layout_marginLeft="5dp"
                   android:layout_marginRight="5dp"
 
                   android:text="@string/zustandbeob"
                   android:id="@+id/zustandbeob"
-                  android:bottomLeftRadius="8dip"
-                  android:onClick="test"/>
-
-        <CheckBox android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:background="@drawable/testbot"
-                  android:layout_marginLeft="5dp"
-                  android:layout_marginRight="5dp"
-
-                  android:text="@string/untersp"
-                  android:id="@+id/Untersp_fundanment"
                   android:bottomLeftRadius="8dip"
                   android:onClick="test"/>
 

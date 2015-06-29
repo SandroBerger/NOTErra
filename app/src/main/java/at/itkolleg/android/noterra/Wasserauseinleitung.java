@@ -6,8 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
@@ -138,10 +136,13 @@ public class Wasserauseinleitung extends ActionBarActivity {
         if (freiwahl.isChecked() && edit.getText().toString().equals("")) {
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
-                    .setMessage("Es wurde kein Text innerhalb der Auswahl des Zweckes eingegeben")
+                    .setMessage("Bitte geben Sie einen Zweck an")
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            edit.requestFocus();
+                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
                         }
                     })
 
@@ -150,7 +151,7 @@ public class Wasserauseinleitung extends ActionBarActivity {
         } else if (mySpinner.getSelectedItem().toString().equals("Art: Aus/Einleitung: ")) {
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
-                    .setMessage("Es wurde keine Aus- oder -Einleitung gewählt")
+                    .setMessage("Bitte wählen sie eiene Art der Aus- oder -Einleitung aus.")
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -160,26 +161,23 @@ public class Wasserauseinleitung extends ActionBarActivity {
         } else if (!abwasser.isChecked() && !beschneiung.isChecked() && !bewaesserung.isChecked() && !trinkwasser.isChecked() && !freiwahl.isChecked()) {
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
-                    .setMessage("Es wurde kein Zweck ausgewählt")
+                    .setMessage("Bitte wählen Sie einen Zweck aus")
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                         }
                     }).show();
 
-        } else if (besch.getText().toString().equals("")) {
-            new AlertDialog.Builder(this)
-                    .setTitle("!!Achtung!!")
-                    .setMessage("Es wurde keine Beschreibung hinzugefügt")
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    }).show();
-        } else
+        }else
         {
 
            art=mySpinner.getSelectedItem().toString();
+
+            if(freiwahl.isChecked())
+            {
+                auswahl=edit.getText().toString();
+            }
+
 
             beschreibung=besch.getText().toString();
             forstDB.addWasserAuseinleitung(art,auswahl,beschreibung);
@@ -189,34 +187,6 @@ public class Wasserauseinleitung extends ActionBarActivity {
             intent.putExtra("Headline", extra);
             startActivity(intent);
         }
-
-
-
-
-
-
-
-
-    }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_wasserauseinleitung, menu);
-        return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

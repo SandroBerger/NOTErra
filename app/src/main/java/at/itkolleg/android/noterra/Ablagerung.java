@@ -6,8 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -133,21 +131,23 @@ public class Ablagerung extends ActionBarActivity {
         if (eigenes.isChecked() && edit.getText().toString().equals("")) {
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
-                    .setMessage("Es wurde kein Text eingegeben")
+                    .setMessage("Bitte geben Sie eine Ablagerungsart an")
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-
+                            edit.requestFocus();
+                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
                         }
+
                     })
-                    .setIcon(R.drawable.warning_ablagerungsart)
 
 
                     .show();
         } else if (!bauaushub.isChecked() && !felsbloecke.isChecked() && !muellablagerung.isChecked() && !schotter.isChecked() && !eigenes.isChecked()) {
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
-                    .setMessage("Es wurde kein Ablagerungsart ausgewählt")
+                    .setMessage("Bitte wählen Sie eine Ablagerungsart aus")
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -157,25 +157,17 @@ public class Ablagerung extends ActionBarActivity {
 
                     .show();
 
-        } else if (besch.getText().toString().equals("")){
-            new AlertDialog.Builder(this)
-                    .setTitle("!!Achtung!!")
-                    .setMessage("Es wurde keine Beschreibung angegeben")
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
 
-                        }
-                    })
-
-                    .show();
         } else if (groeße.getText().toString().equals("")) {
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
-                    .setMessage("Es wurde keine Größe oder Ausmaß angegeben")
+                    .setMessage("Bitte geben Sie eine Größe bzw. Ausmaß an")
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            groeße.requestFocus();
+                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
 
                         }
                     })
@@ -184,11 +176,14 @@ public class Ablagerung extends ActionBarActivity {
         } else if (laengebach.getText().toString().equals("")){
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
-                    .setMessage("Es wurde keine Länge zum Bachabschnitt angegeben")
+                    .setMessage("Bitte geben sie eine Länge des Bachabschnittes an")
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
+                            laengebach.requestFocus();
+                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
                         }
                     })
 
@@ -209,6 +204,10 @@ public class Ablagerung extends ActionBarActivity {
                 ausmas=Integer.parseInt(groeße.getText().toString());
             }
 
+            if(eigenes.isChecked()){
+                auswahl=edit.getText().toString();
+            }
+
 
 
             forstDB.addAblagerung(auswahl,beschreibung, bachabschnitt,ausmas);
@@ -222,28 +221,5 @@ public class Ablagerung extends ActionBarActivity {
         }
 
 
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_ablagerung, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

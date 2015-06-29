@@ -1,13 +1,13 @@
 package at.itkolleg.android.noterra;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -36,7 +36,7 @@ public class Holzbewuchs extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_holzbewuchs);
-         mySpinner = (Spinner) findViewById(R.id.Spinner01);
+        mySpinner = (Spinner) findViewById(R.id.Spinner01);
 
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
 
@@ -87,36 +87,36 @@ public class Holzbewuchs extends ActionBarActivity {
         mySpinner1.setSelection(longsize);
 
 
-        baumhohe=(EditText)findViewById(R.id.baumhoehe);
-        holzmenge=(EditText)findViewById(R.id.holzbewuchs_laenge_bachabschnitt);
-        beschreibung=(EditText)findViewById(R.id.beschreibung);
+        baumhohe = (EditText) findViewById(R.id.baumhoehe);
+        holzmenge = (EditText) findViewById(R.id.holzbewuchs_laenge_bachabschnitt);
+        beschreibung = (EditText) findViewById(R.id.beschreibung);
 
 
     }
 
-    public void save(View v){
+    public void save(View v) {
 
-        String baumarten=mySpinner1.getSelectedItem().toString();
-        anzahl=mySpinner.getSelectedItem().toString();
+        String baumarten = mySpinner1.getSelectedItem().toString();
+        anzahl = mySpinner.getSelectedItem().toString();
 
 
         switch (anzahl) {
             case "<10":
-                anzahl1=10;
+                anzahl1 = 10;
 
                 break;
             case "11-50":
-                anzahl1=35;
+                anzahl1 = 35;
 
 
                 break;
             case "50-100":
-                anzahl1=75;
+                anzahl1 = 75;
 
 
                 break;
             case ">100":
-                anzahl1=100;
+                anzahl1 = 100;
 
 
                 break;
@@ -126,23 +126,24 @@ public class Holzbewuchs extends ActionBarActivity {
 
         }
 
-if(!baumhohe.getText().toString().equals("")){
-    baumhoehe=Integer.parseInt(baumhohe.getText().toString());
-    holzmengen=Integer.parseInt(holzmenge.getText().toString());
-    beschreibungen=beschreibung.getText().toString();
-}
+        if (!baumhohe.getText().toString().equals("")) {
+            baumhoehe = Integer.parseInt(baumhohe.getText().toString());
+            holzmengen = Integer.parseInt(holzmenge.getText().toString());
+            beschreibungen = beschreibung.getText().toString();
+        }
 
 
-    forstDB.addHolzbewuchs(anzahl1,baumarten,baumhoehe,holzmengen,beschreibungen);
+        forstDB.addHolzbewuchs(anzahl1, baumarten, baumhoehe, holzmengen, beschreibungen);
 
 
-        if(mySpinner.getSelectedItem().toString().equals("Anzahl der Stämme/Sträucher:")){
+        if (mySpinner.getSelectedItem().toString().equals("Anzahl der Stämme/Sträucher:")) {
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
                     .setMessage("Bitte wählen Sie eine Anzahl der Stämme bzw. Sträucher aus")
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+
                         }
                     }).show();
         } else if (mySpinner1.getSelectedItem().toString().equals("Baumarten:")) {
@@ -154,36 +155,42 @@ if(!baumhohe.getText().toString().equals("")){
                         public void onClick(DialogInterface dialog, int which) {
                         }
                     }).show();
-        }else
-            {
+        } else if(baumhohe.getText().toString().equals("")){
+            new AlertDialog.Builder(this)
+                    .setTitle("!!Achtung!!")
+                    .setMessage("Bitte geben Sie eine Baumhöhe an")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            baumhohe.requestFocus();
+                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+                        }
+                    }).show();
+
+        } else if(holzmenge.getText().toString().equals("")) {
+            new AlertDialog.Builder(this)
+                    .setTitle("!!Achtung!!")
+                    .setMessage("Bitte geben Sie eine Holzmenge an")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            holzmenge.requestFocus();
+                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+                        }
+                    }).show();
+
+        }else{
                 String extra = getIntent().getStringExtra("Headline");
                 Intent intent = new Intent(Holzbewuchs.this, InspectionActivity.class);
                 intent.putExtra("Headline", extra);
                 startActivity(intent);
             }
-
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_holzbewuchs, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
         }
 
-        return super.onOptionsItemSelected(item);
-    }
+
 }
+
+
