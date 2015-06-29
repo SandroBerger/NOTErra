@@ -163,8 +163,8 @@ public class Holzbewuchs extends ActionBarActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             baumhohe.requestFocus();
-                            InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                            mgr.showSoftInput(baumhohe, InputMethodManager.SHOW_FORCED);
+                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
                         }
                     }).show();
 
@@ -177,8 +177,8 @@ public class Holzbewuchs extends ActionBarActivity {
                         public void onClick(DialogInterface dialog, int which) {
 
                             holzmenge.requestFocus();
-                            InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                            mgr.showSoftInput(holzmenge, InputMethodManager.SHOW_FORCED);
+                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
                         }
                     }).show();
 

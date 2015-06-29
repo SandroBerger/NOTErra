@@ -141,8 +141,8 @@ public class Wasserauseinleitung extends ActionBarActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             edit.requestFocus();
-                            InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                            mgr.showSoftInput(edit, InputMethodManager.SHOW_FORCED);
+                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
                         }
                     })
 

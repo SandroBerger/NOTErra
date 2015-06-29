@@ -302,8 +302,8 @@ public class FormActivity extends ActionBarActivity  {
                         public void onClick(DialogInterface dialog, int which) {
 
                             gemeinde.requestFocus();
-                            InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                            mgr.showSoftInput(gemeinde, InputMethodManager.SHOW_FORCED);
+                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
 
 
                         }
@@ -316,8 +316,8 @@ public class FormActivity extends ActionBarActivity  {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             kosten.requestFocus();
-                            InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                            mgr.showSoftInput(kosten, InputMethodManager.SHOW_FORCED);
+                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
                         }
                     }).show();
         }else if(maßnahmen.getText().toString().equals("")){
@@ -328,8 +328,8 @@ public class FormActivity extends ActionBarActivity  {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             maßnahmen.requestFocus();
-                            InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                            mgr.showSoftInput(maßnahmen, InputMethodManager.SHOW_FORCED);
+                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
                         }
                     }).show();
         }else if (mySpinner.getSelectedItem().toString().equals("Priorität")) {

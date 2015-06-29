@@ -43,6 +43,7 @@
         </activity>
 
 
+
         <activity
             android:name=".FormActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -87,6 +88,7 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyDPIQPHoveJ82POg6reLYtBHy4Mg7-UmCY" />
         -->
+
 
         <activity
             android:name=".Holzablagerung"

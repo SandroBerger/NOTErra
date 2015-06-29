@@ -118,6 +118,8 @@ public class Abflussbehinderndeeinbauten extends ActionBarActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             editText.requestFocus();
+                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
                         }
                     })
 

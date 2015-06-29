@@ -775,9 +775,6 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
                 seek.setMax((int) finalTime);
                 oneTimeOnly = 1;
             }
-
-
-
             pos.setText(String.format("Gesamtdauer: " +"%d min, %d sec",
                             TimeUnit.MILLISECONDS.toMinutes((long) finalTime),
                             TimeUnit.MILLISECONDS.toSeconds((long) finalTime) -

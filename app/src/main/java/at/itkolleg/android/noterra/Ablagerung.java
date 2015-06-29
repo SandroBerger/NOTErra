@@ -136,8 +136,8 @@ public class Ablagerung extends ActionBarActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             edit.requestFocus();
-                            InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                            mgr.showSoftInput(edit, InputMethodManager.SHOW_FORCED);
+                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
                         }
 
                     })
@@ -166,8 +166,8 @@ public class Ablagerung extends ActionBarActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             groeße.requestFocus();
-                            InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                            mgr.showSoftInput(groeße, InputMethodManager.SHOW_FORCED);
+                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
 
                         }
                     })
@@ -182,8 +182,8 @@ public class Ablagerung extends ActionBarActivity {
                         public void onClick(DialogInterface dialog, int which) {
 
                             laengebach.requestFocus();
-                            InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                            mgr.showSoftInput(laengebach, InputMethodManager.SHOW_FORCED);
+                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
                         }
                     })
 
