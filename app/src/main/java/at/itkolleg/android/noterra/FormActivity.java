@@ -264,7 +264,7 @@ public class FormActivity extends ActionBarActivity  {
         if(zustandbeob.isChecked())
         {
             zustandbeobint=1;
-        }
+        }else {zustandbeobint = 0;}
 
 
     }
