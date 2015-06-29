@@ -645,18 +645,9 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
                 Cursor cbeschreibung=forstdb.getLastInformation("Beschreibung","tbl_WasserAusEinleitung");
                 String cbeschreibungtext=cbeschreibung.getString(0);
                 sf3tv.setText("Beschreibung: " + cbeschreibungtext);
-
-
-
             }
         }
-
-
-
     }
-
-
-
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -705,7 +696,6 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         }
     };
 
-
     @Override
     public void onClick(View v) {
 
@@ -724,18 +714,16 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         return audioPath;
     }
 
-
-
     public void send(View v) throws IOException {
         HTTPHandler httpHandler = new HTTPHandler(this);
         loadData();
         try {
-            if (getImagePath() != null) {
+            if (getImagePath().isEmpty()) {
                 for(String filepath : getImagePath()){
                     FTPHandler ftp1 = new FTPHandler(filepath);
                 }
             }
-            if (getAudioPath() != null) {
+            if (getAudioPath().isEmpty()) {
                 for(String filepath : getAudioPath()){
                     FTPHandler ftp1 = new FTPHandler(filepath);
                 }
@@ -822,23 +810,12 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
             seek.setVisibility(View.GONE);
             dur.setVisibility(View.GONE);
 
-
-
-
             Toast.makeText(getApplicationContext(), "Audio ist zurückgesetzt",
                    Toast.LENGTH_SHORT).show();
         }catch (Exception e){
             e.printStackTrace();
         }
-
     }
-
-
-
-
-
-
-
 
     /**
      * A placeholder fragment containing a simple view.
