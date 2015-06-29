@@ -304,10 +304,9 @@ public class FormActivity extends ActionBarActivity  {
                             gemeinde.requestFocus();
                             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                             imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
-
-
                         }
                     }).show();
+
         }else if(kosten.getText().toString().equals("")){
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
