@@ -185,7 +185,6 @@
                     android:hint="@string/freiehoehedammkrone"
                     android:background="@drawable/textfield_style"
                     android:inputType="number"
-                    android:onClick="textfeld"
 
                     />
 

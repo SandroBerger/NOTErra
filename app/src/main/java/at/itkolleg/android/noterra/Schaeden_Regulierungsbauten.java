@@ -8,8 +8,6 @@ import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
@@ -212,21 +210,21 @@ public class Schaeden_Regulierungsbauten extends ActionBarActivity   {
         if (freiwahl.isChecked() && edit.getText().toString().equals("")) {
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
-                    .setMessage("Es wurde kein Text eingegeben")
+                    .setMessage("Bitte geben sie die Art des Bauwerks an")
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
                         }
                     })
-                    .setIcon(R.drawable.warning_ablagerungsart)
+
 
 
                     .show();
         } else if (!geschiebsperre.isChecked() && !laengsverbauung.isChecked() && !querwerk.isChecked() && !freiwahl.isChecked() ) {
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
-                    .setMessage("Es wurde kein Bauwerksart ausgewählt")
+                    .setMessage("Bitte wählen Sie eine Art des Bauwerkes aus")
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -236,7 +234,34 @@ public class Schaeden_Regulierungsbauten extends ActionBarActivity   {
 
                     .show();
 
-        } else
+        } else if(!fehl.isChecked() && !ausg.isChecked() && !geschiebesperre.isChecked() && !rissMauerwerk.isChecked() && !schadMauerwerk.isChecked() && !sonst.isChecked() && !starkerbewuchs.isChecked() && !untersp.isChecked()){
+            new AlertDialog.Builder(this)
+                    .setTitle("!!Achtung!!")
+                    .setMessage("Bitte wählen Sie mind. eine Schadensart uas")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+
+                    .show();
+        }else if(hoehe.getText().toString().equals("")){
+            new AlertDialog.Builder(this)
+                    .setTitle("!!Achtung!!")
+                    .setMessage("Bitte geben sie eine freie Höhe bis zur Dammkrone an")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+
+                    .show();
+        }
+
+
+        else
         {
 
             String extra = getIntent().getStringExtra("Headline");
@@ -252,26 +277,4 @@ public class Schaeden_Regulierungsbauten extends ActionBarActivity   {
 
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_schaeden__regulierungsbauten, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

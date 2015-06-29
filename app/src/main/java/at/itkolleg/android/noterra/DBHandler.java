@@ -511,6 +511,14 @@ public class DBHandler extends SQLiteOpenHelper {
         return id;
     }
 
+    public Integer tableexist(String tablename){
+        Cursor callInitcheck=forstDB.rawQuery("SELECT COUNT(*) FROM " + tablename , null);
+
+        callInitcheck.moveToNext();
+
+        return Integer.parseInt(callInitcheck.getString(0));
+    }
+
     public void deleteWhereIDIs(String tabelname, String column, String[] uuid){
         forstDB.delete(tabelname, column + " = ?", uuid);
     }
@@ -519,6 +527,13 @@ public class DBHandler extends SQLiteOpenHelper {
         Cursor cursor = forstDB.rawQuery("SELECT * FROM " + tablename+";", null);
         cursor.moveToFirst();
 
+        return cursor;
+    }
+
+
+    public Cursor getLastInformation(String columnname, String tablename){
+        Cursor cursor=forstDB.rawQuery("SELECT "+columnname +" FROM " + tablename + " order by ROWID DESC  limit 1;", null);
+        cursor.moveToFirst();
         return cursor;
     }
 

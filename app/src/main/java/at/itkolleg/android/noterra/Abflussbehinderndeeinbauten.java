@@ -6,8 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -115,11 +113,11 @@ public class Abflussbehinderndeeinbauten extends ActionBarActivity {
         if (editText.getText().toString().equals("") && freiwahl.isChecked()) {
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
-                    .setMessage("Es wurde kein Text eingegeben")
+                    .setMessage("Bitte geben Sie einen Art der Einbaut ein")
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-
+                            editText.requestFocus();
                         }
                     })
 
@@ -129,7 +127,7 @@ public class Abflussbehinderndeeinbauten extends ActionBarActivity {
         } else if (!bruecke.isChecked() && !huette.isChecked() && !staubrett.isChecked() && !rohrdurchlass.isChecked() && !freiwahl.isChecked() ) {
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
-                    .setMessage("Es wurde kein Art der Einbauten ausgewählt")
+                    .setMessage("Bitte wählen Sie eine Art der Einbaut aus")
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -139,23 +137,11 @@ public class Abflussbehinderndeeinbauten extends ActionBarActivity {
 
                     .show();
 
-        } else if (beschreibung.getText().toString().equals("")) {
-            new AlertDialog.Builder(this)
-                    .setTitle("!!Achtung!!")
-                    .setMessage("Es wurde keine Beschreibung angegeben")
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    })
-
-                    .show();
         } else
         {
 
 
-            forstDB.addAbflussbehinderung(auswahl,beschreibung.getText().toString());
+            forstDB.addOhneBehinderung(auswahl,beschreibung.getText().toString());
 
             String extra= getIntent().getStringExtra("Headline");
             Intent intent=new Intent(Abflussbehinderndeeinbauten.this, InspectionActivity.class);
@@ -167,30 +153,4 @@ public class Abflussbehinderndeeinbauten extends ActionBarActivity {
 
         }
     }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_ablufssbehinderndeeinbauten, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
-
 }

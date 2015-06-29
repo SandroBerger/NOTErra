@@ -83,7 +83,7 @@
     <string name="durchlass">Durchlass freilegen</string>
     <string name="genehmigung">Genehmigung prüfen</string>
     <string name="hindernisseentf">Hindernisse entfernen/räumen</string>
-    <string name="hindernissp">Hinderniss sperngen</string>
+    <string name="hindernissp">Hinderniss sprengen</string>
     <string name="holzablang">Holz ablängen</string>
     <string name="keineMaßn">Keine Maßnahmen</string>
     <string name="sperreodgerinne">Sperre oder Gerinne räumen</string>
@@ -155,5 +155,7 @@
     <string name="title_activity_test">test</string>
     <string name="title_activity_startup">startup</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="nothing">     </string>
 
 </resources>

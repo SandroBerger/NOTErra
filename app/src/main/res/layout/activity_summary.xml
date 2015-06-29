@@ -2,7 +2,7 @@
              xmlns:tools="http://schemas.android.com/tools" android:id="@+id/container"
              android:layout_width="match_parent" android:layout_height="match_parent"
              tools:context="com.example.android.noterra.FinishActivity" tools:ignore="MergeRootFrame"
-             android:background="@color/Hintergrundfarbe"    >
+             android:background="@color/Hintergrundfarbe" android:orientation="vertical">
 
 
     <ScrollView android:layout_width="fill_parent" android:layout_height="wrap_content">
@@ -13,9 +13,165 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Haupt-Formular:"
+                android:id="@+id/Formular"
+                android:textStyle="bold"/>
+
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gemeinde: "
+                android:layout_marginLeft="0dp"
+                android:id="@+id/gemeinde"
+                android:textStyle="bold"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kostenschätzung: "
+                android:layout_marginLeft="0dp"
+                android:id="@+id/kostenschaetzung"
+                android:textStyle="bold"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Empfohlene Maßnahme: "
+                android:layout_marginLeft="0dp"
+                android:id="@+id/empfmaßnhamen"
+                android:textStyle="bold"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Priorität:"
+                android:layout_marginLeft="0dp"
+                android:id="@+id/prioritaet"
+                android:textStyle="bold"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Förderfähig:"
+                android:layout_marginLeft="0dp"
+                android:id="@+id/foerderfaehig"
+                android:textStyle="bold"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Abwicklung:"
+                android:layout_marginLeft="0dp"
+                android:id="@+id/abwicklung"
+                android:textStyle="bold"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Definierte Maßnahmen antoworten: "
+
+                android:layout_gravity="right"
+                android:id="@+id/defmaßnahmenjanein"
+                android:textStyle="bold"
+                android:layout_marginRight="10dp"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Definierte Maßnahmen: "
+                android:layout_marginTop="-244dp"
+                android:id="@+id/defmaßnahmen"
+                android:textStyle="bold"/>
+
+
+
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Spezielles-Formular:"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:id="@+id/Formular2"
+                android:textStyle="bold"/>
+
+
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:id="@+id/sfh"
+                android:text="Überschrift"
+                android:textStyle="bold"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:id="@+id/sf1"
+
+                android:textStyle="bold"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:id="@+id/sf2"
+
+                android:textStyle="bold"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:id="@+id/sf3"
+
+                android:textStyle="bold"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:id="@+id/sf4"
+
+                android:textStyle="bold"/>
+
+
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/sf5"
+
+                android:layout_marginTop="-20dp"
+
+                android:textStyle="bold"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+
+                android:layout_marginRight="10dp"
+                android:id="@+id/sf6"
+
+                android:layout_gravity="right"
+                android:layout_marginTop="-148dp"
+                android:textStyle="bold"/>
+
+
+
+
+
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+               android:layout_marginTop="120dp"
+                android:id="@+id/textfoto" android:textStyle="bold"
+
                 android:text="Foto: "
 
-                android:id="@+id/textfoto" android:textStyle="bold"/>
+                />
 
 
 
@@ -37,35 +193,67 @@
 
 
         <ImageButton
-                android:layout_marginLeft="40dp"
+                android:layout_marginLeft="20dp"
                 android:id="@+id/playButtonClick"
                 android:background="@drawable/play"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:onClick="playButtonClick"
+                android:layout_gravity="center"
                 />
 
         <ImageButton
                 android:id="@+id/stopButtonClick"
                 android:background="@drawable/stop"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="40dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="-50dp"
+                android:layout_marginLeft="-40dp"
+                android:layout_gravity="center"
                 android:onClick="stopButtonClick"/>
 
 
-
-
-        <Chronometer
-                android:id="@+id/chronometer"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="100dp"
-                android:layout_height="25dp"
-                android:textColor="#FFFF"
+        <ImageButton
+                android:id="@+id/pauseButtonClick"
+                android:background="@drawable/pause"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="-50dp"
-                android:layout_marginLeft="-30dp"/>
+                android:layout_gravity="center"
+                android:layout_marginLeft="80dp"
+                android:onClick="pauseButtonClick"/>
+
+
+
+
+        <SeekBar
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/seekBar" android:layout_gravity="center_horizontal"/>
+
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFF"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_marginTop="-010dp"
+                android:id="@+id/pos"
+                android:layout_gravity="right"
+                android:textSize="12sp"
+                />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#FFFF"
+                android:layout_marginTop="-20dp"
+                android:id="@+id/dur"
+                android:textSize="12sp"/>
+
 
         <TextView
                 android:layout_width="wrap_content"
@@ -82,15 +270,7 @@
                 android:layout_height="wrap_content"
                 android:text="Hier ist der eingegebene Text zu finden."
                 android:layout_marginLeft="0dp"
-                android:id="@+id/textView6"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:text="Zurück"
-            android:id="@+id/zurueck" android:layout_gravity="center_horizontal"
-            android:background="@drawable/button_style"
-            android:onClick="back"/>
+                android:id="@+id/notetext"/>
 
 
     <Button
