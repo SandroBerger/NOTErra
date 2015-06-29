@@ -216,51 +216,51 @@ public class FormActivity extends ActionBarActivity  {
         if(absturzsicherung.isChecked())
         {
             absturzsicherungint=1;
-        }
+        }else {absturzsicherungint = 0;}
         if(baumestr.isChecked())
         {
             baumestrint=1;
-        }
+        }else {baumestrint = 0;}
         if(bauwerkwart.isChecked())
         {
              bauwerksanint=1;
-        }
+        }else {bauwerksanint = 0;}
         if(bauwerkwart.isChecked())
         {
            bauwerkwartint=1;
-        }
+        }else {bauwerkwartint = 0;}
         if(durchlassfrei.isChecked())
         {
          durchlassfreiint=1;
-        }
+        }else {durchlassfreiint = 0;}
         if(genehmigung.isChecked())
         {
             genehmigungint=1;
-        }
+        }else {genehmigungint = 0;}
         if(hindernisseentf.isChecked())
         {
             hindernisseentfint=1;
-        }
+        }else {hindernisseentfint = 0;}
         if(hindernissespreng.isChecked())
         {
             hindernissesprengint=1;
-        }
+        }else {hindernissesprengint = 0;}
         if(holzablang.isChecked())
         {
             holzablangint=1;
-        }
+        }else {holzablangint = 0;}
         if(keinemaßnahm.isChecked())
         {
             keinemaßnahmint=1;
-        }
+        }else {keinemaßnahmint = 0;}
         if(sperreodgerinne.isChecked())
         {
             sperreodgerinneint=1;
-        }
+        }else {sperreodgerinneint = 0;}
         if(ufersichern.isChecked())
         {
             ufersichernint=1;
-        }
+        }else {ufersichernint = 0;}
         if(zustandbeob.isChecked())
         {
             zustandbeobint=1;
