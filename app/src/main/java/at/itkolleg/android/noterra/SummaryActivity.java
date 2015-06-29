@@ -356,49 +356,45 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         }
 
 
-        if(forstdb.tableexist("tbl_OhneBehinderung")!=0){
-            idAbflussbehinderndeeinbauten = forstdb.getIDfromTable("tbl_OhneBehinderung", "idOhneBehinderung");
+        if(forstdb.tableexist("tbl_Abflussbehinderung")!=0){
+            idAbflussbehinderndeeinbauten = forstdb.getIDfromTable("tbl_Abflussbehinderung", "idAbflussbehinderung");
 
             if(idHauptform.equals(idAbflussbehinderndeeinbauten))
             {
                 h1.setText("Abflussbehindernde Einbauten");
 
-                Cursor  carteinbaut=forstdb.getLastInformation("Art","tbl_OhneBehinderung");
+                Cursor  carteinbaut=forstdb.getLastInformation("Art","tbl_Abflussbehinderung");
                 String carteinbauttext=carteinbaut.getString(0);
                 sf1tv.setText("\nArt der Einbauten: " + carteinbauttext);
-
-
-                Cursor cbeschreibung=forstdb.getLastInformation("Beschreibung","tbl_OhneBehinderung");
-                String cbeschreibungtext=cbeschreibung.getString(0);
-                sf2tv.setText("Beschreibung: " + cbeschreibungtext);
-
-            }
-
-
-
-
-        }
-        if(forstdb.tableexist("tbl_Abflussbehinderung")!=0){
-            idAbflussbehinderung = forstdb.getIDfromTable("tbl_Abflussbehinderung", "idAbflussbehinderung");
-
-
-            if(idHauptform.equals(idAbflussbehinderung))
-            {
-                h1.setText("Ereignis ohne unmittelbare Abflussbehinderung");
-
-                Cursor  cartbeobachtung=forstdb.getLastInformation("Art","tbl_Abflussbehinderung");
-                String cartbeobachtungtext=cartbeobachtung.getString(0);
-                sf1tv.setText("\nArt der Beobachtung: " + cartbeobachtungtext);
 
 
                 Cursor cbeschreibung=forstdb.getLastInformation("Beschreibung","tbl_Abflussbehinderung");
                 String cbeschreibungtext=cbeschreibung.getString(0);
                 sf2tv.setText("Beschreibung: " + cbeschreibungtext);
 
-
             }
 
 
+        }
+        if(forstdb.tableexist("tbl_OhneBehinderung")!=0){
+            idAbflussbehinderung = forstdb.getIDfromTable("tbl_OhneBehinderung", "idOhneBehinderung");
+
+
+            if(idHauptform.equals(idAbflussbehinderung))
+            {
+                h1.setText("Ereignis ohne unmittelbare Abflussbehinderung");
+
+                Cursor  cartbeobachtung=forstdb.getLastInformation("Art","idOhneBehinderung");
+                String cartbeobachtungtext=cartbeobachtung.getString(0);
+                sf1tv.setText("\nArt der Beobachtung: " + cartbeobachtungtext);
+
+
+                Cursor cbeschreibung=forstdb.getLastInformation("Beschreibung","idOhneBehinderung");
+                String cbeschreibungtext=cbeschreibung.getString(0);
+                sf2tv.setText("Beschreibung: " + cbeschreibungtext);
+
+
+            }
 
         }
         if(forstdb.tableexist("tbl_Ablagerung")!=0){
@@ -503,7 +499,7 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
 
                 Cursor  cart=forstdb.getLastInformation("Art","tbl_SchadenAnRegulierung");
                 String carttext=cart.getString(0);
-                sf1tv.setText("\nArt des Bauwerks " + carttext);
+                sf1tv.setText("\nArt des Bauwerks: " + carttext);
 
                 Cursor  choehe=forstdb.getLastInformation("Hoehe","tbl_SchadenAnRegulierung");
                 String choehetext=choehe.getString(0);
