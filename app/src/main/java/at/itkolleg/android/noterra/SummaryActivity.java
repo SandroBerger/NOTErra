@@ -117,7 +117,8 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
 
 
         ArrayList<String> audioRefArray = forstdb.getRefFromAudioTable();
-        if (!(audioRefArray == null)) {
+
+        if (!(audioRefArray.get(audioRefArray.size()-1) == null)) {
             audiofpad = audioRefArray.get(audioRefArray.size() - 1);
 
             myplayer = new MediaPlayer();
@@ -619,7 +620,7 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
 
     public void loadImage() {
         ArrayList<String> RefArray = forstdb.getRefFromImageTable();
-        if (!(RefArray == null)) {
+        if (!(RefArray.size() == 0)) {
             outputFile = RefArray.get(RefArray.size() - 1);
 
             File imgFile = new File(outputFile);
