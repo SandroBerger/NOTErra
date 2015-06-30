@@ -151,41 +151,62 @@ public class Schaeden_Regulierungsbauten extends ActionBarActivity   {
         {
 
             fehlendeAbsturzsicherung=1;
+        }else
+        {
+            fehlendeAbsturzsicherung=0;
         }
+
         if(ausg.isChecked())
         {
-
             ausgangSperrenfluegel=1;
+        }
+        else
+        {
+            ausgangSperrenfluegel=0;
         }
         if(geschiebesperre.isChecked())
         {
-
             geschiebesperre1=1;
         }
+        else
+        {
+            geschiebesperre1=0;
+        }
+
         if(rissMauerwerk.isChecked())
         {
-
             risse=1;
+        }else
+        {
+            risse=0;
         }
+
         if(schadMauerwerk.isChecked())
         {
-
             schadhaftesMauerwerk=1;
+        }else{
+            schadhaftesMauerwerk=0;
         }
+
         if(sonst.isChecked())
         {
-
             sonstiges=1;
+        }else
+        {
+            sonstiges=0;
         }
         if(starkerbewuchs.isChecked())
         {
-
             bewuchs=1;
-        }
-        if(untersp.isChecked())
+        }else
         {
+            bewuchs=0;
+        }
 
-            unterspulfundament=1;
+        if(untersp.isChecked()) {
+            unterspulfundament = 1;
+        }else {
+            unterspulfundament=0;
         }
 
     }

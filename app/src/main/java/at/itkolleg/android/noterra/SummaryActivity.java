@@ -1,13 +1,11 @@
 package at.itkolleg.android.noterra;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -85,6 +83,7 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
 
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
         forstdb = new DBHandler(this);
+        loadImage();
 
         dur=(TextView)findViewById(R.id.dur);
         pos=(TextView)findViewById(R.id.pos);
@@ -356,49 +355,45 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         }
 
 
-        if(forstdb.tableexist("tbl_OhneBehinderung")!=0){
-            idAbflussbehinderndeeinbauten = forstdb.getIDfromTable("tbl_OhneBehinderung", "idOhneBehinderung");
+        if(forstdb.tableexist("tbl_Abflussbehinderung")!=0){
+            idAbflussbehinderndeeinbauten = forstdb.getIDfromTable("tbl_Abflussbehinderung", "idAbflussbehinderung");
 
             if(idHauptform.equals(idAbflussbehinderndeeinbauten))
             {
                 h1.setText("Abflussbehindernde Einbauten");
 
-                Cursor  carteinbaut=forstdb.getLastInformation("Art","tbl_OhneBehinderung");
+                Cursor  carteinbaut=forstdb.getLastInformation("Art","tbl_Abflussbehinderung");
                 String carteinbauttext=carteinbaut.getString(0);
                 sf1tv.setText("\nArt der Einbauten: " + carteinbauttext);
-
-
-                Cursor cbeschreibung=forstdb.getLastInformation("Beschreibung","tbl_OhneBehinderung");
-                String cbeschreibungtext=cbeschreibung.getString(0);
-                sf2tv.setText("Beschreibung: " + cbeschreibungtext);
-
-            }
-
-
-
-
-        }
-        if(forstdb.tableexist("tbl_Abflussbehinderung")!=0){
-            idAbflussbehinderung = forstdb.getIDfromTable("tbl_Abflussbehinderung", "idAbflussbehinderung");
-
-
-            if(idHauptform.equals(idAbflussbehinderung))
-            {
-                h1.setText("Ereignis ohne unmittelbare Abflussbehinderung");
-
-                Cursor  cartbeobachtung=forstdb.getLastInformation("Art","tbl_Abflussbehinderung");
-                String cartbeobachtungtext=cartbeobachtung.getString(0);
-                sf1tv.setText("\nArt der Beobachtung: " + cartbeobachtungtext);
 
 
                 Cursor cbeschreibung=forstdb.getLastInformation("Beschreibung","tbl_Abflussbehinderung");
                 String cbeschreibungtext=cbeschreibung.getString(0);
                 sf2tv.setText("Beschreibung: " + cbeschreibungtext);
 
-
             }
 
 
+        }
+        if(forstdb.tableexist("tbl_OhneBehinderung")!=0){
+            idAbflussbehinderung = forstdb.getIDfromTable("tbl_OhneBehinderung", "idOhneBehinderung");
+
+
+            if(idHauptform.equals(idAbflussbehinderung))
+            {
+                h1.setText("Ereignis ohne unmittelbare Abflussbehinderung");
+
+                Cursor  cartbeobachtung=forstdb.getLastInformation("Art","idOhneBehinderung");
+                String cartbeobachtungtext=cartbeobachtung.getString(0);
+                sf1tv.setText("\nArt der Beobachtung: " + cartbeobachtungtext);
+
+
+                Cursor cbeschreibung=forstdb.getLastInformation("Beschreibung","idOhneBehinderung");
+                String cbeschreibungtext=cbeschreibung.getString(0);
+                sf2tv.setText("Beschreibung: " + cbeschreibungtext);
+
+
+            }
 
         }
         if(forstdb.tableexist("tbl_Ablagerung")!=0){
@@ -486,7 +481,7 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
                 Integer cholzmengeint=cholzmenge.getInt(0);
                 sf4tv.setText("Holzmenge: " + cholzmengeint + " fm");
 
-                Cursor cbeschreibung=forstdb.getLastInformation("Beschreibung","tbl_Abflussbehinderung");
+                Cursor cbeschreibung=forstdb.getLastInformation("Beschreibung","tbl_Holzbewuchs");
                 String cbeschreibungtext=cbeschreibung.getString(0);
                 sf5tv.setText("Beschreibung: " + cbeschreibungtext);
 
@@ -503,7 +498,7 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
 
                 Cursor  cart=forstdb.getLastInformation("Art","tbl_SchadenAnRegulierung");
                 String carttext=cart.getString(0);
-                sf1tv.setText("\nArt des Bauwerks " + carttext);
+                sf1tv.setText("\nArt des Bauwerks: " + carttext);
 
                 Cursor  choehe=forstdb.getLastInformation("Hoehe","tbl_SchadenAnRegulierung");
                 String choehetext=choehe.getString(0);
@@ -649,13 +644,9 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         }
     }
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        loadImage();
-    }
-
     public void loadImage() {
-        audiofpad = "/storage/emulated/0/NOTErra/Media/Images/begehungImage_" + getCurrentTime() + ".jpg";
+         ArrayList<String> RefArray = forstdb.getRefFromImageTable();
+        outputFile = RefArray.get(RefArray.size()-1);
 
         File imgFile = new File(outputFile);
 

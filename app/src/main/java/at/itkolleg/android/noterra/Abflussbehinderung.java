@@ -155,7 +155,7 @@ public class Abflussbehinderung extends ActionBarActivity {
                         .show();
 
             } else {
-                forstDB.addAbflussbehinderung(auswahl, besch.getText().toString());
+                forstDB.addOhneBehinderung(auswahl, besch.getText().toString());
                 String extra = getIntent().getStringExtra("Headline");
                 Intent intent = new Intent(Abflussbehinderung.this, InspectionActivity.class);
                 intent.putExtra("Headline", extra);

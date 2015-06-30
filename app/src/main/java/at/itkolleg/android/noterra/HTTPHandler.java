@@ -49,7 +49,7 @@ public class HTTPHandler {
                             }
                         }
 
-                        httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                        httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs, "UTF-8"));
 
                         HttpResponse response = httpclient.execute(httpPost);
                         responseCode = response.getStatusLine().getStatusCode();
