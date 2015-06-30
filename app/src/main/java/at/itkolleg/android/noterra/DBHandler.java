@@ -546,7 +546,6 @@ public class DBHandler extends SQLiteOpenHelper {
         cursor.moveToFirst();
         if(!(cursor.getCount() == 0)){
             cursor.moveToPosition(-1);
-
             while(cursor.moveToNext()){
                 imageRef.add(cursor.getString(0));
             }

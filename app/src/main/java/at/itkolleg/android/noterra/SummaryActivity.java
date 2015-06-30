@@ -1,13 +1,11 @@
 package at.itkolleg.android.noterra;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -85,6 +83,7 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
 
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
         forstdb = new DBHandler(this);
+        loadImage();
 
         dur=(TextView)findViewById(R.id.dur);
         pos=(TextView)findViewById(R.id.pos);
@@ -482,7 +481,7 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
                 Integer cholzmengeint=cholzmenge.getInt(0);
                 sf4tv.setText("Holzmenge: " + cholzmengeint + " fm");
 
-                Cursor cbeschreibung=forstdb.getLastInformation("Beschreibung","tbl_Abflussbehinderung");
+                Cursor cbeschreibung=forstdb.getLastInformation("Beschreibung","tbl_Holzbewuchs");
                 String cbeschreibungtext=cbeschreibung.getString(0);
                 sf5tv.setText("Beschreibung: " + cbeschreibungtext);
 
@@ -643,11 +642,6 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
                 sf3tv.setText("Beschreibung: " + cbeschreibungtext);
             }
         }
-    }
-
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        loadImage();
     }
 
     public void loadImage() {
