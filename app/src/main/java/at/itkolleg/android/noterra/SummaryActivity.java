@@ -651,7 +651,8 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
     }
 
     public void loadImage() {
-        audiofpad = "/storage/emulated/0/NOTErra/Media/Images/begehungImage_" + getCurrentTime() + ".jpg";
+         ArrayList<String> RefArray = forstdb.getRefFromImageTable();
+        outputFile = RefArray.get(RefArray.size()-1);
 
         File imgFile = new File(outputFile);
 
