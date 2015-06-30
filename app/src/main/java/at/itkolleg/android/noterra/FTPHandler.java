@@ -9,11 +9,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Calendar;
 
 /**
- * Created by SandroB on 23.05.2015.
- */
+ * Diese Klasse ist für den Upload der Foto- und Sprachaufnahmedateien zuständig.
+ * @author Berger Sandro
+ * @version 30.06.2015
+ * */
 public class FTPHandler {
 
     FTPClient ftpClient = new FTPClient();
@@ -40,23 +41,44 @@ public class FTPHandler {
         ftptask.execute();
     }
 
+    /**
+     * Stellt eine Verbindung zum FTP-Server her.
+     * */
     public void ftpConnection() throws IOException {
         ftpClient.connect(servername, port);
     }
 
+    /**
+     * Ist der die Anwendung erfolgreich mit dem Server verbunden,
+     * logt diese sich mithilfe dieser Methode ein.
+     * */
     public void ftpLogin() throws IOException {
         ftpClient.login(username, password);
     }
 
+    /**
+     * Setzt den Speicherpfad des Server, in dem die Bilder oder Spachaufnahmen
+     * gespeichert werden.
+     * @param workingpath Ordnerpfad des Servers in dem die Daten abgelegt werden sollen
+     * */
     public void workingDirektory(String workingpath) throws IOException {
         this.workingpath = workingpath;
         ftpClient.changeWorkingDirectory(workingpath);
     }
 
+    /**
+     * hier wird ein neues FileInputStream objket erstellt.
+     * Dieses wird für den Fileupload benötigt.
+     * */
     public void setFileInputStream() throws FileNotFoundException {
         inputFile = new FileInputStream(file);
     }
 
+    /**
+     * In dieser Methode werden die Daten schlussendlich auf den Server gelden.
+     * Zuerst wird überprüft ob es sich um eine Bild oder Audio-Datei handelt und anschließend
+     * wird der upload auf den Server gestartet.
+     * */
     public void saveFileOnServer() throws IOException {
         boolean checkFileUpload;
 
@@ -71,28 +93,26 @@ public class FTPHandler {
         }
     }
 
+    /**
+     * Meldet die Anwendung wieder vom Server ab und gibt anschließend
+     * die Verbindung wieder frei.
+     * */
     public void closeConnection() throws IOException {
         ftpClient.logout();
         ftpClient.disconnect();
     }
 
-    private String getCurrentTime() {
-        final Calendar cal = Calendar.getInstance();
-        cal.setTimeInMillis(System.currentTimeMillis());
-
-        int day = cal.get(Calendar.DATE);
-        int month = cal.get(Calendar.MONTH);
-        int year = cal.get(Calendar.YEAR);
-        int hour = cal.get(Calendar.HOUR);
-        int minute = cal.get(Calendar.MINUTE);
-        int second = cal.get(Calendar.SECOND);
-
-        String time = day + "." + month + "." + year + "_" + hour + ":" + minute + ":" + second;
-
-        return time;
-    }
-
+    /**
+     * /**
+     * Diese Klasse führt im Hintergrund der Anwendung den upload der Daten durch.
+     * @author Berger Sandro
+     * @version 30.06.2015
+     * */
     public class FtpTask extends AsyncTask<Void, Void, Void> {
+        /**
+         * Mithilfe dieser Methode werden die in im FTPHandler definierten
+         * Methoden genutzt um alle Daten auf den Server hochzuladen.
+         * */
         @Override
         protected Void doInBackground(Void... params) {
             try {

@@ -16,8 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by SandroB on 19.06.2015.
- */
+ * Diese Klasse sendet die Datenbank inhalte an das PHP-File am Server,
+ * der anschließend die Daten in die MySQL-Datenbank einträgt.
+ * @author Berger Sandro
+ * @version 30.06.2015
+ * */
 public class HTTPHandler {
     private HttpClient httpclient;
     private HttpPost httpPost;
@@ -32,6 +35,14 @@ public class HTTPHandler {
         httpTask.execute();
     }
 
+    /**
+     * Es werden alle Daten der Tabelle aus der Datenbank ausgelesen und anschließend
+     * in eine Liste gespeichert.
+     * Danach wird die Liste durchloffen und jeder Wert einzeln an das PHP-File übergeben
+     * Wurde die Tabelle erfolgreich hinaufgeladen, und der Responsecode 200 - OK zurückgegeben,
+     * wird alles aus der Tabelle gelöscht.
+     * @param tabelname Angabe des Tabellenname der versendet werden soll.
+     * */
     public void sendTableToServer(String tabelname) {
         Cursor cursor = forstDB.getAllFromTable(tabelname);
         int responseCode = 0;
@@ -69,7 +80,18 @@ public class HTTPHandler {
     }
 
 
+    /**
+     * Verwendet die Methoden des HTTPHandler und sendet so
+     * die Daten im Hintergrund der Anwendung.
+     * @author Berger Sandro
+     * @version 30.06.2015
+     * */
     public class HTTPTask extends AsyncTask<Void, Void, Void> {
+        /**
+         * Sendet jede Tabelle einzelen an das PHP-File zur
+         * weiterverarbeitung und für das eintragen in die
+         * MySQL-Datenbank
+         * */
         @Override
         protected Void doInBackground(Void... params) {
             sendTableToServer("tbl_Beobachtung");

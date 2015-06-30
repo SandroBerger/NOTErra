@@ -666,6 +666,13 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         return audioPath;
     }
 
+    /**
+     * Erstellt ein neues HTTPHandler objekt und sendet somit die
+     * Daten der Datenbank an das PHP-File.
+     * Als nächstes werden die Bild und Audiodareferenzen aus der Datenbank
+     * ausgelesen und mittels des FTPHandlers an den FTP-Server gesendet.
+     * @author Berger Sandro
+     * */
     public void send(View v) throws IOException {
         HTTPHandler httpHandler = new HTTPHandler(this);
         loadData();
