@@ -271,17 +271,6 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
     //---------------------------------------------------------------------
 //---------------Ladet das bild in den Imageview wenn eines vorhanden ist in der Ordner struktur------------------
     public void loadImage() {
-       /*File imageDir = new File("/storage/emulated/0/NOTErra/Media/Images/");
-        final ArrayList<String> imageFiles = new ArrayList<>();
-
-        imageDir.listFiles(new FileFilter() {
-            @Override
-            public boolean accept(File file) {
-                imageFiles.add(file.getAbsolutePath());
-                return false;
-            }
-        });*/
-
         outputFile = getImagePfad();
 
         File imgFile = new File(outputFile);
