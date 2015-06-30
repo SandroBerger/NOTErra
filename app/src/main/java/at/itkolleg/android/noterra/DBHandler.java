@@ -511,7 +511,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return id;
     }
 
-    public Integer tableExist(String tablename){
+    public Integer tableexist(String tablename){
         Cursor callInitcheck=forstDB.rawQuery("SELECT COUNT(*) FROM " + tablename , null);
 
         callInitcheck.moveToNext();
