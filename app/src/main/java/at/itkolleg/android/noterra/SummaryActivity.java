@@ -18,7 +18,6 @@ import android.widget.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
 public class SummaryActivity extends ActionBarActivity implements View.OnClickListener {
@@ -83,7 +82,6 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
 
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
         forstdb = new DBHandler(this);
-
         loadImage();
 
         dur = (TextView) findViewById(R.id.dur);
@@ -118,16 +116,18 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         textfoto = (TextView) findViewById(R.id.textfoto);
 
 
-        audiofpad = "/storage/emulated/0/NOTErra/Media/Audio/begehungAudio_" + getCurrentTime() + ".3gpp";
+        ArrayList<String> audioRefArray = forstdb.getRefFromAudioTable();
+        if (!(audioRefArray == null)) {
+            audiofpad = audioRefArray.get(audioRefArray.size() - 1);
 
-        myplayer = new MediaPlayer();
-        try {
-            myplayer.setDataSource(audiofpad);
-            myplayer.prepare();
-        } catch (IOException e) {
-            e.printStackTrace();
+            myplayer = new MediaPlayer();
+            try {
+                myplayer.setDataSource(audiofpad);
+                myplayer.prepare();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-
 
         if (forstdb.tableexist("tbl_text") != 0) {
             //Notizen-Text
@@ -619,9 +619,8 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
 
     public void loadImage() {
         ArrayList<String> RefArray = forstdb.getRefFromImageTable();
-        if (!(RefArray.size() == 0)) {
+        if (!(RefArray == null)) {
             outputFile = RefArray.get(RefArray.size() - 1);
-
 
             File imgFile = new File(outputFile);
 
@@ -633,25 +632,8 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         }
     }
 
-    private String getCurrentTime() {
-        final Calendar cal = Calendar.getInstance();
-        cal.setTimeInMillis(System.currentTimeMillis());
-
-        int day = cal.get(Calendar.DATE);
-        int month = cal.get(Calendar.MONTH);
-        int year = cal.get(Calendar.YEAR);
-        int hour = cal.get(Calendar.HOUR);
-        int minute = cal.get(Calendar.MINUTE);
-
-        String time = day + "." + month + "." + year + "_" + hour + ":" + minute;
-
-        return time;
-    }
-
     private Runnable UpdateSongTime = new Runnable() {
         public void run() {
-
-
             startTime = myplayer.getCurrentPosition();
             dur.setText(String.format("%d min, %d sec",
 
