@@ -86,9 +86,10 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
 
         forstdb = new DBHandler(this);
 
-        loadImage();
-
         initialisierung();
+
+
+        loadImage();
 
 
         audioinitialisierung();
@@ -161,11 +162,12 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
      * Diese Methode erstellt den Medienplayer und falls ein Audiofile vorhanden ist wird dieses in den Medianplayer eingelesen.
      */
     public void audioinitialisierung() {
-        ArrayList<String> audioRefArray = forstdb.getRefFromAudioTable();
 
-        if (!audioRefArray.isEmpty()) {
+        ArrayList<String> audioRefArray= forstdb.getRefFromAudioTable();
+
+
             audiofpad = audioRefArray.get(audioRefArray.size() - 1);
-
+        if(audiofpad!=null){
             myplayer = new MediaPlayer();
             try {
                 FileInputStream audioFile = new FileInputStream(audiofpad);
@@ -871,7 +873,8 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
             myplayer.release();
 
             myplayer = new MediaPlayer();
-            myplayer.setDataSource(audiofpad);
+            FileInputStream audioFile = new FileInputStream(audiofpad);
+            myplayer.setDataSource(audioFile.getFD());
             myplayer.prepare();
             seek.setVisibility(View.GONE);
             dur.setVisibility(View.GONE);
