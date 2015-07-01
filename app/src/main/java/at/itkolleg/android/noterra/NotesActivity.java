@@ -25,7 +25,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Calendar;
 
-
+/**
+ * Diese Klasse behandelt das Aufnehmen von Foto-, Sprach-, und Textnotizen.
+ * @author Berger Sandro
+ * @version 30.06.2015
+ * */
 public class NotesActivity extends ActionBarActivity implements View.OnClickListener {
 
     private static final int CAMERA_REQUEST = 1888;
@@ -47,7 +51,11 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
     private EditText textNotiz;
     private DBHandler forstDB;
 
-
+    /**
+     * Wird autmatisch beim Aufruf der Klasse ausgeführt
+     * In dieser Methode wird ein Datenbank-Objekt Initalisiert
+     * und die Button des XML den Button-Variablen hinzugefügt.
+     * */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +66,11 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         addButton();
     }
 
+    /**
+     * Hier wird jeder Button-Variable die Referenz zum XML-file zugewiesen.
+     * Anschließend wird ein Click-Listener an den Variablen Aufgerufen,
+     * der überprüft ob ein button gedrückt wurde
+     * */
     //-------------Button Hinzufügen und funktion hinzufügen zugriff auf kamera, ufnahme von audio und notiz aufnahme----
     public void addButton() {
         cameraButton = (ImageButton) findViewById(R.id.camerabutton);
@@ -80,6 +93,12 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         deleteButton.setOnClickListener(this);
     }
 
+    /**
+     * onClick ist eine automatisch generierte Methode.
+     * Hier werden nach dem Klick auf einen Button die jeweiligen
+     * zugeordneten Methode ausgeführt. Anhand eines Switches wird
+     * die prüfung ausgeführt.
+     * */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -107,6 +126,11 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         }
     }
 
+    /**
+     * Wird auf den Camera-Image-Button geklickt, wird diese Methode ausgeführt.
+     * Hier wird die Systemkamera gestartet und ein Dateiname angegeben, wie das
+     * Bild in der Ordnerstruktur benannt werden soll.
+     * */
     private void cameraButtonClick() {
         Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 
@@ -119,8 +143,14 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         startActivityForResult(intent, CAMERA_REQUEST);
     }
 
+    /**
+     * Erstellt einen neues Recorder-Objekt mithilfe der Methode createRecorder().
+     * und startet anschließend die Sprachaufnahme und ändert während der Aufnahme
+     * das Bild auf einen Stopp-Button.
+     * Wird ein zweitesmal gedrückt stoppt die Aufnahme und der Button wird wieder
+     * zum Aufnahme-Button
+     * */
     private void recordButtonClick() {
-
         if (recButtonCount == 1) {
             try {
                 createRecorder();
@@ -173,8 +203,11 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         }
     }
 
+    /**
+     * Startet die im vorhinein aufgenommene Sprachaufnahme mithilfe
+     * des vorher definierten Speicherortes + Dateiname
+     * */
     private void playButtonClick() {
-
         try {
             FileInputStream audioFile = new FileInputStream(getAudioPfad());
             myPlayer = new MediaPlayer();
@@ -197,6 +230,10 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         toast.show();
     }
 
+    /**
+     * Hier wird überorüft ob ein MediaPlayer-Objekt erstellt wurde.
+     * Anschliepend wird beim Klick die Sprachaufnahme wieder gestoppt.
+     * */
     private void stopButtonClick() {
         try {
             if (myPlayer != null) {
@@ -214,6 +251,11 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         }
     }
 
+    /**
+     * Ermöglicht dem Anwender das Löschen der vorher aufgenommenen
+     * Sprachaufnahme. Hierbei wird zur vermeidung einer versehendlichen
+     * Löschung eine Warnung ausgegeben und erfordert anschließend eine Bestätigung
+     * */
     private void deleteAudioButtonClick() {
         new AlertDialog.Builder(this)
                 .setTitle("Aufnahme löschen")
@@ -236,6 +278,12 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
                 .show();
     }
 
+    /**
+     * Speichert die getätigten Notizen in die Datenbank
+     * Jedoch wird von einer Sprachaufnahme und von einem Bild
+     * nur die Referenz gespeichert. Die Textnotiz wird direkt eingetragen.
+     * Anschließend kehrt die Anwendung wieder auf die Übersichtsseite zurück.
+     * */
     private void saveButtonClick() {
         forstDB.addImageRef(imagePfad);
         forstDB.addAudioRef(audioPfad);
@@ -243,6 +291,9 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         startActivity(new Intent(this, InspectionActivity.class));
     }
 
+    /**
+     * Ermöglicht das löschen des gemachten Bildes.
+     * */
     private void imageDeleteClick() {
         new AlertDialog.Builder(this)
                 .setTitle("Bild löschen")
@@ -268,8 +319,11 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
                 .show();
     }
 
-    //---------------------------------------------------------------------
-//---------------Ladet das bild in den Imageview wenn eines vorhanden ist in der Ordner struktur------------------
+    /**
+     * Lädt das vorhinein gemachte Bild in die ImageView der Anwendung.
+     * Kehrt der Anwender zur anwendung ohne gemachtes Bild zurück wird nichts
+     * geladen.
+     * */
     public void loadImage() {
         outputFile = getImagePfad();
 
@@ -282,6 +336,10 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         }
     }
 
+    /**
+     * Lest die aktuelle Zeit aus dem Android-System aus.
+     * @return der aktuelle Zeitpunkt indem z.B. das Foto getätigt wurde.
+     * */
     private String getCurrentTime() {
         final Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(System.currentTimeMillis());
@@ -297,12 +355,21 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         return time;
     }
 
-    //---------------------------------------------------------------------
+    /**
+     * Wird aufgerufen, wenn der Anwender von der Systemkamera wieder zurück
+     * in die Anwendung kehrt. Hierbei wird die Methode loadImage() audgeführt,
+     * dass das gemachte Bild in die ImageView der Anwendung hineilädt.
+     * */
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         loadImage();
     }
 
+    /**
+     * Es wird ein neuer MediaRecorder erstellt um eine Sprachaufnahme starten zu können.
+     * Desweiteren wird hier auch der Pfad und Dateiname für die Sprachaufnahme festgelegt.
+     * Hier wird auch die Quelle, das Dateiformat und das Encoderformat angegeben.
+     * */
     private void createRecorder() {
         outputFile = "/storage/emulated/0/NOTErra/Media/Audio/begehungAudio_" + getCurrentTime() + ".3gpp";
 
@@ -315,22 +382,43 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         myRecorder.setOutputFile(outputFile);
     }
 
+    /**
+     * Ermöglicht das setzen des Speicherpfades
+     * der gemachten Sprachaufnahme
+     * @param AudioPfad Der Datei- und Pfadnamen ist hier anzugeben
+     * */
     public void setAudioPfad(String AudioPfad) {
         this.audioPfad = AudioPfad;
     }
 
+    /**
+     * Liefert den Pfad der gemachten Sprachaufnahme.
+     * @return Speicherpfad der Sprachaufname
+     * */
     public String getAudioPfad() {
         return audioPfad;
     }
 
+    /**
+     * Ermöglicht das setzen des Speicherpfades
+     * des gemachten Bildes
+     * @param ImagePfad Der Datei- und Pfadnamen ist hier anzugeben
+     * */
     public void setImagePfad(String ImagePfad) {
         this.imagePfad = ImagePfad;
     }
 
+    /**
+     * Liefert den Pfad des gemachten Bildes.
+     * @return Speicherpfad des Bildes
+     * */
     public String getImagePfad() {
         return imagePfad;
     }
 
+    /**
+     * Automatisch generierte Methode
+     * */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -338,6 +426,9 @@ public class NotesActivity extends ActionBarActivity implements View.OnClickList
         return true;
     }
 
+    /**
+     * Automatisch generierte Methode
+     * */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

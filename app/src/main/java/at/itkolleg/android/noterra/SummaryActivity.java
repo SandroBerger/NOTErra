@@ -8,8 +8,11 @@ import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.*;
 
 import java.io.File;
@@ -17,14 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-
-/**
- * Diese Klasse implementiert die komplett Ansicht für das App. Aufgerufen wird diese mittels denn Button Fertigstellen auf der Hauptansicht des Apps.
- *
- * @author Gutsche Christoph, Berger Sandro
- *
- */
-public class SummaryActivity extends ActionBarActivity {
+public class SummaryActivity extends ActionBarActivity implements View.OnClickListener {
 
     private String outputFile = null;
     private ImageView imageView;
@@ -457,6 +453,7 @@ public class SummaryActivity extends ActionBarActivity {
             String cbeschreibungtext = cbeschreibung.getString(0);
             sf2tv.setText("Beschreibung: " + cbeschreibungtext);
 
+            }
 
         }
     }
@@ -657,46 +654,41 @@ public class SummaryActivity extends ActionBarActivity {
             );
 
 
-            sf6tv.setText("Checkliste " +
-                            "\n" + cfehlabsturztext +
-                            "\n" + caussperretext +
-                            "\n" + csperretext +
-                            "\n" + crissetext +
-                            "\n" + cmauerwerktext +
-                            "\n" + csonstigestext +
-                            "\n" + cbewuchstext +
-                            "\n" + cunfuntext
-            );
+                sf6tv.setText("Checkliste " +
+                                "\n" + cfehlabsturztext +
+                                "\n" + caussperretext +
+                                "\n" + csperretext +
+                                "\n" + crissetext +
+                                "\n" + cmauerwerktext +
+                                "\n" + csonstigestext +
+                                "\n" + cbewuchstext +
+                                "\n" + cunfuntext
+                );
+
+            }
+
+        }
+        if (forstdb.tableexist("tbl_WasserAusEinleitung") != 0) {
+            idWasserazseinleitung = forstdb.getIDfromTable("tbl_WasserAusEinleitung", "idWasserAusEinleitung");
+
+            if (idHauptform.equals(idWasserazseinleitung)) {
+                h1.setText("Wasseraus-und -einleitungen");
+
+                Cursor cart = forstdb.getLastInformation("Art", "tbl_WasserAusEinleitung");
+                String carttext = cart.getString(0);
+                sf1tv.setText("Art: " + carttext);
+
+                Cursor czweck = forstdb.getLastInformation("Zweck", "tbl_WasserAusEinleitung");
+                String czwecktext = czweck.getString(0);
+                sf2tv.setText("Zweck: " + czwecktext);
+
+                Cursor cbeschreibung = forstdb.getLastInformation("Beschreibung", "tbl_WasserAusEinleitung");
+                String cbeschreibungtext = cbeschreibung.getString(0);
+                sf3tv.setText("Beschreibung: " + cbeschreibungtext);
+            }
         }
     }
 
-    /**
-     * Diese Methode setzt das jeweilige Textfeld mit den Daten aus dem speziellen Formular WasserAusEinleitung.
-     */
-    public void loadWasserAusEinleitung() {
-        idWasserazseinleitung = forstdb.getIDfromTable("tbl_WasserAusEinleitung", "idWasserAusEinleitung");
-
-        if (idHauptform.equals(idWasserazseinleitung)) {
-            h1.setText("Wasseraus-und -einleitungen");
-
-            Cursor cart = forstdb.getLastInformation("Art", "tbl_WasserAusEinleitung");
-            String carttext = cart.getString(0);
-            sf1tv.setText("Art: " + carttext);
-
-            Cursor czweck = forstdb.getLastInformation("Zweck", "tbl_WasserAusEinleitung");
-            String czwecktext = czweck.getString(0);
-            sf2tv.setText("Zweck: " + czwecktext);
-
-            Cursor cbeschreibung = forstdb.getLastInformation("Beschreibung", "tbl_WasserAusEinleitung");
-            String cbeschreibungtext = cbeschreibung.getString(0);
-            sf3tv.setText("Beschreibung: " + cbeschreibungtext);
-        }
-    }
-
-
-    /**
-     * Hier wird as Bild auf einer loakeln ArrayList von der Datenbank aus gespeichert. Und in eine Bitmapt umgesetzt. Zum Schluss wird es in eine ImageView eingesetzt. Diese Imagevie zeigt dann dieses Bild.
-     */
     public void loadImage() {
         ArrayList<String> RefArray = forstdb.getRefFromImageTable();
         if (!(RefArray.size() == 0)) {
@@ -712,13 +704,7 @@ public class SummaryActivity extends ActionBarActivity {
         }
     }
 
-
-    /**
-     *Hier wird die aktuelle Zeit für die Sprachaufnahme bearbeitet
-     * Verwendet wird diese Zeit für die Seekbar (mitlaufende Anzeige)
-     * dur (TextView) zeigt den Text an
-     */
-    private Runnable VoiceTime = new Runnable() {
+    private Runnable UpdateSongTime = new Runnable() {
         public void run() {
             startTime = myplayer.getCurrentPosition();
             dur.setText(String.format("%d min, %d sec",
@@ -733,10 +719,11 @@ public class SummaryActivity extends ActionBarActivity {
         }
     };
 
+    @Override
+    public void onClick(View v) {
 
-    /**
-     *
-     */
+    }
+
     public void loadData() {
         imagePath = forstdb.getRefFromImageTable();
         audioPath = forstdb.getRefFromAudioTable();
@@ -750,7 +737,14 @@ public class SummaryActivity extends ActionBarActivity {
         return audioPath;
     }
 
-    public void send(View v) throws  IOException{
+    /**
+     * Erstellt ein neues HTTPHandler objekt und sendet somit die
+     * Daten der Datenbank an das PHP-File.
+     * Als nächstes werden die Bild und Audiodareferenzen aus der Datenbank
+     * ausgelesen und mittels des FTPHandlers an den FTP-Server gesendet.
+     * @author Berger Sandro
+     * */
+    public void send(View v) throws IOException {
         HTTPHandler httpHandler = new HTTPHandler(this);
         loadData();
         try {
@@ -782,13 +776,11 @@ public class SummaryActivity extends ActionBarActivity {
         toast.show();
     }
 
-    /**
-     * Wird der Play button auf der Fertigstellenseite gedrückt somit wird diese Methode aktiviert.
-     * @param v Grundbaustein für die Benutzeroberfälche / Wird kurz benutzt um die seekbar und die Zeit anzuzeigen.
-     */
-    public void playButtonClick(View v){
-        try {
 
+    public void playButtonClick(View v) {
+        try {
+            Toast.makeText(getApplicationContext(), "Audio wird gestartet",
+                    Toast.LENGTH_SHORT).show();
             seek.setVisibility(View.VISIBLE);
             dur.setVisibility(View.VISIBLE);
 
@@ -797,8 +789,6 @@ public class SummaryActivity extends ActionBarActivity {
             finalTime = myplayer.getDuration();
             startTime = myplayer.getCurrentPosition();
 
-            Toast.makeText(getApplicationContext(), "Audio wird gestartet",
-                    Toast.LENGTH_SHORT).show();
             if (oneTimeOnly == 0) {
                 seek.setMax((int) finalTime);
                 oneTimeOnly = 1;
@@ -817,7 +807,7 @@ public class SummaryActivity extends ActionBarActivity {
 
 
             seek.setProgress((int) startTime);
-            myHandler.postDelayed(VoiceTime, 100);
+            myHandler.postDelayed(UpdateSongTime, 100);
 
 
         } catch (Exception e) {
