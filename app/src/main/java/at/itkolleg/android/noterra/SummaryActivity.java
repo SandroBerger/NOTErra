@@ -725,15 +725,32 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
 
     }
 
+    /**
+     * Liest die sowohl den Bild als auch die Audiopfad aus der Datenbank aus
+     * und weist diese den zwei dafür vorgesehenen Path-Variablen zu.
+     * @author Berger Sandro
+     * */
     public void loadData() {
         imagePath = forstdb.getRefFromImageTable();
         audioPath = forstdb.getRefFromAudioTable();
     }
 
+    /**
+     * Die Method liefer alle Bild-Referenzen die sich in der
+     * tbl_Foto befinden.
+     * @author Berger Sandro
+     * @return ArrayList of String (Bild-Referenzen)
+     * */
     public ArrayList<String> getImagePath() {
         return imagePath;
     }
 
+    /**
+     * Die Method liefer alle Audio-Referenzen die sich in der
+     * tbl_Sprachaufnahme befinden.
+     * @author Berger Sandro
+     * @return ArrayList of String (Audio-Referenzen)
+     * */
     public ArrayList<String> getAudioPath() {
         return audioPath;
     }
