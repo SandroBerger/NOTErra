@@ -8,11 +8,8 @@ import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.*;
 
 import java.io.File;
@@ -456,7 +453,7 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
             }
 
         }
-    }
+
 
     /**
      * Diese Methode setzt das jeweilige Textfeld mit den Daten aus dem speziellen Formular Ablagerung.
@@ -667,7 +664,11 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
 
             }
 
-        }
+
+
+    }
+
+    public void loadWasserAusEinleitung(){
         if (forstdb.tableexist("tbl_WasserAusEinleitung") != 0) {
             idWasserazseinleitung = forstdb.getIDfromTable("tbl_WasserAusEinleitung", "idWasserAusEinleitung");
 
