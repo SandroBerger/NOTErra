@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.*;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -167,7 +168,8 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
 
             myplayer = new MediaPlayer();
             try {
-                myplayer.setDataSource(audiofpad);
+                FileInputStream audioFile = new FileInputStream(audiofpad);
+                myplayer.setDataSource(audioFile.getFD());
                 myplayer.prepare();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -450,9 +452,9 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
             String cbeschreibungtext = cbeschreibung.getString(0);
             sf2tv.setText("Beschreibung: " + cbeschreibungtext);
 
-            }
-
         }
+
+    }
 
 
     /**
@@ -651,24 +653,23 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
             );
 
 
-                sf6tv.setText("Checkliste " +
-                                "\n" + cfehlabsturztext +
-                                "\n" + caussperretext +
-                                "\n" + csperretext +
-                                "\n" + crissetext +
-                                "\n" + cmauerwerktext +
-                                "\n" + csonstigestext +
-                                "\n" + cbewuchstext +
-                                "\n" + cunfuntext
-                );
+            sf6tv.setText("Checkliste " +
+                            "\n" + cfehlabsturztext +
+                            "\n" + caussperretext +
+                            "\n" + csperretext +
+                            "\n" + crissetext +
+                            "\n" + cmauerwerktext +
+                            "\n" + csonstigestext +
+                            "\n" + cbewuchstext +
+                            "\n" + cunfuntext
+            );
 
-            }
-
+        }
 
 
     }
 
-    public void loadWasserAusEinleitung(){
+    public void loadWasserAusEinleitung() {
         if (forstdb.tableexist("tbl_WasserAusEinleitung") != 0) {
             idWasserazseinleitung = forstdb.getIDfromTable("tbl_WasserAusEinleitung", "idWasserAusEinleitung");
 
@@ -692,10 +693,13 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
 
     public void loadImage() {
         ArrayList<String> RefArray = forstdb.getRefFromImageTable();
-        if (!(RefArray.size() == 0)) {
-            outputFile = RefArray.get(RefArray.size() - 1);
+        File imgFile = null;
 
-            File imgFile = new File(outputFile);
+        outputFile = RefArray.get(RefArray.size() - 1);
+
+        if (!(outputFile == null)) {
+            imgFile = new File(outputFile);
+
 
             if (imgFile.exists()) {
                 Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
@@ -728,8 +732,9 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
     /**
      * Liest die sowohl den Bild als auch die Audiopfad aus der Datenbank aus
      * und weist diese den zwei dafür vorgesehenen Path-Variablen zu.
+     *
      * @author Berger Sandro
-     * */
+     */
     public void loadData() {
         imagePath = forstdb.getRefFromImageTable();
         audioPath = forstdb.getRefFromAudioTable();
@@ -738,9 +743,10 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
     /**
      * Die Method liefer alle Bild-Referenzen die sich in der
      * tbl_Foto befinden.
-     * @author Berger Sandro
+     *
      * @return ArrayList of String (Bild-Referenzen)
-     * */
+     * @author Berger Sandro
+     */
     public ArrayList<String> getImagePath() {
         return imagePath;
     }
@@ -748,9 +754,10 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
     /**
      * Die Method liefer alle Audio-Referenzen die sich in der
      * tbl_Sprachaufnahme befinden.
-     * @author Berger Sandro
+     *
      * @return ArrayList of String (Audio-Referenzen)
-     * */
+     * @author Berger Sandro
+     */
     public ArrayList<String> getAudioPath() {
         return audioPath;
     }
@@ -760,8 +767,9 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
      * Daten der Datenbank an das PHP-File.
      * Als nächstes werden die Bild und Audiodareferenzen aus der Datenbank
      * ausgelesen und mittels des FTPHandlers an den FTP-Server gesendet.
+     *
      * @author Berger Sandro
-     * */
+     */
     public void send(View v) throws IOException {
         HTTPHandler httpHandler = new HTTPHandler(this);
         loadData();
@@ -835,6 +843,7 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
 
     /**
      * Diese Methode pausiert die Aufnahme.
+     *
      * @param v
      */
     public void pauseButtonClick(View v) {
@@ -851,9 +860,10 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
 
     /**
      * Diese Methode stoppt die Aufnhame und erstellt zugleich noch einmal denselben Mediaplayer damit man ihn nochmals abspielen kann
+     *
      * @param v
      */
-    public void stopButtonClick(View v)  {
+    public void stopButtonClick(View v) {
         try {
 
             myplayer.stop();
