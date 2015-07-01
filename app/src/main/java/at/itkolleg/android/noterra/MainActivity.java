@@ -64,10 +64,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     }
 
     public void onClick(View v) {
-        String date = t.format("%d.%m.%Y");
         forstDB.addBeobachtung(date);
         Intent intent=new Intent(MainActivity.this,InspectionActivity.class);
-        intent.putExtra("Zeit",date);
         startActivity(intent);
     }
 

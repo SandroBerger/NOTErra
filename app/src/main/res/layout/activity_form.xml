@@ -46,20 +46,18 @@
                 android:layout_width="match_parent"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-
                 android:layout_height="150dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/textfield_style"
                 android:id="@+id/maßnahmen"
                 android:hint="@string/maßnahme"
                 android:inputType="textMultiLine"
-
                 android:gravity="top|start"
                 android:maxLines="10"
                 android:focusableInTouchMode="true"/>
 
 
-        <Spinner android:id="@+id/Spinner02"
+        <Spinner android:id="@+id/Spinner01"
 
                  android:layout_width="match_parent"
                  android:layout_marginLeft="5dp"
@@ -71,29 +69,23 @@
                  android:prompt="@string/prioritat"
                 />
 
-        <Spinner android:id="@+id/Spinner03"
-
+        <Spinner android:id="@+id/Spinner02"
                  android:layout_width="match_parent"
                  android:layout_marginLeft="5dp"
                  android:layout_marginRight="5dp"
-
                  android:layout_height="50dp"
                  android:layout_marginTop="30dp"
                  android:background="@drawable/spinner_style"
-
                  android:prompt="@string/forderfahig"
                 />
 
-        <Spinner android:id="@+id/Spinner04"
-
+        <Spinner android:id="@+id/Spinner03"
                  android:layout_width="match_parent"
                  android:layout_marginLeft="5dp"
                  android:layout_marginRight="5dp"
-
                  android:layout_height="50dp"
                  android:layout_marginTop="30dp"
                  android:background="@drawable/spinner_style"
-
                  android:prompt="@string/abwicklung"
                 />
 
@@ -118,77 +110,70 @@
                    android:background="@drawable/testtop"
                    android:layout_marginLeft="5dp"
                    android:layout_marginRight="5dp"
-
                    android:text="@string/absturzsicherung"
                    android:id="@+id/abstuzsicherung"
                    android:bottomLeftRadius="8dip"
-                   android:onClick="test"/>
+                   android:onClick="defMaßnahmen"/>
 
         <CheckBox android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:background="#F6E398"
                   android:layout_marginLeft="5dp"
                   android:layout_marginRight="5dp"
-
                   android:text="@string/baumestraucher"
                   android:id="@+id/baumestraucher"
                   android:bottomLeftRadius="8dip"
-                  android:onClick="test"/>
+                  android:onClick="defMaßnahmen"/>
 
         <CheckBox android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:background="#F6E398"
                   android:layout_marginLeft="5dp"
                   android:layout_marginRight="5dp"
-
                   android:text="@string/bauwerksan"
                   android:id="@+id/bauwerksan"
                   android:bottomLeftRadius="8dip"
-                  android:onClick="test"/>
+                  android:onClick="defMaßnahmen"/>
 
         <CheckBox android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:background="#F6E398"
                   android:layout_marginLeft="5dp"
                   android:layout_marginRight="5dp"
-
                   android:text="@string/bauwerkwar"
                   android:id="@+id/bauwerkwar"
                   android:bottomLeftRadius="8dip"
-                  android:onClick="test"/>
+                  android:onClick="defMaßnahmen"/>
 
         <CheckBox android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:background="#F6E398"
                   android:layout_marginLeft="5dp"
                   android:layout_marginRight="5dp"
-
                   android:text="@string/durchlass"
                   android:id="@+id/durchlass"
                   android:bottomLeftRadius="8dip"
-                  android:onClick="test"/>
+                  android:onClick="defMaßnahmen"/>
 
         <CheckBox android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:background="#F6E398"
                   android:layout_marginLeft="5dp"
                   android:layout_marginRight="5dp"
-
                   android:text="@string/genehmigung"
                   android:id="@+id/genehmigung"
                   android:bottomLeftRadius="8dip"
-                  android:onClick="test"/>
+                  android:onClick="defMaßnahmen"/>
 
         <CheckBox android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:background="#F6E398"
                   android:layout_marginLeft="5dp"
                   android:layout_marginRight="5dp"
-
                   android:text="@string/hindernisseentf"
                   android:id="@+id/hindernisseentf"
                   android:bottomLeftRadius="8dip"
-                  android:onClick="test"/>
+                  android:onClick="defMaßnahmen"/>
 
 
 
@@ -197,11 +182,10 @@
                   android:background="#F6E398"
                   android:layout_marginLeft="5dp"
                   android:layout_marginRight="5dp"
-
                   android:text="@string/hindernissp"
                   android:id="@+id/hindernissp"
                   android:bottomLeftRadius="8dip"
-                  android:onClick="test"/>
+                  android:onClick="defMaßnahmen"/>
 
 
         <CheckBox android:layout_width="match_parent"
@@ -209,11 +193,10 @@
                   android:background="#F6E398"
                   android:layout_marginLeft="5dp"
                   android:layout_marginRight="5dp"
-
                   android:text="@string/holzablang"
                   android:id="@+id/holzablang"
                   android:bottomLeftRadius="8dip"
-                  android:onClick="test"/>
+                  android:onClick="defMaßnahmen"/>
 
 
         <CheckBox android:layout_width="match_parent"
@@ -233,11 +216,10 @@
                   android:background="#F6E398"
                   android:layout_marginLeft="5dp"
                   android:layout_marginRight="5dp"
-
                   android:text="@string/sperreodgerinne"
                   android:id="@+id/sperreodgerinne"
                   android:bottomLeftRadius="8dip"
-                  android:onClick="test"/>
+                  android:onClick="defMaßnahmen"/>
 
 
         <CheckBox android:layout_width="match_parent"
@@ -245,22 +227,20 @@
                   android:background="#F6E398"
                   android:layout_marginLeft="5dp"
                   android:layout_marginRight="5dp"
-
                   android:text="@string/ufersich"
                   android:id="@+id/ufersich"
                   android:bottomLeftRadius="8dip"
-                  android:onClick="test"/>
+                  android:onClick="defMaßnahmen"/>
 
         <CheckBox android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:background="@drawable/testbot"
                   android:layout_marginLeft="5dp"
                   android:layout_marginRight="5dp"
-
                   android:text="@string/zustandbeob"
                   android:id="@+id/zustandbeob"
                   android:bottomLeftRadius="8dip"
-                  android:onClick="test"/>
+                  android:onClick="defMaßnahmen"/>
 
 
 
@@ -273,21 +253,17 @@
                 android:id="@+id/textView"
                 android:layout_marginTop="50dp"
                 android:textSize="18dp"
-                android:textStyle="bold" android:layout_alignBottom="@+id/Spinner01" android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"/>
+                android:textStyle="bold"/>
 
 
 
 
-    <Spinner android:id="@+id/Spinner01"
+    <Spinner android:id="@+id/Spinner04"
              android:layout_width="fill_parent"
              android:layout_height="50dp"
              android:layout_marginTop="5dp"
-
              android:layout_marginRight="5dp"
             android:background="@drawable/spinner_style"
-             android:layout_alignParentTop="true" android:layout_alignParentLeft="true"
-             android:layout_alignParentStart="true"
             android:spinnerMode="dropdown"
 
 
@@ -300,8 +276,7 @@
             android:text="Öffnen"
             android:layout_marginTop="5dp"
             android:textColor="@color/black"
-            android:id="@+id/button" android:layout_centerVertical="true" android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
+            android:id="@+id/button"
             android:background="@drawable/button_style"
             android:onClick="onclick"/>
 

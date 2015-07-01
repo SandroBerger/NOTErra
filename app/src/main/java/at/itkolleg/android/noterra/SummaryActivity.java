@@ -8,11 +8,8 @@ import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.*;
 
 import java.io.File;
@@ -20,7 +17,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-public class SummaryActivity extends ActionBarActivity implements View.OnClickListener {
+
+/**
+ * Diese Klasse implementiert die komplett Ansicht für das App. Aufgerufen wird diese mittels denn Button Fertigstellen auf der Hauptansicht des Apps.
+ *
+ * @author Gutsche Christoph, Berger Sandro
+ *
+ */
+public class SummaryActivity extends ActionBarActivity {
 
     private String outputFile = null;
     private ImageView imageView;
@@ -73,17 +77,62 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
     private TextView sf5tv;
     private TextView sf6tv;
 
-    private TextView textfoto;
 
+    /**
+     * Initialisierung der Activity und Appstart.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_summary);
-
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
+
+
         forstdb = new DBHandler(this);
+
         loadImage();
 
+        initialisierung();
+
+
+        audioinitialisierung();
+
+        loadText();
+        loadFormular();
+
+
+        if (forstdb.tableexist("tbl_Abflussbehinderung") != 0) {
+            loadAbflussbehinderung();
+        }
+        if (forstdb.tableexist("tbl_OhneBehinderung") != 0) {
+            loadOhneBehinderung();
+        }
+        if (forstdb.tableexist("tbl_Ablagerung") != 0) {
+
+            loadAblagerung();
+        }
+        if (forstdb.tableexist("tbl_Holzablagerung") != 0) {
+            loadHolzablagerung();
+        }
+        if (forstdb.tableexist("tbl_Holzbewuchs") != 0) {
+            loadHolzbewuchs();
+        }
+        if (forstdb.tableexist("tbl_SchadenAnRegulierung") != 0) {
+            loadSchadenAnRegulierung();
+        }
+        if (forstdb.tableexist("tbl_WasserAusEinleitung") != 0) {
+            loadWasserAusEinleitung();
+        }
+
+
+    }
+
+    /**
+     * Diese Methode dient zur initialisierung der Textfelder (TextvView's), Buttons und der Seekbar.
+     */
+    public void initialisierung() {
         dur = (TextView) findViewById(R.id.dur);
         pos = (TextView) findViewById(R.id.pos);
 
@@ -112,13 +161,15 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         sf4tv = (TextView) findViewById(R.id.sf4);
         sf5tv = (TextView) findViewById(R.id.sf5);
         sf6tv = (TextView) findViewById(R.id.sf6);
+    }
 
-        textfoto = (TextView) findViewById(R.id.textfoto);
-
-
+    /**
+     * Diese Methode erstellt den Medienplayer und falls ein Audiofile vorhanden ist wird dieses in den Medianplayer eingelesen.
+     */
+    public void audioinitialisierung() {
         ArrayList<String> audioRefArray = forstdb.getRefFromAudioTable();
 
-        if (!(audioRefArray.get(audioRefArray.size()-1) == null)) {
+        if (!audioRefArray.isEmpty()) {
             audiofpad = audioRefArray.get(audioRefArray.size() - 1);
 
             myplayer = new MediaPlayer();
@@ -129,13 +180,24 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
                 e.printStackTrace();
             }
         }
+    }
 
+    /**
+     * Diese Methode setzt das Notiztextfeld mit der Notiz aus dem Notesfeld.
+     */
+    public void loadText() {
         if (forstdb.tableexist("tbl_text") != 0) {
             //Notizen-Text
             Cursor c = forstdb.getLastInformation("Text", "tbl_Text");
             String text1 = c.getString(0);
             notetext.setText(text1);
         }
+    }
+
+    /**
+     * Diese Methode setzt das jeweilige Textfeld mit den Daten aus dem Hauptformular.
+     */
+    public void loadFormular() {
 
         if (forstdb.tableexist("tbl_Formular") != 0) {
             //Hauptformular
@@ -353,271 +415,288 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
 
             idHauptform = forstdb.getIDfromTable("tbl_Formular", "idFormular");
         }
+    }
 
+    /**
+     * Diese Methode setzt das jeweilige Textfeld mit den Daten aus dem speziellen Formular Abflussbehinderndeeinbauten.
+     */
+    public void loadAbflussbehinderung() {
+        idAbflussbehinderndeeinbauten = forstdb.getIDfromTable("tbl_Abflussbehinderung", "idAbflussbehinderung");
 
-        if (forstdb.tableexist("tbl_Abflussbehinderung") != 0) {
-            idAbflussbehinderndeeinbauten = forstdb.getIDfromTable("tbl_Abflussbehinderung", "idAbflussbehinderung");
+        if (idHauptform.equals(idAbflussbehinderndeeinbauten)) {
+            h1.setText("Abflussbehindernde Einbauten");
 
-            if (idHauptform.equals(idAbflussbehinderndeeinbauten)) {
-                h1.setText("Abflussbehindernde Einbauten");
+            Cursor carteinbaut = forstdb.getLastInformation("Art", "tbl_Abflussbehinderung");
+            String carteinbauttext = carteinbaut.getString(0);
+            sf1tv.setText("\nArt der Einbauten: " + carteinbauttext);
 
-                Cursor carteinbaut = forstdb.getLastInformation("Art", "tbl_Abflussbehinderung");
-                String carteinbauttext = carteinbaut.getString(0);
-                sf1tv.setText("\nArt der Einbauten: " + carteinbauttext);
 
+            Cursor cbeschreibung = forstdb.getLastInformation("Beschreibung", "tbl_Abflussbehinderung");
+            String cbeschreibungtext = cbeschreibung.getString(0);
+            sf2tv.setText("Beschreibung: " + cbeschreibungtext);
 
-                Cursor cbeschreibung = forstdb.getLastInformation("Beschreibung", "tbl_Abflussbehinderung");
-                String cbeschreibungtext = cbeschreibung.getString(0);
-                sf2tv.setText("Beschreibung: " + cbeschreibungtext);
-
-            }
-
-
-        }
-        if (forstdb.tableexist("tbl_OhneBehinderung") != 0) {
-            idAbflussbehinderung = forstdb.getIDfromTable("tbl_OhneBehinderung", "idOhneBehinderung");
-
-
-            if (idHauptform.equals(idAbflussbehinderung)) {
-                h1.setText("Ereignis ohne unmittelbare Abflussbehinderung");
-
-                Cursor cartbeobachtung = forstdb.getLastInformation("Art", "idOhneBehinderung");
-                String cartbeobachtungtext = cartbeobachtung.getString(0);
-                sf1tv.setText("\nArt der Beobachtung: " + cartbeobachtungtext);
-
-
-                Cursor cbeschreibung = forstdb.getLastInformation("Beschreibung", "idOhneBehinderung");
-                String cbeschreibungtext = cbeschreibung.getString(0);
-                sf2tv.setText("Beschreibung: " + cbeschreibungtext);
-
-
-            }
-
-        }
-        if (forstdb.tableexist("tbl_Ablagerung") != 0) {
-            idAblagerung = forstdb.getIDfromTable("tbl_Ablagerung", "idAblagerung");
-
-            if (idHauptform.equals(idAblagerung)) {
-                h1.setText("Ablagerung sonstiger abflusshemender Gegenstände");
-
-                Cursor cablagerung = forstdb.getLastInformation("Art", "tbl_Ablagerung");
-                String cablagerungtext = cablagerung.getString(0);
-                sf1tv.setText("\nAblagerung: " + cablagerungtext);
-
-
-                Cursor cbeschreibung = forstdb.getLastInformation("Beschreibung", "tbl_Ablagerung");
-                String cbeschreibungtext = cbeschreibung.getString(0);
-                sf2tv.setText("Beschreibung: " + cbeschreibungtext);
-
-                Cursor cbachabschnitt = forstdb.getLastInformation("Bachabschnitt", "tbl_Ablagerung");
-                String cbachabschnitttext = cbachabschnitt.getString(0);
-                sf3tv.setText("Länge des Bachabschnittes: " + cbachabschnitttext + " meter");
-
-                Cursor causmass = forstdb.getLastInformation("Ausmass", "tbl_Ablagerung");
-                String causmasstext = causmass.getString(0);
-                sf4tv.setText("Größe / Ausmaß: " + causmasstext + "m2");
-
-
-            }
-
-
-        }
-        if (forstdb.tableexist("tbl_Holzablagerung") != 0) {
-            idHolzablagerung = forstdb.getIDfromTable("tbl_Holzablagerung", "idHolzablagerung");
-            if (idHauptform.equals(idHolzablagerung)) {
-                h1.setText("Holzablagerungen im Hochwasserabflussbereich");
-
-                Cursor canzhalstamm = forstdb.getLastInformation("AnzahlStaemme", "tbl_Holzablagerung");
-                Integer canzhalstammint = canzhalstamm.getInt(0);
-                sf1tv.setText("\nAnzahl der Stämme: " + canzhalstammint);
-
-                Cursor cbaumart = forstdb.getLastInformation("Baumart", "tbl_Holzablagerung");
-                String cbaumarttext = cbaumart.getString(0);
-                sf2tv.setText("Baumart: " + cbaumarttext);
-
-                Cursor cmedia = forstdb.getLastInformation("Media", "tbl_Holzablagerung");
-                Integer cmediaint = cmedia.getInt(0);
-                sf3tv.setText("Media (BHD): " + cmediaint);
-
-                Cursor cholzmenge = forstdb.getLastInformation("Holzmenge", "tbl_Holzablagerung");
-                Integer cholzmengeint = cholzmenge.getInt(0);
-                sf4tv.setText("Anzahl der Stämme: " + cholzmengeint);
-
-                Cursor cbachabschnitt = forstdb.getLastInformation("Bachabschnitt", "tbl_Holzablagerung");
-                Integer cbachabschnittint = cbachabschnitt.getInt(0);
-                sf5tv.setText("Länge Bachabschnitt: " + cbachabschnittint + " meter");
-
-
-            }
-
-
-        }
-        if (forstdb.tableexist("tbl_Holzbewuchs") != 0) {
-            idHolzbewuchs = forstdb.getIDfromTable("tbl_Holzbewuchs", "idHolzbewuchs");
-
-            if (idHauptform.equals(idHolzbewuchs)) {
-                h1.setText("Holzbewuchs im Hochwasserabflussbereich");
-
-
-                Cursor canzahl = forstdb.getLastInformation("Anzahl", "tbl_Holzbewuchs");
-                Integer canzahlint = canzahl.getInt(0);
-                sf1tv.setText("\nAnzahl der Stämme / Sträucher: " + canzahlint);
-
-                Cursor cbaumart = forstdb.getLastInformation("Baumart", "tbl_Holzbewuchs");
-                String cbaumarttext = cbaumart.getString(0);
-                sf2tv.setText("Baumart: " + cbaumarttext);
-
-                Cursor choehe = forstdb.getLastInformation("Hoehe", "tbl_Holzbewuchs");
-                Integer choeheint = choehe.getInt(0);
-                sf3tv.setText("Baumhöhe: " + choeheint + " meter");
-
-                Cursor cholzmenge = forstdb.getLastInformation("Menge", "tbl_Holzbewuchs");
-                Integer cholzmengeint = cholzmenge.getInt(0);
-                sf4tv.setText("Holzmenge: " + cholzmengeint + " fm");
-
-                Cursor cbeschreibung = forstdb.getLastInformation("Beschreibung", "tbl_Holzbewuchs");
-                String cbeschreibungtext = cbeschreibung.getString(0);
-                sf5tv.setText("Beschreibung: " + cbeschreibungtext);
-
-
-            }
-
-        }
-        if (forstdb.tableexist("tbl_SchadenAnRegulierung") != 0) {
-            idSchaedenRegulierungsbauten = forstdb.getIDfromTable("tbl_SchadenAnRegulierung", "idSchadenAnRegulierung");
-
-            if (idHauptform.equals(idSchaedenRegulierungsbauten)) {
-                h1.setText("Schäden an Regulierungsbauten");
-
-                Cursor cart = forstdb.getLastInformation("Art", "tbl_SchadenAnRegulierung");
-                String carttext = cart.getString(0);
-                sf1tv.setText("\nArt des Bauwerks: " + carttext);
-
-                Cursor choehe = forstdb.getLastInformation("Hoehe", "tbl_SchadenAnRegulierung");
-                String choehetext = choehe.getString(0);
-                sf2tv.setText("Freie Höhe bis Dammkrone: " + choehetext + " meter");
-
-
-                Cursor cfehlabsturz = forstdb.getLastInformation("FehlendeAbsturzsicherung", "tbl_SchadenAnRegulierung");
-                String cfehlabsturztext = cfehlabsturz.getString(0);
-
-                if (cfehlabsturztext.equals("0")) {
-                    cfehlabsturztext = "Nein";
-                } else {
-                    cfehlabsturztext = "Ja";
-                }
-
-                Cursor caussperre = forstdb.getLastInformation("AusgangSperrenfluegel", "tbl_SchadenAnRegulierung");
-                String caussperretext = caussperre.getString(0);
-
-                if (caussperretext.equals("0")) {
-                    caussperretext = "Nein";
-                } else {
-                    caussperretext = "Ja";
-                }
-
-                Cursor csperre = forstdb.getLastInformation("Geschiebesperre", "tbl_SchadenAnRegulierung");
-                String csperretext = csperre.getString(0);
-
-                if (csperretext.equals("0")) {
-                    csperretext = "Nein";
-                } else {
-                    csperretext = "Ja";
-                }
-
-                Cursor crisse = forstdb.getLastInformation("Risse", "tbl_SchadenAnRegulierung");
-                String crissetext = crisse.getString(0);
-
-                if (crissetext.equals("0")) {
-                    crissetext = "Nein";
-                } else {
-                    crissetext = "Ja";
-                }
-
-                Cursor cmauerwerk = forstdb.getLastInformation("SchadhaftesMauerwerk", "tbl_SchadenAnRegulierung");
-                String cmauerwerktext = cmauerwerk.getString(0);
-
-                if (cmauerwerktext.equals("0")) {
-                    cmauerwerktext = "Nein";
-                } else {
-                    cmauerwerktext = "Ja";
-                }
-
-                Cursor csonstiges = forstdb.getLastInformation("Sonstiges", "tbl_SchadenAnRegulierung");
-                String csonstigestext = csonstiges.getString(0);
-
-                if (csonstigestext.equals("0")) {
-                    csonstigestext = "Nein";
-                } else {
-                    csonstigestext = "Ja";
-                }
-
-                Cursor cbewuchs = forstdb.getLastInformation("Bewuchs", "tbl_SchadenAnRegulierung");
-                String cbewuchstext = cbewuchs.getString(0);
-
-                if (cbewuchstext.equals("0")) {
-                    cbewuchstext = "Nein";
-                } else {
-                    cbewuchstext = "Ja";
-                }
-
-                Cursor cunfun = forstdb.getLastInformation("UnterspueltesFundament", "tbl_SchadenAnRegulierung");
-                String cunfuntext = cunfun.getString(0);
-
-                if (cunfuntext.equals("0")) {
-                    cunfuntext = "Nein";
-                } else {
-                    cunfuntext = "Ja";
-                }
-
-
-                sf5tv.setText("\n Schadensart des Bauwerks" +
-                                "\n Fehlende Absturzsicherung " +
-                                "\n Ausgang Sperrenflügel: " +
-                                "\n Geschiebesperre: " +
-                                "\n Risse im Mauerwerk / Beton: " +
-                                "\n Schadhaftes Mauerwerk / Beton: " +
-                                "\n Sonstiges" +
-                                "\n Starker Bewuchs: " +
-                                "\n Untersp. Fundament: "
-                );
-
-
-                sf6tv.setText("Checkliste " +
-                                "\n" + cfehlabsturztext +
-                                "\n" + caussperretext +
-                                "\n" + csperretext +
-                                "\n" + crissetext +
-                                "\n" + cmauerwerktext +
-                                "\n" + csonstigestext +
-                                "\n" + cbewuchstext +
-                                "\n" + cunfuntext
-                );
-
-            }
-
-        }
-        if (forstdb.tableexist("tbl_WasserAusEinleitung") != 0) {
-            idWasserazseinleitung = forstdb.getIDfromTable("tbl_WasserAusEinleitung", "idWasserAusEinleitung");
-
-            if (idHauptform.equals(idWasserazseinleitung)) {
-                h1.setText("Wasseraus-und -einleitungen");
-
-                Cursor cart = forstdb.getLastInformation("Art", "tbl_WasserAusEinleitung");
-                String carttext = cart.getString(0);
-                sf1tv.setText("Art: " + carttext);
-
-                Cursor czweck = forstdb.getLastInformation("Zweck", "tbl_WasserAusEinleitung");
-                String czwecktext = czweck.getString(0);
-                sf2tv.setText("Zweck: " + czwecktext);
-
-                Cursor cbeschreibung = forstdb.getLastInformation("Beschreibung", "tbl_WasserAusEinleitung");
-                String cbeschreibungtext = cbeschreibung.getString(0);
-                sf3tv.setText("Beschreibung: " + cbeschreibungtext);
-            }
         }
     }
 
+    /**
+     * Diese Methode setzt das jeweilige Textfeld mit den Daten aus dem speziellen Fromular Abflussbehinderung.
+     */
+    public void loadOhneBehinderung() {
+        idAbflussbehinderung = forstdb.getIDfromTable("tbl_OhneBehinderung", "idOhneBehinderung");
+
+
+        if (idHauptform.equals(idAbflussbehinderung)) {
+            h1.setText("Ereignis ohne unmittelbare Abflussbehinderung");
+
+            Cursor cartbeobachtung = forstdb.getLastInformation("Art", "idOhneBehinderung");
+            String cartbeobachtungtext = cartbeobachtung.getString(0);
+            sf1tv.setText("\nArt der Beobachtung: " + cartbeobachtungtext);
+
+
+            Cursor cbeschreibung = forstdb.getLastInformation("Beschreibung", "idOhneBehinderung");
+            String cbeschreibungtext = cbeschreibung.getString(0);
+            sf2tv.setText("Beschreibung: " + cbeschreibungtext);
+
+
+        }
+    }
+
+    /**
+     * Diese Methode setzt das jeweilige Textfeld mit den Daten aus dem speziellen Formular Ablagerung.
+     */
+    public void loadAblagerung() {
+        idAblagerung = forstdb.getIDfromTable("tbl_Ablagerung", "idAblagerung");
+
+        if (idHauptform.equals(idAblagerung)) {
+            h1.setText("Ablagerung sonstiger abflusshemender Gegenstände");
+
+            Cursor cablagerung = forstdb.getLastInformation("Art", "tbl_Ablagerung");
+            String cablagerungtext = cablagerung.getString(0);
+            sf1tv.setText("\nAblagerung: " + cablagerungtext);
+
+
+            Cursor cbeschreibung = forstdb.getLastInformation("Beschreibung", "tbl_Ablagerung");
+            String cbeschreibungtext = cbeschreibung.getString(0);
+            sf2tv.setText("Beschreibung: " + cbeschreibungtext);
+
+            Cursor cbachabschnitt = forstdb.getLastInformation("Bachabschnitt", "tbl_Ablagerung");
+            String cbachabschnitttext = cbachabschnitt.getString(0);
+            sf3tv.setText("Länge des Bachabschnittes: " + cbachabschnitttext + " meter");
+
+            Cursor causmass = forstdb.getLastInformation("Ausmass", "tbl_Ablagerung");
+            String causmasstext = causmass.getString(0);
+            sf4tv.setText("Größe / Ausmaß: " + causmasstext + "m2");
+
+        }
+
+    }
+
+
+    /**
+     * Diese Methode setzt das jeweilige Textfeld mit den Daten aus dem speziellen Formular Holzablagerung.
+     */
+    public void loadHolzablagerung() {
+        idHolzablagerung = forstdb.getIDfromTable("tbl_Holzablagerung", "idHolzablagerung");
+        if (idHauptform.equals(idHolzablagerung)) {
+            h1.setText("Holzablagerungen im Hochwasserabflussbereich");
+
+            Cursor canzhalstamm = forstdb.getLastInformation("AnzahlStaemme", "tbl_Holzablagerung");
+            Integer canzhalstammint = canzhalstamm.getInt(0);
+            sf1tv.setText("\nAnzahl der Stämme: " + canzhalstammint);
+
+            Cursor cbaumart = forstdb.getLastInformation("Baumart", "tbl_Holzablagerung");
+            String cbaumarttext = cbaumart.getString(0);
+            sf2tv.setText("Baumart: " + cbaumarttext);
+
+            Cursor cmedia = forstdb.getLastInformation("Media", "tbl_Holzablagerung");
+            Integer cmediaint = cmedia.getInt(0);
+            sf3tv.setText("Media (BHD): " + cmediaint);
+
+            Cursor cholzmenge = forstdb.getLastInformation("Holzmenge", "tbl_Holzablagerung");
+            Integer cholzmengeint = cholzmenge.getInt(0);
+            sf4tv.setText("Anzahl der Stämme: " + cholzmengeint);
+
+            Cursor cbachabschnitt = forstdb.getLastInformation("Bachabschnitt", "tbl_Holzablagerung");
+            Integer cbachabschnittint = cbachabschnitt.getInt(0);
+            sf5tv.setText("Länge Bachabschnitt: " + cbachabschnittint + " meter");
+
+        }
+    }
+
+    /**
+     * Diese Methode setzt das jeweilige Textfeld mit den Daten aus dem speziellen Formular Holzbewuchs.
+     */
+    public void loadHolzbewuchs() {
+        idHolzbewuchs = forstdb.getIDfromTable("tbl_Holzbewuchs", "idHolzbewuchs");
+
+        if (idHauptform.equals(idHolzbewuchs)) {
+            h1.setText("Holzbewuchs im Hochwasserabflussbereich");
+
+
+            Cursor canzahl = forstdb.getLastInformation("Anzahl", "tbl_Holzbewuchs");
+            Integer canzahlint = canzahl.getInt(0);
+            sf1tv.setText("\nAnzahl der Stämme / Sträucher: " + canzahlint);
+
+            Cursor cbaumart = forstdb.getLastInformation("Baumart", "tbl_Holzbewuchs");
+            String cbaumarttext = cbaumart.getString(0);
+            sf2tv.setText("Baumart: " + cbaumarttext);
+
+            Cursor choehe = forstdb.getLastInformation("Hoehe", "tbl_Holzbewuchs");
+            Integer choeheint = choehe.getInt(0);
+            sf3tv.setText("Baumhöhe: " + choeheint + " meter");
+
+            Cursor cholzmenge = forstdb.getLastInformation("Menge", "tbl_Holzbewuchs");
+            Integer cholzmengeint = cholzmenge.getInt(0);
+            sf4tv.setText("Holzmenge: " + cholzmengeint + " fm");
+
+            Cursor cbeschreibung = forstdb.getLastInformation("Beschreibung", "tbl_Holzbewuchs");
+            String cbeschreibungtext = cbeschreibung.getString(0);
+            sf5tv.setText("Beschreibung: " + cbeschreibungtext);
+        }
+    }
+
+    /**
+     * Diese Methode setzt das jeweilige Textfeld mit den Daten aus dem speziellen Formular SchadenAnRegulierung.
+     */
+    public void loadSchadenAnRegulierung() {
+        idSchaedenRegulierungsbauten = forstdb.getIDfromTable("tbl_SchadenAnRegulierung", "idSchadenAnRegulierung");
+        if (idHauptform.equals(idSchaedenRegulierungsbauten)) {
+            h1.setText("Schäden an Regulierungsbauten");
+
+            Cursor cart = forstdb.getLastInformation("Art", "tbl_SchadenAnRegulierung");
+            String carttext = cart.getString(0);
+            sf1tv.setText("\nArt des Bauwerks: " + carttext);
+
+            Cursor choehe = forstdb.getLastInformation("Hoehe", "tbl_SchadenAnRegulierung");
+            String choehetext = choehe.getString(0);
+            sf2tv.setText("Freie Höhe bis Dammkrone: " + choehetext + " meter");
+
+
+            Cursor cfehlabsturz = forstdb.getLastInformation("FehlendeAbsturzsicherung", "tbl_SchadenAnRegulierung");
+            String cfehlabsturztext = cfehlabsturz.getString(0);
+
+            if (cfehlabsturztext.equals("0")) {
+                cfehlabsturztext = "Nein";
+            } else {
+                cfehlabsturztext = "Ja";
+            }
+
+            Cursor caussperre = forstdb.getLastInformation("AusgangSperrenfluegel", "tbl_SchadenAnRegulierung");
+            String caussperretext = caussperre.getString(0);
+
+            if (caussperretext.equals("0")) {
+                caussperretext = "Nein";
+            } else {
+                caussperretext = "Ja";
+            }
+
+            Cursor csperre = forstdb.getLastInformation("Geschiebesperre", "tbl_SchadenAnRegulierung");
+            String csperretext = csperre.getString(0);
+
+            if (csperretext.equals("0")) {
+                csperretext = "Nein";
+            } else {
+                csperretext = "Ja";
+            }
+
+            Cursor crisse = forstdb.getLastInformation("Risse", "tbl_SchadenAnRegulierung");
+            String crissetext = crisse.getString(0);
+
+            if (crissetext.equals("0")) {
+                crissetext = "Nein";
+            } else {
+                crissetext = "Ja";
+            }
+
+            Cursor cmauerwerk = forstdb.getLastInformation("SchadhaftesMauerwerk", "tbl_SchadenAnRegulierung");
+            String cmauerwerktext = cmauerwerk.getString(0);
+
+            if (cmauerwerktext.equals("0")) {
+                cmauerwerktext = "Nein";
+            } else {
+                cmauerwerktext = "Ja";
+            }
+
+            Cursor csonstiges = forstdb.getLastInformation("Sonstiges", "tbl_SchadenAnRegulierung");
+            String csonstigestext = csonstiges.getString(0);
+
+            if (csonstigestext.equals("0")) {
+                csonstigestext = "Nein";
+            } else {
+                csonstigestext = "Ja";
+            }
+
+            Cursor cbewuchs = forstdb.getLastInformation("Bewuchs", "tbl_SchadenAnRegulierung");
+            String cbewuchstext = cbewuchs.getString(0);
+
+            if (cbewuchstext.equals("0")) {
+                cbewuchstext = "Nein";
+            } else {
+                cbewuchstext = "Ja";
+            }
+
+            Cursor cunfun = forstdb.getLastInformation("UnterspueltesFundament", "tbl_SchadenAnRegulierung");
+            String cunfuntext = cunfun.getString(0);
+
+            if (cunfuntext.equals("0")) {
+                cunfuntext = "Nein";
+            } else {
+                cunfuntext = "Ja";
+            }
+
+
+            sf5tv.setText("\n Schadensart des Bauwerks" +
+                            "\n Fehlende Absturzsicherung " +
+                            "\n Ausgang Sperrenflügel: " +
+                            "\n Geschiebesperre: " +
+                            "\n Risse im Mauerwerk / Beton: " +
+                            "\n Schadhaftes Mauerwerk / Beton: " +
+                            "\n Sonstiges" +
+                            "\n Starker Bewuchs: " +
+                            "\n Untersp. Fundament: "
+            );
+
+
+            sf6tv.setText("Checkliste " +
+                            "\n" + cfehlabsturztext +
+                            "\n" + caussperretext +
+                            "\n" + csperretext +
+                            "\n" + crissetext +
+                            "\n" + cmauerwerktext +
+                            "\n" + csonstigestext +
+                            "\n" + cbewuchstext +
+                            "\n" + cunfuntext
+            );
+        }
+    }
+
+    /**
+     * Diese Methode setzt das jeweilige Textfeld mit den Daten aus dem speziellen Formular WasserAusEinleitung.
+     */
+    public void loadWasserAusEinleitung() {
+        idWasserazseinleitung = forstdb.getIDfromTable("tbl_WasserAusEinleitung", "idWasserAusEinleitung");
+
+        if (idHauptform.equals(idWasserazseinleitung)) {
+            h1.setText("Wasseraus-und -einleitungen");
+
+            Cursor cart = forstdb.getLastInformation("Art", "tbl_WasserAusEinleitung");
+            String carttext = cart.getString(0);
+            sf1tv.setText("Art: " + carttext);
+
+            Cursor czweck = forstdb.getLastInformation("Zweck", "tbl_WasserAusEinleitung");
+            String czwecktext = czweck.getString(0);
+            sf2tv.setText("Zweck: " + czwecktext);
+
+            Cursor cbeschreibung = forstdb.getLastInformation("Beschreibung", "tbl_WasserAusEinleitung");
+            String cbeschreibungtext = cbeschreibung.getString(0);
+            sf3tv.setText("Beschreibung: " + cbeschreibungtext);
+        }
+    }
+
+
+    /**
+     * Hier wird as Bild auf einer loakeln ArrayList von der Datenbank aus gespeichert. Und in eine Bitmapt umgesetzt. Zum Schluss wird es in eine ImageView eingesetzt. Diese Imagevie zeigt dann dieses Bild.
+     */
     public void loadImage() {
         ArrayList<String> RefArray = forstdb.getRefFromImageTable();
         if (!(RefArray.size() == 0)) {
@@ -633,7 +712,13 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         }
     }
 
-    private Runnable UpdateSongTime = new Runnable() {
+
+    /**
+     *Hier wird die aktuelle Zeit für die Sprachaufnahme bearbeitet
+     * Verwendet wird diese Zeit für die Seekbar (mitlaufende Anzeige)
+     * dur (TextView) zeigt den Text an
+     */
+    private Runnable VoiceTime = new Runnable() {
         public void run() {
             startTime = myplayer.getCurrentPosition();
             dur.setText(String.format("%d min, %d sec",
@@ -648,11 +733,10 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         }
     };
 
-    @Override
-    public void onClick(View v) {
 
-    }
-
+    /**
+     *
+     */
     public void loadData() {
         imagePath = forstdb.getRefFromImageTable();
         audioPath = forstdb.getRefFromAudioTable();
@@ -666,7 +750,7 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         return audioPath;
     }
 
-    public void send(View v) throws IOException {
+    public void send(View v) throws  IOException{
         HTTPHandler httpHandler = new HTTPHandler(this);
         loadData();
         try {
@@ -698,11 +782,13 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         toast.show();
     }
 
-
-    public void playButtonClick(View v) {
+    /**
+     * Wird der Play button auf der Fertigstellenseite gedrückt somit wird diese Methode aktiviert.
+     * @param v Grundbaustein für die Benutzeroberfälche / Wird kurz benutzt um die seekbar und die Zeit anzuzeigen.
+     */
+    public void playButtonClick(View v){
         try {
-            Toast.makeText(getApplicationContext(), "Audio wird gestartet",
-                    Toast.LENGTH_SHORT).show();
+
             seek.setVisibility(View.VISIBLE);
             dur.setVisibility(View.VISIBLE);
 
@@ -711,6 +797,8 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
             finalTime = myplayer.getDuration();
             startTime = myplayer.getCurrentPosition();
 
+            Toast.makeText(getApplicationContext(), "Audio wird gestartet",
+                    Toast.LENGTH_SHORT).show();
             if (oneTimeOnly == 0) {
                 seek.setMax((int) finalTime);
                 oneTimeOnly = 1;
@@ -729,7 +817,7 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
 
 
             seek.setProgress((int) startTime);
-            myHandler.postDelayed(UpdateSongTime, 100);
+            myHandler.postDelayed(VoiceTime, 100);
 
 
         } catch (Exception e) {
@@ -737,6 +825,10 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         }
     }
 
+    /**
+     * Diese Methode pausiert die Aufnahme.
+     * @param v
+     */
     public void pauseButtonClick(View v) {
         try {
             myplayer.pause();
@@ -749,7 +841,11 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
 
     }
 
-    public void stopButtonClick(View v) {
+    /**
+     * Diese Methode stoppt die Aufnhame und erstellt zugleich noch einmal denselben Mediaplayer damit man ihn nochmals abspielen kann
+     * @param v
+     */
+    public void stopButtonClick(View v)  {
         try {
 
             myplayer.stop();
@@ -769,19 +865,5 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         }
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
 
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_summary, container, false);
-            return rootView;
-        }
-    }
 }

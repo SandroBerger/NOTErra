@@ -11,6 +11,7 @@ import android.widget.TextView;
 public class InspectionActivity extends ActionBarActivity implements View.OnClickListener {
     private DBHandler forstDB;
     private String date;
+    private TextView uberschrifttextview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,17 +23,36 @@ public class InspectionActivity extends ActionBarActivity implements View.OnClic
                     .commit();
         }
 
-        addButton();
-        forstDB = new DBHandler(this);
-
-        TextView textView=(TextView)findViewById(R.id.h2beobachtung);
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
 
-        date=getIntent().getStringExtra("Zeit");
+        addButton();
+        forstDB = new DBHandler(this);
+        uberschrift();
+    }
 
-        String extra= getIntent().getStringExtra("Headline");
-        textView.setText(extra);
+    public void uberschrift(){
+        if (forstDB.tableexist("tbl_Abflussbehinderung") != 0) {
+           uberschrifttextview.setText("Abflussbehindernde Einbauten");
+        }
+        if (forstDB.tableexist("tbl_OhneBehinderung") != 0) {
+            uberschrifttextview.setText("Ereignis ohne unmittelbare Abflussbehinderung");
+        }
+        if (forstDB.tableexist("tbl_Ablagerung") != 0) {
+            uberschrifttextview.setText("Ablagerung sonstiger abflusshemender Gegenstände");
 
+        }
+        if (forstDB.tableexist("tbl_Holzablagerung") != 0) {
+           uberschrifttextview.setText("Holzablagerungen im Hochwasserabflussbereich");
+        }
+        if (forstDB.tableexist("tbl_Holzbewuchs") != 0) {
+            uberschrifttextview.setText("Holzbewuchs im Hochwasserabflussbereich");
+        }
+        if (forstDB.tableexist("tbl_SchadenAnRegulierung") != 0) {
+           uberschrifttextview.setText("Schäden an Regulierungsbauten");
+        }
+        if (forstDB.tableexist("tbl_WasserAusEinleitung") != 0) {
+            uberschrifttextview.setText("Wasseraus-und -einleitungen");
+        }
     }
 
     public void addButton(){
@@ -45,6 +65,8 @@ public class InspectionActivity extends ActionBarActivity implements View.OnClic
         noteButton.setOnClickListener(this);
         gpsButton.setOnClickListener(this);
         summaryButton.setOnClickListener(this);
+        uberschrifttextview=(TextView)findViewById(R.id.hbeobachtung);
+
     }
 
     //-------------Hinzufügen der Buttonclick funktion und weiterleitung auf die einzelnen Funktionen bzw. Module wie Formular, Notiz oder GPS--
@@ -74,7 +96,6 @@ public class InspectionActivity extends ActionBarActivity implements View.OnClic
     private void buttonFormClick(){
 
         Intent intent=new Intent(InspectionActivity.this,FormActivity.class);
-        intent.putExtra("Zeit", date);
         startActivity(intent);
 
     }

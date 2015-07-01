@@ -34,14 +34,43 @@ public class Wasserauseinleitung extends ActionBarActivity {
     private String art;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wasserauseinleitung);
+        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
+        forstDB = new DBHandler(this);
 
-         mySpinner=(Spinner)findViewById(R.id.wasserauseinleitung);
+        initialisierung();
+        spinner();
+        focus();
 
+    }
+
+    private void focus() {
+        edit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                freiwahl.setChecked(true);
+            }
+        });
+    }
+
+    private void initialisierung() {
+        mySpinner = (Spinner) findViewById(R.id.wasserauseinleitung);
+        zweck = (RadioGroup) findViewById(R.id.zweck);
+        abwasser = (RadioButton) findViewById(R.id.abwasser);
+        beschneiung = (RadioButton) findViewById(R.id.beschneiung);
+        bewaesserung = (RadioButton) findViewById(R.id.bewaesserung);
+        trinkwasser = (RadioButton) findViewById(R.id.trinkwasser);
+        freiwahl = (RadioButton) findViewById(R.id.freiwahl);
+        edit = (EditText) findViewById(R.id.art_des_zweckes);
+        besch = (EditText) findViewById(R.id.beschreibung);
+
+
+    }
+
+    private void spinner() {
         List<String> anzahl = new ArrayList<String>();
         anzahl.add("Wassereinleitung");
         anzahl.add("Wasserentnahme");
@@ -57,57 +86,39 @@ public class Wasserauseinleitung extends ActionBarActivity {
         };
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner.setAdapter(dataAdapter);
-
         mySpinner.setSelection(listsize);
 
 
-        zweck=(RadioGroup)findViewById(R.id.zweck);
 
-        abwasser =(RadioButton)findViewById(R.id.abwasser);
-        beschneiung=(RadioButton)findViewById(R.id.beschneiung);
-        bewaesserung=(RadioButton)findViewById(R.id.bewaesserung);
-        trinkwasser=(RadioButton)findViewById(R.id.trinkwasser);
-        freiwahl=(RadioButton)findViewById(R.id.freiwahl);
-        edit=(EditText)findViewById(R.id.art_des_zweckes);
-
-        besch=(EditText)findViewById(R.id.beschreibung);
-
-
-        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
-
-        forstDB = new DBHandler(this);
-
-        edit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                freiwahl.setChecked(true);
-            }
-        });
     }
 
-    public void onclick(View view) {
+    /**
+     * Diese Methode wird von dem jeweiligen Radiobutton aufgerufen.
+     * @param view
+     */
+    public void zweck(View view) {
 
         int checkedRadiobut = zweck.getCheckedRadioButtonId();
 
         switch (checkedRadiobut) {
             case R.id.abwasser:
                 if (abwasser.isChecked()) {
-                   auswahl=abwasser.getText().toString();
+                    auswahl = abwasser.getText().toString();
                 }
                 break;
             case R.id.beschneiung:
                 if (beschneiung.isChecked()) {
-                    auswahl=beschneiung.getText().toString();
+                    auswahl = beschneiung.getText().toString();
                 }
                 break;
             case R.id.bewaesserung:
                 if (bewaesserung.isChecked()) {
-                    auswahl=bewaesserung.getText().toString();
+                    auswahl = bewaesserung.getText().toString();
                 }
                 break;
             case R.id.trinkwasser:
                 if (trinkwasser.isChecked()) {
-                    auswahl=trinkwasser.getText().toString();
+                    auswahl = trinkwasser.getText().toString();
                 }
                 break;
 
@@ -116,11 +127,8 @@ public class Wasserauseinleitung extends ActionBarActivity {
                 if (freiwahl.isChecked()) {
 
                     edit.requestFocus();
-                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.showSoftInput(edit, InputMethodManager.SHOW_IMPLICIT);
-                    auswahl=edit.getText().toString();
-
-
                 }
                 break;
 
@@ -131,7 +139,6 @@ public class Wasserauseinleitung extends ActionBarActivity {
     }
 
     public void save(View v) {
-
 
         if (freiwahl.isChecked() && edit.getText().toString().equals("")) {
             new AlertDialog.Builder(this)
@@ -168,23 +175,19 @@ public class Wasserauseinleitung extends ActionBarActivity {
                         }
                     }).show();
 
-        }else
-        {
+        } else {
 
-           art=mySpinner.getSelectedItem().toString();
-
-            if(freiwahl.isChecked())
-            {
-                auswahl=edit.getText().toString();
+            if(freiwahl.isChecked()){
+                auswahl = edit.getText().toString();
             }
+            art = mySpinner.getSelectedItem().toString();
+            beschreibung = besch.getText().toString();
+
+            forstDB.addWasserAuseinleitung(art, auswahl, beschreibung);
 
 
-            beschreibung=besch.getText().toString();
-            forstDB.addWasserAuseinleitung(art,auswahl,beschreibung);
-
-            String extra = getIntent().getStringExtra("Headline");
             Intent intent = new Intent(Wasserauseinleitung.this, InspectionActivity.class);
-            intent.putExtra("Headline", extra);
+
             startActivity(intent);
         }
     }

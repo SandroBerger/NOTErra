@@ -36,13 +36,26 @@ public class Holzbewuchs extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_holzbewuchs);
-        mySpinner = (Spinner) findViewById(R.id.Spinner01);
-
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
-
 
         forstDB = new DBHandler(this);
 
+        initialisierung();
+
+        spinner();
+        spinner1();
+    }
+
+    public void initialisierung(){
+        baumhohe = (EditText) findViewById(R.id.baumhoehe);
+        holzmenge = (EditText) findViewById(R.id.holzbewuchs_laenge_bachabschnitt);
+        beschreibung = (EditText) findViewById(R.id.beschreibung);
+
+        mySpinner = (Spinner) findViewById(R.id.Spinner01);
+        mySpinner1 = (Spinner) findViewById(R.id.Spinner02);
+    }
+
+    public void spinner(){
         List<String> anzahl = new ArrayList<String>();
         anzahl.add("<10");
         anzahl.add("11-50");
@@ -62,8 +75,9 @@ public class Holzbewuchs extends ActionBarActivity {
         mySpinner.setAdapter(dataAdapter);
 
         mySpinner.setSelection(listsize);
+    }
 
-
+    public void spinner1(){
         List<String> list = new ArrayList<String>();
         list.add("Laubholz");
         list.add("Nadelholz");
@@ -80,18 +94,11 @@ public class Holzbewuchs extends ActionBarActivity {
             }
         };
 
-        mySpinner1 = (Spinner) findViewById(R.id.Spinner02);
+
 
         dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner1.setAdapter(dataAdapter1);
         mySpinner1.setSelection(longsize);
-
-
-        baumhohe = (EditText) findViewById(R.id.baumhoehe);
-        holzmenge = (EditText) findViewById(R.id.holzbewuchs_laenge_bachabschnitt);
-        beschreibung = (EditText) findViewById(R.id.beschreibung);
-
-
     }
 
     public void save(View v) {
@@ -118,21 +125,15 @@ public class Holzbewuchs extends ActionBarActivity {
             case ">100":
                 anzahl1 = 100;
 
-
                 break;
-
-            default:
-                break;
-
         }
 
-        if (!baumhohe.getText().toString().equals("")) {
+        if (!baumhohe.getText().toString().equals("") && !holzmenge.getText().toString().equals("")) {
             baumhoehe = Integer.parseInt(baumhohe.getText().toString());
             holzmengen = Integer.parseInt(holzmenge.getText().toString());
-            beschreibungen = beschreibung.getText().toString();
         }
 
-
+        beschreibungen = beschreibung.getText().toString();
         forstDB.addHolzbewuchs(anzahl1, baumarten, baumhoehe, holzmengen, beschreibungen);
 
 

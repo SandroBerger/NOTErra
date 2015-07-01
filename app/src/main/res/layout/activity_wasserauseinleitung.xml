@@ -43,43 +43,38 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/testtop"
-
                         android:text="@string/abwasser"
                         android:id="@+id/abwasser"
-                        android:onClick="onclick"/>
+                        android:onClick="zweck"/>
                 <RadioButton
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#F6E398"
-
                         android:text="@string/beschneiung"
                         android:id="@+id/beschneiung"
-                        android:onClick="onclick"/>
+                        android:onClick="zweck"/>
                 <RadioButton
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#F6E398"
-
                         android:text="@string/bewaesserung"
                         android:id="@+id/bewaesserung"
-                        android:onClick="onclick"/>
+                        android:onClick="zweck"/>
                 <RadioButton
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#F6E398"
-
                         android:text="@string/trinkwasser"
                         android:id="@+id/trinkwasser"
-                        android:onClick="onclick"/>
+                        android:onClick="zweck"/>
                 <RadioButton
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/testbot"
-
                         android:text=""
                         android:id="@+id/freiwahl"
                         android:bottomLeftRadius="8dip"
-                        android:onClick="onclick"/>
+                        android:onClick="zweck"/>
             </RadioGroup>
             <EditText
                     android:layout_width="120dp"

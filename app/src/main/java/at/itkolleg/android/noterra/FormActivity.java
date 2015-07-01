@@ -4,12 +4,10 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
@@ -19,7 +17,7 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FormActivity extends ActionBarActivity  {
+public class FormActivity extends ActionBarActivity {
 
     private EditText gemeinde;
     private EditText kosten;
@@ -63,10 +61,10 @@ public class FormActivity extends ActionBarActivity  {
     private String abwicklung;
 
 
-
-    private Spinner mySpinner;
     private Spinner mySpinner1;
     private Spinner mySpinner2;
+    private Spinner mySpinner5;
+    private Spinner mySpinner4;
     private Spinner mySpinner3;
 
 
@@ -74,14 +72,23 @@ public class FormActivity extends ActionBarActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
-                    .commit();
-
-        }
         forstDB = new DBHandler(this);
+        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
+        initialisierung();
+        getDate();
+        spinner1(); // Für die Priorität
+        spinner2(); // Für die Förderfähigkeit
+        spinner3(); // Für die Abwicklung
+        spinner4(); // Für die Arten
+    }
 
+    public void getDate(){
+        Cursor czweck = forstDB.getLastInformation("Zeit", "tbl_Beobachtung");
+        date = czweck.getString(0);
+    }
+
+
+    public void initialisierung() {
         absturzsicherung = (CheckBox) findViewById(R.id.abstuzsicherung);
         baumestr = (CheckBox) findViewById(R.id.baumestraucher);
         bauwerksan = (CheckBox) findViewById(R.id.bauwerksan);
@@ -96,13 +103,19 @@ public class FormActivity extends ActionBarActivity  {
         ufersichern = (CheckBox) findViewById(R.id.ufersich);
         zustandbeob = (CheckBox) findViewById(R.id.zustandbeob);
 
+        gemeinde = (EditText) findViewById(R.id.gemeinde);
+        kosten = (EditText) findViewById(R.id.kosten);
+        maßnahmen = (EditText) findViewById(R.id.maßnahmen);
+
+        mySpinner1 = (Spinner) findViewById(R.id.Spinner01);
+        mySpinner2 = (Spinner) findViewById(R.id.Spinner02);
+        mySpinner3 = (Spinner) findViewById(R.id.Spinner03);
+        mySpinner4 = (Spinner) findViewById(R.id.Spinner04);
+
+    }
 
 
-         mySpinner = (Spinner) findViewById(R.id.Spinner02);
-
-
-        date=getIntent().getStringExtra("Zeit");
-
+    public void spinner1(){
         List<String> anzahl = new ArrayList<String>();
         anzahl.add("Niedrig(in 6-7 Jahren)");
         anzahl.add("Mittel(in 3-5 Jahren)");
@@ -118,15 +131,15 @@ public class FormActivity extends ActionBarActivity  {
             }
         };
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mySpinner.setAdapter(dataAdapter);
+        mySpinner1.setAdapter(dataAdapter);
 
-        mySpinner.setSelection(listsize);
+        mySpinner1.setSelection(listsize);
+    }
 
-
+    public void spinner2(){
         List<String> list = new ArrayList<String>();
         list.add("Ja");
         list.add("Nein");
-
         list.add("Förderfähig");
 
         final int longsize1 = list.size() - 1;
@@ -139,15 +152,13 @@ public class FormActivity extends ActionBarActivity  {
             }
         };
 
-         mySpinner1 = (Spinner) findViewById(R.id.Spinner03);
 
         dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mySpinner1.setAdapter(dataAdapter1);
-        mySpinner1.setSelection(longsize1);
+        mySpinner2.setAdapter(dataAdapter1);
+        mySpinner2.setSelection(longsize1);
+    }
 
-
-
-
+    public void spinner3(){
         List<String> list1 = new ArrayList<String>();
         list1.add("Gemeinde");
         list1.add("Gebietsbauleitung");
@@ -163,108 +174,100 @@ public class FormActivity extends ActionBarActivity  {
             }
         };
 
-         mySpinner2 = (Spinner) findViewById(R.id.Spinner04);
 
         dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mySpinner2.setAdapter(dataAdapter2);
-        mySpinner2.setSelection(longsize2);
+        mySpinner3.setAdapter(dataAdapter2);
+        mySpinner3.setSelection(longsize2);
+    }
 
-
-        String ar[]={"Holzablagerungen im Hochwasserabflussbereich",
+    public void spinner4(){
+        String ar[] = {"Holzablagerungen im Hochwasserabflussbereich",
                 "Ablagerung sonst. abflusshemmender Gegenstände",
                 "Holzbewuchs im Hochwasserabflussbereich",
                 "Schäden an Regulierungsbauten",
                 "Abflussbehindernde Einbauten",
                 "Wasseraus- und -einleitungen",
-                "Ereignis ohne unmittelbare Abflussbehinderung" };
+                "Ereignis ohne unmittelbare Abflussbehinderung"};
 
 
-        mySpinner3=(Spinner)findViewById(R.id.Spinner01);
-
-        ArrayAdapter<String> dataAdapter3 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, ar) {};
+        ArrayAdapter<String> dataAdapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ar) {
+        };
         dataAdapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mySpinner3.setAdapter(dataAdapter3);
-
-
-
-        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
-
-
-        gemeinde=(EditText)findViewById(R.id.gemeinde);
-
-
-
-        kosten=(EditText)findViewById(R.id.kosten);
-
-
-
-
-        maßnahmen=(EditText)findViewById(R.id.maßnahmen);
-
-
-
-
-
-
+        mySpinner4.setAdapter(dataAdapter3);
 
 
     }
 
-    public void test(View v){
 
 
-        if(absturzsicherung.isChecked())
-        {
-            absturzsicherungint=1;
-        }else {absturzsicherungint = 0;}
-        if(baumestr.isChecked())
-        {
-            baumestrint=1;
-        }else {baumestrint = 0;}
-        if(bauwerkwart.isChecked())
-        {
-             bauwerksanint=1;
-        }else {bauwerksanint = 0;}
-        if(bauwerkwart.isChecked())
-        {
-           bauwerkwartint=1;
-        }else {bauwerkwartint = 0;}
-        if(durchlassfrei.isChecked())
-        {
-         durchlassfreiint=1;
-        }else {durchlassfreiint = 0;}
-        if(genehmigung.isChecked())
-        {
-            genehmigungint=1;
-        }else {genehmigungint = 0;}
-        if(hindernisseentf.isChecked())
-        {
-            hindernisseentfint=1;
-        }else {hindernisseentfint = 0;}
-        if(hindernissespreng.isChecked())
-        {
-            hindernissesprengint=1;
-        }else {hindernissesprengint = 0;}
-        if(holzablang.isChecked())
-        {
-            holzablangint=1;
-        }else {holzablangint = 0;}
-        if(keinemaßnahm.isChecked())
-        {
-            keinemaßnahmint=1;
-        }else {keinemaßnahmint = 0;}
-        if(sperreodgerinne.isChecked())
-        {
-            sperreodgerinneint=1;
-        }else {sperreodgerinneint = 0;}
-        if(ufersichern.isChecked())
-        {
-            ufersichernint=1;
-        }else {ufersichernint = 0;}
-        if(zustandbeob.isChecked())
-        {
-            zustandbeobint=1;
-        }else {zustandbeobint = 0;}
+    public void defMaßnahmen(View v) {
+
+
+        if (absturzsicherung.isChecked()) {
+            absturzsicherungint = 1;
+        } else {
+            absturzsicherungint = 0;
+        }
+        if (baumestr.isChecked()) {
+            baumestrint = 1;
+        } else {
+            baumestrint = 0;
+        }
+        if (bauwerkwart.isChecked()) {
+            bauwerksanint = 1;
+        } else {
+            bauwerksanint = 0;
+        }
+        if (bauwerkwart.isChecked()) {
+            bauwerkwartint = 1;
+        } else {
+            bauwerkwartint = 0;
+        }
+        if (durchlassfrei.isChecked()) {
+            durchlassfreiint = 1;
+        } else {
+            durchlassfreiint = 0;
+        }
+        if (genehmigung.isChecked()) {
+            genehmigungint = 1;
+        } else {
+            genehmigungint = 0;
+        }
+        if (hindernisseentf.isChecked()) {
+            hindernisseentfint = 1;
+        } else {
+            hindernisseentfint = 0;
+        }
+        if (hindernissespreng.isChecked()) {
+            hindernissesprengint = 1;
+        } else {
+            hindernissesprengint = 0;
+        }
+        if (holzablang.isChecked()) {
+            holzablangint = 1;
+        } else {
+            holzablangint = 0;
+        }
+        if (keinemaßnahm.isChecked()) {
+            keinemaßnahmint = 1;
+        } else {
+            keinemaßnahmint = 0;
+        }
+        if (sperreodgerinne.isChecked()) {
+            sperreodgerinneint = 1;
+        } else {
+            sperreodgerinneint = 0;
+        }
+        if (ufersichern.isChecked()) {
+            ufersichernint = 1;
+        } else {
+            ufersichernint = 0;
+        }
+        if (zustandbeob.isChecked()) {
+            zustandbeobint = 1;
+        } else {
+            zustandbeobint = 0;
+        }
 
 
     }
@@ -278,22 +281,20 @@ public class FormActivity extends ActionBarActivity  {
         gemeindestr = gemeinde.getText().toString();
         maßnhamenstr = maßnahmen.getText().toString();
 
-        prioritat = mySpinner.getSelectedItem().toString();
+        prioritat = mySpinner1.getSelectedItem().toString();
 
-        if (mySpinner1.getSelectedItem().equals("Ja")) {
+        if (mySpinner2.getSelectedItem().equals("Ja")) {
             foederfahig = 1;
         } else {
             foederfahig = 0;
         }
 
-        abwicklung = mySpinner2.getSelectedItem().toString();
-
-
+        abwicklung = mySpinner3.getSelectedItem().toString();
 
 
         forstDB.addFormular(gemeindestr, date, kostenint, maßnhamenstr, prioritat, foederfahig, abwicklung, absturzsicherungint, baumestrint, bauwerksanint, bauwerkwartint, durchlassfreiint, genehmigungint, hindernisseentfint, hindernissesprengint, holzablangint, keinemaßnahmint, sperreodgerinneint, ufersichernint, zustandbeobint);
 
-        if(gemeinde.getText().toString().equals("")){
+        if (gemeinde.getText().toString().equals("")) {
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
                     .setMessage("Bitte geben Sie eine Gemeinde an")
@@ -307,7 +308,7 @@ public class FormActivity extends ActionBarActivity  {
                         }
                     }).show();
 
-        }else if(kosten.getText().toString().equals("")){
+        } else if (kosten.getText().toString().equals("")) {
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
                     .setMessage("Bitte geben Sie die Kostenschätzung an")
@@ -319,7 +320,7 @@ public class FormActivity extends ActionBarActivity  {
                             imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
                         }
                     }).show();
-        }else if(maßnahmen.getText().toString().equals("")){
+        } else if (maßnahmen.getText().toString().equals("")) {
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
                     .setMessage("Bitte geben Sie eine Maßnahme an")
@@ -331,7 +332,7 @@ public class FormActivity extends ActionBarActivity  {
                             imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
                         }
                     }).show();
-        }else if (mySpinner.getSelectedItem().toString().equals("Priorität")) {
+        } else if (mySpinner1.getSelectedItem().toString().equals("Priorität")) {
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
                     .setMessage("Bitte wählen Sie eine Priorität aus")
@@ -340,7 +341,7 @@ public class FormActivity extends ActionBarActivity  {
                         public void onClick(DialogInterface dialog, int which) {
                         }
                     }).show();
-        } else if (mySpinner1.getSelectedItem().toString().equals("Förderfähig")) {
+        } else if (mySpinner2.getSelectedItem().toString().equals("Förderfähig")) {
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
                     .setMessage("Bitte wählen Sie die Förderfähigkeit aus")
@@ -349,7 +350,7 @@ public class FormActivity extends ActionBarActivity  {
                         public void onClick(DialogInterface dialog, int which) {
                         }
                     }).show();
-        } else if (mySpinner2.getSelectedItem().toString().equals("Abwicklung")) {
+        } else if (mySpinner3.getSelectedItem().toString().equals("Abwicklung")) {
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
                     .setMessage("Bitte wählen Sie eine Abwicklung aus")
@@ -358,7 +359,7 @@ public class FormActivity extends ActionBarActivity  {
                         public void onClick(DialogInterface dialog, int which) {
                         }
                     }).show();
-        } else if(!absturzsicherung.isChecked() && !baumestr.isChecked()&& !bauwerksan.isChecked() && !bauwerkwart.isChecked() && !durchlassfrei.isChecked() && !genehmigung.isChecked() && !hindernisseentf.isChecked() && !hindernissespreng.isChecked() && !holzablang.isChecked() && !keinemaßnahm.isChecked() && !sperreodgerinne.isChecked() && !ufersichern.isChecked() && !zustandbeob.isChecked()){
+        } else if (!absturzsicherung.isChecked() && !baumestr.isChecked() && !bauwerksan.isChecked() && !bauwerkwart.isChecked() && !durchlassfrei.isChecked() && !genehmigung.isChecked() && !hindernisseentf.isChecked() && !hindernissespreng.isChecked() && !holzablang.isChecked() && !keinemaßnahm.isChecked() && !sperreodgerinne.isChecked() && !ufersichern.isChecked() && !zustandbeob.isChecked()) {
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
                     .setMessage("Bitte wählen Sie mindestens eine Maßnahme aus")
@@ -367,9 +368,8 @@ public class FormActivity extends ActionBarActivity  {
                         public void onClick(DialogInterface dialog, int which) {
                         }
                     }).show();
-        } else{
-            Spinner mySpinner = (Spinner) findViewById(R.id.Spinner01);
-            String beobachtung = mySpinner.getSelectedItem().toString();
+        } else {
+            String beobachtung = mySpinner4.getSelectedItem().toString();
 
             switch (beobachtung) {
                 case "Holzablagerungen im Hochwasserabflussbereich":
@@ -414,32 +414,10 @@ public class FormActivity extends ActionBarActivity  {
                     intent6.putExtra("Headline", beobachtung);
                     startActivity(intent6);
 
-
                     break;
-                default:
-                    break;
-
             }
         }
 
     }
 
-
-
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_form, container, false);
-            return rootView;
-        }
-    }
 }

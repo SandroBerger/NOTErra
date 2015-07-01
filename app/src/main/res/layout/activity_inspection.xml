@@ -59,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/leer"
-            android:id="@+id/h2beobachtung"
+            android:id="@+id/hbeobachtung"
             android:textStyle="bold" android:textColor="#ff020001"
             android:layout_below="@+id/textView3" android:layout_centerHorizontal="true"/>
     <TextView
