@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
               android:id="@+id/container"
-              android:layout_width="match_parent"
+              android:layout_width="fill_parent"
               android:layout_height="match_parent"
               android:background="@color/Hintergrundfarbe"
               tools:context="at.itkolleg.android.noterra.NotesActivity"
@@ -9,8 +9,9 @@
 
     <ScrollView
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+            android:layout_height="wrap_content"
+            android:fillViewport="true">
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
                       android:orientation="vertical">
             <ImageView
                     android:layout_marginTop="20dp"
@@ -84,11 +85,15 @@
                     android:layout_marginTop="40dp"
                     android:layout_marginLeft="-40dp"/>
 
+            <LinearLayout
+                    android:focusable="true" android:focusableInTouchMode="true"
+                    android:layout_width="0px" android:layout_height="0px"/>
             <EditText
-                    android:layout_width="330dp"
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:layout_height="150dp"
                     android:layout_marginTop="20dp"
-                    android:layout_marginLeft="15dp"
                     android:background="@drawable/textfield_style"
                     android:id="@+id/notetextfield"
                     android:hint="@string/notetextfield"
@@ -97,7 +102,7 @@
                     android:maxLines="10"/>
 
             <Button
-                    android:layout_width="350dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:text="Speichern"

@@ -122,6 +122,9 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         }
 
 
+
+
+
     }
 
     /**
@@ -133,7 +136,6 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
 
         chronmeter = (Chronometer) findViewById(R.id.chronometer);
         seek = (SeekBar) findViewById(R.id.seekBar);
-        seek.setClickable(false);
 
         notetext = (TextView) findViewById(R.id.notetext);
 
@@ -413,7 +415,6 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
             idHauptform = forstdb.getIDfromTable("tbl_Formular", "idFormular");
         }
     }
-
     /**
      * Diese Methode setzt das jeweilige Textfeld mit den Daten aus dem speziellen Formular Abflussbehinderndeeinbauten.
      */
@@ -723,8 +724,32 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
             );
             seek.setProgress((int) startTime);
             myHandler.postDelayed(this, 100);
+
+            seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                    if(fromUser){
+                        myplayer.pause();
+                        myplayer.seekTo(progress);
+                    }
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+
+                }
+
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+
+
+                }
+            });
+
+
         }
     };
+
 
     @Override
     public void onClick(View v) {
@@ -807,7 +832,7 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
 
     public void playButtonClick(View v) {
         try {
-            Toast.makeText(getApplicationContext(), "Audio wird gestartet",
+            Toast.makeText(getApplicationContext(), "Aufnahme wird gestartet",
                     Toast.LENGTH_SHORT).show();
             seek.setVisibility(View.VISIBLE);
             dur.setVisibility(View.VISIBLE);
@@ -838,6 +863,7 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
             myHandler.postDelayed(UpdateSongTime, 100);
 
 
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -851,7 +877,7 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
     public void pauseButtonClick(View v) {
         try {
             myplayer.pause();
-            Toast.makeText(getApplicationContext(), "Audio ist auf pause",
+            Toast.makeText(getApplicationContext(), "Aufnahme ist auf pause",
                     Toast.LENGTH_SHORT).show();
 
         } catch (Exception e) {
@@ -861,7 +887,7 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
     }
 
     /**
-     * Diese Methode stoppt die Aufnhame und erstellt zugleich noch einmal denselben Mediaplayer damit man ihn nochmals abspielen kann
+     * Diese Methode stoppt die Aufnhame und erstellt zugleich noch einmal einen Mediaplayer damit man ihn wiederholt abspielen kann
      *
      * @param v
      */
@@ -876,15 +902,20 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
             FileInputStream audioFile = new FileInputStream(audiofpad);
             myplayer.setDataSource(audioFile.getFD());
             myplayer.prepare();
-            seek.setVisibility(View.GONE);
-            dur.setVisibility(View.GONE);
 
-            Toast.makeText(getApplicationContext(), "Audio ist zurückgesetzt",
-                    Toast.LENGTH_SHORT).show();
+            dur.setText(String.format("%d min, %d sec",
+                    TimeUnit.MILLISECONDS.toMinutes((long) 00),
+                            TimeUnit.MILLISECONDS.toSeconds((long) 00) -
+                                    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long) 00))));
+
+                       Toast.makeText(getApplicationContext(), "Aufnahme ist gestoppt",
+                               Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+
 
 
 }

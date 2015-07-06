@@ -208,7 +208,7 @@
                   android:text="@string/keineMaßn"
                   android:id="@+id/keineMaßn"
                   android:bottomLeftRadius="8dip"
-                  android:onClick="test"/>
+                  android:onClick="defMaßnahmen"/>
 
 
         <CheckBox android:layout_width="match_parent"

@@ -18,6 +18,7 @@
                     android:layout_gravity="center_vertical"
                     android:textStyle="bold"
                     android:textColor="@color/black" android:textSize="20dp"/>
+
             <RadioGroup android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5dp" android:id="@+id/schaeden" android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp">
 
@@ -29,7 +30,7 @@
 
                         android:text="@string/geschiebesperre"
                         android:id="@+id/geschiebesperre"
-                        android:onClick="onclick"/>
+                        android:onClick="artDesBauwerks"/>
                 <RadioButton
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -37,7 +38,7 @@
 
                         android:text="@string/laengsverbauung"
                         android:id="@+id/laengsverbauung"
-                        android:onClick="onclick"/>
+                        android:onClick="artDesBauwerks"/>
                 <RadioButton
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -45,7 +46,7 @@
 
                         android:text="@string/querwerk"
                         android:id="@+id/querwerk"
-                        android:onClick="onclick"/>
+                        android:onClick="artDesBauwerks"/>
                 <RadioButton
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -54,8 +55,9 @@
                         android:text=""
                         android:id="@+id/freiwahl"
                         android:bottomLeftRadius="8dip"
-                        android:onClick="onclick"/>
+                        android:onClick="artDesBauwerks"/>
             </RadioGroup>
+
             <EditText
                     android:layout_width="120dp"
                     android:layout_marginLeft="30dp"
@@ -91,7 +93,7 @@
                       android:text="@string/fehlendeabsturz"
                       android:id="@+id/fehlabsturz"
                       android:bottomLeftRadius="8dip"
-                      android:onClick="onclick1"/>
+                      android:onClick="schdaensartBauwerk"/>
 
             <CheckBox android:layout_width="match_parent"
                       android:layout_height="wrap_content"
@@ -102,7 +104,7 @@
                       android:text="@string/Ausg"
                       android:id="@+id/ausgsperrenfluegel"
                       android:bottomLeftRadius="8dip"
-                      android:onClick="onclick1"/>
+                      android:onClick="schdaensartBauwerk"/>
 
             <CheckBox android:layout_width="match_parent"
                       android:layout_height="wrap_content"
@@ -113,7 +115,7 @@
                       android:text="@string/geschiebesperre"
                       android:id="@+id/geschiebesperre2"
                       android:bottomLeftRadius="8dip"
-                      android:onClick="onclick1"/>
+                      android:onClick="schdaensartBauwerk"/>
 
             <CheckBox android:layout_width="match_parent"
                       android:layout_height="wrap_content"
@@ -124,7 +126,7 @@
                       android:text="@string/mauerwerk"
                       android:id="@+id/rissemauerwerk"
                       android:bottomLeftRadius="8dip"
-                      android:onClick="onclick1"/>
+                      android:onClick="schdaensartBauwerk"/>
 
             <CheckBox android:layout_width="match_parent"
                       android:layout_height="wrap_content"
@@ -135,7 +137,7 @@
                       android:text="@string/schadhaftes"
                       android:id="@+id/schadhaftesmauerwerk"
                       android:bottomLeftRadius="8dip"
-                      android:onClick="onclick1"/>
+                      android:onClick="schdaensartBauwerk"/>
 
             <CheckBox android:layout_width="match_parent"
                       android:layout_height="wrap_content"
@@ -146,7 +148,7 @@
                       android:text="@string/sonst"
                       android:id="@+id/sonst"
                       android:bottomLeftRadius="8dip"
-                      android:onClick="onclick1"/>
+                      android:onClick="schdaensartBauwerk"/>
 
             <CheckBox android:layout_width="match_parent"
                       android:layout_height="wrap_content"
@@ -157,7 +159,7 @@
                       android:text="@string/starkerbewuchs"
                       android:id="@+id/starkerbewuchs"
                       android:bottomLeftRadius="8dip"
-                      android:onClick="onclick1"/>
+                      android:onClick="schdaensartBauwerk"/>
 
             <CheckBox android:layout_width="match_parent"
                       android:layout_height="wrap_content"
@@ -168,7 +170,7 @@
                       android:text="@string/untersp"
                       android:id="@+id/Untersp_fundanment"
                       android:bottomLeftRadius="8dip"
-                      android:onClick="onclick1"/>
+                      android:onClick="schdaensartBauwerk"/>
 
 
 

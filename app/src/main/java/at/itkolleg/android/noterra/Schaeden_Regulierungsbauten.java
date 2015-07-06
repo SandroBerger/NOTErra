@@ -92,7 +92,7 @@ public class Schaeden_Regulierungsbauten extends ActionBarActivity   {
 
         forstDB = new DBHandler(this);
 
-     edit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        edit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
          @Override
          public void onFocusChange(View v, boolean hasFocus) {
              freiwahl.setChecked(true);
@@ -108,10 +108,8 @@ public class Schaeden_Regulierungsbauten extends ActionBarActivity   {
 
 
 
-    public void onclick(View view)
+    public void artDesBauwerks(View view)
     {
-
-
         int checkedRadiobut= schaeden.getCheckedRadioButtonId();
 
         switch(checkedRadiobut){
@@ -143,13 +141,10 @@ public class Schaeden_Regulierungsbauten extends ActionBarActivity   {
     }
 
 
-    public void onclick1(View view)
+    public void schdaensartBauwerk(View view)
     {
-
-
         if(fehl.isChecked())
         {
-
             fehlendeAbsturzsicherung=1;
         }else
         {
@@ -224,7 +219,7 @@ public class Schaeden_Regulierungsbauten extends ActionBarActivity   {
             auswahl=edit.getText().toString();
         }
 
-        forstDB.addSchadenAnRegulierung(auswahl,hoehen,fehlendeAbsturzsicherung,ausgangSperrenfluegel,geschiebesperre1,risse,schadhaftesMauerwerk,sonstiges,bewuchs, unterspulfundament);
+
 
 
 
@@ -288,6 +283,17 @@ public class Schaeden_Regulierungsbauten extends ActionBarActivity   {
 
         else
         {
+
+            forstDB.addSchadenAnRegulierung(auswahl,
+                    hoehen,
+                    fehlendeAbsturzsicherung,
+                    ausgangSperrenfluegel,
+                    geschiebesperre1,
+                    risse,
+                    schadhaftesMauerwerk,
+                    sonstiges,
+                    bewuchs,
+                    unterspulfundament);
 
             String extra = getIntent().getStringExtra("Headline");
             Intent intent = new Intent(Schaeden_Regulierungsbauten.this, InspectionActivity.class);

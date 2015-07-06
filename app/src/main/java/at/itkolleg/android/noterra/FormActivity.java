@@ -79,7 +79,7 @@ public class FormActivity extends ActionBarActivity {
         spinner1(); // Für die Priorität
         spinner2(); // Für die Förderfähigkeit
         spinner3(); // Für die Abwicklung
-        spinner4(); // Für die Arten
+        auswahlFormular(); // Auswahl der Speziellen Formulare
     }
 
     public void getDate(){
@@ -180,7 +180,7 @@ public class FormActivity extends ActionBarActivity {
         mySpinner3.setSelection(longsize2);
     }
 
-    public void spinner4(){
+    public void auswahlFormular(){
         String ar[] = {"Holzablagerungen im Hochwasserabflussbereich",
                 "Ablagerung sonst. abflusshemmender Gegenstände",
                 "Holzbewuchs im Hochwasserabflussbereich",
@@ -190,12 +190,11 @@ public class FormActivity extends ActionBarActivity {
                 "Ereignis ohne unmittelbare Abflussbehinderung"};
 
 
-        ArrayAdapter<String> dataAdapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ar) {
+        ArrayAdapter<String> dataAdapter3 =
+                new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ar) {
         };
         dataAdapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner4.setAdapter(dataAdapter3);
-
-
     }
 
 
@@ -369,6 +368,8 @@ public class FormActivity extends ActionBarActivity {
                         }
                     }).show();
         } else {
+
+
             String beobachtung = mySpinner4.getSelectedItem().toString();
 
             switch (beobachtung) {
