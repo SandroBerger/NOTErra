@@ -801,12 +801,12 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         HTTPHandler httpHandler = new HTTPHandler(this);
         loadData();
         try {
-            if (getImagePath().isEmpty()) {
+            if (!getImagePath().isEmpty()) {
                 for (String filepath : getImagePath()) {
                     FTPHandler ftp1 = new FTPHandler(filepath);
                 }
             }
-            if (getAudioPath().isEmpty()) {
+            if (!getAudioPath().isEmpty()) {
                 for (String filepath : getAudioPath()) {
                     FTPHandler ftp1 = new FTPHandler(filepath);
                 }

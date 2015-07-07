@@ -113,7 +113,8 @@ public class GpsHandler extends FragmentActivity implements LocationListener {
         alertDialog.setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                startActivity(new Intent(context, InspectionActivity.class));
+                Intent intent = new Intent(context, InspectionActivity.class);
+                context.startActivity(intent);
             }
         });
         alertDialog.show();
