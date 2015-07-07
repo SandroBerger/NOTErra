@@ -38,6 +38,12 @@ public class GpsHandler extends FragmentActivity implements LocationListener {
         getLocation();
     }
 
+    /**
+     * Mithilfe dieser Methode wird der Standort wermittelt.
+     * zuerst wird überprüft ob es entweder über GPS oder das Ntzwerk möglich ist
+     * und anschließend die jeweilige verfgbare Ortungsmethode ausgeführt
+     *
+     * */
     public Location getLocation() {
         try {
             locationManager = (LocationManager) context.getSystemService(LOCATION_SERVICE);
@@ -80,6 +86,11 @@ public class GpsHandler extends FragmentActivity implements LocationListener {
         return location;
     }
 
+    /**
+     * Diese Methode lest den Aktuellen Breitengrad aus.
+     *
+     * @return aktueller Breitengrad
+     * */
     public double getBreitengrad() {
         if (location != null) {
             breitengrad = location.getLatitude();
@@ -87,6 +98,11 @@ public class GpsHandler extends FragmentActivity implements LocationListener {
         return breitengrad;
     }
 
+    /**
+     * Diese Methode lest den Aktuellen Längengrad aus.
+     *
+     * @return aktueller Längengrad
+     * */
     public double getLaengengrad() {
         if (location != null) {
             laengengrad = location.getLongitude();
@@ -94,10 +110,22 @@ public class GpsHandler extends FragmentActivity implements LocationListener {
         return laengengrad;
     }
 
+    /**
+     * Gibt an ob eine Ortung möglich ist oder nicht
+     *
+     * @return true oder false
+     * */
     public boolean canGetLocation() {
         return this.canGetLocation;
     }
 
+    /**
+     * Diese Methode zeigt die Fehlermeldung am Smartphone an
+     * wenn eine Ortung nicht möglich ist, da der Ortungsdienst
+     * ausgeschaltet ist und gibt die möglichkeit direkt in die
+     * dafür vorgesehenen Einstellungen zu navigieren
+     *
+     **/
     public void showSettingsAlert() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
 

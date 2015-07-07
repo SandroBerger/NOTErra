@@ -37,6 +37,11 @@ public class GpsActivity extends FragmentActivity {
         createMap();
     }
 
+
+    /**
+     * Mit dieser Methode wird die Kartenansicht erstellt und
+     * am Smartphone im Vollbildmodus angezeigt.
+     * */
     public void createMap() {
         map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
                 .getMap();
@@ -57,6 +62,10 @@ public class GpsActivity extends FragmentActivity {
         map.animateCamera(CameraUpdateFactory.zoomTo(17), 2000, null);
     }
 
+    /**
+     * Setz die Variablen breiten- und laengengrad mit den aktuellen
+     * Positionsdaten
+     * */
     public void getLaengeBreite() {
         if (gps.canGetLocation()) {
             breitengrad = gps.getBreitengrad();
@@ -68,6 +77,11 @@ public class GpsActivity extends FragmentActivity {
         }
     }
 
+    /**
+     * Kehrt der Benutzer von den Einstellungen zurück
+     * wird er anschließend direkt in die Hauptübersicht weitergeleitet
+     * und muss anschließend erneut in die Positionsermittlung hineingehen.
+     * */
     protected void onRestart() {
         super.onRestart();
         startActivity(new Intent(this, InspectionActivity.class));
