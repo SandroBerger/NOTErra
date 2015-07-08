@@ -1,10 +1,13 @@
-package at.itkolleg.android.noterra;
+package at.itkolleg.android.noterra.GPS;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.*;
+import at.itkolleg.android.noterra.DatenbankSQLite.DBHandler;
+import at.itkolleg.android.noterra.InspectionActivity;
+import at.itkolleg.android.noterra.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -78,9 +81,9 @@ public class GpsActivity extends FragmentActivity {
     }
 
     /**
-     * Kehrt der Benutzer von den Einstellungen zurück
-     * wird er anschließend direkt in die Hauptübersicht weitergeleitet
-     * und muss anschließend erneut in die Positionsermittlung hineingehen.
+     * Kehrt der Benutzer von den Einstellungen zurï¿½ck
+     * wird er anschlieï¿½end direkt in die Hauptï¿½bersicht weitergeleitet
+     * und muss anschlieï¿½end erneut in die Positionsermittlung hineingehen.
      * */
     protected void onRestart() {
         super.onRestart();

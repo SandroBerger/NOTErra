@@ -27,10 +27,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/testtop"
-
                         android:text="@string/geschiebesperre"
                         android:id="@+id/geschiebesperre"
                         android:onClick="artDesBauwerks"/>
+
                 <RadioButton
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -89,7 +89,6 @@
                       android:background="@drawable/testtop"
                       android:layout_marginLeft="5dp"
                       android:layout_marginRight="5dp"
-
                       android:text="@string/fehlendeabsturz"
                       android:id="@+id/fehlabsturz"
                       android:bottomLeftRadius="8dip"
@@ -166,7 +165,6 @@
                       android:background="@drawable/testbot"
                       android:layout_marginLeft="5dp"
                       android:layout_marginRight="5dp"
-
                       android:text="@string/untersp"
                       android:id="@+id/Untersp_fundanment"
                       android:bottomLeftRadius="8dip"

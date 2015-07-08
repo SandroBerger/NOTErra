@@ -6,6 +6,6 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="at.itkolleg.android.noterra.NotesActivity$PlaceholderFragment">
+    tools:context="at.itkolleg.android.noterra.Notiz.NotesActivity$PlaceholderFragment">
 
 </FrameLayout>

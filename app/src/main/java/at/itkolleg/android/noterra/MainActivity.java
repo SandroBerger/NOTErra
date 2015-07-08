@@ -8,6 +8,7 @@ import android.text.format.Time;
 import android.view.*;
 import android.widget.Button;
 import android.widget.TextView;
+import at.itkolleg.android.noterra.DatenbankSQLite.DBHandler;
 
 import java.io.File;
 

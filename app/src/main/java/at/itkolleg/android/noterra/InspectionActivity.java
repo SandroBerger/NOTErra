@@ -7,6 +7,10 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.*;
 import android.widget.Button;
 import android.widget.TextView;
+import at.itkolleg.android.noterra.DatenbankSQLite.DBHandler;
+import at.itkolleg.android.noterra.GPS.GpsActivity;
+import at.itkolleg.android.noterra.Hauptformular.FormActivity;
+import at.itkolleg.android.noterra.Notiz.NotesActivity;
 
 public class InspectionActivity extends ActionBarActivity implements View.OnClickListener {
     private DBHandler forstDB;

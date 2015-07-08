@@ -1,4 +1,4 @@
-package at.itkolleg.android.noterra;
+package at.itkolleg.android.noterra.SpezielleFormulare;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -11,8 +11,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-
-
+import at.itkolleg.android.noterra.DatenbankSQLite.DBHandler;
+import at.itkolleg.android.noterra.InspectionActivity;
+import at.itkolleg.android.noterra.R;
 
 
 public class Abflussbehinderung extends ActionBarActivity {

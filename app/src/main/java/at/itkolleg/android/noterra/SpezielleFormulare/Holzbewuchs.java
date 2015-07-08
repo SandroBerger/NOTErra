@@ -1,4 +1,4 @@
-package at.itkolleg.android.noterra;
+package at.itkolleg.android.noterra.SpezielleFormulare;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -11,53 +11,60 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import at.itkolleg.android.noterra.DatenbankSQLite.DBHandler;
+import at.itkolleg.android.noterra.InspectionActivity;
+import at.itkolleg.android.noterra.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Holzablagerung extends ActionBarActivity {
+
+public class Holzbewuchs extends ActionBarActivity {
 
     private Spinner mySpinner;
     private Spinner mySpinner1;
 
-    private EditText bhd;
+    private EditText baumhohe;
     private EditText holzmenge;
-    private EditText lbachabschnitt;
-    private EditText maßnahmen;
-    private EditText kosten;
-
-    private EditText besch;
+    private EditText beschreibung;
 
     private DBHandler forstDB;
-    private int media;
-    private int bachabschnitt;
-    private int holzmengen;
-    private int anzahl1;
     private String anzahl;
+    private int anzahl1;
+    private int baumhoehe;
+    private int holzmengen;
+    private String beschreibungen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_holzablagerung);
-
-        bhd=(EditText)findViewById(R.id.Mediabhd);
-        holzmenge=(EditText)findViewById(R.id.Holzmenge);
-        lbachabschnitt=(EditText)findViewById(R.id.bachabschnitt);
-
-
+        setContentView(R.layout.activity_holzbewuchs);
+        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
 
         forstDB = new DBHandler(this);
 
+        initialisierung();
 
-         mySpinner = (Spinner) findViewById(R.id.Spinner01);
+        spinner();
+        spinner1();
+    }
 
-        List<String> anzahl = new ArrayList<>();
-        anzahl.add("<5");
-        anzahl.add("5-20");
-        anzahl.add("21-50");
-        anzahl.add(">50");
-        anzahl.add("Anzahl der Stämme:");
+    public void initialisierung(){
+        baumhohe = (EditText) findViewById(R.id.baumhoehe);
+        holzmenge = (EditText) findViewById(R.id.holzbewuchs_laenge_bachabschnitt);
+        beschreibung = (EditText) findViewById(R.id.beschreibung);
 
+        mySpinner = (Spinner) findViewById(R.id.Spinner01);
+        mySpinner1 = (Spinner) findViewById(R.id.Spinner02);
+    }
+
+    public void spinner(){
+        List<String> anzahl = new ArrayList<String>();
+        anzahl.add("<10");
+        anzahl.add("11-50");
+        anzahl.add("50-100");
+        anzahl.add(">100");
+        anzahl.add("Anzahl der Stämme/Sträucher:");
 
         final int listsize = anzahl.size() - 1;
 
@@ -71,9 +78,10 @@ public class Holzablagerung extends ActionBarActivity {
         mySpinner.setAdapter(dataAdapter);
 
         mySpinner.setSelection(listsize);
+    }
 
-
-        List<String> list = new ArrayList<>();
+    public void spinner1(){
+        List<String> list = new ArrayList<String>();
         list.add("Laubholz");
         list.add("Nadelholz");
         list.add("Laubholz+Nadelholz");
@@ -89,33 +97,60 @@ public class Holzablagerung extends ActionBarActivity {
             }
         };
 
-         mySpinner1 = (Spinner) findViewById(R.id.Spinner02);
+
 
         dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner1.setAdapter(dataAdapter1);
         mySpinner1.setSelection(longsize);
-
-
-        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
-
-
-
     }
 
+    public void save(View v) {
+
+        String baumarten = mySpinner1.getSelectedItem().toString();
+        anzahl = mySpinner.getSelectedItem().toString();
 
 
-    public void onclick(View v) {
+        switch (anzahl) {
+            case "<10":
+                anzahl1 = 10;
 
-        if(mySpinner.getSelectedItem().toString().equals("Anzahl der Stämme:")){
+                break;
+            case "11-50":
+                anzahl1 = 35;
+
+
+                break;
+            case "50-100":
+                anzahl1 = 75;
+
+
+                break;
+            case ">100":
+                anzahl1 = 100;
+
+                break;
+        }
+
+        if (!baumhohe.getText().toString().equals("") && !holzmenge.getText().toString().equals("")) {
+            baumhoehe = Integer.parseInt(baumhohe.getText().toString());
+            holzmengen = Integer.parseInt(holzmenge.getText().toString());
+        }
+
+        beschreibungen = beschreibung.getText().toString();
+        forstDB.addHolzbewuchs(anzahl1, baumarten, baumhoehe, holzmengen, beschreibungen);
+
+
+        if (mySpinner.getSelectedItem().toString().equals("Anzahl der Stämme/Sträucher:")) {
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
-                    .setMessage("Bitte wählen Sie eine Anzahl der Stämme aus")
+                    .setMessage("Bitte wählen Sie eine Anzahl der Stämme bzw. Sträucher aus")
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+
                         }
                     }).show();
-        } else if (mySpinner1.getSelectedItem().toString().equals("Baumarten:")){
+        } else if (mySpinner1.getSelectedItem().toString().equals("Baumarten:")) {
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
                     .setMessage("Bitte wählen Sie eine Baumart aus")
@@ -124,103 +159,42 @@ public class Holzablagerung extends ActionBarActivity {
                         public void onClick(DialogInterface dialog, int which) {
                         }
                     }).show();
-        } else if(bhd.getText().toString().equals(""))
-        {
+        } else if(baumhohe.getText().toString().equals("")){
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
-                    .setMessage("Es wurde kein Media eingegeben")
+                    .setMessage("Bitte geben Sie eine Baumhöhe an")
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            bhd.requestFocus();
+                            baumhohe.requestFocus();
                             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                             imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
                         }
                     }).show();
-        } else if (holzmenge.getText().toString().equals("")){
+
+        } else if(holzmenge.getText().toString().equals("")) {
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
-                    .setMessage("Es wurde keine Holzmenge eingegeben")
+                    .setMessage("Bitte geben Sie eine Holzmenge an")
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+
                             holzmenge.requestFocus();
                             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                             imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
                         }
                     }).show();
-        } else if (lbachabschnitt.getText().toString().equals("")){
-            new AlertDialog.Builder(this)
-                    .setTitle("!!Achtung!!")
-                    .setMessage("Es wurde keine Länge des Bachabschnittes angegeben")
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            lbachabschnitt.requestFocus();
-                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
-                        }
-                    }).show();
 
-        } else
-        {
-
-
-            String baumarten=mySpinner1.getSelectedItem().toString();
-             anzahl=mySpinner.getSelectedItem().toString();
-
-
-            switch (anzahl) {
-                case "<5":
-                    anzahl1=5;
-
-                    break;
-                case "5-20":
-                    anzahl1=20;
-
-
-                    break;
-                case "21-50":
-                    anzahl1=35;
-
-                    break;
-                case ">50":
-                    anzahl1=50;
-
-                    break;
-
-
-                default:
-                    break;
-
+        }else{
+                String extra = getIntent().getStringExtra("Headline");
+                Intent intent = new Intent(Holzbewuchs.this, InspectionActivity.class);
+                intent.putExtra("Headline", extra);
+                startActivity(intent);
             }
-
-            if(!bhd.getText().equals(""))
-            {
-                media= Integer.parseInt(bhd.getText().toString());
-                bachabschnitt=Integer.parseInt(lbachabschnitt.getText().toString());
-            }
-                holzmengen=Integer.parseInt(holzmenge.getText().toString());
-
-
-            forstDB.addHolzablagerung(anzahl1,baumarten,media,holzmengen,bachabschnitt);
-
-
-            String extra = getIntent().getStringExtra("Headline");
-            Intent intent = new Intent(Holzablagerung.this, InspectionActivity.class);
-            intent.putExtra("Headline", extra);
-            startActivity(intent);
-
         }
 
 
-
-
-
-    }
-
-
-
-
-
 }
+
+

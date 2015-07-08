@@ -1,4 +1,4 @@
-package at.itkolleg.android.noterra;
+package at.itkolleg.android.noterra.GPS;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -10,6 +10,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.FragmentActivity;
+import at.itkolleg.android.noterra.InspectionActivity;
 
 public class GpsHandler extends FragmentActivity implements LocationListener {
 
@@ -40,8 +41,8 @@ public class GpsHandler extends FragmentActivity implements LocationListener {
 
     /**
      * Mithilfe dieser Methode wird der Standort wermittelt.
-     * zuerst wird überprüft ob es entweder über GPS oder das Ntzwerk möglich ist
-     * und anschließend die jeweilige verfgbare Ortungsmethode ausgeführt
+     * zuerst wird ï¿½berprï¿½ft ob es entweder ï¿½ber GPS oder das Ntzwerk mï¿½glich ist
+     * und anschlieï¿½end die jeweilige verfgbare Ortungsmethode ausgefï¿½hrt
      *
      * */
     public Location getLocation() {
@@ -99,9 +100,9 @@ public class GpsHandler extends FragmentActivity implements LocationListener {
     }
 
     /**
-     * Diese Methode lest den Aktuellen Längengrad aus.
+     * Diese Methode lest den Aktuellen Lï¿½ngengrad aus.
      *
-     * @return aktueller Längengrad
+     * @return aktueller Lï¿½ngengrad
      * */
     public double getLaengengrad() {
         if (location != null) {
@@ -111,7 +112,7 @@ public class GpsHandler extends FragmentActivity implements LocationListener {
     }
 
     /**
-     * Gibt an ob eine Ortung möglich ist oder nicht
+     * Gibt an ob eine Ortung mï¿½glich ist oder nicht
      *
      * @return true oder false
      * */
@@ -121,9 +122,9 @@ public class GpsHandler extends FragmentActivity implements LocationListener {
 
     /**
      * Diese Methode zeigt die Fehlermeldung am Smartphone an
-     * wenn eine Ortung nicht möglich ist, da der Ortungsdienst
-     * ausgeschaltet ist und gibt die möglichkeit direkt in die
-     * dafür vorgesehenen Einstellungen zu navigieren
+     * wenn eine Ortung nicht mï¿½glich ist, da der Ortungsdienst
+     * ausgeschaltet ist und gibt die mï¿½glichkeit direkt in die
+     * dafï¿½r vorgesehenen Einstellungen zu navigieren
      *
      **/
     public void showSettingsAlert() {

@@ -1,4 +1,4 @@
-package at.itkolleg.android.noterra;
+package at.itkolleg.android.noterra.DatenbankSQLite;
 
 import android.content.ContentValues;
 import android.content.Context;

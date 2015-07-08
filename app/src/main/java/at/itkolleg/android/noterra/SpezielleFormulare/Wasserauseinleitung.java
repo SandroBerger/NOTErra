@@ -1,4 +1,4 @@
-package at.itkolleg.android.noterra;
+package at.itkolleg.android.noterra.SpezielleFormulare;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -9,6 +9,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
+import at.itkolleg.android.noterra.DatenbankSQLite.DBHandler;
+import at.itkolleg.android.noterra.InspectionActivity;
+import at.itkolleg.android.noterra.R;
 
 import java.util.ArrayList;
 import java.util.List;

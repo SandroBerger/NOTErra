@@ -45,21 +45,21 @@
 
 
         <activity
-            android:name=".FormActivity"
+            android:name=".Hauptformular.FormActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_form"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" >
         </activity>
         <activity
-            android:name=".NotesActivity"
+            android:name=".Notiz.NotesActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="adjustPan"
             android:label="@string/title_activity_notes"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".GpsActivity"
+            android:name=".GPS.GpsActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_gps"
             android:screenOrientation="portrait" >
@@ -76,7 +76,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".GpsHandler"
+            android:name=".GPS.GpsHandler"
             android:label="@string/title_activity_gps_handler" >
         </activity>
 
@@ -91,43 +91,43 @@
 
 
         <activity
-            android:name=".Holzablagerung"
+            android:name=".SpezielleFormulare.Holzablagerung"
             android:label="@string/title_activity_holzablagerung"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
-            android:name=".Ablagerung"
+            android:name=".SpezielleFormulare.Ablagerung"
             android:label="@string/title_activity_ablagerung"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
-            android:name=".Holzbewuchs"
+            android:name=".SpezielleFormulare.Holzbewuchs"
             android:label="@string/title_activity_holzbewuchs"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
-            android:name=".Schaeden_Regulierungsbauten"
+            android:name=".SpezielleFormulare.Schaeden_Regulierungsbauten"
             android:label="@string/title_activity_schaeden__regulierungsbauten"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
-            android:name=".Abflussbehinderndeeinbauten"
+            android:name=".SpezielleFormulare.Abflussbehinderndeeinbauten"
             android:label="@string/title_activity_ablufssbehinderndeeinbauten"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
-            android:name=".Wasserauseinleitung"
+            android:name=".SpezielleFormulare.Wasserauseinleitung"
             android:label="@string/title_activity_wasserauseinleitung"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
-            android:name=".Abflussbehinderung"
+            android:name=".SpezielleFormulare.Abflussbehinderung"
             android:label="@string/title_activity_abflussbehinderung"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden" >

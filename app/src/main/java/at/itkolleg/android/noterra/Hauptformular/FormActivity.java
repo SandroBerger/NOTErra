@@ -1,4 +1,4 @@
-package at.itkolleg.android.noterra;
+package at.itkolleg.android.noterra.Hauptformular;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -13,6 +13,9 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import at.itkolleg.android.noterra.DatenbankSQLite.DBHandler;
+import at.itkolleg.android.noterra.R;
+import at.itkolleg.android.noterra.SpezielleFormulare.*;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.*;
+import at.itkolleg.android.noterra.DatenbankSQLite.DBHandler;
 
 import java.io.File;
 import java.io.FileInputStream;

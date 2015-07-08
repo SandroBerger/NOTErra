@@ -3,6 +3,7 @@ package at.itkolleg.android.noterra;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.AsyncTask;
+import at.itkolleg.android.noterra.DatenbankSQLite.DBHandler;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -17,7 +18,7 @@ import java.util.List;
 
 /**
  * Diese Klasse sendet die Datenbank inhalte an das PHP-File am Server,
- * der anschließend die Daten in die MySQL-Datenbank einträgt.
+ * der anschlieï¿½end die Daten in die MySQL-Datenbank eintrï¿½gt.
  * @author Berger Sandro
  * @version 30.06.2015
  * */
@@ -36,11 +37,11 @@ public class HTTPHandler {
     }
 
     /**
-     * Es werden alle Daten der Tabelle aus der Datenbank ausgelesen und anschließend
+     * Es werden alle Daten der Tabelle aus der Datenbank ausgelesen und anschlieï¿½end
      * in eine Liste gespeichert.
-     * Danach wird die Liste durchloffen und jeder Wert einzeln an das PHP-File übergeben
-     * Wurde die Tabelle erfolgreich hinaufgeladen, und der Responsecode 200 - OK zurückgegeben,
-     * wird alles aus der Tabelle gelöscht.
+     * Danach wird die Liste durchloffen und jeder Wert einzeln an das PHP-File ï¿½bergeben
+     * Wurde die Tabelle erfolgreich hinaufgeladen, und der Responsecode 200 - OK zurï¿½ckgegeben,
+     * wird alles aus der Tabelle gelï¿½scht.
      * @param tabelname Angabe des Tabellenname der versendet werden soll.
      * */
     public void sendTableToServer(String tabelname) {
@@ -89,7 +90,7 @@ public class HTTPHandler {
     public class HTTPTask extends AsyncTask<Void, Void, Void> {
         /**
          * Sendet jede Tabelle einzelen an das PHP-File zur
-         * weiterverarbeitung und für das eintragen in die
+         * weiterverarbeitung und fï¿½r das eintragen in die
          * MySQL-Datenbank
          * */
         @Override

@@ -1,4 +1,4 @@
-package at.itkolleg.android.noterra;
+package at.itkolleg.android.noterra.Notiz;
 
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
@@ -19,6 +19,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
+import at.itkolleg.android.noterra.DatenbankSQLite.DBHandler;
+import at.itkolleg.android.noterra.InspectionActivity;
+import at.itkolleg.android.noterra.R;
 
 import java.io.File;
 import java.io.FileInputStream;
