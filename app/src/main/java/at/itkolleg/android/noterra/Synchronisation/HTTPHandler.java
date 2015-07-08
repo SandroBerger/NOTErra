@@ -1,4 +1,4 @@
-package at.itkolleg.android.noterra;
+package at.itkolleg.android.noterra.Synchronisation;
 
 import android.content.Context;
 import android.database.Cursor;

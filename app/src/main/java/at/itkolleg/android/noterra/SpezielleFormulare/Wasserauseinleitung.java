@@ -16,7 +16,12 @@ import at.itkolleg.android.noterra.R;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Diese Klasse ist ein spezielles Formular names "Wasseraus- und -einleitungen".
+ * Wird in der Datenbank mit der  Tabelle "tbl_WasserAusEinleitung" abgespeichert.
+ *
+ * @author Gutsche Christoph
+ */
 public class Wasserauseinleitung extends ActionBarActivity {
 
     private Spinner mySpinner;
@@ -37,6 +42,11 @@ public class Wasserauseinleitung extends ActionBarActivity {
     private String art;
 
 
+    /**
+     * In diese Methode wird automatisch bei Klassenaufruf gestartet.
+     *
+     * @param savedInstanceState Wird benutzt um vorherige Zustand bzw. Informatioenn zu laden.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +63,9 @@ public class Wasserauseinleitung extends ActionBarActivity {
 
     }
 
+    /**
+     * Für die Initialisierung von Radiobuttons und Editexte
+     */
     private void initialisierung() {
         mySpinner = (Spinner) findViewById(R.id.wasserauseinleitung);
         zweck = (RadioGroup) findViewById(R.id.zweck);

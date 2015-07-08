@@ -1,4 +1,4 @@
-package at.itkolleg.android.noterra;
+package at.itkolleg.android.noterra.Synchronisation;
 
 import android.os.AsyncTask;
 import org.apache.commons.net.ftp.FTP;
@@ -11,7 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
- * Diese Klasse ist für den Upload der Foto- und Sprachaufnahmedateien zuständig.
+ * Diese Klasse ist fï¿½r den Upload der Foto- und Sprachaufnahmedateien zustï¿½ndig.
  * @author Berger Sandro
  * @version 30.06.2015
  * */
@@ -68,7 +68,7 @@ public class FTPHandler {
 
     /**
      * hier wird ein neues FileInputStream objket erstellt.
-     * Dieses wird für den Fileupload benötigt.
+     * Dieses wird fï¿½r den Fileupload benï¿½tigt.
      * */
     public void setFileInputStream() throws FileNotFoundException {
         inputFile = new FileInputStream(file);
@@ -76,7 +76,7 @@ public class FTPHandler {
 
     /**
      * In dieser Methode werden die Daten schlussendlich auf den Server gelden.
-     * Zuerst wird überprüft ob es sich um eine Bild oder Audio-Datei handelt und anschließend
+     * Zuerst wird ï¿½berprï¿½ft ob es sich um eine Bild oder Audio-Datei handelt und anschlieï¿½end
      * wird der upload auf den Server gestartet.
      * */
     public void saveFileOnServer() throws IOException {
@@ -94,7 +94,7 @@ public class FTPHandler {
     }
 
     /**
-     * Meldet die Anwendung wieder vom Server ab und gibt anschließend
+     * Meldet die Anwendung wieder vom Server ab und gibt anschlieï¿½end
      * die Verbindung wieder frei.
      * */
     public void closeConnection() throws IOException {
@@ -104,7 +104,7 @@ public class FTPHandler {
 
     /**
      * /**
-     * Diese Klasse führt im Hintergrund der Anwendung den upload der Daten durch.
+     * Diese Klasse fï¿½hrt im Hintergrund der Anwendung den upload der Daten durch.
      * @author Berger Sandro
      * @version 30.06.2015
      * */

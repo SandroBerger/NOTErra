@@ -12,8 +12,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.*;
 import at.itkolleg.android.noterra.DatenbankSQLite.DBHandler;
-import at.itkolleg.android.noterra.FTPHandler;
-import at.itkolleg.android.noterra.HTTPHandler;
+import at.itkolleg.android.noterra.Synchronisation.FTPHandler;
+import at.itkolleg.android.noterra.Synchronisation.HTTPHandler;
 import at.itkolleg.android.noterra.MainActivity;
 import at.itkolleg.android.noterra.R;
 
@@ -23,7 +23,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-public class SummaryActivity extends ActionBarActivity implements View.OnClickListener {
+
+/**
+ * Diese Klasse gibt nochmals alle aufgenommenen Daten der Datenbank zurück und zeigt Bild , Audio und Textnoitz.
+ *
+ * @author Gutsche Christoph, Berger Sandro
+ */
+public class SummaryActivity extends ActionBarActivity {
 
     private String outputFile = null;
     private ImageView imageView;
@@ -78,6 +84,7 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
 
 
     /**
+     * Diese Methode wird Automatisch beim Klassenaufruf gestartet.
      * Initialisierung der Activity und Appstart.
      *
      * @param savedInstanceState
@@ -88,20 +95,17 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         setContentView(R.layout.activity_summary);
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
 
-
-        forstdb = new DBHandler(this);
-
         initialisierung();
 
+        datenbankVerbindung();
 
         loadImage();
-
 
         audioinitialisierung();
 
         loadText();
-        loadFormular();
 
+        loadFormular();
 
         if (forstdb.tableexist("tbl_Abflussbehinderung") != 0) {
             loadAbflussbehinderung();
@@ -125,17 +129,19 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         if (forstdb.tableexist("tbl_WasserAusEinleitung") != 0) {
             loadWasserAusEinleitung();
         }
+    }
 
-
-
-
-
+    /**
+     * Diese Methode erstellt einen neuen DB Hanlder der für die Interaktion der DB erstellt wird.
+     */
+    private void datenbankVerbindung() {
+        forstdb = new DBHandler(this);
     }
 
     /**
      * Diese Methode dient zur initialisierung der Textfelder (TextvView's), Buttons und der Seekbar.
      */
-    public void initialisierung() {
+    private void initialisierung() {
         dur = (TextView) findViewById(R.id.dur);
         pos = (TextView) findViewById(R.id.pos);
 
@@ -168,13 +174,13 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
     /**
      * Diese Methode erstellt den Medienplayer und falls ein Audiofile vorhanden ist wird dieses in den Medianplayer eingelesen.
      */
-    public void audioinitialisierung() {
+    private void audioinitialisierung() {
 
-        ArrayList<String> audioRefArray= forstdb.getRefFromAudioTable();
+        ArrayList<String> audioRefArray = forstdb.getRefFromAudioTable();
 
 
-            audiofpad = audioRefArray.get(audioRefArray.size() - 1);
-        if(audiofpad!=null){
+        audiofpad = audioRefArray.get(audioRefArray.size() - 1);
+        if (audiofpad != null) {
             myplayer = new MediaPlayer();
             try {
                 FileInputStream audioFile = new FileInputStream(audiofpad);
@@ -420,6 +426,7 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
             idHauptform = forstdb.getIDfromTable("tbl_Formular", "idFormular");
         }
     }
+
     /**
      * Diese Methode setzt das jeweilige Textfeld mit den Daten aus dem speziellen Formular Abflussbehinderndeeinbauten.
      */
@@ -677,6 +684,9 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
 
     }
 
+    /**
+     * Diese Methode setzt das jeweilige Textfeld mit den Daten aus dem speziellen Formular Wasser Aus- Einleitung.
+     */
     public void loadWasserAusEinleitung() {
         if (forstdb.tableexist("tbl_WasserAusEinleitung") != 0) {
             idWasserazseinleitung = forstdb.getIDfromTable("tbl_WasserAusEinleitung", "idWasserAusEinleitung");
@@ -699,6 +709,9 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         }
     }
 
+    /**
+     * Diese Methode ladet das Bild aus der Datenbank und gibt es dann auf den Bildschirm zurück.
+     */
     public void loadImage() {
         ArrayList<String> RefArray = forstdb.getRefFromImageTable();
         File imgFile = null;
@@ -717,6 +730,9 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         }
     }
 
+    /**
+     * Diese Runnable wird benützt um die Zeit der Sprachmemo zu synchroniseren. Zusätzlich kann man auch die Seekbar mithilfe dieser Runnable verschieben und bearbeiten.
+     */
     private Runnable UpdateSongTime = new Runnable() {
         public void run() {
             startTime = myplayer.getCurrentPosition();
@@ -733,7 +749,7 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
             seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                 @Override
                 public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                    if(fromUser){
+                    if (fromUser) {
                         myplayer.pause();
                         myplayer.seekTo(progress);
                     }
@@ -755,11 +771,6 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         }
     };
 
-
-    @Override
-    public void onClick(View v) {
-
-    }
 
     /**
      * Liest die sowohl den Bild als auch die Audiopfad aus der Datenbank aus
@@ -834,7 +845,11 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
         toast.show();
     }
 
-
+    /**
+     * Diese Methode wird vom Play button ausgerufen. Sie startet das Sprachmemo und die Seekbar
+     *
+     * @param v ist die angeklickte view
+     */
     public void playButtonClick(View v) {
         try {
             Toast.makeText(getApplicationContext(), "Aufnahme wird gestartet",
@@ -868,16 +883,15 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
             myHandler.postDelayed(UpdateSongTime, 100);
 
 
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * Diese Methode pausiert die Aufnahme.
+     * Diese Methode pausiert die Sprachaufnahme.
      *
-     * @param v
+     * @param v ist die geklickte view
      */
     public void pauseButtonClick(View v) {
         try {
@@ -894,7 +908,7 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
     /**
      * Diese Methode stoppt die Aufnhame und erstellt zugleich noch einmal einen Mediaplayer damit man ihn wiederholt abspielen kann
      *
-     * @param v
+     * @param v ist die geklickte view
      */
     public void stopButtonClick(View v) {
         try {
@@ -910,17 +924,15 @@ public class SummaryActivity extends ActionBarActivity implements View.OnClickLi
 
             dur.setText(String.format("%d min, %d sec",
                     TimeUnit.MILLISECONDS.toMinutes((long) 00),
-                            TimeUnit.MILLISECONDS.toSeconds((long) 00) -
-                                    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long) 00))));
+                    TimeUnit.MILLISECONDS.toSeconds((long) 00) -
+                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long) 00))));
 
-                       Toast.makeText(getApplicationContext(), "Aufnahme ist gestoppt",
-                               Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Aufnahme ist gestoppt",
+                    Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-
 
 
 }
