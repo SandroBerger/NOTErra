@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import at.itkolleg.android.noterra.DatenbankSQLite.DBHandler;
-import at.itkolleg.android.noterra.InspectionActivity;
+import at.itkolleg.android.noterra.Hauptfenster.InspectionActivity;
 import at.itkolleg.android.noterra.R;
 
 import java.util.ArrayList;
@@ -42,21 +42,15 @@ public class Wasserauseinleitung extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wasserauseinleitung);
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
-        forstDB = new DBHandler(this);
 
         initialisierung();
-        spinner();
-        focus();
 
-    }
+        datenbankVerbindung();
 
-    private void focus() {
-        edit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                freiwahl.setChecked(true);
-            }
-        });
+        textFeldFokus();
+
+        artDerAusEinleitung();
+
     }
 
     private void initialisierung() {
@@ -73,18 +67,42 @@ public class Wasserauseinleitung extends ActionBarActivity {
 
     }
 
-    private void spinner() {
+    /**
+     * Für die Verbindung der Datebank zuständig
+     */
+    private void datenbankVerbindung() {
+        forstDB = new DBHandler(this);
+    }
+
+    /**
+     * Diese Methode kontrolliert ob das textfeld geklickt wurde. Wurde das Sonstiges Edixtext geklickt wird automatisch die Checkbox auf True gesetzt
+     */
+    private void textFeldFokus() {
+        edit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                freiwahl.setChecked(true);
+            }
+        });
+    }
+
+    /**
+     * Diese Methode erstellt den Spinner / Auswahlmöglichkeit für die Art ob es eine Aus- oder -Einleitung ist.
+     * Der Arrayadapter wird mit der Liste Befüllt.
+     * Anhand des Arrayadapter wird das Dropdown des Spinners befüllt.
+     */
+    private void artDerAusEinleitung() {
         List<String> anzahl = new ArrayList<String>();
         anzahl.add("Wassereinleitung");
         anzahl.add("Wasserentnahme");
         anzahl.add("Art: Aus/Einleitung: ");
 
-        final int listsize = anzahl.size() - 1;
+        final int listsize = anzahl.size() - 1; // Somit wird die Überschrift nicht mehr angezeigt.
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, anzahl) {
             @Override
             public int getCount() {
-                return (listsize); // Truncate the list
+                return (listsize);
             }
         };
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -97,6 +115,7 @@ public class Wasserauseinleitung extends ActionBarActivity {
 
     /**
      * Diese Methode wird von dem jeweiligen Radiobutton aufgerufen.
+     * Stimmt die Radiobuttonid mit der ausgewälten id überein wird dessen String abgepseichert
      * @param view
      */
     public void zweck(View view) {
@@ -141,6 +160,13 @@ public class Wasserauseinleitung extends ActionBarActivity {
 
     }
 
+
+    /**
+     * Diese Methode wird mit den Button speichern aufgerufen.
+     * Innerhalb dieser Methode wird kontrolliert ob alle angabgen gemacht wurden. Ist dies korrekt werden die Daten an dei Datenbank weitergeleitet.
+     *
+     * @param v Ist die Momentan view die geklickt wurde
+     */
     public void save(View v) {
 
         if (freiwahl.isChecked() && edit.getText().toString().equals("")) {

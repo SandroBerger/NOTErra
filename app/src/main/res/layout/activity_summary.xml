@@ -23,12 +23,14 @@
                 android:layout_marginLeft="0dp"
                 android:id="@+id/gemeinde"
                 android:textStyle="bold"/>
+
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="0dp"
                 android:id="@+id/kostenschaetzung"
                 android:textStyle="bold"/>
+
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -43,6 +45,7 @@
                 android:layout_marginLeft="0dp"
                 android:id="@+id/prioritaet"
                 android:textStyle="bold"/>
+
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -55,6 +58,7 @@
                 android:layout_marginLeft="0dp"
                 android:id="@+id/abwicklung"
                 android:textStyle="bold"/>
+
 
         <TextView
                 android:layout_width="wrap_content"
@@ -122,13 +126,11 @@
                 android:id="@+id/sf4"
                 android:textStyle="bold"/>
 
-
-
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/sf5"
-                android:layout_marginTop="-20dp"
+                android:layout_marginLeft="0dp"
                 android:textStyle="bold"/>
 
         <TextView
@@ -142,22 +144,13 @@
                 android:textStyle="bold"/>
 
 
-
-
-
-
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                android:layout_marginTop="120dp"
                 android:id="@+id/textfoto" android:textStyle="bold"
-
-                android:text="Foto: "
-
-                />
-
-
+                android:text="Foto: " />
 
         <ImageView
                 android:layout_marginTop="20dp"
@@ -172,7 +165,6 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:layout_marginTop="-10dp"
                 android:text="Audio File: "
-
                 android:id="@+id/textaudio" android:textStyle="bold"/>
 
 
@@ -184,8 +176,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:onClick="playButtonClick"
-                android:layout_gravity="center"
-                />
+                android:layout_gravity="center" />
 
         <ImageButton
                 android:id="@+id/stopButtonClick"
@@ -207,9 +198,6 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="80dp"
                 android:onClick="pauseButtonClick"/>
-
-
-
 
         <SeekBar
                 android:layout_width="match_parent"
@@ -257,14 +245,14 @@
                 android:id="@+id/notetext"/>
 
 
-    <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Absenden"
-            android:id="@+id/speichern"
-            android:background="@drawable/button_style"
-            android:onClick="send"/>
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Absenden"
+                android:id="@+id/speichern"
+                android:background="@drawable/button_style"
+                android:onClick="send"/>
 
     </LinearLayout>
     </ScrollView>

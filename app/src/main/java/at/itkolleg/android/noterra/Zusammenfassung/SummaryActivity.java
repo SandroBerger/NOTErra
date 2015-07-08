@@ -1,4 +1,4 @@
-package at.itkolleg.android.noterra;
+package at.itkolleg.android.noterra.Zusammenfassung;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,10 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.*;
 import at.itkolleg.android.noterra.DatenbankSQLite.DBHandler;
+import at.itkolleg.android.noterra.FTPHandler;
+import at.itkolleg.android.noterra.HTTPHandler;
+import at.itkolleg.android.noterra.MainActivity;
+import at.itkolleg.android.noterra.R;
 
 import java.io.File;
 import java.io.FileInputStream;

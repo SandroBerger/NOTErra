@@ -15,12 +15,9 @@
                      android:layout_width="match_parent"
                      android:layout_marginLeft="5dp"
                      android:layout_marginRight="5dp"
-
                      android:layout_height="50dp"
-
                      android:layout_marginTop="10dp"
-                     android:background="@drawable/spinner_style"
-                     />
+                     android:background="@drawable/spinner_style"/>
 
 
             <TextView
@@ -46,6 +43,7 @@
                         android:text="@string/abwasser"
                         android:id="@+id/abwasser"
                         android:onClick="zweck"/>
+
                 <RadioButton
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -53,6 +51,7 @@
                         android:text="@string/beschneiung"
                         android:id="@+id/beschneiung"
                         android:onClick="zweck"/>
+
                 <RadioButton
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -60,6 +59,7 @@
                         android:text="@string/bewaesserung"
                         android:id="@+id/bewaesserung"
                         android:onClick="zweck"/>
+
                 <RadioButton
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -67,6 +67,7 @@
                         android:text="@string/trinkwasser"
                         android:id="@+id/trinkwasser"
                         android:onClick="zweck"/>
+
                 <RadioButton
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -75,6 +76,7 @@
                         android:id="@+id/freiwahl"
                         android:bottomLeftRadius="8dip"
                         android:onClick="zweck"/>
+
             </RadioGroup>
             <EditText
                     android:layout_width="120dp"
@@ -83,7 +85,6 @@
                     android:id="@+id/art_des_zweckes"
                     android:layout_marginTop="-35dp"
                     android:singleLine="true"
-
                     android:background="@drawable/apptheme_textfield_default_holo_light"
                     android:maxLength="20"
                     android:hint="Sonstiges"/>
@@ -99,16 +100,11 @@
                     android:id="@+id/beschreibung"
                     android:hint="@string/Beschreibung"
                     android:inputType="textMultiLine"
-
                     android:gravity="top|start"
-                    android:maxLines="10"
-
-                    />
+                    android:maxLines="10" />
 
             <Button
                     android:layout_width="match_parent"
-
-
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
                     android:text="Speichern"

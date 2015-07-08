@@ -20,6 +20,12 @@ import at.itkolleg.android.noterra.SpezielleFormulare.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Dies Klasse ist die Hauptformular Klasse.
+ * Wird in der Datenbank mit der  Tabelle "tbl_Formular" abgespeichert.
+ *
+ * @author Gutsche Christoph
+ */
 public class FormActivity extends ActionBarActivity {
 
     private EditText gemeinde;
@@ -66,32 +72,50 @@ public class FormActivity extends ActionBarActivity {
 
     private Spinner mySpinner1;
     private Spinner mySpinner2;
-    private Spinner mySpinner5;
     private Spinner mySpinner4;
     private Spinner mySpinner3;
 
-
+    /**
+     * In diese Methode wird automatisch bei Klassenaufruf gestartet.
+     *
+     * @param savedInstanceState Wird benutzt um vorherige Zustand bzw. Informatioenn zu laden.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_form);
-        forstDB = new DBHandler(this);
-        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
-        initialisierung();
-        getDate();
+        super.onCreate(savedInstanceState); //vorherigen Informationen holen
+        setContentView(R.layout.activity_form); // Aktivierung der Activity
+
+        datenbankVerbindung(); // Datebankverbindung
+
+        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground)); //Hintergrundbild für die ActionBar
+
+        initialisierung(); // Initialisierung der Checkboxes, Eingabefelder und Auswahlfelder
+        getDate(); //Datum für die erstellung des Hauptformulares
         spinner1(); // Für die Priorität
         spinner2(); // Für die Förderfähigkeit
         spinner3(); // Für die Abwicklung
         auswahlFormular(); // Auswahl der Speziellen Formulare
     }
 
-    public void getDate(){
+    /**
+     * Für die Verbindung der Datebank zuständig
+     */
+    private void datenbankVerbindung() {
+        forstDB = new DBHandler(this);
+    }
+
+    /**
+     * Hier wird die Zeit von der Tbl Beobachtung ausgelesen und in den String date abgespeichert
+     */
+    private void getDate() {
         Cursor czweck = forstDB.getLastInformation("Zeit", "tbl_Beobachtung");
         date = czweck.getString(0);
     }
 
-
-    public void initialisierung() {
+    /**
+     * Hier werden alle Checkboxes, Edittextes (Textfelder), und Spinner (auswahlmöglichkeiten)
+     */
+    private void initialisierung() {
         absturzsicherung = (CheckBox) findViewById(R.id.abstuzsicherung);
         baumestr = (CheckBox) findViewById(R.id.baumestraucher);
         bauwerksan = (CheckBox) findViewById(R.id.bauwerksan);
@@ -117,8 +141,10 @@ public class FormActivity extends ActionBarActivity {
 
     }
 
-
-    public void spinner1(){
+    /**
+     * Dieses Methode ist für Auswahl der Priorität zuständig. Die Werte werden in einer Array gespeichert und mithilfe eines Arrayadapters in den spinner dropdown eingefügt.
+     */
+    private void spinner1() {
         List<String> anzahl = new ArrayList<String>();
         anzahl.add("Niedrig(in 6-7 Jahren)");
         anzahl.add("Mittel(in 3-5 Jahren)");
@@ -139,7 +165,10 @@ public class FormActivity extends ActionBarActivity {
         mySpinner1.setSelection(listsize);
     }
 
-    public void spinner2(){
+    /**
+     * Diese Methode ist für die Auswahl der Förderfähigkeit zuständig. Die Werte werden in einer Array gespeichert und mithilfe eines Arrayadapters in den spinner dropdown eingefügt.
+     */
+    private void spinner2() {
         List<String> list = new ArrayList<String>();
         list.add("Ja");
         list.add("Nein");
@@ -161,7 +190,10 @@ public class FormActivity extends ActionBarActivity {
         mySpinner2.setSelection(longsize1);
     }
 
-    public void spinner3(){
+    /**
+     * Diese Methode ist für die Auswahl der Förderfähigkeit zuständig. Die Werte werden in einer Array gespeichert und mithilfe eines Arrayadapters in den spinner dropdown eingefügt.
+     */
+    private void spinner3() {
         List<String> list1 = new ArrayList<String>();
         list1.add("Gemeinde");
         list1.add("Gebietsbauleitung");
@@ -183,7 +215,10 @@ public class FormActivity extends ActionBarActivity {
         mySpinner3.setSelection(longsize2);
     }
 
-    public void auswahlFormular(){
+    /**
+     * Diese Methode ist für die Auswhal der Spezielle Formulare zuständig. Die Werte werden in einer Array gespeichert und mithilfe eines Arrayadapters in den spinner dropdown eingefügt.
+     */
+    private void auswahlFormular() {
         String ar[] = {"Holzablagerungen im Hochwasserabflussbereich",
                 "Ablagerung sonst. abflusshemmender Gegenstände",
                 "Holzbewuchs im Hochwasserabflussbereich",
@@ -195,15 +230,18 @@ public class FormActivity extends ActionBarActivity {
 
         ArrayAdapter<String> dataAdapter3 =
                 new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ar) {
-        };
+                };
         dataAdapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner4.setAdapter(dataAdapter3);
     }
 
-
-
-    public void defMaßnahmen(View v) {
-
+    /**
+     * Diese Methode wird immer Aufgerufen sobald eine checkbox angeclickt wurde
+     * Hier werden die checkboxen kontrolliert und der jeweilige Wert gesetzt.
+     *
+     * @param v ist die View die geklickt wurde
+     */
+    public void defMaßnahmen(View view) {
 
         if (absturzsicherung.isChecked()) {
             absturzsicherungint = 1;
@@ -274,27 +312,29 @@ public class FormActivity extends ActionBarActivity {
 
     }
 
+    /**
+     * Diese Methode wird vom "Öffnen"- Button aus aufgerufen.
+     * Anfangs werden nochmals die Strings und Integer werte abgespeichert.
+     * Dann wird Kontrolliert ob alles angegeben wurde.
+     * Schlussendlich wird in das Spezielle Formular gewechselt das ausgewählt wurde
+     *
+     * @param v ist die View die geklickt wurde
+     */
+    public void oeffnen(View view) {
 
-    public void onclick(View v) {
         if (!kosten.getText().toString().equals("")) {
             kostenint = Integer.parseInt(kosten.getText().toString());
         }
 
+        //Nochmalige Kontrolle der Spinner welcher Text ausgewählt wurde
         gemeindestr = gemeinde.getText().toString();
         maßnhamenstr = maßnahmen.getText().toString();
-
         prioritat = mySpinner1.getSelectedItem().toString();
-
         if (mySpinner2.getSelectedItem().equals("Ja")) {
             foederfahig = 1;
         } else {
             foederfahig = 0;
         }
-
-        abwicklung = mySpinner3.getSelectedItem().toString();
-
-
-        forstDB.addFormular(gemeindestr, date, kostenint, maßnhamenstr, prioritat, foederfahig, abwicklung, absturzsicherungint, baumestrint, bauwerksanint, bauwerkwartint, durchlassfreiint, genehmigungint, hindernisseentfint, hindernissesprengint, holzablangint, keinemaßnahmint, sperreodgerinneint, ufersichernint, zustandbeobint);
 
         if (gemeinde.getText().toString().equals("")) {
             new AlertDialog.Builder(this)
@@ -372,6 +412,10 @@ public class FormActivity extends ActionBarActivity {
                     }).show();
         } else {
 
+            abwicklung = mySpinner3.getSelectedItem().toString();
+
+
+            forstDB.addFormular(gemeindestr, date, kostenint, maßnhamenstr, prioritat, foederfahig, abwicklung, absturzsicherungint, baumestrint, bauwerksanint, bauwerkwartint, durchlassfreiint, genehmigungint, hindernisseentfint, hindernissesprengint, holzablangint, keinemaßnahmint, sperreodgerinneint, ufersichernint, zustandbeobint);
 
             String beobachtung = mySpinner4.getSelectedItem().toString();
 
@@ -423,5 +467,6 @@ public class FormActivity extends ActionBarActivity {
         }
 
     }
+
 
 }

@@ -278,7 +278,7 @@
             android:textColor="@color/black"
             android:id="@+id/button"
             android:background="@drawable/button_style"
-            android:onClick="onclick"/>
+            android:onClick="oeffnen"/>
 
     </LinearLayout>
     </ScrollView>

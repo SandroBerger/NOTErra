@@ -35,27 +35,27 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#F6E398"
-
                         android:text="@string/laengsverbauung"
                         android:id="@+id/laengsverbauung"
                         android:onClick="artDesBauwerks"/>
+
                 <RadioButton
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#F6E398"
-
                         android:text="@string/querwerk"
                         android:id="@+id/querwerk"
                         android:onClick="artDesBauwerks"/>
+
                 <RadioButton
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/testbot"
-
                         android:text=""
                         android:id="@+id/freiwahl"
                         android:bottomLeftRadius="8dip"
                         android:onClick="artDesBauwerks"/>
+
             </RadioGroup>
 
             <EditText
@@ -67,24 +67,20 @@
                     android:singleLine="true"
                     android:background="@drawable/apptheme_textfield_default_holo_light"
                     android:maxLength="20"
-
-                    android:hint="Sonstiges"
-                    />
-
-
+                    android:hint="Sonstiges"/>
             
            <TextView
                    android:layout_marginTop="20dp"
                    android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/schandsart"
-            android:id="@+id/h2Schadensart"
-            android:layout_gravity="center_vertical"
-            android:textStyle="bold"
-            android:textColor="@color/black" android:textSize="20dp"/>
+                   android:layout_height="wrap_content"
+                   android:text="@string/schandsart"
+                   android:id="@+id/h2Schadensart"
+                   android:layout_gravity="center_vertical"
+                   android:textStyle="bold"
+                   android:textColor="@color/black" android:textSize="20dp"/>
 
-            <CheckBox  android:layout_marginTop="5dp"
-                       android:layout_width="match_parent"
+            <CheckBox android:layout_marginTop="5dp"
+                      android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:background="@drawable/testtop"
                       android:layout_marginLeft="5dp"
@@ -99,7 +95,6 @@
                       android:background="#F6E398"
                       android:layout_marginLeft="5dp"
                       android:layout_marginRight="5dp"
-
                       android:text="@string/Ausg"
                       android:id="@+id/ausgsperrenfluegel"
                       android:bottomLeftRadius="8dip"
@@ -110,7 +105,6 @@
                       android:background="#F6E398"
                       android:layout_marginLeft="5dp"
                       android:layout_marginRight="5dp"
-
                       android:text="@string/geschiebesperre"
                       android:id="@+id/geschiebesperre2"
                       android:bottomLeftRadius="8dip"
@@ -121,7 +115,6 @@
                       android:background="#F6E398"
                       android:layout_marginLeft="5dp"
                       android:layout_marginRight="5dp"
-
                       android:text="@string/mauerwerk"
                       android:id="@+id/rissemauerwerk"
                       android:bottomLeftRadius="8dip"
@@ -132,7 +125,6 @@
                       android:background="#F6E398"
                       android:layout_marginLeft="5dp"
                       android:layout_marginRight="5dp"
-
                       android:text="@string/schadhaftes"
                       android:id="@+id/schadhaftesmauerwerk"
                       android:bottomLeftRadius="8dip"
@@ -143,7 +135,6 @@
                       android:background="#F6E398"
                       android:layout_marginLeft="5dp"
                       android:layout_marginRight="5dp"
-
                       android:text="@string/sonst"
                       android:id="@+id/sonst"
                       android:bottomLeftRadius="8dip"
@@ -154,7 +145,6 @@
                       android:background="#F6E398"
                       android:layout_marginLeft="5dp"
                       android:layout_marginRight="5dp"
-
                       android:text="@string/starkerbewuchs"
                       android:id="@+id/starkerbewuchs"
                       android:bottomLeftRadius="8dip"
@@ -170,27 +160,19 @@
                       android:bottomLeftRadius="8dip"
                       android:onClick="schdaensartBauwerk"/>
 
-
-
-
             <EditText
                     android:layout_width="match_parent"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
                     android:id="@+id/freiehoehedammkrone"
-
                     android:hint="@string/freiehoehedammkrone"
                     android:background="@drawable/textfield_style"
-                    android:inputType="number"
-
-                    />
+                    android:inputType="number" />
 
             <Button
                     android:layout_width="match_parent"
-
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
                     android:text="Speichern"

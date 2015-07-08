@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.*;
 import at.itkolleg.android.noterra.DatenbankSQLite.DBHandler;
-import at.itkolleg.android.noterra.InspectionActivity;
+import at.itkolleg.android.noterra.Hauptfenster.InspectionActivity;
 import at.itkolleg.android.noterra.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;

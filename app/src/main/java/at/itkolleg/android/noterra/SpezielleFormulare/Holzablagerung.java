@@ -8,16 +8,21 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.Spinner;
+import android.widget.*;
 import at.itkolleg.android.noterra.DatenbankSQLite.DBHandler;
-import at.itkolleg.android.noterra.InspectionActivity;
+import at.itkolleg.android.noterra.Hauptfenster.InspectionActivity;
 import at.itkolleg.android.noterra.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Diese Klasse ist ein spezielles Formular names "Holzablagerungen im Hochwasserabflussbereich".
+ * Wird in der Datenbank mit der  Tabelle "tbl_Holzablagerung" abgespeichert.
+ *
+ * @author Gutsche Christoph
+ */
 public class Holzablagerung extends ActionBarActivity {
 
     private Spinner mySpinner;
@@ -38,21 +43,51 @@ public class Holzablagerung extends ActionBarActivity {
     private int anzahl1;
     private String anzahl;
 
+    /**
+     * In diese Methode wird automatisch bei Klassenaufruf gestartet.
+     *
+     * @param savedInstanceState Wird benutzt um vorherige Zustand bzw. Informatioenn zu laden.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_holzablagerung);
+        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
 
-        bhd=(EditText)findViewById(R.id.Mediabhd);
-        holzmenge=(EditText)findViewById(R.id.Holzmenge);
-        lbachabschnitt=(EditText)findViewById(R.id.bachabschnitt);
+        initialisierung();
 
+        datenbankVerbindung();
 
+        stammAnzahl();
 
+        baumArt();
+    }
+
+    /**
+     * Für die Initialisierung von Editexte
+     */
+    private void initialisierung() {
+        mySpinner = (Spinner) findViewById(R.id.Spinner01);
+        mySpinner1 = (Spinner) findViewById(R.id.Spinner02);
+
+        bhd = (EditText) findViewById(R.id.Mediabhd);
+        holzmenge = (EditText) findViewById(R.id.Holzmenge);
+        lbachabschnitt = (EditText) findViewById(R.id.bachabschnitt);
+    }
+
+    /**
+     * Für die Verbindung der Datebank zuständig
+     */
+    private void datenbankVerbindung() {
         forstDB = new DBHandler(this);
+    }
 
-
-         mySpinner = (Spinner) findViewById(R.id.Spinner01);
+    /**
+     * Diese Methode erstellt den Spinner / Auswahlmöglichkeit für die Anzhal der Stämme
+     * Der Arrayadapter wird mit der Liste Befüllt.
+     * Anhand des Arrayadapter wird das Dropdown des Spinners befüllt.
+     */
+    private void stammAnzahl() {
 
         List<String> anzahl = new ArrayList<>();
         anzahl.add("<5");
@@ -62,19 +97,27 @@ public class Holzablagerung extends ActionBarActivity {
         anzahl.add("Anzahl der Stämme:");
 
 
-        final int listsize = anzahl.size() - 1;
+        final int listsize = anzahl.size() - 1; // Somit kann man die Überschrift nicht mehr auswählen.
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, anzahl) {
             @Override
             public int getCount() {
-                return (listsize); // Truncate the list
+                return (listsize);
             }
         };
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner.setAdapter(dataAdapter);
 
         mySpinner.setSelection(listsize);
+    }
 
+
+    /**
+     * Diese Methode erstellt den Spinner / Auswahlmöglichkeit für die Baumart
+     * Der Arrayadapter wird mit der Liste Befüllt.
+     * Anhand des Arrayadapter wird das Dropdown des Spinners befüllt.
+     */
+    private void baumArt() {
 
         List<String> list = new ArrayList<>();
         list.add("Laubholz");
@@ -82,34 +125,33 @@ public class Holzablagerung extends ActionBarActivity {
         list.add("Laubholz+Nadelholz");
         list.add("Baumarten:");
 
-        final int longsize = list.size() - 1;
+        final int longsize = list.size() - 1;// Somit kann man die Überschrift nicht mehr auswählen.
 
 
         ArrayAdapter<String> dataAdapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list) {
             @Override
             public int getCount() {
-                return (longsize); // Truncate the list
+                return (longsize);
             }
         };
-
-         mySpinner1 = (Spinner) findViewById(R.id.Spinner02);
 
         dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner1.setAdapter(dataAdapter1);
         mySpinner1.setSelection(longsize);
 
 
-        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
-
-
-
     }
 
 
+    /**
+     * Diese Methode wird mit den Button speichern aufgerufen.
+     * Innerhalb dieser Methode wird Kontrolliert ob alle angabgen gemacht wurden. Ist dies korrekt werden die Daten an dei Datenbank weitergeleitet.
+     *
+     * @param v Ist die Momentan view die geklickt wurde
+     */
+    public void save(View v) {
 
-    public void onclick(View v) {
-
-        if(mySpinner.getSelectedItem().toString().equals("Anzahl der Stämme:")){
+        if (mySpinner.getSelectedItem().toString().equals("Anzahl der Stämme:")) {
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
                     .setMessage("Bitte wählen Sie eine Anzahl der Stämme aus")
@@ -118,7 +160,7 @@ public class Holzablagerung extends ActionBarActivity {
                         public void onClick(DialogInterface dialog, int which) {
                         }
                     }).show();
-        } else if (mySpinner1.getSelectedItem().toString().equals("Baumarten:")){
+        } else if (mySpinner1.getSelectedItem().toString().equals("Baumarten:")) {
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
                     .setMessage("Bitte wählen Sie eine Baumart aus")
@@ -127,8 +169,7 @@ public class Holzablagerung extends ActionBarActivity {
                         public void onClick(DialogInterface dialog, int which) {
                         }
                     }).show();
-        } else if(bhd.getText().toString().equals(""))
-        {
+        } else if (bhd.getText().toString().equals("")) {
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
                     .setMessage("Es wurde kein Media eingegeben")
@@ -140,7 +181,7 @@ public class Holzablagerung extends ActionBarActivity {
                             imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
                         }
                     }).show();
-        } else if (holzmenge.getText().toString().equals("")){
+        } else if (holzmenge.getText().toString().equals("")) {
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
                     .setMessage("Es wurde keine Holzmenge eingegeben")
@@ -152,7 +193,7 @@ public class Holzablagerung extends ActionBarActivity {
                             imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
                         }
                     }).show();
-        } else if (lbachabschnitt.getText().toString().equals("")){
+        } else if (lbachabschnitt.getText().toString().equals("")) {
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
                     .setMessage("Es wurde keine Länge des Bachabschnittes angegeben")
@@ -165,48 +206,47 @@ public class Holzablagerung extends ActionBarActivity {
                         }
                     }).show();
 
-        } else
-        {
+        } else {
 
 
-            String baumarten=mySpinner1.getSelectedItem().toString();
-             anzahl=mySpinner.getSelectedItem().toString();
+            String baumarten = mySpinner1.getSelectedItem().toString();
+            anzahl = mySpinner.getSelectedItem().toString();
 
-
+            // Weil in der Datenbank nur Int Werte gespeichert werden in dieser Spalte werden die angegebenen Werte gespeichert.
             switch (anzahl) {
                 case "<5":
-                    anzahl1=5;
+                    anzahl1 = 5;
 
                     break;
                 case "5-20":
-                    anzahl1=20;
+                    anzahl1 = 20;
 
 
                     break;
                 case "21-50":
-                    anzahl1=35;
+                    anzahl1 = 35;
 
                     break;
                 case ">50":
-                    anzahl1=50;
+                    anzahl1 = 50;
 
                     break;
-
-
-                default:
-                    break;
-
             }
 
-            if(!bhd.getText().equals(""))
-            {
-                media= Integer.parseInt(bhd.getText().toString());
-                bachabschnitt=Integer.parseInt(lbachabschnitt.getText().toString());
+            if (!bhd.getText().equals("")) {
+                media = Integer.parseInt(bhd.getText().toString());
             }
-                holzmengen=Integer.parseInt(holzmenge.getText().toString());
+
+            if (!lbachabschnitt.getText().equals("")) {
+                bachabschnitt = Integer.parseInt(lbachabschnitt.getText().toString());
+            }
+
+            if (!holzmenge.getText().equals("")) {
+                holzmengen = Integer.parseInt(holzmenge.getText().toString());
+            }
 
 
-            forstDB.addHolzablagerung(anzahl1,baumarten,media,holzmengen,bachabschnitt);
+            forstDB.addHolzablagerung(anzahl1, baumarten, media, holzmengen, bachabschnitt);
 
 
             String extra = getIntent().getStringExtra("Headline");
@@ -217,13 +257,7 @@ public class Holzablagerung extends ActionBarActivity {
         }
 
 
-
-
-
     }
-
-
-
 
 
 }

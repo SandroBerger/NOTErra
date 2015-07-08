@@ -65,13 +65,13 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".SummaryActivity"
+            android:name=".Zusammenfassung.SummaryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_summary"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".InspectionActivity"
+            android:name=".Hauptfenster.InspectionActivity"
             android:label="@string/title_activity_inspection"
             android:screenOrientation="portrait" >
         </activity>

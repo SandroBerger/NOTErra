@@ -13,74 +13,57 @@
                       android:orientation="vertical" android:focusableInTouchMode="true" >
 
             <Spinner android:id="@+id/Spinner01"
-
                      android:layout_width="match_parent"
                      android:layout_marginLeft="5dp"
                      android:layout_marginRight="5dp"
-
                      android:layout_height="50dp"
                      android:layout_marginTop="10dp"
                      android:background="@drawable/spinner_style"
-                     android:prompt="@string/Beliebig"
-                    />
+                     android:prompt="@string/Beliebig"/>
 
             <Spinner android:id="@+id/Spinner02"
-
                      android:layout_width="match_parent"
                      android:layout_marginLeft="5dp"
                      android:layout_marginRight="5dp"
-
                      android:layout_height="50dp"
                      android:layout_marginTop="30dp"
                      android:background="@drawable/spinner_style"
-
-                     android:prompt="@string/Beliebig"
-                    />
+                     android:prompt="@string/Beliebig"/>
 
             <EditText
                     android:layout_width="match_parent"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
                     android:id="@+id/baumhoehe"
                     android:hint="@string/baumhoehe"
                     android:background="@drawable/textfield_style"
-                    android:inputType="number"
-                    />
+                    android:inputType="number" />
+
             <EditText
                     android:layout_width="match_parent"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
                     android:id="@+id/holzbewuchs_laenge_bachabschnitt"
                     android:hint="@string/holzmenge"
                     android:background="@drawable/textfield_style"
-                    android:inputType="number"
-                    />
+                    android:inputType="number"/>
 
             <EditText
                     android:layout_width="match_parent"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-
                     android:layout_height="150dp"
                     android:layout_marginTop="50dp"
                     android:background="@drawable/textfield_style"
                     android:id="@+id/beschreibung"
                     android:hint="@string/Beschreibung"
                     android:inputType="textMultiLine"
-
                     android:gravity="top|start"
-                    android:maxLines="10"
-                    />
-
-
-
-
+                    android:maxLines="10"/>
 
             <Button
                     android:layout_width="match_parent"
@@ -90,8 +73,6 @@
                     android:id="@+id/speichern" android:layout_gravity="center_horizontal"
                     android:background="@drawable/button_style"
                     android:onClick="save"/>
-
-
 
         </LinearLayout>
     </ScrollView>

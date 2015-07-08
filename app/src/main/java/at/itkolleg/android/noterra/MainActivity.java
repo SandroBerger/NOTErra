@@ -9,6 +9,7 @@ import android.view.*;
 import android.widget.Button;
 import android.widget.TextView;
 import at.itkolleg.android.noterra.DatenbankSQLite.DBHandler;
+import at.itkolleg.android.noterra.Hauptfenster.InspectionActivity;
 
 import java.io.File;
 

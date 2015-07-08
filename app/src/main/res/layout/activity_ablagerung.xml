@@ -27,45 +27,44 @@
             <RadioButton
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-
                     android:text="@string/Bau"
                     android:id="@+id/Bauaushub"
                     android:topLeftRadius="8dip"
                     android:background="@drawable/testtop"
-                    android:onClick="onclick"/>
+                    android:onClick="ablagerungsArt"/>
+
             <RadioButton
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-
                     android:text="@string/felsblock"
                     android:id="@+id/fesblock"
                     android:background="#F6E398"
-                    android:onClick="onclick"/>
+                    android:onClick="ablagerungsArt"/>
+
             <RadioButton
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:background="#F6E398"
-
                     android:text="@string/mull"
                     android:id="@+id/mull"
-                    android:onClick="onclick"/>
+                    android:onClick="ablagerungsArt"/>
+
             <RadioButton
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:background="#F6E398"
-
                     android:text="@string/schotter"
                     android:id="@+id/schotter"
-                    android:onClick="onclick"/>
-    <RadioButton
+                    android:onClick="ablagerungsArt"/>
+
+            <RadioButton
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/testbot"
-
                     android:text=""
                     android:id="@+id/freiwahl"
                     android:bottomLeftRadius="8dip"
-                    android:onClick="onclick"/>
+                    android:onClick="ablagerungsArt"/>
 
 
 </RadioGroup>
@@ -76,60 +75,43 @@
                     android:layout_marginLeft="30dp"
                     android:layout_marginTop="-35dp"
                     android:singleLine="true"
-
                     android:background="@drawable/apptheme_textfield_default_holo_light"
-                    android:onClick="editclick"
-                    android:hint="Sonstiges"
-
-                    />
+                    android:hint="Sonstiges"/>
 
             <EditText
                     android:layout_width="match_parent"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-
                     android:layout_height="150dp"
                     android:layout_marginTop="50dp"
                     android:background="@drawable/textfield_style"
                     android:id="@+id/Beschreibung"
                     android:hint="@string/Beschreibung"
                     android:inputType="textMultiLine"
-
                     android:gravity="top|start"
-                    android:maxLines="10"
-
-                    />
+                    android:maxLines="10" />
 
             <EditText
                     android:layout_width="match_parent"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
                     android:id="@+id/Großausmaß"
                     android:hint="@string/großaus"
                     android:background="@drawable/textfield_style"
-                    android:inputType="number"
-
-                    />
+                    android:inputType="number" />
 
             <EditText
                     android:layout_width="match_parent"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
                     android:id="@+id/laenge_bachabschnitt"
                     android:hint="@string/lange_bachabschnitt"
                     android:background="@drawable/textfield_style"
-                    android:inputType="number"
-
-                    />
-
-
-
+                    android:inputType="number"/>
 
             <Button
                     android:layout_width="360dp"

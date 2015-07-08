@@ -1,4 +1,4 @@
-package at.itkolleg.android.noterra;
+package at.itkolleg.android.noterra.Hauptfenster;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import at.itkolleg.android.noterra.DatenbankSQLite.DBHandler;
 import at.itkolleg.android.noterra.GPS.GpsActivity;
 import at.itkolleg.android.noterra.Hauptformular.FormActivity;
 import at.itkolleg.android.noterra.Notiz.NotesActivity;
+import at.itkolleg.android.noterra.R;
+import at.itkolleg.android.noterra.Zusammenfassung.SummaryActivity;
 
 public class InspectionActivity extends ActionBarActivity implements View.OnClickListener {
     private DBHandler forstDB;

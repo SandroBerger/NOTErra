@@ -10,7 +10,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.FragmentActivity;
-import at.itkolleg.android.noterra.InspectionActivity;
+import at.itkolleg.android.noterra.Hauptfenster.InspectionActivity;
 
 public class GpsHandler extends FragmentActivity implements LocationListener {
 

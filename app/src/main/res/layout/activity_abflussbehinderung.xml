@@ -28,66 +28,59 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/testtop"
-
-
                         android:text="@string/felssturz"
                         android:id="@+id/felssturz"
-                        android:onClick="onclick"/>
+                        android:onClick="artDerBeobachtung"/>
+
                 <RadioButton
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#F6E398"
-
                         android:text="@string/hochwasser"
                         android:id="@+id/hochwasser"
-                        android:onClick="onclick"/>
+                        android:onClick="artDerBeobachtung"/>
 
                 <RadioButton
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#F6E398"
-
-
                         android:text="@string/lawinenablagerung"
                         android:id="@+id/lawinenablagerung"
-                        android:onClick="onclick"/>
+                        android:onClick="artDerBeobachtung"/>
+
                 <RadioButton
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#F6E398"
-
-
                         android:text="@string/mure"
                         android:id="@+id/mure"
-                        android:onClick="onclick"/>
+                        android:onClick="artDerBeobachtung"/>
+
                 <RadioButton
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#F6E398"
-
-
                         android:text="@string/rutschung"
                         android:id="@+id/rutschung"
-                        android:onClick="onclick"/>
+                        android:onClick="artDerBeobachtung"/>
+
                 <RadioButton
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#F6E398"
-
-
                         android:text="@string/sonst"
                         android:id="@+id/sonst"
-                        android:onClick="onclick"/>
+                        android:onClick="artDerBeobachtung"/>
+
                 <RadioButton
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/testbot"
-
-
                         android:text=""
                         android:id="@+id/freiwahl"
                         android:bottomLeftRadius="8dip"
-                        android:onClick="onclick"/>
+                        android:onClick="artDerBeobachtung"/>
+
             </RadioGroup>
             <EditText
                     android:layout_width="120dp"
@@ -97,7 +90,6 @@
                     android:layout_marginTop="-35dp"
                     android:singleLine="true"
                     android:background="@drawable/apptheme_textfield_default_holo_light"
-
                     android:maxLength="20"
                     android:hint="Sonstiges"/>
 
@@ -106,7 +98,6 @@
                     android:layout_width="match_parent"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-
                     android:layout_height="150dp"
                     android:layout_marginTop="50dp"
                     android:background="@drawable/textfield_style"
@@ -114,10 +105,7 @@
                     android:hint="@string/Beschreibung"
                     android:gravity="top|start"
                     android:maxLines="10"
-
-                    android:inputType="textMultiLine"
-
-                    />
+                    android:inputType="textMultiLine"/>
 
             <Button
                     android:layout_width="match_parent"

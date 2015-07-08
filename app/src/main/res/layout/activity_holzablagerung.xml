@@ -16,9 +16,7 @@
                      android:layout_marginRight="5dp"
                      android:layout_height="50dp"
                      android:layout_marginTop="10dp"
-                     android:background="@drawable/spinner_style"
-
-                    />
+                     android:background="@drawable/spinner_style"/>
 
             <Spinner android:id="@+id/Spinner02"
                      android:layout_width="match_parent"
@@ -26,9 +24,7 @@
                      android:layout_marginRight="5dp"
                      android:layout_height="50dp"
                      android:layout_marginTop="30dp"
-                     android:background="@drawable/spinner_style"
-
-                    />
+                     android:background="@drawable/spinner_style"/>
 
 
             <EditText
@@ -40,9 +36,7 @@
                     android:inputType="number"
                     android:id="@+id/Mediabhd"
                     android:hint="@string/Mediabhd"
-                    android:background="@drawable/textfield_style"
-
-                    />
+                    android:background="@drawable/textfield_style"/>
 
             <EditText
                     android:layout_width="match_parent"
@@ -53,9 +47,7 @@
                     android:id="@+id/Holzmenge"
                     android:hint="@string/holzmenge"
                     android:background="@drawable/textfield_style"
-                    android:inputType="number"
-
-                    />
+                    android:inputType="number"/>
 
 
             <EditText
@@ -67,23 +59,17 @@
                     android:id="@+id/bachabschnitt"
                     android:hint="@string/bachabschnitt"
                     android:background="@drawable/textfield_style"
-                    android:inputType="number"
-
-                    />
-
-
-
+                    android:inputType="number" />
 
 
             <Button
                     android:layout_width="match_parent"
-
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
                     android:text="Speichern"
                     android:id="@+id/speichern" android:layout_gravity="center_horizontal"
                     android:background="@drawable/button_style"
-                    android:onClick="onclick"/>
+                    android:onClick="save"/>
 
         </LinearLayout>
     </ScrollView>

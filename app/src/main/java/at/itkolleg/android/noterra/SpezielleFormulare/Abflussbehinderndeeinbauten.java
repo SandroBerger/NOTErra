@@ -12,13 +12,18 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import at.itkolleg.android.noterra.DatenbankSQLite.DBHandler;
-import at.itkolleg.android.noterra.InspectionActivity;
+import at.itkolleg.android.noterra.Hauptfenster.InspectionActivity;
 import at.itkolleg.android.noterra.R;
 
-
+/**
+ * Diese Klasse ist ein spezielles Formular names "Abflussbehindernde Einbauten".
+ * Wird in der Datenbank mit der  Tabelle "tbl_Abflussbehinderung" abgespeichert.
+ *
+ * @author Gutsche Christoph
+ */
 public class Abflussbehinderndeeinbauten extends ActionBarActivity {
 
-    private  RadioGroup einbaut;
+    private RadioGroup einbaut;
     private RadioButton bruecke;
     private RadioButton huette;
     private RadioButton staubrett;
@@ -31,37 +36,69 @@ public class Abflussbehinderndeeinbauten extends ActionBarActivity {
     private DBHandler forstDB;
     private String auswahl;
 
+    /**
+     * In diese Methode wird automatisch bei Klassenaufruf gestartet.
+     *
+     * @param savedInstanceState Wird benutzt um vorherige Zustand bzw. Informatioenn zu laden.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ablufssbehinderndeeinbauten);
+        super.onCreate(savedInstanceState);//vorherige Informationen laden
+        setContentView(R.layout.activity_ablufssbehinderndeeinbauten);  // Anbindung an das XML
 
-        einbaut=(RadioGroup)findViewById(R.id.artdereinbauten);
+        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground)); //Hintergrundbild für die ActionBar
 
-        bruecke =(RadioButton)findViewById(R.id.bruckesteg);
-        huette=(RadioButton)findViewById(R.id.huette);
-        staubrett=(RadioButton)findViewById(R.id.staubrett);
-        rohrdurchlass=(RadioButton)findViewById(R.id.rohrdurchlass);
-        freiwahl=(RadioButton)findViewById(R.id.freiwahl);
+        initialisierung(); // Initialisierung
 
-        editText=(EditText)findViewById(R.id.art_sonstiges);
+        datenbankVerbindung(); // Verbindung zur SQLite Datenbank
 
-        beschreibung=(EditText)findViewById(R.id.Beschreibung);
+        textFeldFokus(); // Dient zu fokusierung des Textfeldes
 
-        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarbackground));
 
-        forstDB = new DBHandler(this);
+    }
 
+    /**
+     * Diese Methode kontrolliert ständig ob das textfeld geklickt wurde. Wurde das Sonstiges Edixtext geklickt wird automatisch die Checkbox auf True gesetzt
+     */
+    private void textFeldFokus() {
         editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 freiwahl.setChecked(true);
             }
         });
-
     }
 
-    public void onclick(View view) {
+    /**
+     * Für die Verbindung der Datebank zuständig
+     */
+    private void datenbankVerbindung() {
+        forstDB = new DBHandler(this);
+    }
+
+    /**
+     * Für die Initialisierung von Radiobuttons und Editexte
+     */
+    private void initialisierung() {
+        einbaut = (RadioGroup) findViewById(R.id.artdereinbauten);
+        bruecke = (RadioButton) findViewById(R.id.bruckesteg);
+        huette = (RadioButton) findViewById(R.id.huette);
+        staubrett = (RadioButton) findViewById(R.id.staubrett);
+        rohrdurchlass = (RadioButton) findViewById(R.id.rohrdurchlass);
+        freiwahl = (RadioButton) findViewById(R.id.freiwahl);
+
+
+        editText = (EditText) findViewById(R.id.art_sonstiges);
+        beschreibung = (EditText) findViewById(R.id.Beschreibung);
+    }
+
+    /**
+     * Aufgerufen wird die Methode artDerEinabut mithilfe der onclick Methode von dem XMLFile.
+     * Überprüfung der Radiobuttons. Wird ein Radiobutton geklickt, wird dessen Wert abgfragt, und in einen String gespeichert
+     *
+     * @param view ist die View die geklickt wurde
+     */
+    public void artDerEinbaut(View view) {
 
         int checkedRadiobut = einbaut.getCheckedRadioButtonId();
 
@@ -69,25 +106,25 @@ public class Abflussbehinderndeeinbauten extends ActionBarActivity {
             case R.id.bruckesteg:
                 if (bruecke.isChecked()) {
 
-                    auswahl=bruecke.getText().toString();
+                    auswahl = bruecke.getText().toString();
                 }
                 break;
             case R.id.huette:
                 if (huette.isChecked()) {
 
-                    auswahl=huette.getText().toString();
+                    auswahl = huette.getText().toString();
                 }
                 break;
             case R.id.staubrett:
                 if (staubrett.isChecked()) {
 
-                    auswahl=staubrett.getText().toString();
+                    auswahl = staubrett.getText().toString();
                 }
                 break;
             case R.id.rohrdurchlass:
                 if (rohrdurchlass.isChecked()) {
 
-                    auswahl=rohrdurchlass.getText().toString();
+                    auswahl = rohrdurchlass.getText().toString();
                 }
                 break;
 
@@ -95,23 +132,28 @@ public class Abflussbehinderndeeinbauten extends ActionBarActivity {
             case R.id.freiwahl:
                 if (freiwahl.isChecked()) {
 
-
                     editText.requestFocus();
-                        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                        imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
-                    auswahl=editText.getText().toString();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
+                    auswahl = editText.getText().toString();
                 }
                 break;
         }
 
     }
 
-    public void save(View v){
+    /**
+     * Diese Methode wird von Button Speichern (XML-File) aus aufgerufen.
+     * Kontrolliert ob alle wichtigen Werte eingegeben oder ausgewält wurden.
+     * Ist alles korrekt werden die Werte in der Datenbank übernommen und man gelangt zurück auf das Hauptfenster.
+     *
+     * @param v gibt die view an die gerade geklickt wurde
+     */
+    public void save(View v) {
 
-        if(freiwahl.isChecked()){
-            auswahl=editText.getText().toString();
+        if (freiwahl.isChecked()) {
+            auswahl = editText.getText().toString();
         }
-
 
         if (editText.getText().toString().equals("") && freiwahl.isChecked()) {
             new AlertDialog.Builder(this)
@@ -127,9 +169,8 @@ public class Abflussbehinderndeeinbauten extends ActionBarActivity {
                     })
 
 
-
                     .show();
-        } else if (!bruecke.isChecked() && !huette.isChecked() && !staubrett.isChecked() && !rohrdurchlass.isChecked() && !freiwahl.isChecked() ) {
+        } else if (!bruecke.isChecked() && !huette.isChecked() && !staubrett.isChecked() && !rohrdurchlass.isChecked() && !freiwahl.isChecked()) {
             new AlertDialog.Builder(this)
                     .setTitle("!!Achtung!!")
                     .setMessage("Bitte wählen Sie eine Art der Einbaut aus")
@@ -142,20 +183,13 @@ public class Abflussbehinderndeeinbauten extends ActionBarActivity {
 
                     .show();
 
-        } else
-        {
+        } else {
+            forstDB.addAbflussbehinderung(auswahl, beschreibung.getText().toString());
 
-
-            forstDB.addAbflussbehinderung(auswahl,beschreibung.getText().toString());
-
-            String extra= getIntent().getStringExtra("Headline");
-            Intent intent=new Intent(Abflussbehinderndeeinbauten.this, InspectionActivity.class);
-            intent.putExtra("Headline",extra);
+            String extra = getIntent().getStringExtra("Headline");
+            Intent intent = new Intent(Abflussbehinderndeeinbauten.this, InspectionActivity.class);
+            intent.putExtra("Headline", extra);
             startActivity(intent);
-
-
-
-
         }
     }
 }
