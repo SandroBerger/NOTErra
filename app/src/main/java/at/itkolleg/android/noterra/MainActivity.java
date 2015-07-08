@@ -77,7 +77,7 @@ public class MainActivity extends ActionBarActivity  {
 
     /**
      * Wird der Button begehung starten gedrückt somit gelant man zum Hauptfenster.
-     * @param v
+     * @param v ist die View die geklickt wurde
      */
     public void onClick(View v) {
         forstDB.addBeobachtung(date);
