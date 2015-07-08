@@ -178,8 +178,10 @@ public class SummaryActivity extends ActionBarActivity {
 
         ArrayList<String> audioRefArray = forstdb.getRefFromAudioTable();
 
+        if(audioRefArray.size()>=1){
+            audiofpad = audioRefArray.get(audioRefArray.size() - 1);
+        }
 
-        audiofpad = audioRefArray.get(audioRefArray.size() - 1);
         if (audiofpad != null) {
             myplayer = new MediaPlayer();
             try {
@@ -716,7 +718,10 @@ public class SummaryActivity extends ActionBarActivity {
         ArrayList<String> RefArray = forstdb.getRefFromImageTable();
         File imgFile = null;
 
-        outputFile = RefArray.get(RefArray.size() - 1);
+        if(RefArray.size()>=1){
+            outputFile = RefArray.get(RefArray.size() - 1);
+        }
+
 
         if (!(outputFile == null)) {
             imgFile = new File(outputFile);
